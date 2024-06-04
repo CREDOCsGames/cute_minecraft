@@ -34,8 +34,10 @@ namespace PlatformGame.Contents
 
         public void LoadNext()
         {
+            State = WorkState.Action;
             var sceneName = Stages.Names[mStageLevel];
             mStageLevel = Mathf.Min(mStageLevel + 1, Stages.Names.Count - 1);
+            mLoadingWindow.ShowWindow(true);
             mCoroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
         }
 
@@ -43,24 +45,7 @@ namespace PlatformGame.Contents
         {
             mTitle.text = sceneName;
             var timer = 0f;
-            State = WorkState.Action;
             var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-            mLoadingWindow.ShowWindow(true);
-#if DEVELOPMENT
-            while (true)
-            {
-                timer += Time.unscaledDeltaTime;
-                if (timer > 5f)
-                {
-                    asyncOperation.allowSceneActivation = true;
-                    break;
-                }
-
-                mProgressBar.normalizedValue = timer / 5f;
-
-                yield return null;
-            }
-#else
             while (!asyncOperation.isDone)
             {
                 if (asyncOperation.progress < 0.9f)
@@ -79,7 +64,6 @@ namespace PlatformGame.Contents
                 }
                 yield return null;
             }
-#endif
             mLoadingWindow.ShowWindow(false);
             State = WorkState.Ready;
         }

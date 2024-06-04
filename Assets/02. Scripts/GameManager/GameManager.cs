@@ -13,7 +13,16 @@ namespace PlatformGame
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance { get; private set; }
+        static GameManager mInstance;
+        public static GameManager Instance
+        {
+            get
+            {
+                Debug.Assert(mInstance != null, $"Not found : Game Manager");
+                return mInstance;
+            }
+            private set => mInstance = value;
+        }
         public List<Character.Character> JoinCharacters => JoinCharactersController.Select(x => x.ControlledCharacter).ToList();
         float mLastSwapTime;
         Contents.Contents mContents;
@@ -31,29 +40,39 @@ namespace PlatformGame
 
         [Header("[Debug]")]
         [SerializeField, ReadOnly(false)] LoaderType mLoaderType;
-        [SerializeField, ReadOnly(false)] bool bGameStart;
+        [SerializeField, ReadOnly(false)] bool mbGameStart;
 
         public void ExitGame()
         {
             Application.Quit();
         }
 
-        public void LoadGame()
+        public void LoadGame(float pauseTime = 0f)
         {
             PauseGame();
+            Invoke(nameof(StopGame), pauseTime);
+            Invoke(nameof(MoveNext), pauseTime);
+        }
+
+        void MoveNext()
+        {
             mContents.LoadNextLevel();
         }
 
         void StartGame()
         {
-            bGameStart = true;
+            mbGameStart = true;
             ControlDefaultCharacter();
         }
 
         void PauseGame()
         {
-            bGameStart = false;
             ReleaseController();
+        }
+
+        void StopGame()
+        {
+            mbGameStart = false;
         }
 
         void ControlDefaultCharacter()
@@ -63,7 +82,7 @@ namespace PlatformGame
             ReplaceControlWith(defaultCharacter);
         }
 
-        void ReplaceControlWith(Character.Controller.PlayerCharacterController controller)
+        void ReplaceControlWith(PlayerCharacterController controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
@@ -91,20 +110,16 @@ namespace PlatformGame
 
         void Awake()
         {
-            Debug.Assert(Instance == null);
+            Debug.Assert(mInstance == null);
             Instance = this;
             DontDestroyOnLoad(gameObject);
             mContents = new Contents.Contents(mLoaderType);
-        }
-
-        void Start()
-        {
             LoadGame();
         }
 
         void Update()
         {
-            if (bGameStart)
+            if (mbGameStart)
             {
                 // TODO : 분리
                 if (Time.time < mLastSwapTime + 0.5f)
