@@ -9,6 +9,7 @@ namespace PlatformGame.Contents
         public LoaderType LoaderType;
         [Range(0, byte.MaxValue)]
         public byte NeedCharacters = 1;
+        public float LoadDelay;
 
         protected override bool CanRunningPortal(Character.Character other)
         {
@@ -21,7 +22,7 @@ namespace PlatformGame.Contents
         {
             base.RunPortal();
             Contents.Instance.SetLoaderType(LoaderType);
-            GameManager.Instance.LoadGame();
+            GameManager.Instance.LoadGame(LoadDelay);
         }
     }
 }
