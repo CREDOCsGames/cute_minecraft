@@ -26,12 +26,12 @@ namespace PlatformGame
         public List<Character.Character> JoinCharacters => JoinCharactersController.Select(x => x.ControlledCharacter).ToList();
         float mLastSwapTime;
         Contents.Contents mContents;
-        PlayerCharacterController mCurrentController;
-        List<PlayerCharacterController> JoinCharactersController
+        ActionController mCurrentController;
+        List<ActionController> JoinCharactersController
         {
             get
             {
-                var playerControllers = PlayerCharacterController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                var playerControllers = ActionController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 Debug.Assert(playerControllers.Count > 0 && playerControllers.All(x => x),
                     $"No controllers with the {TAG_PLAYER} tag found.");
                 return playerControllers;
@@ -82,7 +82,7 @@ namespace PlatformGame
             ReplaceControlWith(defaultCharacter);
         }
 
-        void ReplaceControlWith(PlayerCharacterController controller)
+        void ReplaceControlWith(ActionController controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;

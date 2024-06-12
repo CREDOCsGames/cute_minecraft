@@ -63,6 +63,7 @@ namespace PlatformGame.Character
                 return;
             }
             State = action.BeState;
+
             mAgent.UseAbility(action);
 
             if (!action.Movement)

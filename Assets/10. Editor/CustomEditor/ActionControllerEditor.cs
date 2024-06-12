@@ -8,10 +8,10 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[CustomEditor(typeof(PlayerCharacterController))]
-public class PlayerCharacterControllerEditor : ReorderableListEditor
+[CustomEditor(typeof(ActionController))]
+public class ActionControllerEditor : ReorderableListEditor
 {
-    PlayerCharacterController mController;
+    ActionController mController;
     Character mControlledCharacter => mController.ControlledCharacter;
 
     readonly List<string> mAbilities = new List<string>();
@@ -75,7 +75,7 @@ public class PlayerCharacterControllerEditor : ReorderableListEditor
     {
         base.Awake();
         mTitle = "(InputKey, Action)";
-        mController = (PlayerCharacterController)target;
+        mController = (ActionController)target;
     }
 
     protected override void OnEnable()

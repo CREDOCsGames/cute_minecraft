@@ -35,8 +35,6 @@ namespace PlatformGame.Character.Animation
 
             var trigger = mStateMap[state];
             mAnimator.SetTrigger(trigger);
-
-            Debug.Log(trigger);
         }
 
         void Awake()
