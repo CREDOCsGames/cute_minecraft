@@ -14,6 +14,7 @@ namespace PlatformGame.Character.Controller
         const uint STATE_JUMPING = 4290000003;
         const uint STATE_FALLING = 4290000004;
         const uint STATE_LAND = 4290000005;
+        const uint STATE_ATTACK_DELAY = 4290000006;
         Character mCharacter;
 
         void ReturnBasicState()
@@ -21,14 +22,14 @@ namespace PlatformGame.Character.Controller
             var velY = Math.Round(mCharacter.Rigid.velocity.y, 1);
             uint actionID;
 
-            if (mCharacter.State is CharacterState.Attack)
-            {
-                mCharacter.SetAttackDelayState();
-            }
-
             if (mCharacter.IsAction)
             {
                 return;
+            }
+
+            if (mCharacter.State is CharacterState.Attack)
+            {
+                actionID = STATE_ATTACK_DELAY;
             }
 
             else if (IsLandState())
@@ -63,18 +64,19 @@ namespace PlatformGame.Character.Controller
 
         bool IsJumpState()
         {
-            return !RigidbodyUtil.IsGrounded(mCharacter.Rigid) && !IsStopped();
+            return !mCharacter.IsGrounded() && !IsStopped();
         }
 
         bool IsLandState()
         {
-            return RigidbodyUtil.IsGrounded(mCharacter.Rigid)
+            return mCharacter.IsGrounded()
                    && mCharacter.State is CharacterState.Falling;
         }
 
         void Awake()
         {
             mCharacter = GetComponent<Character>();
+            mCharacter.IsGrounded = () => RigidbodyUtil.IsGrounded(mCharacter.Rigid);
         }
 
         void Update()

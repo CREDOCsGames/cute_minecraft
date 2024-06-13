@@ -19,7 +19,7 @@ namespace PlatformGame.Contents
 
         public Contents(LoaderType type)
         {
-            Debug.Assert(Instance == null);
+            Debug.Assert(Instance == null, $"Contents already exists.");
             Instance = this;
             SetLoaderType(type);
         }

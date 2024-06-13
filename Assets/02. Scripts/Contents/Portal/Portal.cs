@@ -33,7 +33,7 @@ namespace PlatformGame.Contents
         void OnTriggerEnter(Collider other)
         {
             var character = other.GetComponent<Character.Character>();
-            if (!character)
+            if (!(character && character.tag == "Player"))
             {
                 return;
             }

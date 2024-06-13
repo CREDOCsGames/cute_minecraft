@@ -41,7 +41,7 @@ namespace PlatformGame.Character.Controller
             }
         }
 
-        void EnterCommand(ControllerInputData input)
+        protected virtual void EnterCommand(ControllerInputData input)
         {
             if (!mInputMap.ContainsKey(input.Key))
             {

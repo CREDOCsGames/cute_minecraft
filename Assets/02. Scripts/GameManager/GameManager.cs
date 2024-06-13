@@ -56,22 +56,26 @@ namespace PlatformGame
 
         void MoveNext()
         {
+            Debug.Log("Load");
             mContents.LoadNextLevel();
         }
 
         void StartGame()
         {
+            Debug.Log("Start Game");
             mbGameStart = true;
             ControlDefaultCharacter();
         }
 
         void PauseGame()
         {
+            Debug.Log("Pause Game");
             ReleaseController();
         }
 
         void StopGame()
         {
+            Debug.Log("Stop Game");
             mbGameStart = false;
         }
 
@@ -110,7 +114,7 @@ namespace PlatformGame
 
         void Awake()
         {
-            Debug.Assert(mInstance == null);
+            Debug.Assert(mInstance == null, $"already exists {gameObject.name}.");
             Instance = this;
             DontDestroyOnLoad(gameObject);
             mContents = new Contents.Contents(mLoaderType);
@@ -141,6 +145,7 @@ namespace PlatformGame
             {
                 if (mContents.State == WorkState.Ready)
                 {
+                    Debug.Log("Loaded");
                     StartGame();
                 }
             }

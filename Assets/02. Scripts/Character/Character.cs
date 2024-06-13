@@ -2,6 +2,7 @@
 using PlatformGame.Character.Combat;
 using PlatformGame.Character.Movement;
 using PlatformGame.Debugger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +15,12 @@ namespace PlatformGame.Character
         public const string TAG_PLAYER = "Player";
         static readonly List<Character> mInstances = new();
         public static List<Character> Instances => mInstances.ToList();
-        public bool IsAction => mAgent.InAction;
+        public bool IsAction => mAgent.IsAction;
+
+        public Func<bool> IsGrounded
+        {
+            get; set;
+        }
         CharacterState mState;
         public CharacterState State
         {
@@ -55,6 +61,7 @@ namespace PlatformGame.Character
 
         public void DoAction(uint actionID)
         {
+            Debug.Assert(mHasAbilities != null, $"do not own the Ability {gameObject.name}.");
             mHasAbilities.Library.TryGetValue(actionID, out var action);
             Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
 
@@ -71,11 +78,6 @@ namespace PlatformGame.Character
                 return;
             }
             Movement.PlayMovement(action.Movement);
-        }
-
-        public void SetAttackDelayState()
-        {
-            State = CharacterState.AttackDelay;
         }
 
         void Awake()

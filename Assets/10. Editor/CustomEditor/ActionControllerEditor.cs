@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[CustomEditor(typeof(ActionController))]
+[CustomEditor(typeof(ActionController),true)]
 public class ActionControllerEditor : ReorderableListEditor
 {
     ActionController mController;
