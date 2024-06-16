@@ -7,7 +7,7 @@ namespace PlatformGame.Contents.Loader
     public class CubeLoader : MonoBehaviour, ILevelLoader
     {
         public WorkState State { get; private set; }
-        [SerializeField] Character.Controller.PlayerCharacterController mCubeController;
+        [SerializeField] Character.Controller.ActionController mCubeController;
 
         void Awake()
         {

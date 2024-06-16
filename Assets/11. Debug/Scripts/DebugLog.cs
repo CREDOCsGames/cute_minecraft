@@ -31,7 +31,7 @@ namespace PlatformGame.Debugger
         public static void PrintLog(ControllerInputData inputData)
         {
             var instanceID = inputData.Controller.transform.GetInstanceID();
-            DebugWrapper.LogMessage(instanceID, $"{ID_CONTROLLER}{inputData.Key}, {inputData.ActionData.Name}");
+            DebugWrapper.LogMessage(instanceID, $"{ID_CONTROLLER}{inputData.Key}");
         }
 
         [Conditional("DEVELOPMENT")]

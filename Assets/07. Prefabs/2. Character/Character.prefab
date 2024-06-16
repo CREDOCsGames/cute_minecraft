@@ -143,9 +143,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6958300129645910225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65.29, y: -17.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 65.29, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3751585557237308010
@@ -401,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5072228660262590644}
   - component: {fileID: 8909505949129107049}
+  - component: {fileID: 567969550801680343}
   - component: {fileID: 4723074752516479117}
   - component: {fileID: 1495312884412037735}
   - component: {fileID: 7824345862538364997}
@@ -451,6 +452,39 @@ MonoBehaviour:
   mOnChangedState:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &567969550801680343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7018736071673053955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0486c5164ba93419c422ecf22dc23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ControlledCharacter: {fileID: 8909505949129107049}
+  mIsActive: 1
+  InputEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  EditorInputMap:
+  - Key: Right
+    ActionData: {fileID: 11400000, guid: 4966e9c58f525c543ae8eff19109e4c4, type: 2}
+  - Key: Left
+    ActionData: {fileID: 11400000, guid: 3cb7c4f9adc9b8147a69524d2d385652, type: 2}
+  - Key: Up
+    ActionData: {fileID: 11400000, guid: dc26fb9639debb04aaaa66a418f3b364, type: 2}
+  - Key: Down
+    ActionData: {fileID: 11400000, guid: 356333008a59153428c676181f920e18, type: 2}
+  - Key: Jump
+    ActionData: {fileID: 11400000, guid: 30ae6a14ab8f3de459788cfb09e76851, type: 2}
+  - Key: Attack
+    ActionData: {fileID: 11400000, guid: 128953c3767cd3a40816c5124698d723, type: 2}
+  - Key: Guard
+    ActionData: {fileID: 11400000, guid: 05eb6361da5a81b429c342c89de3b587, type: 2}
+  EditorBeforeCharacter: {fileID: 8909505949129107049}
 --- !u!114 &4723074752516479117
 MonoBehaviour:
   m_ObjectHideFlags: 0

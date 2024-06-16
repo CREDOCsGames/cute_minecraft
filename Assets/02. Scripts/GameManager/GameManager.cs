@@ -26,12 +26,12 @@ namespace PlatformGame
         public List<Character.Character> JoinCharacters => JoinCharactersController.Select(x => x.ControlledCharacter).ToList();
         float mLastSwapTime;
         Contents.Contents mContents;
-        PlayerCharacterController mCurrentController;
-        List<PlayerCharacterController> JoinCharactersController
+        ActionController mCurrentController;
+        List<ActionController> JoinCharactersController
         {
             get
             {
-                var playerControllers = PlayerCharacterController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                var playerControllers = ActionController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 Debug.Assert(playerControllers.Count > 0 && playerControllers.All(x => x),
                     $"No controllers with the {TAG_PLAYER} tag found.");
                 return playerControllers;
@@ -56,22 +56,26 @@ namespace PlatformGame
 
         void MoveNext()
         {
+            Debug.Log("Load");
             mContents.LoadNextLevel();
         }
 
         void StartGame()
         {
+            Debug.Log("Start Game");
             mbGameStart = true;
             ControlDefaultCharacter();
         }
 
         void PauseGame()
         {
+            Debug.Log("Pause Game");
             ReleaseController();
         }
 
         void StopGame()
         {
+            Debug.Log("Stop Game");
             mbGameStart = false;
         }
 
@@ -82,7 +86,7 @@ namespace PlatformGame
             ReplaceControlWith(defaultCharacter);
         }
 
-        void ReplaceControlWith(PlayerCharacterController controller)
+        void ReplaceControlWith(ActionController controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
@@ -110,7 +114,7 @@ namespace PlatformGame
 
         void Awake()
         {
-            Debug.Assert(mInstance == null);
+            Debug.Assert(mInstance == null, $"already exists {gameObject.name}.");
             Instance = this;
             DontDestroyOnLoad(gameObject);
             mContents = new Contents.Contents(mLoaderType);
@@ -141,6 +145,7 @@ namespace PlatformGame
             {
                 if (mContents.State == WorkState.Ready)
                 {
+                    Debug.Log("Loaded");
                     StartGame();
                 }
             }

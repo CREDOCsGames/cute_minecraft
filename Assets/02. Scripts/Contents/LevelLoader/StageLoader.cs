@@ -10,7 +10,7 @@ namespace PlatformGame.Contents
     public class StageLoader : ILevelLoader
     {
         public WorkState State { get; private set; }
-        int mStageLevel;
+        static int mStageLevel;
         readonly StageList Stages;
         readonly Slider mProgressBar;
         readonly TextMeshProUGUI mTitle;
@@ -62,8 +62,9 @@ namespace PlatformGame.Contents
                         break;
                     }
                 }
-                yield return null;
+                yield return new WaitForSeconds(1);
             }
+
             mLoadingWindow.ShowWindow(false);
             State = WorkState.Ready;
         }

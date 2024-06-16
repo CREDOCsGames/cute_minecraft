@@ -16,7 +16,7 @@ namespace PlatformGame.Character.Combat
             mHitBox = hitBox;
         }
 
-        public bool InAction
+        public bool IsAction
         {
             get => mLastUsedAction != null && Time.time < mLastActionTime + mLastUsedAction.ActionDelay;
         }

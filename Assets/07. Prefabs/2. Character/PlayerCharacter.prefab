@@ -7651,6 +7651,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 567969550801680343, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
+      propertyPath: EditorInputMap.Array.data[5].ActionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 30ae6a14ab8f3de459788cfb09e76851, type: 2}
     - target: {fileID: 659006465685209737, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: Transforms.Array.size
       value: 3
@@ -7889,7 +7893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_Name
-      value: Character_Player
+      value: PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_Layer
@@ -8080,15 +8084,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 5113562738094987806}
-    - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
-      insertIndex: 3
       addedObject: {fileID: 4286571686665992587}
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 4667952315070095578}
-    - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
-      insertIndex: 7
+      insertIndex: 5
       addedObject: {fileID: 5285587408460059751}
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       insertIndex: -1
@@ -8120,37 +8118,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
   m_PrefabInstance: {fileID: 2607823967141724443}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5113562738094987806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4996556122173243928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61557522675bde4a9f5c0a83428d805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EditorInputMap:
-  - Key: Right
-    ActionData: {fileID: 11400000, guid: 4966e9c58f525c543ae8eff19109e4c4, type: 2}
-  - Key: Left
-    ActionData: {fileID: 11400000, guid: 3cb7c4f9adc9b8147a69524d2d385652, type: 2}
-  - Key: Up
-    ActionData: {fileID: 11400000, guid: dc26fb9639debb04aaaa66a418f3b364, type: 2}
-  - Key: Down
-    ActionData: {fileID: 11400000, guid: 356333008a59153428c676181f920e18, type: 2}
-  - Key: Jump
-    ActionData: {fileID: 11400000, guid: 30ae6a14ab8f3de459788cfb09e76851, type: 2}
-  - Key: Guard
-    ActionData: {fileID: 11400000, guid: 05eb6361da5a81b429c342c89de3b587, type: 2}
-  EditorBeforeCharacter: {fileID: 6887189516238088050}
-  ControlledCharacter: {fileID: 6887189516238088050}
-  mIsActive: 1
-  InputEvents:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4286571686665992587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8180,18 +8147,6 @@ MonoBehaviour:
   - State: 6
     Trigger: Guard
   mAnimator: {fileID: 4940914859081684397}
---- !u!114 &4667952315070095578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4996556122173243928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25e8fb7e27b8694ebb5b60eb7247747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5285587408460059751
 MonoBehaviour:
   m_ObjectHideFlags: 0
