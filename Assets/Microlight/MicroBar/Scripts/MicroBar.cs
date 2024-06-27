@@ -112,6 +112,10 @@ namespace Microlight.MicroBar {
         public void UpdateBar(float newHP) {
             UpdateBar(newHP, false, UpdateAnim.Damage);
         }
+        public void HitBar(float damage)
+        {
+            UpdateBar(CurrentValue - damage, false, UpdateAnim.Damage);
+        }
         /// <summary>
         /// Snapshots current values of the image and rect transform to be used as new default values
         /// </summary>
