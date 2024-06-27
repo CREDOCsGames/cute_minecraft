@@ -18,20 +18,20 @@ namespace PlatformGame.Character.Controller
         protected override void EnterCommand(ControllerInputData input)
         {
             base.EnterCommand(input);
-            if (mButtonAction == null)
-            {
-                return;
-            }
 
             var map = GetKeyDownMap();
             if (!map[KEY_ATTACK])
             {
                 return;
             }
+            mBlockEvent.Invoke();
 
+            if (mButtonAction == null)
+            {
+                return;
+            }
             var actionID = mButtonAction.ID;
             ControlledCharacter.DoAction(actionID);
-            mBlockEvent.Invoke();
         }
 
         void OnTriggerEnter(Collider other)
