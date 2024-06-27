@@ -6,19 +6,28 @@ using UnityEngine.Events;
 
 namespace PlatformGame.Contents
 {
-    public abstract class Portal : MonoBehaviour
+    public class Portal : MonoBehaviour
     {
+        [Range(0, byte.MaxValue)]
+        public byte NeedCharacters = 1;
         protected WorkState State { get; set; }
         protected readonly Dictionary<Character.Character, bool> mEntrylist = new();
         [SerializeField] UnityEvent mRunEvent;
+        [SerializeField] UnityEvent mEndEvent;
 
         protected virtual void RunPortal()
         {
             State = WorkState.Action;
             mRunEvent.Invoke();
+            Debug.Log("¡¢±Ÿ");
         }
 
-        protected abstract bool CanRunningPortal(Character.Character other);
+        protected virtual bool CanRunningPortal(Character.Character other)
+        {
+            Debug.Assert(NeedCharacters <= mEntrylist.Count);
+            return State == WorkState.Ready &&
+                   NeedCharacters <= mEntrylist.Count(x => x.Value);
+        }
 
         void ResetEntrylist()
         {
@@ -30,10 +39,10 @@ namespace PlatformGame.Contents
             }
         }
 
-        void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             var character = other.GetComponent<Character.Character>();
-            if (!(character && character.tag == "Player"))
+            if (!(character && character.CompareTag("Player")))
             {
                 return;
             }
@@ -46,10 +55,11 @@ namespace PlatformGame.Contents
             RunPortal();
         }
 
-        void OnTriggerExit(Collider other)
+        protected virtual void OnTriggerExit(Collider other)
         {
+
             var character = other.GetComponent<Character.Character>();
-            if (!character)
+            if (!(character && character.CompareTag("Player")))
             {
                 return;
             }
@@ -59,10 +69,20 @@ namespace PlatformGame.Contents
                 mEntrylist[character] = false;
             }
 
-            if (mEntrylist.All(x => x.Value == false))
+            if(!(State is WorkState.Action))
             {
-                State = WorkState.Ready;
+                return;
             }
+
+            if (mEntrylist.Any(x => x.Value))
+            {
+                return;
+            }
+
+
+            State = WorkState.Ready;
+            mEndEvent.Invoke();
+            Debug.Log("≈ª√‚");
         }
 
         void Start()
