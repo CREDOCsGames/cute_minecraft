@@ -176,6 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1926611401391016118}
+  - component: {fileID: 3020553422763827935}
   - component: {fileID: 5966086638363589101}
   - component: {fileID: 2656724719773568411}
   - component: {fileID: 8829342907061995202}
@@ -205,6 +206,37 @@ Transform:
   - {fileID: 8023098907900573809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3020553422763827935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360229836865790275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc99192be25a6a4dbb9fe208fe6aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NeedCharacters: 1
+  mRunEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5966086638363589101}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5966086638363589101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,23 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf1608d8e1afbc44a12282f6b1c16f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mRunEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3185135722836064836}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   LoaderType: 0
-  NeedCharacters: 1
   LoadDelay: 0
 --- !u!65 &2656724719773568411
 BoxCollider:

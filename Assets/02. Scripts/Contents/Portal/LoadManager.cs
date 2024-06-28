@@ -1,13 +1,14 @@
+using UnityEngine;
+
 namespace PlatformGame.Contents
 {
-    public class GoalPortal : Portal
+    public class LoadManager : MonoBehaviour
     {
         public LoaderType LoaderType;
         public float LoadDelay;
 
-        protected override void RunPortal()
+        public void Load()
         {
-            base.RunPortal();
             Contents.Instance.SetLoaderType(LoaderType);
             GameManager.Instance.LoadGame(LoadDelay);
         }
