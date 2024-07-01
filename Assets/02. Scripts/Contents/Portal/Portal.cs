@@ -82,7 +82,6 @@ namespace PlatformGame.Contents
 
             State = WorkState.Ready;
             mEndEvent.Invoke();
-            Debug.Log("≈ª√‚");
         }
 
         void Start()
