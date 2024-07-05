@@ -24,7 +24,7 @@ namespace PlatformGame.Character.Controller
             {
                 return;
             }
-            mBlockEvent.Invoke();
+            mBlockEvent?.Invoke();
 
             if (mButtonAction == null)
             {
