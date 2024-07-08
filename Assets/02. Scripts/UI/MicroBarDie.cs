@@ -1,6 +1,4 @@
 using Microlight.MicroBar;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,20 +6,35 @@ public class MicroBarDie : MonoBehaviour
 {
     public UnityEvent DieEvent;
     public UnityEvent TakeDamageEvent;
+    bool mbDie;
     [SerializeField] MicroBar bar;
-
-    private void Awake()
-    {
-        bar.OnCurrentValueChange += Die;
-    }
 
     public void Die(MicroBar bar)
     {
-        if (bar.CurrentValue > 0)
+        if (mbDie)
+        {
+            mbDie = bar.CurrentValue <= 0;
+            return;
+        }
+
+        mbDie = bar.CurrentValue <= 0;
+        if (!mbDie)
         {
             TakeDamageEvent.Invoke();
             return;
         }
+
         DieEvent.Invoke();
     }
+
+    void Awake()
+    {
+        bar.OnCurrentValueChange += Die;
+    }
+
+    void OnDestroy()
+    {
+        bar.OnCurrentValueChange -= Die;
+    }
+
 }
