@@ -15,6 +15,12 @@ namespace PlatformGame.Character.Controller
             mButtonAction = actionData;
         }
 
+        public void ClearEvent()
+        {
+            mButtonAction = null;
+            mBlockEvent.RemoveAllListeners();
+        }
+
         protected override void EnterCommand(ControllerInputData input)
         {
             base.EnterCommand(input);
@@ -24,14 +30,14 @@ namespace PlatformGame.Character.Controller
             {
                 return;
             }
-            mBlockEvent?.Invoke();
 
-            if (mButtonAction == null)
+            if (mButtonAction != null)
             {
-                return;
+                var actionID = mButtonAction.ID;
+                ControlledCharacter.DoAction(actionID);
             }
-            var actionID = mButtonAction.ID;
-            ControlledCharacter.DoAction(actionID);
+
+            mBlockEvent?.Invoke();
         }
 
         void OnTriggerEnter(Collider other)
