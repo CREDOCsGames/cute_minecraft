@@ -15,11 +15,11 @@ namespace PlatformGame.Character.Animation
     public class CharacterAnimation : MonoBehaviour
     {
         public Animator EditorAnimator => mAnimator == null ? null : mAnimator;
-        [HideInInspector] public RuntimeAnimatorController BeforeController;
-        [HideInInspector] public List<StateTriggerPair> EditorStateTriggers = new List<StateTriggerPair>();
         Character mCharacter;
         Dictionary<CharacterState, string> mStateMap;
         [SerializeField] Animator mAnimator;
+        [HideInInspector] public RuntimeAnimatorController BeforeController;
+        [HideInInspector] public List<StateTriggerPair> EditorStateTriggers = new();
 
         void UpdateAnimation(CharacterState state)
         {

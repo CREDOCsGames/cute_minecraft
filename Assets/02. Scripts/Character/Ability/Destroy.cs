@@ -20,5 +20,6 @@ namespace PlatformGame.Character.Combat
             }
             GameObject.Destroy(character.gameObject);
         }
+
     }
 }
