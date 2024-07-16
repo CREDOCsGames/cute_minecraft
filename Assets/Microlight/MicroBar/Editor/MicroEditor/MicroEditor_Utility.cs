@@ -1,10 +1,12 @@
 using UnityEngine;
 
-namespace Microlight.MicroEditor {
+namespace Microlight.MicroEditor
+{
     // ****************************************************************************************************
     // Various constants 
     // ****************************************************************************************************
-    internal static class MicroEditor_Utility {
+    internal static class MicroEditor_Utility
+    {
         // Colors
         internal static Color EditorColor = new Color(0.2196f, 0.2196f, 0.2196f);   // Color of editor base background color RGB(56)
         internal static Color ElementColor = new Color(0.251f, 0.251f, 0.251f);   // Color of element background RGB(64)

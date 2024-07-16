@@ -89,7 +89,7 @@ namespace PlatformGame.Character
             mInstances.Add(this);
             mAgent = new AbilityAgent(mHitBox);
             Attribute.SetFlag(Attribute.Flags, this);
-            
+
         }
         void Start()
         {

@@ -1,17 +1,20 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Microlight.MicroEditor {
+namespace Microlight.MicroEditor
+{
     // ****************************************************************************************************
     // Utility class for drawing custom editor elements
     // ****************************************************************************************************
-    internal static class MicroEditor_DrawUtility {
+    internal static class MicroEditor_DrawUtility
+    {
         #region Fields
         /// <summary>
         /// Draws property, label + field
         /// </summary>
         /// <returns>Returns rect with new x and y positions where should next element be</returns>
-        internal static Rect DrawProperty(Rect position, SerializedProperty property, GUIContent label) {
+        internal static Rect DrawProperty(Rect position, SerializedProperty property, GUIContent label)
+        {
             Rect fieldRect = new Rect(
                 position.x,
                 position.y,
@@ -29,7 +32,8 @@ namespace Microlight.MicroEditor {
         /// Draws 2 fileds in order LFFL where width of the label is constant
         /// </summary>
         /// <returns>Returns rect with new x and y positions where should next element be</returns>
-        internal static Rect DrawTwoPropertiesConstantLabel(Rect position, SerializedProperty property1, GUIContent label1, SerializedProperty property2, GUIContent label2, int labelWidth = 70) {
+        internal static Rect DrawTwoPropertiesConstantLabel(Rect position, SerializedProperty property1, GUIContent label1, SerializedProperty property2, GUIContent label2, int labelWidth = 70)
+        {
             Rect label1Rect = new Rect(
                 position.x,
                 position.y,
@@ -68,7 +72,8 @@ namespace Microlight.MicroEditor {
         /// Draws 2 fileds in order LFFL where width of the field is constant
         /// </summary>
         /// <returns>Returns rect with new x and y positions where should next element be</returns>
-        internal static Rect DrawTwoPropertiesConstantField(Rect position, SerializedProperty property1, GUIContent label1, SerializedProperty property2, GUIContent label2, int fieldWidth = 70) {
+        internal static Rect DrawTwoPropertiesConstantField(Rect position, SerializedProperty property1, GUIContent label1, SerializedProperty property2, GUIContent label2, int fieldWidth = 70)
+        {
             Rect label1Rect = new Rect(
                 position.x,
                 position.y,
@@ -106,7 +111,8 @@ namespace Microlight.MicroEditor {
         #endregion
 
         #region Container
-        internal static void DrawContainer(Rect rect) {
+        internal static void DrawContainer(Rect rect)
+        {
             DrawContainer(rect, Color.white);
         }
         /// <summary>
@@ -114,7 +120,8 @@ namespace Microlight.MicroEditor {
         /// </summary>
         /// <param name="rect">Size of the container</param>
         /// <param name="elementColorMultiplier">Color overlay, 0-1f, Color.white leaves same color</param>
-        internal static void DrawContainer(Rect rect, Color elementColorMultiplier) {
+        internal static void DrawContainer(Rect rect, Color elementColorMultiplier)
+        {
             DrawContainer(rect, MicroEditor_Utility.ElementColor * elementColorMultiplier, MicroEditor_Utility.OutlineColor, MicroEditor_Utility.LightOutlineColor);
         }
         /// <summary>
@@ -123,7 +130,8 @@ namespace Microlight.MicroEditor {
         /// <param name="rect">Area of container</param>
         /// <param name="elementColor">Background color</param>
         /// <param name="lightOutlineColor">Lighter color for the edges of the container</param>
-        internal static void DrawContainer(Rect rect, Color elementColor, Color outlineColor, Color lightOutlineColor) {
+        internal static void DrawContainer(Rect rect, Color elementColor, Color outlineColor, Color lightOutlineColor)
+        {
             // Draw background
             EditorGUI.DrawRect(new Rect(rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2), elementColor);
 
@@ -148,7 +156,8 @@ namespace Microlight.MicroEditor {
         /// Draw default glow effect over container
         /// </summary>
         /// <param name="rect">Area for of the container</param>
-        internal static void DrawContainerGlow(Rect rect) {
+        internal static void DrawContainerGlow(Rect rect)
+        {
             DrawContainerGlow(rect, Color.white);
         }
         /// <summary>
@@ -156,7 +165,8 @@ namespace Microlight.MicroEditor {
         /// </summary>
         /// <param name="rect">Area for of the container</param>
         /// <param name="colorMultiplier">Color overlay, 0-1f, Color.white leaves same color</param>
-        internal static void DrawContainerGlow(Rect rect, Color colorMultiplier) {
+        internal static void DrawContainerGlow(Rect rect, Color colorMultiplier)
+        {
             // Draw background
             EditorGUI.DrawRect(new Rect(rect.x + 2, rect.y + 1, rect.width - 4, rect.height - 2), MicroEditor_Utility.ElementHoverColor * colorMultiplier);
             EditorGUI.DrawRect(new Rect(rect.x + 1, rect.y + 2, 1, rect.height - 4), MicroEditor_Utility.ElementHoverColor * colorMultiplier);
@@ -166,7 +176,8 @@ namespace Microlight.MicroEditor {
         /// Draws light outline at the bottom of the contaner
         /// </summary>
         /// <param name="rect">Area of the container</param>
-        internal static void DrawContainerBottomOutline(Rect rect) {
+        internal static void DrawContainerBottomOutline(Rect rect)
+        {
             DrawContainerBottomOutline(rect, MicroEditor_Utility.LightOutlineColor);
         }
         /// <summary>
@@ -174,7 +185,8 @@ namespace Microlight.MicroEditor {
         /// </summary>
         /// <param name="rect">Area of the container</param>
         /// <param name="outlineColor">Color of the outline</param>
-        internal static void DrawContainerBottomOutline(Rect rect, Color outlineColor, int outlineWidth = 1) {
+        internal static void DrawContainerBottomOutline(Rect rect, Color outlineColor, int outlineWidth = 1)
+        {
             EditorGUI.DrawRect(new Rect(rect.x + 1, rect.yMax - outlineWidth, rect.width - 2, outlineWidth), outlineColor);
         }
         #endregion
@@ -183,7 +195,8 @@ namespace Microlight.MicroEditor {
         /// <summary>
         /// Draws default fade line
         /// </summary>
-        internal static void DrawFadeLine(Rect rect) {
+        internal static void DrawFadeLine(Rect rect)
+        {
             DrawFadeLine(rect, MicroEditor_Utility.ElementColor);
         }
         /// <summary>
@@ -195,7 +208,8 @@ namespace Microlight.MicroEditor {
         /// <param name="colorBrightness">Change in color brightness from 1.0f</param>
         /// <param name="gradientSample">How fine gradient is, lower number means less gradual change in color</param>
         /// <param name="sidePadding">In pixels, how much space on each side will be empty</param>
-        internal static void DrawFadeLine(Rect rect, Color fadeColor, int lineHeight = 2, float colorBrightness = 0.3f, int gradientSample = 10, int sidePadding = 2) {
+        internal static void DrawFadeLine(Rect rect, Color fadeColor, int lineHeight = 2, float colorBrightness = 0.3f, int gradientSample = 10, int sidePadding = 2)
+        {
             // Initialization
             int fadeLinesWidth = Mathf.RoundToInt(rect.width * 0.2f / gradientSample);   // 0.2 is how much (in %) of the line will fading use (per side)
             float colorGradient = colorBrightness / (gradientSample + 1);
@@ -203,7 +217,8 @@ namespace Microlight.MicroEditor {
             Rect leftRect = new Rect(rect.x + sidePadding - fadeLinesWidth, rect.y, rect.width, rect.height);
             Rect rightRect = new Rect(rect.xMax - 1 - sidePadding, rect.y, rect.width, rect.height);
             float colorMultiplier = 1f;
-            for(int i = 0; i < gradientSample; i++) {
+            for (int i = 0; i < gradientSample; i++)
+            {
                 colorMultiplier += colorGradient;
                 leftRect = new Rect(leftRect.x + fadeLinesWidth, rect.y, fadeLinesWidth, lineHeight);
                 rightRect = new Rect(rightRect.x - fadeLinesWidth, rect.y, fadeLinesWidth, lineHeight);

@@ -1,12 +1,14 @@
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-namespace Microlight.MicroBar {
+namespace Microlight.MicroBar
+{
     // ****************************************************************************************************
     // Command specifying the behavior and duration of a segment of an animation.
     // ****************************************************************************************************
     [System.Serializable]
-    public class AnimCommand {
+    public class AnimCommand
+    {
         internal AnimExecution Execution => execution;
         [SerializeField] AnimExecution execution = AnimExecution.Sequence;
         internal AnimEffect Effect => effect;

@@ -1,6 +1,6 @@
-using UnityEngine;
 using PlatformGame.Character.Combat;
 using Unity.VisualScripting;
+using UnityEngine;
 
 namespace PlatformGame.Character.BehaviorTree
 {
@@ -18,7 +18,7 @@ namespace PlatformGame.Character.BehaviorTree
 
         protected override Transform GetTargetInFocus()
         {
-            if(mLastHitTime + mMemoryTime < Time.time)
+            if (mLastHitTime + mMemoryTime < Time.time)
             {
                 mLastHitMe = null;
             }
@@ -27,7 +27,7 @@ namespace PlatformGame.Character.BehaviorTree
 
         void LogHitMe(AbilityCollision collision)
         {
-            if(Owner.IsDestroyed())
+            if (Owner.IsDestroyed())
             {
                 AbilityLog.RemoveHitCallback(mMe.GetInstanceID(), LogHitMe);
                 return;

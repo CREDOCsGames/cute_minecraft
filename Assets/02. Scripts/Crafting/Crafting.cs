@@ -80,5 +80,22 @@ namespace PlatformGame
             Init();
         }
 
+#if DEVELOPMENT
+        string t;
+        public void SetCount()
+        {
+            t = "";
+            foreach (var item in mRecipe)
+            {
+                t += $"({item.Item.name}) {item.Count} / {item.RequiredCount}\n";
+            }
+            Debugger.DebugWrapper.LogMessage(transform.GetInstanceID(), "07" + t);
+        }
+        void Update()
+        {
+            SetCount();
+        }
+#endif
+
     }
 }

@@ -9,7 +9,7 @@ namespace PlatformGame.Character.Movement
         public bool ZeroVelocity;
         public override void PlayAction(Rigidbody rigid, MonoBehaviour coroutine)
         {
-            if(ZeroVelocity)
+            if (ZeroVelocity)
             {
                 rigid.velocity = Vector3.zero;
             }

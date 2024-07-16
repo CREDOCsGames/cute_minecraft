@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Microlight.MicroBar {
+namespace Microlight.MicroBar
+{
     // ****************************************************************************************************
     // Stores default values for an image
     // ****************************************************************************************************
-    internal readonly struct ImageDefaultValues {
+    internal readonly struct ImageDefaultValues
+    {
         readonly Color color;
         readonly float fade;
         readonly float fill;
@@ -22,7 +24,8 @@ namespace Microlight.MicroBar {
         internal readonly Vector2 Scale => scale;
         internal readonly Vector2 AnchorPosition => anchorPosition;
 
-        internal ImageDefaultValues(Image image) {
+        internal ImageDefaultValues(Image image)
+        {
             color = image.color;
             fade = image.color.a;
             fill = image.fillAmount;

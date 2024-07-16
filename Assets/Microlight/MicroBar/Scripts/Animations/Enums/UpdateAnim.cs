@@ -1,9 +1,11 @@
-namespace Microlight.MicroBar {
+namespace Microlight.MicroBar
+{
     // ****************************************************************************************************
     // Defines what animation will be used to update the bar
     // *Enum must be public because editor scripts are in another assembly
     // ****************************************************************************************************
-    public enum UpdateAnim {
+    public enum UpdateAnim
+    {
         Damage,
         Heal,
         CriticalDamage,

@@ -6,13 +6,28 @@ namespace PlatformGame.Character
 {
     public class Role : MonoBehaviour
     {
+        protected Transform mSwapTransform;
+        protected Transform mOriginTransform;
         bool mbStop = true;
-        [SerializeField] Formation mFormation;
+        [SerializeField] protected Formation mFormation;
         [SerializeField] TransformBaseMovement mTrace;
+        [SerializeField] TransformBaseMovement mSwapTrace;
+
+        public virtual void DoAction()
+        {
+            Debug.LogWarning("Calling deprecated methods.");
+        }
+
+        protected void SwapTransform()
+        {
+            (mFormation.Transform, mSwapTransform) = (mSwapTransform, mFormation.Transform);
+            (mTrace, mSwapTrace) = (mSwapTrace, mTrace);
+        }
 
         public void SetTransform(Transform transform)
         {
             mFormation.Transform = transform;
+            mOriginTransform = transform;
         }
 
         void TraceFormation()
@@ -31,9 +46,9 @@ namespace PlatformGame.Character
             mbStop = false;
         }
 
-        void Awake()
+        protected virtual void Awake()
         {
-            mFormation.Transform = transform;
+            SetTransform(transform);
             mFormation.Trace = TraceFormation;
             mFormation.IsStoped = () => mbStop;
             mFormation.IsReached = () => IsNearByDistance(transform, mFormation.Transform);
@@ -41,7 +56,7 @@ namespace PlatformGame.Character
             mFormation.OnStartMoveEvent.AddListener(StartTrace);
         }
 
-        void Update()
+        protected virtual void Update()
         {
             mFormation.UpdateBehaviour();
         }
