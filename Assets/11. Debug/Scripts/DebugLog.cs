@@ -37,7 +37,7 @@ namespace PlatformGame.Debugger
         [Conditional("DEVELOPMENT")]
         public void ReloadScene(ControllerInputData inputData)
         {
-            if(inputData.Key == ActionKey.KEY_Debug)
+            if (inputData.Key == ActionKey.KEY_Debug)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
@@ -58,5 +58,9 @@ namespace PlatformGame.Debugger
             DebugWrapper.LogMessage(who.GetInstanceID(), $"{ID_CHARACTERSTATE}{state}");
         }
 
+        public static void PrintLog(string text)
+        {
+            Debug.Log(text);
+        }
     }
 }

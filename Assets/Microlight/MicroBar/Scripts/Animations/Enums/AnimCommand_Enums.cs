@@ -1,14 +1,17 @@
-namespace Microlight.MicroBar {
+namespace Microlight.MicroBar
+{
     // ****************************************************************************************************
     // Enums that help AnimCommand to be built
     // * Enums must be public because editor scripts are in another assembly
     // ****************************************************************************************************
-    public enum AnimExecution {
+    public enum AnimExecution
+    {
         Sequence,
         Parallel,
         Wait,
     }
-    public enum AnimEffect {
+    public enum AnimEffect
+    {
         Color,
         Fade,
         Fill,
@@ -19,20 +22,23 @@ namespace Microlight.MicroBar {
         Shake,
         AnchorMove,
     }
-    public enum ValueMode {
+    public enum ValueMode
+    {
         Absolute,
         Additive,
         Multiplicative,
         StartingValue,
         DefaultValue,
     }
-    public enum AnimAxis {
+    public enum AnimAxis
+    {
         Uniform,
         XY,
         X,
         Y,
     }
-    public enum TransformProperties {
+    public enum TransformProperties
+    {
         Position,
         Rotation,
         Scale,

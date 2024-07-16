@@ -9,7 +9,7 @@ public class IsNear : Conditional
     public float FieldOfView;
     public override TaskStatus OnUpdate()
     {
-        if(!ExistTraceTarget())
+        if (!ExistTraceTarget())
         {
             return TaskStatus.Failure;
         }

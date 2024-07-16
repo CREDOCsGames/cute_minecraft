@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using PlatformGame.Character.Combat;
 using UnityEngine;
 
-namespace PlatformGame.Character.BehaviorTree 
+namespace PlatformGame.Character.BehaviorTree
 {
     public class Trace : Action
     {
@@ -27,9 +27,9 @@ namespace PlatformGame.Character.BehaviorTree
             var dir = (goal - transform.position).normalized;
 
             int countX = Mathf.Abs((int)(dir.x * 10));
-            for(int i =0; i<countX; i++)
+            for (int i = 0; i < countX; i++)
             {
-                var action = dir.x>0?MoveRight:MoveLeft;
+                var action = dir.x > 0 ? MoveRight : MoveLeft;
                 mMe.DoAction(action.ID);
             }
 

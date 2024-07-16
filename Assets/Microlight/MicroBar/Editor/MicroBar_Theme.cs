@@ -1,10 +1,12 @@
 using UnityEngine;
 
-namespace Microlight.MicroBar {
+namespace Microlight.MicroBar
+{
     // ****************************************************************************************************
     // Defines colors for the MicroBar custom editors and drawers
     // ****************************************************************************************************
-    internal static class MicroBar_Theme {
+    internal static class MicroBar_Theme
+    {
         // Button colors
         internal static Color RemoveButtonColor = new Color(1f, 0.65f, 0.65f);   // Color tint for the remove button
         internal static Color AddButtonColor = new Color(0.65f, 1f, 0.65f);   // Color tint for the add anim command button
@@ -21,7 +23,7 @@ namespace Microlight.MicroBar {
         internal static Color CustomAnimColorMultiplier = new Color(1.00f, 1.00f, 1.00f);
 
         // Tooltips
-        internal const string ExecutionTooltip = 
+        internal const string ExecutionTooltip =
             "Order of command execution" +
             "\nSequence - Command runs when the above command finishes" +
             "\nParallel - Command runs at the same time as the command above" +

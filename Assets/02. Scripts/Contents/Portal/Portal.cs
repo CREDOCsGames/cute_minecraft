@@ -69,7 +69,7 @@ namespace PlatformGame.Contents
                 mEntrylist[character] = false;
             }
 
-            if(!(State is WorkState.Action))
+            if (!(State is WorkState.Action))
             {
                 return;
             }

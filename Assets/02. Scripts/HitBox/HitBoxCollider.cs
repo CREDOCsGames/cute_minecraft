@@ -136,6 +136,6 @@ namespace PlatformGame.Character.Collision
             mHitPipeline.InsertPipe(InvokeEffectEvent);
             mHitPipeline.InsertPipe(InvokeAbilityEvent);
         }
-        
+
     }
 }
