@@ -38,6 +38,7 @@ namespace PlatformGame.Character.Controller
             }
 
             mBlockEvent?.Invoke();
+            mBlockEvent = null;
         }
 
         void OnTriggerEnter(Collider other)

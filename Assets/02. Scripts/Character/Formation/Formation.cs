@@ -1,6 +1,6 @@
-using UnityEngine.Events;
-using UnityEngine;
 using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame.Character
 {
@@ -18,15 +18,25 @@ namespace PlatformGame.Character
             }
         }
         public UnityAction Trace;
-        public Func<bool> IsStoped;
-        public Func<bool> IsReached;
-        public UnityEvent OnReachFormationEvent;
-        public UnityEvent OnChangeFormationEvent;
+        public UnityAction Behaviour;
+        public Func<bool> IsStoped = () => true;
+        public Func<bool> IsReached = () => false;
+        public Func<bool> BehaviourConditoin = () => false;
         public UnityEvent OnStopMoveEvent;
         public UnityEvent OnStartMoveEvent;
+        public UnityEvent OnReachFormationEvent;
+        public UnityEvent OnChangeFormationEvent;
+        public UnityEvent OnBehaviourEvent;
 
         public void UpdateBehaviour()
         {
+            Debug.Assert(BehaviourConditoin != null);
+            if (BehaviourConditoin())
+            {
+                OnBehaviour();
+                return;
+            }
+
 #if DEVELOPMENT
             var isReached = IsReached();
             var isStoped = IsStoped();
@@ -69,6 +79,12 @@ namespace PlatformGame.Character
         {
             Trace.Invoke();
             OnStartMove();
+        }
+
+        void OnBehaviour()
+        {
+            Behaviour.Invoke();
+            OnBehaviourEvent.Invoke();
         }
 
     }
