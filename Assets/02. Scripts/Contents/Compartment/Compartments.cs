@@ -19,7 +19,20 @@ namespace PlatformGame.Contents.Compartment
         public List<Transform> WhiteColors;
         List<List<Transform>> Colors;
         public Color SymbolColor;
-        Color PaintedColor;
+        [SerializeField] Color mPaintedColor;
+        public Color PaintedColor
+        {
+            set
+            {
+                mPaintedColor = value;
+                if(mPaintedColor == Color.None)
+                {
+                    return;
+                }
+                mbInfinitelyActive = SymbolColor == mPaintedColor;
+                Activetion();
+            }
+        }
         UnityEngine.Color[] ColorArray =
         {
             UnityEngine.Color.magenta,
@@ -50,14 +63,12 @@ namespace PlatformGame.Contents.Compartment
                 return;
             }
             PaintedColor = FindColor(transform);
-            mbInfinitelyActive = SymbolColor == PaintedColor;
-            Activetion();
         }
 
         public void SetEffectColor(LineRenderer renderer)
         {
-            renderer.startColor = ColorArray[(int)PaintedColor];
-            renderer.endColor = ColorArray[(int)PaintedColor];
+            renderer.startColor = ColorArray[(int)mPaintedColor];
+            renderer.endColor = ColorArray[(int)mPaintedColor];
         }
 
         Color FindColor(Transform transform)
@@ -89,6 +100,11 @@ namespace PlatformGame.Contents.Compartment
                 RedColors,
                 WhiteColors
             };
+
+            if(mPaintedColor != Color.None)
+            {
+                PaintedColor = mPaintedColor;
+            }
         }
         void Update()
         {

@@ -58,12 +58,25 @@ namespace PlatformGame.Character
 
         AbilityAgent mAgent;
 
+        public void ReleaseRest()
+        {
+            DoAction(4290000009);
+            Rigid.isKinematic = false;
+            UI.SetActive(true);
+        }
+
+        public void Rest()
+        {
+            DoAction(4290000008);
+            Rigid.isKinematic = true;
+            Rigid.velocity = Vector3.zero;
+            UI.SetActive(false);
+        }
 
         public void DoAction(uint actionID)
         {
-            Debug.Assert(mHasAbilities != null, $"do not own the Ability {gameObject.name}.");
             mHasAbilities.Library.TryGetValue(actionID, out var action);
-            Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
+           Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
 
             if (!StateCheck.Equals(State, action.AllowedState))
             {

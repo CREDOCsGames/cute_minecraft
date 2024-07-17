@@ -11,7 +11,8 @@ namespace PlatformGame.Character
         Move = 1 << 2,
         Jump = 1 << 3,
         Fall = 1 << 4,
-        Action = 1 << 5
+        Action = 1 << 5,
+        Rest = 1 << 6
     }
 
     [Serializable]
@@ -27,7 +28,9 @@ namespace PlatformGame.Character
         Attack2,
         AttackDelay,
         Interaction,
-        Die
+        Die,
+        Rest,
+        ReleaseRest
     }
 
     public static class StateCheck
@@ -46,6 +49,8 @@ namespace PlatformGame.Character
                 case CharacterState.AttackDelay: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Land: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
                 case CharacterState.Interaction: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+                case CharacterState.Rest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
+                case CharacterState.ReleaseRest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
                 default: Debug.Assert(false, $"Undefined values : {state}"); return false;
             }
         }
