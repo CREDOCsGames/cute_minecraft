@@ -7,7 +7,8 @@
 ```
 
 # 목표 달성
->6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>
+>6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
+>7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/Pb-O8Zdzcyc">진행도 체크</a>   
 
 ### ※ 회의록
 <details>
