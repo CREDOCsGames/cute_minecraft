@@ -1,5 +1,6 @@
 ﻿using PlatformGame.Input;
 using UnityEngine;
+using UnityEngine.Events;
 using static PlatformGame.Input.ActionKey;
 
 namespace PlatformGame.Contents.Loader
@@ -8,6 +9,8 @@ namespace PlatformGame.Contents.Loader
     {
         public WorkState State { get; private set; }
         [SerializeField] Character.Controller.ActionController mCubeController;
+        public UnityEvent OnLoaded;
+        public UnityEvent OnStartLoad;
 
         void Awake()
         {
@@ -27,7 +30,7 @@ namespace PlatformGame.Contents.Loader
             {
                 return;
             }
-
+            OnLoaded.Invoke();
             State = WorkState.Ready;
             mCubeController.SetActive(false);
         }
@@ -36,6 +39,7 @@ namespace PlatformGame.Contents.Loader
         {
             State = WorkState.Action;
             mCubeController.SetActive(true);
+            OnStartLoad.Invoke();
         }
     }
 }

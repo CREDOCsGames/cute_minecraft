@@ -13,8 +13,10 @@ namespace PlatformGame.Character.Movement
             Debug.Assert(Camera.main, $"Main Camera is not found.");
             Debug.Assert(mDir.y == 0, $"Must have a Y value of 0. : {name}");
             var camTransform = Camera.main.transform;
-            var moveForce = camTransform.right * mDir.x;
-            moveForce += camTransform.forward * mDir.z;
+            var right = camTransform.right.x > 0 ? Vector3.right : Vector3.left;
+            var forward = camTransform.forward.z > 0 ? Vector3.forward : Vector3.back;
+            var moveForce = right * mDir.x;
+            moveForce += forward * mDir.z;
             moveForce = moveForce.normalized * (Time.deltaTime * MOVE_SPEED);
             rigid.AddForce(moveForce);
         }

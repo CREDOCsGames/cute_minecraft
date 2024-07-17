@@ -27,6 +27,11 @@ namespace PlatformGame.Character.Controller
                 return;
             }
 
+            if (mCharacter.State is CharacterState.Rest)
+            {
+               return;
+            }
+
             if (mCharacter.State is CharacterState.Attack)
             {
                 actionID = STATE_ATTACK_DELAY;
