@@ -12,7 +12,7 @@ float4 _Color;
 float4 _ShadowColor;
 float4 _LightColor0;
 float4 _MainTex_ST;
-
+float _Alpha;
 // Textures
 sampler2D _MainTex;
 sampler2D _FalloffSampler;
@@ -100,6 +100,6 @@ float4 frag( v2f i ) : COLOR
 	float_t attenuation = saturate( 2.0 * LIGHT_ATTENUATION( i ) - 1.0 );
 	combinedColor = lerp( shadowColor, combinedColor, attenuation );
 #endif
-
+    clip(_Alpha <= 0 ? -1 : 1);
 	return float4_t( combinedColor, diffSamplerColor.a ) * _Color * _LightColor0;
 }

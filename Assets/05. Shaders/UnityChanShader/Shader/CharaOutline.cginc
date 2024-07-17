@@ -23,7 +23,7 @@ float  _EdgeThickness = 1.0;
 float  _DepthBias = 0.00012;
 
 float4 _MainTex_ST;
-
+float _Alpha;
 // Main texture
 // メインテクスチャ
 sampler2D _MainTex;
@@ -105,6 +105,8 @@ float4_t frag(v2f i) : COLOR
 	float3_t outlineColor = BRIGHTNESS_FACTOR 
 		* SetSaturation(mainMapColor.rgb, SATURATION_FACTOR)
 		* mainMapColor.rgb;
+	
+    clip(_Alpha  <= 0? -1 : 1);
 	
 	return float4_t(outlineColor, mainMapColor.a) * _Color * _LightColor0; 
 }
