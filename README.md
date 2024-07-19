@@ -8,7 +8,7 @@
 
 # 목표 달성
 >6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
->7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/Pb-O8Zdzcyc">진행도 체크</a>   
+>7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/HGYjXGCR69g">진행도 체크</a>   
 
 ### ※ 회의록
 <details>
@@ -57,6 +57,13 @@
 
 
 # 빌드 파일 링크
+
+### 레벨 배치 & 큐브맵 회전 연출
+>#<a href="https://drive.google.com/file/d/1lNL1erf1I2s2jIMyIjV_Fs8eyf4j4S0C/view?usp=drive_link">build</a>   
+이동 조작 : wasd, 방향키   
+버튼 이벤트 액션 : 마우스 좌클릭   
+플레이 영역 결정 : Left shift
+
 
 #### 크래프팅
 >#<a href="https://drive.google.com/file/d/1Z0lYeIFlIBj55tB6P76l7KQHzohShYWl/view?usp=drive_link">build</a>   
