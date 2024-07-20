@@ -55,6 +55,8 @@
 ><a href="https://www.youtube.com/watch?v=W4UsW0bN_BQ">블록퍼즐 기획서</a>   # <a href="https://1drv.ms/p/c/875d85bddfcdb560/EellX9WRkWpHi124jf4If_cBmZWwYAZP3IISC3soB-i73Q?e=z4bihR">PPT</a>   
 ><a href="https://drive.google.com/file/d/1l6LP5LUDx_e_HMO5gKJ52nG1ULId7ynI/view?usp=drive_link">크래프팅 기획서</a>   # <a href="https://1drv.ms/p/c/7ded37d39663fb50/EVtNDqxnQWNOjJKTd4yxoFQB7GxF6mXaPmWL2pc4am2DDw?e=ulqCNa">PPT</a>   
 
+### 레벨
+><a>용사 vs 마왕 레벨 기획서</a>   #<a href="https://docs.google.com/presentation/d/111KrGqQYLcF8r0YrXrpP6VpJC7vcwSam/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
 
 # 빌드 파일 링크
 
