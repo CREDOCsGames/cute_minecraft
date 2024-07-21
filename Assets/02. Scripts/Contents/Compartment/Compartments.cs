@@ -2,13 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+using static PlatformGame.Contents.Compartment.SymbolColor;
+
 namespace PlatformGame.Contents.Compartment
 {
-    public enum Color
-    {
-        None, Yellow, Green, Blue, Orange, Red, White
-    }
-
     public class Compartments : MonoBehaviour
     {
         public List<Transform> YellowColors;
@@ -22,40 +19,32 @@ namespace PlatformGame.Contents.Compartment
         [SerializeField] Color mPaintedColor;
         public Color PaintedColor
         {
+            get => mPaintedColor;
             set
             {
                 mPaintedColor = value;
-                if(mPaintedColor == Color.None)
+                if (mPaintedColor == Color.None)
                 {
                     return;
                 }
-                mbInfinitelyActive = SymbolColor == mPaintedColor;
+
+                if (mPaintedColor == SymbolColor)
+                {
+                    mTimer.RemoveTimeout();
+                }
+                else
+                {
+                    mTimer.SetTimeout(ActivationDuration);
+                }
                 Activetion();
             }
         }
-        UnityEngine.Color[] ColorArray =
-        {
-            UnityEngine.Color.magenta,
-            UnityEngine.Color.yellow,
-            UnityEngine.Color.green,
-            UnityEngine.Color.blue,
-            new UnityEngine.Color(255,165,0),
-            UnityEngine.Color.red,
-            UnityEngine.Color.white,
-        };
         public UnityEvent ActivationEvent;
         public UnityEvent DeactivationEvent;
         public float ActivationDuration;
-        float mElapsedTime = -1f;
-        bool mbInfinitelyActive;
-        public bool InfinitelyActive
-        {
-            get => mbInfinitelyActive;
-            set => mbInfinitelyActive = value;
-
-        }
-        public bool IsActivation => 0 <= mElapsedTime;
-
+        public bool IsActivation => mTimer.IsStart;
+        Timer mTimer = new();
+        
         public void ColorizeCompartments(Transform transform)
         {
             if (IsActivation)
@@ -80,17 +69,21 @@ namespace PlatformGame.Contents.Compartment
 
         public void Activetion()
         {
-            mElapsedTime = 0f;
+            mTimer.Start();
             ActivationEvent.Invoke();
         }
 
         public void Deactivation()
         {
+            mTimer.Stop();
             DeactivationEvent.Invoke();
         }
 
         void Awake()
         {
+            mTimer.OnTimeoutEvent += (t) => Deactivation();
+            mTimer.SetTimeout(ActivationDuration);
+
             Colors = new()
             {
                 YellowColors,
@@ -101,11 +94,12 @@ namespace PlatformGame.Contents.Compartment
                 WhiteColors
             };
 
-            if(mPaintedColor != Color.None)
+            if (mPaintedColor != Color.None)
             {
                 PaintedColor = mPaintedColor;
             }
         }
+
         void Update()
         {
             if (!IsActivation)
@@ -113,20 +107,9 @@ namespace PlatformGame.Contents.Compartment
                 return;
             }
 
-            if (mbInfinitelyActive)
-            {
-                return;
-            }
-
-            if (ActivationDuration <= mElapsedTime)
-            {
-                mElapsedTime = -1f;
-                Deactivation();
-                return;
-            }
-
-            mElapsedTime += Time.deltaTime;
+            mTimer.Tick();
         }
+
     }
 }
 

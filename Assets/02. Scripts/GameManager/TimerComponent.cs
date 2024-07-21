@@ -7,12 +7,12 @@ namespace PlatformGame
 
     public class TimerComponent : MonoBehaviour
     {
-        public UnityEvent OnStartTimer;
-        public UnityEvent OnStopTimer;
-        public UnityEvent OnPauseTimer;
-        public UnityEvent OnResumeTimer;
-        public UnityEvent OnTick;
-        public UnityEvent OnTimeout;
+        public UnityEvent<TimerComponent> OnStartTimer;
+        public UnityEvent<TimerComponent> OnStopTimer;
+        public UnityEvent<TimerComponent> OnPauseTimer;
+        public UnityEvent<TimerComponent> OnResumeTimer;
+        public UnityEvent<TimerComponent> OnTick;
+        public UnityEvent<TimerComponent> OnTimeout;
 
         public bool IsStart => mTimer.IsStart;
         public bool IsPause => mTimer.IsPause;
@@ -72,12 +72,12 @@ namespace PlatformGame
 
         void Awake()
         {
-            mTimer.OnPauseEvent += (t) => OnPauseTimer.Invoke();
-            mTimer.OnResumeEvent += (t) => OnResumeTimer.Invoke();
-            mTimer.OnStartEvent += (t) => OnStartTimer.Invoke();
-            mTimer.OnStopEvent += (t) => OnStopTimer.Invoke();
-            mTimer.OnTickEvent += (t) => OnTick.Invoke();
-            mTimer.OnTimeoutEvent += (t) => OnTimeout.Invoke();
+            mTimer.OnPauseEvent += (t) => OnPauseTimer.Invoke(this);
+            mTimer.OnResumeEvent += (t) => OnResumeTimer.Invoke(this);
+            mTimer.OnStartEvent += (t) => OnStartTimer.Invoke(this);
+            mTimer.OnStopEvent += (t) => OnStopTimer.Invoke(this);
+            mTimer.OnTickEvent += (t) => OnTick.Invoke(this);
+            mTimer.OnTimeoutEvent += (t) => OnTimeout.Invoke(this);
 
             mTimer.SetTimeout(mTimeout);
         }
