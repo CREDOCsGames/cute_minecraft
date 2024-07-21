@@ -29,7 +29,7 @@ namespace PlatformGame.Contents
             mLoader.LoadNext();
         }
 
-        [VisibleEnum(typeof(LoaderType))]
+        
         public void SetLoaderType(LoaderType type)
         {
             switch (type)
