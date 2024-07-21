@@ -35,7 +35,7 @@ namespace PlatformGame.Character
             private set => mState = value;
         }
 
-        [VisibleEnum(typeof(CubeMapState))]
+        
         public void ChangeState(int newState)
         {
             Debug.Assert(0 <= newState &&
