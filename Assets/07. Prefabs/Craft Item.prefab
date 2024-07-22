@@ -401,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351925729351371153}
   - component: {fileID: 6613404235241043788}
-  - component: {fileID: 2847032682717603570}
+  - component: {fileID: 4371885061125462275}
   - component: {fileID: 7055134139251853736}
   - component: {fileID: 3792892135720315714}
   - component: {fileID: 5545845886232254816}
@@ -449,11 +449,11 @@ MonoBehaviour:
   mModel: {fileID: 7621151384159328647}
   mHasAbilities: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
   mAttribute:
-    mFlags: 3
+    mFlags: 7
   mOnChangedState:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2847032682717603570
+--- !u!114 &4371885061125462275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,16 +462,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4685128091545227814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0486c5164ba93419c422ecf22dc23f, type: 3}
+  m_Script: {fileID: 11500000, guid: 75a281d54937fb6408e415038b5add6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControlledCharacter: {fileID: 6613404235241043788}
-  mIsActive: 1
-  InputEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  EditorInputMap: []
-  EditorBeforeCharacter: {fileID: 6613404235241043788}
+  mAnimator: {fileID: 4666320331323082131}
+  BeforeController: {fileID: 9100000, guid: e518e193a3a60e646ae61c78507044fb, type: 2}
+  EditorStateTriggers:
+  - State: 10
+    Trigger: Die
 --- !u!114 &7055134139251853736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +554,7 @@ GameObject:
   - component: {fileID: 7620984197455078791}
   - component: {fileID: 7618712648038672711}
   - component: {fileID: 7610636070135686753}
+  - component: {fileID: 9020957680536429654}
   m_Layer: 8
   m_Name: BetterCrystal01 (5)
   m_TagString: Untagged
@@ -628,6 +627,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9020957680536429654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622486690017532087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7622680736837903695
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +650,7 @@ GameObject:
   - component: {fileID: 7621034484122703499}
   - component: {fileID: 7618505199356285049}
   - component: {fileID: 7610833899730434859}
+  - component: {fileID: 747314147382108630}
   m_Layer: 8
   m_Name: BetterCrystal01 (3)
   m_TagString: Untagged
@@ -711,6 +723,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &747314147382108630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622680736837903695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7622685917050064441
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +746,7 @@ GameObject:
   - component: {fileID: 7628106902831421775}
   - component: {fileID: 7616951776072054737}
   - component: {fileID: 7610569963704764799}
+  - component: {fileID: 5358642216418994641}
   m_Layer: 8
   m_Name: BetterCrystal01
   m_TagString: Untagged
@@ -794,6 +819,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5358642216418994641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622685917050064441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7622694986565990681
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +842,7 @@ GameObject:
   - component: {fileID: 7620981986797463335}
   - component: {fileID: 7618291812497282655}
   - component: {fileID: 7609359267983542835}
+  - component: {fileID: 4665536205869231781}
   m_Layer: 8
   m_Name: BetterCrystal01 (6)
   m_TagString: Untagged
@@ -877,6 +915,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4665536205869231781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622694986565990681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7622912329269309645
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +938,7 @@ GameObject:
   - component: {fileID: 7628061031877829169}
   - component: {fileID: 7618508558382286789}
   - component: {fileID: 7610841635780320407}
+  - component: {fileID: 5883524086459644828}
   m_Layer: 8
   m_Name: BetterCrystal01 (4)
   m_TagString: Untagged
@@ -960,6 +1011,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5883524086459644828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622912329269309645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7623398314920266605
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +1034,7 @@ GameObject:
   - component: {fileID: 7620863080928445967}
   - component: {fileID: 7618530126899384855}
   - component: {fileID: 7608891407133476001}
+  - component: {fileID: 4531648679649910298}
   m_Layer: 8
   m_Name: BetterCrystal01 (2)
   m_TagString: Untagged
@@ -1043,6 +1107,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4531648679649910298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623398314920266605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7624343134487800985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1130,7 @@ GameObject:
   - component: {fileID: 7628043002243697891}
   - component: {fileID: 7618299707264688215}
   - component: {fileID: 7611038698424903969}
+  - component: {fileID: 2380658026376607201}
   m_Layer: 8
   m_Name: BetterCrystal01 (1)
   m_TagString: Untagged
@@ -1126,6 +1203,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2380658026376607201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624343134487800985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef404221887794fa5e378bd10709ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7624415155178958083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1563,7 @@ PrefabInstance:
     - target: {fileID: 9036980633323257398, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: e518e193a3a60e646ae61c78507044fb, type: 2}
     - target: {fileID: 9105106661575754179, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1496,6 +1585,11 @@ PrefabInstance:
       addedObject: {fileID: 7621151384159328647}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
+--- !u!95 &4666320331323082131 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9036980633323257398, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
+  m_PrefabInstance: {fileID: 4443882538316020645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5136532272327700681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
@@ -1573,6 +1667,10 @@ PrefabInstance:
       propertyPath: mActor
       value: 
       objectReference: {fileID: 6613404235241043788}
+    - target: {fileID: 5350326945323257884, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: mbAttacker
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5350326945323257884, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: mEffectEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0

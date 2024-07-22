@@ -43,7 +43,10 @@ namespace PlatformGame.Character
 
         protected virtual void Awake()
         {
-            SetTransform(transform);
+            if(mOriginTransform == null)
+            {
+                SetTransform(transform);
+            }
             mFormation.Trace = TraceFormation;
             mFormation.IsStoped = () => mbStop;
             mFormation.IsReached = () => IsNearByDistance(transform, mFormation.Transform);

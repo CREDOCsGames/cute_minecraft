@@ -1,5 +1,7 @@
 using PlatformGame.Character;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,12 +43,11 @@ public class FormationManager : MonoBehaviour
     public void InitFormation()
     {
         Debug.Assert(Roles.Count <= Transforms.Count, $"Roles many than Transfomrs");
-
-        for (int i = 0; i < Roles.Count; i++)
+        var list = Roles.ToList();
+        Roles.Clear();
+        for (int i = 0; i < list.Count; i++)
         {
-            var role = Roles[i];
-            role.SetTransform(Transforms[i]);
-            OnAddRoleEvent.Invoke(role);
+            AddRole(list[i]);
         }
     }
 
