@@ -129,7 +129,7 @@ namespace PlatformGame
             }
 
             if (mContents.State == WorkState.Ready)
-            {
+         {
                 Debug.Log("Loaded");
                 StartGame();
             }

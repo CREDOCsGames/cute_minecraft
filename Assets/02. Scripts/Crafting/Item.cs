@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PlatformGame
@@ -21,8 +23,24 @@ namespace PlatformGame
 
     public class Item : MonoBehaviour
     {
+        static List<Item> mInstances = new();
+        public static List<Item> Instances
+        {
+            get => mInstances.ToList();
+        } 
+
         [SerializeField] int mID;
         public int ID => mID;
+
+        void Awake()
+        {
+            mInstances.Add(this);
+        }
+
+        void OnDestroy()
+        {
+            mInstances.Remove(this);
+        }
     }
 
 }

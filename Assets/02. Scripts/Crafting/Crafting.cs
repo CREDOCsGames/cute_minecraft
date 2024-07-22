@@ -1,4 +1,3 @@
-using PlatformGame.Character.Collision;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,27 +10,15 @@ namespace PlatformGame
         [Header("References")]
         [SerializeField] List<QuestItem> mRecipe;
         public List<QuestItem> Recipe => mRecipe.ToList();
-        [SerializeField] GameObject mResultItem;
 
         [Header("Option")]
         public UnityEvent<Item> OnFailEvent;
         public UnityEvent<Item> OnInputItem;
-        public UnityEvent<GameObject> OnOutputItem;
+        public UnityEvent OnOutputItem;
         [Tooltip("요구 개수 초과")]
         [SerializeField] bool mbOvercount;
         [Tooltip("다른 재료 허가")]
         [SerializeField] bool mbOtherInputItem;
-
-        public void OnHit(HitBoxCollision collision)
-        {
-            var item = collision.Attacker.GetComponent<Item>();
-            if (!item)
-            {
-                return;
-            }
-
-            InputItem(item);
-        }
 
         public void ChangeRecipe(List<QuestItem> recipe)
         {
@@ -44,7 +31,7 @@ namespace PlatformGame
             mRecipe.ForEach(x => x.Count = 0);
         }
 
-        void InputItem(Item input)
+        public void InputItem(Item input)
         {
             var item = mRecipe.Find(x => x.Item.ID == input.ID);
             if (!mbOtherInputItem && item == null)
@@ -53,7 +40,7 @@ namespace PlatformGame
                 return;
             }
 
-            if (!mbOvercount && item.IsFull)
+            if (item.IsFull && !mbOvercount)
             {
                 return;
             }
@@ -71,8 +58,7 @@ namespace PlatformGame
 
         void OutputItem()
         {
-            var obj = Instantiate(mResultItem);
-            OnOutputItem.Invoke(obj);
+            OnOutputItem.Invoke();
         }
 
         void Awake()
@@ -90,10 +76,6 @@ namespace PlatformGame
                 t += $"({item.Item.name}) {item.Count} / {item.RequiredCount}\n";
             }
             Debugger.DebugWrapper.LogMessage(transform.GetInstanceID(), "07" + t);
-        }
-        void Update()
-        {
-            SetCount();
         }
 #endif
 

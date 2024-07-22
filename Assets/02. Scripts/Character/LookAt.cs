@@ -6,6 +6,9 @@ public class LookAt : MonoBehaviour
     [SerializeField] Character mCharacter;
     static Vector3 m3DVelocity;
 
+    [SerializeField] bool mbLookAtMoveDir = true;
+    [SerializeField] Transform mTarget;
+
     static void LookAtMovingDirection(Transform transform, Vector3 dir)
     {
         m3DVelocity = dir;
@@ -17,6 +20,11 @@ public class LookAt : MonoBehaviour
 
         transform.forward = m3DVelocity;
     }
+    public void SetTarget(Transform character)
+    {
+        mTarget = character;
+    }
+
     void LookAtMoveDir()
     {
         if (mCharacter.State is not (CharacterState.Walk or CharacterState.Running))
@@ -34,9 +42,23 @@ public class LookAt : MonoBehaviour
         LookAtMovingDirection(transform, velocity);
     }
 
+    void LookAtTarget()
+    {
+        var viewPos = mTarget.position; ;
+        viewPos.y = transform.position.y;
+        transform.LookAt(viewPos);
+    }
+
     void Update()
     {
-        LookAtMoveDir();
+        if (mbLookAtMoveDir)
+        {
+            LookAtMoveDir();
+        }
+        else
+        {
+            LookAtTarget();
+        }
     }
 
 }

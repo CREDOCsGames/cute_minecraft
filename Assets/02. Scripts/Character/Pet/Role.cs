@@ -13,11 +13,6 @@ namespace PlatformGame.Character
         [SerializeField] TransformBaseMovement mTrace;
         [SerializeField] TransformBaseMovement mSwapTrace;
 
-        public virtual void DoAction()
-        {
-            Debug.LogWarning("Calling deprecated methods.");
-        }
-
         protected void SwapTransform()
         {
             (mFormation.Transform, mSwapTransform) = (mSwapTransform, mFormation.Transform);
@@ -48,7 +43,10 @@ namespace PlatformGame.Character
 
         protected virtual void Awake()
         {
-            SetTransform(transform);
+            if(mOriginTransform == null)
+            {
+                SetTransform(transform);
+            }
             mFormation.Trace = TraceFormation;
             mFormation.IsStoped = () => mbStop;
             mFormation.IsReached = () => IsNearByDistance(transform, mFormation.Transform);
