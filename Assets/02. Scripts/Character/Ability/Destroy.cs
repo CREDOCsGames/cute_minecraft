@@ -6,6 +6,7 @@ namespace PlatformGame.Character.Combat
     [CreateAssetMenu(menuName = "Custom/Ability/Destroy")]
     public class Destroy : Ability
     {
+        const uint STATE_DIE = 4290000010;
         public override void UseAbility(AbilityCollision collision)
         {
             var victim = collision.Victim;
@@ -18,7 +19,9 @@ namespace PlatformGame.Character.Combat
             {
                 return;
             }
-            GameObject.Destroy(character.gameObject);
+            character.DoAction(STATE_DIE);
+            var destroyDelay = 3f;
+            GameObject.Destroy(character.gameObject, destroyDelay);
         }
 
     }

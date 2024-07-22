@@ -13,11 +13,6 @@ namespace PlatformGame.Character
         [SerializeField] TransformBaseMovement mTrace;
         [SerializeField] TransformBaseMovement mSwapTrace;
 
-        public virtual void DoAction()
-        {
-            Debug.LogWarning("Calling deprecated methods.");
-        }
-
         protected void SwapTransform()
         {
             (mFormation.Transform, mSwapTransform) = (mSwapTransform, mFormation.Transform);

@@ -44,7 +44,7 @@ namespace PlatformGame
             mRecipe.ForEach(x => x.Count = 0);
         }
 
-        void InputItem(Item input)
+        public void InputItem(Item input)
         {
             var item = mRecipe.Find(x => x.Item.ID == input.ID);
             if (!mbOtherInputItem && item == null)
