@@ -125,29 +125,13 @@ namespace PlatformGame
         {
             if (mbGameStart)
             {
-                // TODO : 분리
-                if (Time.time < mLastSwapTime + 0.5f)
-                {
-                    return;
-                }
-
-                var map = ActionKey.GetKeyDownMap();
-                if (!map[KEY_SWAP])
-                {
-                    return;
-                }
-                SwapCharacter();
-
-                mLastSwapTime = Time.time;
-                // TODOEND
+                return;
             }
-            else
+
+            if (mContents.State == WorkState.Ready)
             {
-                if (mContents.State == WorkState.Ready)
-                {
-                    Debug.Log("Loaded");
-                    StartGame();
-                }
+                Debug.Log("Loaded");
+                StartGame();
             }
         }
 
