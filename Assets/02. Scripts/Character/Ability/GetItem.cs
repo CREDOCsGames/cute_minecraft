@@ -6,6 +6,15 @@ namespace PlatformGame.Character.Combat
 {
     public class GetItem : MonoBehaviour
     {
+        static List<GetItem> mInstances = new();
+        public static List<GetItem> Instances
+        {
+            get
+            {
+                Debug.Assert(mInstances.Count != 0, "There is not a single instance of GetItem.");
+                return mInstances.ToList();
+            }
+        }
         public float Range;
         Dictionary<Item, int> mInventory = new();
         public void Get()
@@ -41,6 +50,14 @@ namespace PlatformGame.Character.Combat
                 }
                 mInventory.Remove(item.Key);
             }
+        }
+        void Awake()
+        {
+            mInstances.Add(this);
+        }
+        void OnDestroy()
+        {
+            mInstances.Remove(this);
         }
     }
 

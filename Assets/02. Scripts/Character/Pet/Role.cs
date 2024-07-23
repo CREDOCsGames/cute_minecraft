@@ -7,7 +7,7 @@ namespace PlatformGame.Character
     public class Role : MonoBehaviour
     {
         protected Transform mSwapTransform;
-        protected Transform mOriginTransform;
+        public Transform OriginTransform { get; protected set; }
         bool mbStop = true;
         [SerializeField] protected Formation mFormation;
         [SerializeField] TransformBaseMovement mTrace;
@@ -22,7 +22,7 @@ namespace PlatformGame.Character
         public void SetTransform(Transform transform)
         {
             mFormation.Transform = transform;
-            mOriginTransform = transform;
+            OriginTransform = transform;
         }
 
         void TraceFormation()
@@ -43,7 +43,7 @@ namespace PlatformGame.Character
 
         protected virtual void Awake()
         {
-            if(mOriginTransform == null)
+            if (OriginTransform == null)
             {
                 SetTransform(transform);
             }
