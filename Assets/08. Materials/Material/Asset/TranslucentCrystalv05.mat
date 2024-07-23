@@ -70,6 +70,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 78dbd2e2ed813e04dbbeab6d982981d0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Normal:
         m_Texture: {fileID: 2800000, guid: fbacd829ce7fbb14ea63d4c6afcc5f06, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -101,9 +105,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _Cull: 2
     - _Cutoff: 0.5
+    - _Cuton: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeWidth: 0.05
     - _EmissionPower: 0.88
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -133,5 +140,6 @@ Material:
     - _ColorTint: {r: 1, g: 0.13333334, b: 0.13333334, a: 1}
     - _ColorTint1: {r: 0.5054769, g: 0, b: 0.8235294, a: 1}
     - _ColorTint2: {r: 0.61237305, g: 0.42647058, b: 1, a: 1}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 0.6667343, b: 0.5441177, a: 1}
   m_BuildTextureStacks: []
