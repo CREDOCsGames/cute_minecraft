@@ -7821,15 +7821,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6601910829923614361, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6601910829923614361, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6601910829923614361, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 130.58
       objectReference: {fileID: 0}
     - target: {fileID: 6601910829923614361, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_SizeDelta.y
@@ -7841,7 +7841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6601910829923614361, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -17.88
       objectReference: {fileID: 0}
     - target: {fileID: 6803103419177055769, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: hitedEvent.m_PersistentCalls.m_Calls.Array.size
@@ -8052,6 +8052,7 @@ PrefabInstance:
     - {fileID: 4223577321830509038, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
     - {fileID: 1720129863511689677, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
     - {fileID: 1434613052432907174, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
+    - {fileID: 4723074752516479117, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5072228660262590644, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
@@ -8086,7 +8087,7 @@ PrefabInstance:
       insertIndex: 2
       addedObject: {fileID: 4286571686665992587}
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
-      insertIndex: 5
+      insertIndex: 4
       addedObject: {fileID: 5285587408460059751}
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       insertIndex: -1
@@ -8130,6 +8131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a281d54937fb6408e415038b5add6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mAnimator: {fileID: 4940914859081684397}
   BeforeController: {fileID: 9100000, guid: 4951f6355d5026640bd8c9c3c392cd6e, type: 2}
   EditorStateTriggers:
   - State: 0
@@ -8146,7 +8148,6 @@ MonoBehaviour:
     Trigger: Land
   - State: 6
     Trigger: Guard
-  mAnimator: {fileID: 4940914859081684397}
 --- !u!114 &5285587408460059751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8221,6 +8222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCharacter: {fileID: 6887189516238088050}
+  mbLookAtMoveDir: 1
+  mTarget: {fileID: 0}
 --- !u!114 &6887189516238088050 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8909505949129107049, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}

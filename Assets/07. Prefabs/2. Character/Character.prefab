@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 5072228660262590644}
   - component: {fileID: 8909505949129107049}
   - component: {fileID: 567969550801680343}
-  - component: {fileID: 4723074752516479117}
   - component: {fileID: 1495312884412037735}
   - component: {fileID: 7824345862538364997}
   m_Layer: 0
@@ -442,7 +441,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mUI: {fileID: 2390169148023136119}
-  mHitBox: {fileID: 4723074752516479117}
   mRigid: {fileID: 7824345862538364997}
   mMovement: {fileID: 1495312884412037735}
   mModel: {fileID: 7434251711434645996}
@@ -471,26 +469,6 @@ MonoBehaviour:
       m_Calls: []
   EditorInputMap: []
   EditorBeforeCharacter: {fileID: 8909505949129107049}
---- !u!114 &4723074752516479117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7018736071673053955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d2cf3d66259654fbda9415b4a64f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mHitControll:
-    pairs: []
-    Delay: 0
-    UseSyncDelay: 0
-  mAttackControll:
-    pairs: []
-    Delay: 0
-    UseSyncDelay: 0
 --- !u!114 &1495312884412037735
 MonoBehaviour:
   m_ObjectHideFlags: 0

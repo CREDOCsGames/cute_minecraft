@@ -1,4 +1,3 @@
-using PlatformGame.Character.Collision;
 using PlatformGame.Character.Movement;
 using UnityEngine;
 
@@ -12,8 +11,6 @@ namespace PlatformGame.Character.Combat
         public float ActionDelay;
         public CharacterState BeState;
         public CharacterStateFlags AllowedState;
-        public Ability Ability;
         public MovementAction Movement;
-        public HitBoxData HitBoxData;
     }
 }

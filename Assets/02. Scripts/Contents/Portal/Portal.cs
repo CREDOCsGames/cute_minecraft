@@ -19,7 +19,6 @@ namespace PlatformGame.Contents
         {
             State = WorkState.Action;
             mRunEvent.Invoke();
-            Debug.Log("Á¢±Ù");
         }
 
         protected virtual bool CanRunningPortal(Character.Character other)
@@ -42,7 +41,7 @@ namespace PlatformGame.Contents
         protected virtual void OnTriggerEnter(Collider other)
         {
             var character = other.GetComponent<Character.Character>();
-            if (!(character && character.CompareTag("Player")))
+            if (!(character && character.CompareTag(Character.Character.TAG_PLAYER)))
             {
                 return;
             }
@@ -59,7 +58,7 @@ namespace PlatformGame.Contents
         {
 
             var character = other.GetComponent<Character.Character>();
-            if (!(character && character.CompareTag("Player")))
+            if (!(character && character.CompareTag(Character.Character.TAG_PLAYER)))
             {
                 return;
             }

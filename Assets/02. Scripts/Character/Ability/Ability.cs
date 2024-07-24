@@ -8,7 +8,7 @@ namespace PlatformGame.Character.Combat
     {
         Pipeline<AbilityCollision> mPipeline;
 
-        public void DoActivation(HitBoxCollision collision)
+        public void Activation(HitBoxCollision collision)
         {
             CreatePipeline();
             var caster = collision.Subject.Actor;

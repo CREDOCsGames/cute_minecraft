@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,7 +19,7 @@ namespace PlatformGame
         public float ElapsedTime => mTimer.ElapsedTime;
         public float LastPauseTime => mTimer.LastPauseTime;
 
-        Timer mTimer = new();
+        readonly Timer mTimer = new();
         float mElapsedTime;
 
         [Header("Options")]

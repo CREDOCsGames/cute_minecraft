@@ -28,7 +28,7 @@ namespace PlatformGame.Character
         void TraceFormation()
         {
             StopAllCoroutines();
-            StartCoroutine(mTrace.Move(transform, mFormation.Transform, true));
+            StartCoroutine( mTrace.Move(transform, mFormation.Transform));
         }
 
         void StopTrace()

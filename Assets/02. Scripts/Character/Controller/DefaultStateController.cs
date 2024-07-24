@@ -29,7 +29,7 @@ namespace PlatformGame.Character.Controller
 
             if (mCharacter.State is CharacterState.Rest)
             {
-               return;
+                return;
             }
 
             if (mCharacter.State is CharacterState.Attack)

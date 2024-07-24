@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 7351925729351371153}
   - component: {fileID: 6613404235241043788}
   - component: {fileID: 4371885061125462275}
-  - component: {fileID: 7055134139251853736}
   - component: {fileID: 3792892135720315714}
   - component: {fileID: 5545845886232254816}
   - component: {fileID: 4775442148313315794}
@@ -442,14 +441,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb6477ae42884a429db142e6880e981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mUI: {fileID: 92590171577290322}
-  mHitBox: {fileID: 7055134139251853736}
   mRigid: {fileID: 5545845886232254816}
   mMovement: {fileID: 3792892135720315714}
   mModel: {fileID: 7621151384159328647}
   mHasAbilities: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
   mAttribute:
-    mFlags: 7
+    mFlags: -1
   mOnChangedState:
     m_PersistentCalls:
       m_Calls: []
@@ -470,26 +467,6 @@ MonoBehaviour:
   EditorStateTriggers:
   - State: 10
     Trigger: Die
---- !u!114 &7055134139251853736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685128091545227814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d2cf3d66259654fbda9415b4a64f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mHitControll:
-    pairs: []
-    Delay: 0
-    UseSyncDelay: 0
-  mAttackControll:
-    pairs: []
-    Delay: 0
-    UseSyncDelay: 0
 --- !u!114 &3792892135720315714
 MonoBehaviour:
   m_ObjectHideFlags: 0

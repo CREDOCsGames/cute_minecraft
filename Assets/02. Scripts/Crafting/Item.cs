@@ -23,11 +23,8 @@ namespace PlatformGame
 
     public class Item : MonoBehaviour
     {
-        static List<Item> mInstances = new();
-        public static List<Item> Instances
-        {
-            get => mInstances.ToList();
-        } 
+        static readonly List<Item> mInstances = new();
+        public static IEnumerable<Item> Instances => mInstances.ToList();
 
         [SerializeField] int mID;
         public int ID => mID;

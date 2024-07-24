@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace PlatformGame.Contents.Compartment
         public void OnColorize()
         {
             mbComplete = Compartments.All(x => x.SymbolColor == x.PaintedColor);
-            if(mbComplete)
+            if (mbComplete)
             {
                 OnCompleteEvent.Invoke();
             }
