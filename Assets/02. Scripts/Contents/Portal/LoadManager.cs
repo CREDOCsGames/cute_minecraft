@@ -9,7 +9,7 @@ namespace PlatformGame.Contents
 
         public void Load()
         {
-            Contents.Instance.SetLoaderType(LoaderType);
+            ContentsLoader.Instance.SetLoaderType(LoaderType);
             GameManager.Instance.LoadGame(LoadDelay);
         }
     }

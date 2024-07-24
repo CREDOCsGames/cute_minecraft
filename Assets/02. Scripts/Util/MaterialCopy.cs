@@ -6,13 +6,13 @@ public class MaterialCopy : MonoBehaviour
     {
         var renderer = GetComponent<Renderer>();
 
-        Material[] originalMaterials = renderer.materials;
-        Material[] copiedMaterials = new Material[originalMaterials.Length];
+        var originalMaterials = renderer.materials;
+        var copiedMaterials = new Material[originalMaterials.Length];
 
         for (int i = 0; i < originalMaterials.Length; i++)
         {
-            Material originalMaterial = originalMaterials[i];
-            Material copiedMaterial = new Material(originalMaterial);
+            var originalMaterial = originalMaterials[i];
+            var copiedMaterial = new Material(originalMaterial);
 
             copiedMaterials[i] = copiedMaterial;
         }

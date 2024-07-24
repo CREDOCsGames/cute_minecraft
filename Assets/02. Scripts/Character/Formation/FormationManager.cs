@@ -32,7 +32,7 @@ public class FormationManager : MonoBehaviour
         }
         Roles.RemoveAt(index);
 
-        for (int i = index + 1; i < Roles.Count; i++)
+        for (var i = index + 1; i < Roles.Count; i++)
         {
             Roles[i].SetTransform(Transforms[i - 1]);
         }
@@ -44,9 +44,9 @@ public class FormationManager : MonoBehaviour
         Debug.Assert(Roles.Count <= Transforms.Count, $"Roles many than Transfomrs");
         var list = Roles.ToList();
         Roles.Clear();
-        for (int i = 0; i < list.Count; i++)
+        foreach (var item in list)
         {
-            AddRole(list[i]);
+            AddRole(item);
         }
     }
 

@@ -10,16 +10,15 @@ namespace PlatformGame.Character.Movement
         [SerializeField] float duration;
         public override IEnumerator Move(Transform start, Transform end, bool repeat = false)
         {
-            float time;
-            Vector3 controlPoint;
-            Vector3 startPos;
             do
             {
-                time = 0;
-                controlPoint.x = Random.Range(start.position.x, end.position.x);
-                controlPoint.y = Random.Range(start.position.y, end.position.y);
-                controlPoint.z = Random.Range(start.position.z, end.position.z);
-                startPos = start.position;
+                float time = 0;
+                Vector3 controlPoint;
+                var startPos = start.position;
+                var endPos = end.position;
+                controlPoint.x = Random.Range(startPos.x, endPos.x);
+                controlPoint.y = Random.Range(startPos.y, endPos.y);
+                controlPoint.z = Random.Range(startPos.z, endPos.z);
 
                 while (time < duration)
                 {
@@ -34,11 +33,11 @@ namespace PlatformGame.Character.Movement
         }
         public static Vector3 CalculateBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
         {
-            float u = 1 - t;
-            float tt = t * t;
-            float uu = u * u;
+            var u = 1 - t;
+            var tt = t * t;
+            var uu = u * u;
 
-            Vector3 point = uu * p0;
+            var point = uu * p0;
             point += 2 * u * t * p1;
             point += tt * p2;
 

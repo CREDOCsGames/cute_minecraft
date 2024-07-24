@@ -40,14 +40,13 @@ namespace PlatformGame.Character.Collision
             get => mActor;
             set => mActor = value;
         }
-        [HideInInspector] public UnityEvent<HitBoxCollision> HitCallback;
         public bool IsDelay => Time.time < mLastHitTime + HitDelay;
         float mLastHitTime;
         HitEvent mAbilityEvent;
         Pipeline<HitBoxCollision> mHitPipeline;
         [SerializeField] UnityEvent<HitBoxCollision> mEffectEvent;
 
-        public void StartDelay()
+        void StartDelay()
         {
             mLastHitTime = Time.time;
         }
@@ -65,11 +64,6 @@ namespace PlatformGame.Character.Collision
         void InvokeEffectEvent(HitBoxCollision collision)
         {
             mEffectEvent.Invoke(collision);
-        }
-
-        void InvokeHitCallback(HitBoxCollision collision)
-        {
-            HitCallback?.Invoke(collision);
         }
 
         void SendCollisionData(IHitBox victim)

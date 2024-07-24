@@ -27,7 +27,7 @@ namespace PlatformGame
 
         void Awake()
         {
-            Debug.Assert(myTransform != null,$"Null references in InventoryRadar : {gameObject.name}");
+            Debug.Assert(myTransform != null, $"Null references in InventoryRadar : {gameObject.name}");
         }
     }
 

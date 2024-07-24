@@ -6,8 +6,8 @@ namespace PlatformGame.Character.Combat
 {
     public class GetItem : MonoBehaviour
     {
-        static List<GetItem> mInstances = new();
-        public static List<GetItem> Instances
+        static readonly List<GetItem> mInstances = new();
+        public static IEnumerable<GetItem> Instances
         {
             get
             {
@@ -16,7 +16,7 @@ namespace PlatformGame.Character.Combat
             }
         }
         public float Range;
-        Dictionary<Item, int> mInventory = new();
+        readonly Dictionary<Item, int> mInventory = new();
         public void Get()
         {
             var foundItems = Item.Instances.Where(x => Vector3.Distance(transform.position, x.transform.position) < Range)
@@ -26,13 +26,9 @@ namespace PlatformGame.Character.Combat
             foreach (var item in foundItems)
             {
                 var character = item.GetComponent<Character>();
-                if (mInventory.ContainsKey(item))
+                if (!mInventory.TryAdd(item, 1))
                 {
                     mInventory[item]++;
-                }
-                else
-                {
-                    mInventory.Add(item, 1);
                 }
 
                 PlatformGame.Character.Combat.Destroy.DestroyTo(character);
@@ -44,7 +40,7 @@ namespace PlatformGame.Character.Combat
         {
             foreach (var item in mInventory.ToList())
             {
-                for (int i = 0; i < item.Value; i++)
+                for (var i = 0; i < item.Value; i++)
                 {
                     crafting.InputItem(item.Key);
                 }

@@ -67,10 +67,9 @@ namespace PlatformGame
         }
 
 #if DEVELOPMENT
-        string t;
         public void SetCount()
         {
-            t = "";
+            var t = "";
             foreach (var item in mRecipe)
             {
                 t += $"({item.Item.name}) {item.Count} / {item.RequiredCount}\n";

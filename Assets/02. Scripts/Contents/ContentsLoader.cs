@@ -10,14 +10,14 @@ namespace PlatformGame.Contents
         LevelLoader
     }
 
-    public class Contents
+    public class ContentsLoader
     {
-        public static Contents Instance { get; private set; }
+        public static ContentsLoader Instance { get; private set; }
 
         public WorkState State => mLoader.State;
         ILevelLoader mLoader;
 
-        public Contents(LoaderType type)
+        public ContentsLoader(LoaderType type)
         {
             Debug.Assert(Instance == null, $"Contents already exists.");
             Instance = this;
@@ -29,7 +29,7 @@ namespace PlatformGame.Contents
             mLoader.LoadNext();
         }
 
-        
+
         public void SetLoaderType(LoaderType type)
         {
             switch (type)

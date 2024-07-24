@@ -1,64 +1,80 @@
-using PlatformGame.Character;
 using UnityEngine;
 
-public class LookAt : MonoBehaviour
+
+namespace PlatformGame.Character.Movement
 {
-    [SerializeField] Character mCharacter;
-    static Vector3 m3DVelocity;
-
-    [SerializeField] bool mbLookAtMoveDir = true;
-    [SerializeField] Transform mTarget;
-
-    static void LookAtMovingDirection(Transform transform, Vector3 dir)
+    enum LookAtType
     {
-        m3DVelocity = dir;
-        m3DVelocity.y = 0;
-        if (m3DVelocity == Vector3.zero)
-        {
-            return;
-        }
-
-        transform.forward = m3DVelocity;
-    }
-    public void SetTarget(Transform character)
-    {
-        mTarget = character;
+        None, MoveDir, Target
     }
 
-    void LookAtMoveDir()
+    public class LookAt : MonoBehaviour
     {
-        if (mCharacter.State is not (CharacterState.Walk or CharacterState.Running))
+        Character mCharacter;
+        static Vector3 m3DVelocity;
+        [SerializeField] LookAtType mType;
+        [SerializeField] Transform mTarget;
+
+        public void SetTarget(Transform target)
         {
-            return;
+            mTarget = target;
+            mCharacter = target?.GetComponent<Character>();
         }
 
-        var velocity = mCharacter.Rigid.velocity;
-        velocity.y = 0f;
-        if (Mathf.Abs(velocity.magnitude) < 1f)
+        void LookAtMoveDir()
         {
-            return;
+            if (mCharacter == null)
+            {
+                mType = LookAtType.None;
+                return;
+            }
+
+            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Running))
+            {
+                return;
+            }
+
+            var velocity = mCharacter.Rigid.velocity;
+
+            if (Mathf.Abs(velocity.magnitude) < 1f)
+            {
+                return;
+            }
+
+            m3DVelocity = velocity;
+            m3DVelocity.y = 0f;
+            if (m3DVelocity == Vector3.zero)
+            {
+                return;
+            }
+
+            transform.forward = m3DVelocity;
         }
 
-        LookAtMovingDirection(transform, velocity);
-    }
-
-    void LookAtTarget()
-    {
-        var viewPos = mTarget.position; ;
-        viewPos.y = transform.position.y;
-        transform.LookAt(viewPos);
-    }
-
-    void Update()
-    {
-        if (mbLookAtMoveDir)
+        void LookAtTarget()
         {
-            LookAtMoveDir();
+            var viewPos = mTarget.position; ;
+            viewPos.y = transform.position.y;
+            transform.LookAt(viewPos);
         }
-        else
+
+        void Awake()
         {
-            LookAtTarget();
+            if (mTarget == null) mTarget = null;
+            SetTarget(mTarget);
         }
+
+        void Update()
+        {
+            switch (mType)
+            {
+                case LookAtType.None: break;
+                case LookAtType.MoveDir: LookAtMoveDir(); break;
+                case LookAtType.Target: LookAtTarget(); break;
+                default: break;
+            }
+        }
+
     }
 
 }

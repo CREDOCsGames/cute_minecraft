@@ -53,7 +53,7 @@ namespace PlatformGame.Character
         public void StickAround()
         {
             var pos = Vector3.zero;
-            for (var i = 0; i < mDirs.Length; i++)
+            foreach (var i in mDirs)
             {
                 if (pos != Vector3.zero)
                 {
@@ -84,7 +84,6 @@ namespace PlatformGame.Character
         Vector3 FindStickyPos(Vector3 dir)
         {
             var near = Vector3.zero;
-            Vector3 one, three;
 
             var hitTarget = FindHandShakeTarget(transform.position, transform, dir);
             if (hitTarget == null)
@@ -111,15 +110,15 @@ namespace PlatformGame.Character
 #endif
 
             var hitTargetPos = mPrev.transform.position;
-            one = hitTargetPos - transform.position;
-            three = hitTargetPos - hitMe.Value.point;
+            var one = hitTargetPos - transform.position;
+            var three = hitTargetPos - hitMe.Value.point;
             near = hitTarget.Value.point - (one - three);
             return near;
         }
 
         static RaycastHit? FindHandShakeTarget(Vector3 offset, Transform A, Vector3 dir)
         {
-            if (!Physics.Raycast(offset, dir, out var hit, GameData.BLOCK_SIZE))
+            if (!Physics.Raycast(offset, dir, out var hit, 5f))
             {
                 return null;
             }
@@ -130,7 +129,7 @@ namespace PlatformGame.Character
                 return null;
             }
 
-            if (!character.Attribute.IsInclude(AttributeFlags.Stickiness))
+            if (character.GetComponent<StickyComponent>() == null)
             {
                 return null;
             }
@@ -169,7 +168,7 @@ namespace PlatformGame.Character
             }
 
             var dir = CurrentDir;
-            for (var i = 0; i < mDirs.Length; i++)
+            foreach (var i in mDirs)
             {
                 var pos = FindStickyPos(mDirs[dir]);
                 if (pos != Vector3.zero)

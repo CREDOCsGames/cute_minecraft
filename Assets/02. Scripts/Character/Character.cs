@@ -1,7 +1,6 @@
 ﻿using PlatformGame.Character.Collision;
 using PlatformGame.Character.Combat;
 using PlatformGame.Character.Movement;
-using PlatformGame.Debugger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +15,10 @@ namespace PlatformGame.Character
         static readonly List<Character> mInstances = new();
         public static List<Character> Instances => mInstances.ToList();
         public bool IsAction => mAgent.IsAction;
-
         public Func<bool> IsGrounded
         {
             get; set;
-        }
+        } = () => true;
         CharacterState mState;
         public CharacterState State
         {
@@ -30,25 +28,20 @@ namespace PlatformGame.Character
                 if (mState != value)
                 {
                     OnChangedState.Invoke(value);
-                    DebugLog.PrintLog(transform, value);
                 }
                 mState = value;
             }
         }
 
-        [Header("References")]
-        [SerializeField] GameObject mUI;
-        [SerializeField] HitBoxGroup mHitBox;
-        public GameObject UI => mUI;
         [SerializeField] Rigidbody mRigid;
         public Rigidbody Rigid => mRigid;
         [SerializeField] MovementComponent mMovement;
         public MovementComponent Movement => mMovement;
         [SerializeField] Transform mModel;
         public Transform Model => mModel;
+        AbilityAgent mAgent;
 
-
-        [Header("Controls")]
+        [Header("Options")]
         [SerializeField] ActionDataList mHasAbilities;
         public ActionDataList HasAbilities => mHasAbilities;
         [SerializeField] AttributeFlag mAttribute;
@@ -56,13 +49,10 @@ namespace PlatformGame.Character
         [SerializeField] UnityEvent<CharacterState> mOnChangedState;
         public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
 
-        AbilityAgent mAgent;
-
         public void ReleaseRest()
         {
             DoAction(4290000009);
             Rigid.isKinematic = false;
-            UI.SetActive(true);
         }
 
         public void Rest()
@@ -70,13 +60,12 @@ namespace PlatformGame.Character
             DoAction(4290000008);
             Rigid.isKinematic = true;
             Rigid.velocity = Vector3.zero;
-            UI.SetActive(false);
         }
 
         public void DoAction(uint actionID)
         {
             mHasAbilities.Library.TryGetValue(actionID, out var action);
-           Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
+            Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
 
             if (!StateCheck.Equals(State, action.AllowedState))
             {
@@ -84,7 +73,7 @@ namespace PlatformGame.Character
             }
             State = action.BeState;
 
-            mAgent.UseAbility(action);
+            mAgent.Use(action);
 
             if (!action.Movement)
             {
@@ -95,12 +84,11 @@ namespace PlatformGame.Character
 
         void Awake()
         {
-            Debug.Assert(mHitBox, $"HitBox reference not found : {gameObject.name}");
             Debug.Assert(Rigid, $"Rigidbody reference not found : {gameObject.name}");
             Debug.Assert(mMovement, $"Movement reference not found : {gameObject.name}");
             Debug.Assert(mModel, $"Model reference not found : {gameObject.name}");
             mInstances.Add(this);
-            mAgent = new AbilityAgent(mHitBox);
+            mAgent = new AbilityAgent();
             Attribute.SetFlag(Attribute.Flags, this);
 
         }
