@@ -31,7 +31,8 @@ namespace PlatformGame.Character
         Die,
         Rest,
         ReleaseRest,
-        Pray
+        Pray,
+        Watering
     }
 
     public static class StateCheck
@@ -53,6 +54,8 @@ namespace PlatformGame.Character
                 case CharacterState.Rest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
                 case CharacterState.ReleaseRest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
                 case CharacterState.Pray: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+                case CharacterState.Watering: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+
                 default: Debug.Assert(false, $"Undefined values : {state}"); return false;
             }
         }
