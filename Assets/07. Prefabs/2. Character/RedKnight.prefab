@@ -12681,6 +12681,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4996556122173243928, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8980996032451684781}
+    - targetCorrespondingSourceObject: {fileID: 5210891488823425613, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7718855070055860229}
+    - targetCorrespondingSourceObject: {fileID: 5210891488823425613, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3357867276258026685}
   m_SourcePrefab: {fileID: 100100000, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
 --- !u!4 &4789593497526039444 stripped
 Transform:
@@ -12714,6 +12720,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e8fb7e27b8694ebb5b60eb7247747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7528950783406510198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5210891488823425613, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+  m_PrefabInstance: {fileID: 2318503798268832315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7718855070055860229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528950783406510198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776adaaacdc5c4e8ab0395120a6e972b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  solver:
+    executedInEditor: 0
+    IKPosition: {x: 24.090458, y: -2.6162663, z: -13.147228}
+    IKPositionWeight: 1
+    root: {fileID: 7149434122134899404}
+    target: {fileID: 0}
+    spine: []
+    head:
+      transform: {fileID: 2971098091111246979}
+      weight: 1
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 1}
+      defaultLocalPosition: {x: -0.024099447, y: -0.0000000018626357, z: -0.0000000018626362}
+      defaultLocalRotation: {x: 0.061285596, y: 0.008348161, z: 0.09709048, w: 0.9933519}
+      length: 0
+      sqrMag: 0
+      axis: {x: -0.41707066, y: 0.8870331, z: -0.19805229}
+      baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
+    eyes: []
+    bodyWeight: 0.216
+    headWeight: 1
+    eyesWeight: 1
+    clampWeight: 0.5
+    clampWeightHead: 0.5
+    clampWeightEyes: 0.5
+    clampSmoothing: 2
+    spineWeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    spineTargetOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3357867276258026685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528950783406510198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8362d7c66e966dd498d59b31392d5148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ik: {fileID: 7718855070055860229}
+  target: {fileID: 0}
+  weight: 1
+  offset: {x: 0, y: 0, z: 0}
+  targetSwitchSmoothTime: 0.3
+  weightSmoothTime: 0.3
+  smoothTurnTowardsTarget: 1
+  maxRadiansDelta: 3
+  maxMagnitudeDelta: 3
+  slerpSpeed: 3
+  pivotOffsetFromRoot: {x: 0, y: 1, z: 0}
+  minDistance: 1
+  maxRootAngle: 45
 --- !u!114 &9203330738624089417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6887189516238088050, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
