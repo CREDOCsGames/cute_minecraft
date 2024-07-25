@@ -13,7 +13,7 @@ public class LoadingWindow : MonoBehaviour
             Debug.Assert(mProgressBar);
             return mProgressBar;
         }
-        private set { mProgressBar = value; }
+        private set => mProgressBar = value;
     }
 
     [SerializeField] TextMeshProUGUI mLoadSceneNameText;
@@ -25,7 +25,7 @@ public class LoadingWindow : MonoBehaviour
             Debug.Assert(mLoadSceneNameText);
             return mLoadSceneNameText;
         }
-        private set { mLoadSceneNameText = value; }
+        private set => mLoadSceneNameText = value;
     }
 
     public MonoBehaviour CoroutineRunner => this;

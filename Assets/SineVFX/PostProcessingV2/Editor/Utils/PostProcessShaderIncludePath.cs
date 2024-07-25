@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using UnityEngine;
-using System.IO;
 
 namespace UnityEditor.Experimental.Rendering
 {

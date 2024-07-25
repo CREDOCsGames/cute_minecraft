@@ -16,20 +16,14 @@ namespace PlatformGame.Character.Controller
 
     public class ActionController : ControllerComponent
     {
-        static List<ActionController> mInstances = new();
-        public static List<ActionController> Instances => mInstances.ToList();
+        static readonly List<ActionController> mInstances = new();
+        public static IEnumerable<ActionController> Instances => mInstances.ToList();
 
         [FormerlySerializedAs("EditorInputMap")]
         [HideInInspector] public List<ActionDataKeyPair> EditorInputMap;
         [HideInInspector] public Character EditorBeforeCharacter;
 
         Dictionary<string, ActionData> mInputMap;
-
-        public override void SetActive(bool able)
-        {
-            base.SetActive(able);
-            FocusOn(able);
-        }
 
         void SetInputAction(List<ActionDataKeyPair> actionKeys)
         {
@@ -50,16 +44,6 @@ namespace PlatformGame.Character.Controller
 
             var actionID = mInputMap[input.Key].ID;
             ControlledCharacter.DoAction(actionID);
-        }
-
-        void FocusOn(bool on)
-        {
-            if (!ControlledCharacter.UI)
-            {
-                return;
-            }
-
-            ControlledCharacter.UI.SetActive(on);
         }
 
         protected override void Awake()

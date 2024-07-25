@@ -74,7 +74,7 @@ namespace PlatformGame.Character.Movement
             }
         }
 
-        Vector3 Temping(Vector3 vector)
+        static Vector3 Temping(Vector3 vector)
         {
             var max = Mathf.Max(vector.x * vector.x, vector.y * vector.y, vector.z * vector.z);
 

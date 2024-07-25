@@ -1,13 +1,11 @@
 using PlatformGame.Character.Controller;
 using PlatformGame.Contents;
 using PlatformGame.Contents.Loader;
-using PlatformGame.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using static PlatformGame.Character.Character;
-using static PlatformGame.Input.ActionKey;
 
 namespace PlatformGame
 {
@@ -25,7 +23,7 @@ namespace PlatformGame
         }
         public List<Character.Character> JoinCharacters => JoinCharactersController.Select(x => x.ControlledCharacter).ToList();
         float mLastSwapTime;
-        Contents.Contents mContents;
+        Contents.ContentsLoader mContents;
         ActionController mCurrentController;
         List<ActionController> JoinCharactersController
         {
@@ -37,6 +35,7 @@ namespace PlatformGame
                 return playerControllers;
             }
         }
+
 
         [Header("[Debug]")]
         [SerializeField, ReadOnly(false)] LoaderType mLoaderType;
@@ -66,6 +65,11 @@ namespace PlatformGame
             mbGameStart = true;
             ControlDefaultCharacter();
         }
+        void StopGame()
+        {
+            Debug.Log("Stop Game");
+            mbGameStart = false;
+        }
 
         void PauseGame()
         {
@@ -73,10 +77,10 @@ namespace PlatformGame
             ReleaseController();
         }
 
-        void StopGame()
+        void ResumeGame()
         {
-            Debug.Log("Stop Game");
-            mbGameStart = false;
+            mbGameStart = true;
+            ControlDefaultCharacter();
         }
 
         void ControlDefaultCharacter()
@@ -99,25 +103,12 @@ namespace PlatformGame
             mCurrentController = null;
         }
 
-        void SwapCharacter()
-        {
-            if (JoinCharactersController.Count < 2)
-            {
-                return;
-            }
-
-            var first = JoinCharactersController.First();
-            JoinCharactersController.RemoveAt(0);
-            JoinCharactersController.Add(first);
-            ControlDefaultCharacter();
-        }
-
         void Awake()
         {
             Debug.Assert(mInstance == null, $"already exists {gameObject.name}.");
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            mContents = new Contents.Contents(mLoaderType);
+            mContents = new Contents.ContentsLoader(mLoaderType);
             LoadGame();
         }
 
@@ -128,11 +119,13 @@ namespace PlatformGame
                 return;
             }
 
-            if (mContents.State == WorkState.Ready)
-         {
-                Debug.Log("Loaded");
-                StartGame();
+            if (mContents.State != WorkState.Ready)
+            {
+                return;
             }
+            
+            Debug.Log("Loaded");
+            StartGame();
         }
 
     }

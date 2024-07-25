@@ -14,14 +14,16 @@ namespace PlatformGame.Character.Collision
             }
 
             var victim = collision.Victim;
-            if (!victim.Attribute.IsInclude(AttributeFlags.Stickiness) ||
-                !victim.Attribute.IsInclude(AttributeFlags.NonStatic))
+            if (!victim.Attribute.IsInclude(AttributeFlags.NonStatic))
             {
                 return;
             }
 
             var stickyBlock = victim.GetComponent<StickyComponent>();
-            Debug.Assert(stickyBlock != null, $"Component not found : {victim.name}");
+            if (stickyBlock == null)
+            {
+                return;
+            }
 
             if (stickyBlock.IsStuck)
             {

@@ -20,7 +20,7 @@ namespace PlatformGame.Contents.Compartment
         public Color PaintedColor
         {
             get => mPaintedColor;
-            set
+            private set
             {
                 mPaintedColor = value;
                 if (mPaintedColor == Color.None)
@@ -43,8 +43,8 @@ namespace PlatformGame.Contents.Compartment
         public UnityEvent DeactivationEvent;
         public float ActivationDuration;
         public bool IsActivation => mTimer.IsStart;
-        Timer mTimer = new();
-        
+        readonly Timer mTimer = new();
+
         public void ColorizeCompartments(Transform transform)
         {
             if (IsActivation)

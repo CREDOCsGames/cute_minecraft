@@ -12,49 +12,19 @@ namespace PlatformGame
         public event Action<Timer> OnTimeoutEvent;
         public event Action<Timer> OnTickEvent;
 
-        bool mbPause = new();
-        public bool IsPause
-        {
-            get => mbPause;
-            private set => mbPause = value;
-        }
+        public bool IsPause { get; private set; }
 
-        bool mbStart = new();
-        public bool IsStart
-        {
-            get => mbStart;
-            private set => mbStart = value;
-        }
+        public bool IsStart { get; private set; }
 
-        float mTimeout = new();
-        public float Timeout
-        {
-            get => mTimeout;
-            private set => mTimeout = value;
-        }
+        public float Timeout { get; private set; }
 
-        float mElapsedTime = new();
-        public float ElapsedTime
-        {
-            get => mElapsedTime;
-            private set => mElapsedTime = value;
-        }
+        public float ElapsedTime { get; private set; }
 
-        float mLastPauseTime = new();
-        public float LastPauseTime
-        {
-            get => mLastPauseTime;
-            private set => mLastPauseTime = value;
-        }
+        public float LastPauseTime { get; private set; }
 
-        float mLastTickTime = new();
-        float LastTickTime
-        {
-            get => mLastTickTime;
-            set => mLastTickTime = value;
-        }
+        private float LastTickTime { get; set; }
 
-        float ServerTime => Server.ServerTime.Time;
+        static float ServerTime => Server.ServerTime.Time;
 
         public void Start()
         {

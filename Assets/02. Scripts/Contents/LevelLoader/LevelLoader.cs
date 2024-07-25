@@ -4,10 +4,7 @@ namespace PlatformGame.Contents.Loader
 {
     public class LevelLoader : ILevelLoader
     {
-        public WorkState State
-        {
-            get { return mEndTime <= Time.time ? WorkState.Ready : WorkState.Action; }
-        }
+        public WorkState State => mEndTime <= Time.time ? WorkState.Ready : WorkState.Action;
 
         float mEndTime;
 
