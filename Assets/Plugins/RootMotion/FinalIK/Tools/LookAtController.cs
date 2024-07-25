@@ -60,6 +60,11 @@ namespace RootMotion.FinalIK {
 
         }
 
+		public void ReleaseTarget()
+		{
+			Target = null;
+		}
+
 		void Start() {
 			lastPosition = ik.solver.IKPosition;
 			dir = ik.solver.IKPosition - pivot;
