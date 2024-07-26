@@ -51,7 +51,7 @@ namespace PlatformGame.Character.Controller
                 return;
             }
 
-            var inputMap = ActionKey.GetKeyDownMap();
+            var inputMap = ActionKey.GetAxisRawMap();
             foreach (var input in inputMap)
             {
                 if (!input.Value)

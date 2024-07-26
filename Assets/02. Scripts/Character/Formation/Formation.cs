@@ -14,18 +14,18 @@ namespace PlatformGame.Character
             set
             {
                 mTransform = value;
-                OnChangeFormation();
+                OnChangeFormation(mTransform);
             }
         }
         public UnityAction Trace;
-        public UnityAction Behaviour;
         public Func<bool> IsStoped = () => true;
         public Func<bool> IsReached = () => false;
         public Func<bool> BehaviourConditoin = () => false;
+        public UnityAction Behaviour;
         public UnityEvent OnStopMoveEvent;
         public UnityEvent OnStartMoveEvent;
         public UnityEvent OnReachFormationEvent;
-        public UnityEvent OnChangeFormationEvent;
+        public UnityEvent<Transform> OnChangeFormationEvent;
         public UnityEvent OnBehaviourEvent;
 
         public void UpdateBehaviour()
@@ -59,10 +59,10 @@ namespace PlatformGame.Character
             OnReachFormationEvent.Invoke();
         }
 
-        void OnChangeFormation()
+        void OnChangeFormation(Transform transform)
         {
             OnStopMove();
-            OnChangeFormationEvent.Invoke();
+            OnChangeFormationEvent.Invoke(transform);
         }
 
         void OnStopMove()

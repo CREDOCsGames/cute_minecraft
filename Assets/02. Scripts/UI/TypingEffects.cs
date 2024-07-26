@@ -21,10 +21,13 @@ namespace PlatformGame
         [SerializeField] float Duration;
         [SerializeField] float FixedInterval;
 
-        public void SetText(string text)
+        public void StartEffects()
         {
-            UI.text = "";
-            Debug.Assert(!string.IsNullOrEmpty(text), $"String Error : {text}");
+            var text = UI.text;
+            if(string.IsNullOrEmpty(text))
+            {
+                return;
+            }
             StopAllCoroutines();
             StartCoroutine(TypringText(text));
         }

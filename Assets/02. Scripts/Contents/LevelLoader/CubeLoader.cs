@@ -25,7 +25,7 @@ namespace PlatformGame.Contents.Loader
                 return;
             }
 
-            var map = ActionKey.GetKeyDownMap();
+            var map = ActionKey.GetAxisRawMap();
             if (!map[KEY_GUARD])
             {
                 return;

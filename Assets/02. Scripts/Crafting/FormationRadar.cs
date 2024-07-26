@@ -1,33 +1,55 @@
 using PlatformGame.Character;
+using System.Linq;
 using UnityEngine;
 
 namespace PlatformGame
 {
     public class FormationRadar : MonoBehaviour
     {
-        Transform mHome;
-        Role pet;
-        public void GoTo(Transform transform)
+        public string PetName;
+
+        public void SetPetTransform(Transform transform)
         {
-            if (pet != null)
-            {
-                Debug.Assert(mHome != null);
-                pet.SetTransform(mHome);
-            }
-            pet = FindObjectOfType<FormationManager>().Roles[0];
-            mHome = pet.OriginTransform;
+            var pet = FindPet(PetName);
             pet.SetTransform(transform);
         }
 
-        public void ReturnHome()
+        public void CombackPet()
         {
-            if (pet == null)
-            {
-                return;
-            }
-            pet.SetTransform(mHome);
-            pet = null;
+            var formation = FindFormation();
+            var pet = FindPet(PetName);
+            formation.Comback(pet);
         }
-    }
 
+        public void ChatText(string text)
+        {
+            var pet = FindPet(PetName);
+            pet.Chat.SetText(text);
+            pet.Chat.Show(true);
+        }
+
+        public void HideChatBalloon()
+        {
+            var pet = FindPet(PetName);
+            pet.Chat.Show(false);
+        }
+
+        static FormationManager FindFormation()
+        {
+            var pc = GameManager.Instance.JoinCharacters.First();
+            var formation = pc.transform.GetComponentInChildren<FormationManager>();
+            return formation;
+        }
+
+        static Role FindPet(string petName)
+        {
+            var formation = FindFormation();
+            var roles = formation.Roles;
+            Debug.Assert(roles.Any(x => x.ID.Name.Equals(petName)), $"Not found in Player's FormationManager : {petName}");
+            var pet = roles.Where(x => x.ID.Name.Equals(petName)).First();
+            return pet;
+
+        }
+
+    }
 }

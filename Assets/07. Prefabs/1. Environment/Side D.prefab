@@ -5113,6 +5113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 494887433134077105}
   - component: {fileID: 478526998729859587}
+  - component: {fileID: 8947742523518075649}
   m_Layer: 0
   m_Name: Side D
   m_TagString: Untagged
@@ -5160,7 +5161,7 @@ MonoBehaviour:
   WhiteColors: []
   SymbolColor: 1
   mPaintedColor: 0
-  ActivationEvent:
+  OnClearEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1720489991095961197}
@@ -5175,10 +5176,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 478526998729859587}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.Compartment.Compartments,
+          Assembly-CSharp
+        m_MethodName: RemoveTimeout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnFailEvent:
+    m_PersistentCalls:
+      m_Calls: []
   DeactivationEvent:
     m_PersistentCalls:
       m_Calls: []
-  ActivationDuration: 0
+  ActivationDuration: 10
+--- !u!114 &8947742523518075649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779176190589759011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc99192be25a6a4dbb9fe208fe6aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NeedCharacters: 1
+  mRunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  mEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7462028057024997717
 GameObject:
   m_ObjectHideFlags: 0

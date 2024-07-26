@@ -39,6 +39,13 @@ public class FormationManager : MonoBehaviour
         OnRemoveRoleEvent.Invoke(role);
     }
 
+    public void Comback(Role role)
+    {
+        Debug.Assert(Roles.Contains(role), $"Not found : {role.ID.Name}");
+        var index = Roles.IndexOf(role);
+        role.SetTransform(Transforms[index]);
+    }
+
     public void InitFormation()
     {
         Debug.Assert(Roles.Count <= Transforms.Count, $"Roles many than Transfomrs");
