@@ -54,12 +54,20 @@ namespace PlatformGame.Character
         public void ReleaseRest()
         {
             DoAction(4290000009);
+            foreach (var item in GetComponents<Collider>())
+            {
+                item.enabled = true;
+            }
             Rigid.isKinematic = false;
         }
 
         public void Rest()
         {
             DoAction(4290000008);
+            foreach (var item in GetComponents<Collider>())
+            {
+                item.enabled = false;
+            }
             Rigid.isKinematic = true;
             Rigid.velocity = Vector3.zero;
         }
