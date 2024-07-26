@@ -2,11 +2,15 @@ using CartoonFX;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame
 {
     public class ChatBalloon : MonoBehaviour
     {
+        [SerializeField] UnityEvent OnShowEvent;
+        [SerializeField] UnityEvent OnHideEvent;
+
         [SerializeField] TextMeshProUGUI UI;
         [SerializeField] SpriteRenderer E;
         [SerializeField] SpriteRenderer W;
@@ -43,7 +47,17 @@ namespace PlatformGame
             if (!bShow)
             {
                 Clear();
+                OnHideEvent.Invoke();
             }
+            else
+            {
+                OnShowEvent.Invoke();
+            }
+        }
+
+        public void SetText(string text)
+        {
+            UI.text = text;
         }
 
         public void Clear()
@@ -75,6 +89,11 @@ namespace PlatformGame
             NW.transform.localPosition = N.transform.localPosition + W.transform.localPosition;
             SE.transform.localPosition = S.transform.localPosition + E.transform.localPosition;
             SW.transform.localPosition = S.transform.localPosition + W.transform.localPosition;
+        }
+
+        void Awake()
+        {
+            Show(false);
         }
 
         void Update()

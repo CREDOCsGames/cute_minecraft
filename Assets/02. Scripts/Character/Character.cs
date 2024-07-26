@@ -12,6 +12,8 @@ namespace PlatformGame.Character
     public class Character : MonoBehaviour
     {
         public const string TAG_PLAYER = "Player";
+        [SerializeField] ID mID;
+        public ID ID => mID;
         static readonly List<Character> mInstances = new();
         public static List<Character> Instances => mInstances.ToList();
         public bool IsAction => mAgent.IsAction;

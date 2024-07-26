@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame.Input
 {
@@ -41,7 +43,9 @@ namespace PlatformGame.Input
         public static List<string> InputKeys => KeyDownMap.Keys.ToList();
         static float mLastUpdate;
 
-        public static Dictionary<string, bool> GetKeyDownMap()
+        static Func<bool> mCheckKey;
+
+        public static Dictionary<string, bool> GetAxisRawMap()
         {
             if (!(mLastUpdate < Time.time))
             {
@@ -57,5 +61,6 @@ namespace PlatformGame.Input
 
             return mKeyDownMap;
         }
+
     }
 }

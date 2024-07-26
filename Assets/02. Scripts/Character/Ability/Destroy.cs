@@ -24,5 +24,9 @@ namespace PlatformGame.Character.Combat
             GameObject.Destroy(character.gameObject, destroyDelay);
         }
 
+        public static void DestroyTo(GameObject gameObject)
+        {
+            GameObject.Destroy(gameObject);
+        }
     }
 }

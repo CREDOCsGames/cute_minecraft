@@ -4,11 +4,21 @@ using UnityEngine.Events;
 
 public class CommandList : MonoBehaviour
 {
-    public List<UnityEvent> Commands;
     int mIndex;
+
+    [Header("References")]
+    [SerializeField] List<UnityEvent> Commands;
+
+    [Header("Options")]
+    [SerializeField] bool bClamp;
 
     public void InvokeCommand()
     {
+        if (bClamp && Commands.Count <= mIndex)
+        {
+            mIndex = 0;
+        }
+
         if (Commands.Count <= mIndex)
         {
             Debug.LogWarning($"Index out of range : {mIndex}/{Commands.Count}");
@@ -17,5 +27,10 @@ public class CommandList : MonoBehaviour
 
         Commands[mIndex].Invoke();
         mIndex++;
+    }
+
+    public void Clear()
+    {
+        Commands.Clear();
     }
 }

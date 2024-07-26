@@ -1,4 +1,5 @@
 ﻿using PlatformGame.Character.Combat;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using static PlatformGame.Input.ActionKey;
@@ -25,8 +26,9 @@ namespace PlatformGame.Character.Controller
         {
             base.EnterCommand(input);
 
-            var map = GetKeyDownMap();
-            if (!map[KEY_ATTACK])
+            var map = GetAxisRawMap();
+            //if (!map[KEY_ATTACK])
+            if(!UnityEngine.Input.GetKeyDown(KeyCode.Mouse0))
             {
                 return;
             }
@@ -35,22 +37,25 @@ namespace PlatformGame.Character.Controller
             {
                 var actionID = mButtonAction.ID;
                 ControlledCharacter.DoAction(actionID);
+                mButtonAction = null;
             }
 
             mBlockEvent?.Invoke();
             mBlockEvent = null;
+            mButtonAnim.gameObject.SetActive(false);
         }
 
         void OnTriggerEnter(Collider other)
         {
             var block = other.GetComponent<BlockEvent>();
-            if (block == null)
+            if (block == null || !block.IsEnable)
             {
                 return;
             }
             SetButtonAction(block.ButtonAction);
             mButtonAnim.transform.SetParent(block.transform);
             mButtonAnim.transform.localPosition = Vector3.zero + Vector3.up;
+            mButtonAnim.gameObject.SetActive(true);
             mButtonAnim.Play("Push");
             mBlockEvent = block.ButtonEvent;
         }

@@ -35,8 +35,6 @@ namespace PlatformGame
                 return playerControllers;
             }
         }
-
-
         [Header("[Debug]")]
         [SerializeField, ReadOnly(false)] LoaderType mLoaderType;
         [SerializeField, ReadOnly(false)] bool mbGameStart;

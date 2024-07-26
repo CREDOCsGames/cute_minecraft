@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-using static PlatformGame.Contents.Compartment.SymbolColor;
-
 namespace PlatformGame.Contents.Compartment
 {
     public class Compartments : MonoBehaviour
@@ -30,16 +28,17 @@ namespace PlatformGame.Contents.Compartment
 
                 if (mPaintedColor == SymbolColor)
                 {
-                    mTimer.RemoveTimeout();
+                    OnClear();
                 }
                 else
                 {
-                    mTimer.SetTimeout(ActivationDuration);
+                    OnFail();
                 }
-                Activetion();
+                mTimer.Start();
             }
         }
-        public UnityEvent ActivationEvent;
+        public UnityEvent OnClearEvent;
+        public UnityEvent OnFailEvent;
         public UnityEvent DeactivationEvent;
         public float ActivationDuration;
         public bool IsActivation => mTimer.IsStart;
@@ -54,10 +53,9 @@ namespace PlatformGame.Contents.Compartment
             PaintedColor = FindColor(transform);
         }
 
-        public void SetEffectColor(LineRenderer renderer)
+        public void RemoveTimeout()
         {
-            renderer.startColor = ColorArray[(int)mPaintedColor];
-            renderer.endColor = ColorArray[(int)mPaintedColor];
+            mTimer.RemoveTimeout();
         }
 
         Color FindColor(Transform transform)
@@ -67,10 +65,14 @@ namespace PlatformGame.Contents.Compartment
             return (Color)index + 1;
         }
 
-        public void Activetion()
+        void OnFail()
         {
-            mTimer.Start();
-            ActivationEvent.Invoke();
+            OnFailEvent.Invoke();
+        }
+
+        void OnClear()
+        {
+            OnClearEvent.Invoke();
         }
 
         public void Deactivation()
