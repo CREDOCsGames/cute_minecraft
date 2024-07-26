@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using static PlatformGame.Character.Status.MovementInfo;
 
@@ -7,6 +8,7 @@ namespace PlatformGame.Character.Movement
     public class Walk : MovementAction
     {
         public Vector3 mDir;
+        public bool ZeroVelocity;
 
         public override void PlayAction(Rigidbody rigid, MonoBehaviour coroutine)
         {
@@ -18,6 +20,10 @@ namespace PlatformGame.Character.Movement
             var moveForce = right * mDir.x;
             moveForce += forward * mDir.z;
             moveForce = moveForce.normalized * (Time.deltaTime * MOVE_SPEED);
+            if(ZeroVelocity)
+            {
+                rigid.velocity = Vector3.zero;
+            }
             rigid.AddForce(moveForce);
         }
 

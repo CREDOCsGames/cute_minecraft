@@ -6,29 +6,25 @@ namespace PlatformGame.Character
 {
     public class Role : MonoBehaviour
     {
-        protected Transform mSwapTransform;
-        public Transform OriginTransform { get; protected set; }
+        public Transform Transform { get; protected set; }
+        [SerializeField] ChatBalloon mChat;
+        public ChatBalloon Chat => mChat;
+        [SerializeField] ID mID;
+        public ID ID => mID;
         bool mbStop = true;
         [SerializeField] protected Formation mFormation;
         [SerializeField] TransformBaseMovement mTrace;
-        [SerializeField] TransformBaseMovement mSwapTrace;
-
-        protected void SwapTransform()
-        {
-            (mFormation.Transform, mSwapTransform) = (mSwapTransform, mFormation.Transform);
-            (mTrace, mSwapTrace) = (mSwapTrace, mTrace);
-        }
 
         public void SetTransform(Transform transform)
         {
             mFormation.Transform = transform;
-            OriginTransform = transform;
+            Transform = transform;
         }
 
         void TraceFormation()
         {
             StopAllCoroutines();
-            StartCoroutine( mTrace.Move(transform, mFormation.Transform));
+            StartCoroutine(mTrace.Move(transform, mFormation.Transform));
         }
 
         void StopTrace()
@@ -43,7 +39,7 @@ namespace PlatformGame.Character
 
         protected virtual void Awake()
         {
-            if (OriginTransform == null)
+            if (Transform == null)
             {
                 SetTransform(transform);
             }

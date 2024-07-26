@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 3792892135720315714}
   - component: {fileID: 5545845886232254816}
   - component: {fileID: 4775442148313315794}
+  - component: {fileID: 5202385407690847571}
   m_Layer: 0
   m_Name: Craft Item
   m_TagString: Player
@@ -441,6 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb6477ae42884a429db142e6880e981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mID:
+    mName: 
   mRigid: {fileID: 5545845886232254816}
   mMovement: {fileID: 3792892135720315714}
   mModel: {fileID: 7621151384159328647}
@@ -520,6 +523,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mID: 0
+--- !u!114 &5202385407690847571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685128091545227814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStartTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPauseTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResumeTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: de474bf62ef70d04b9dbdaf75a026ec8, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.Character.Combat.Destroy, Assembly-CSharp
+        m_MethodName: DestroyTo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6613404235241043788}
+          m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mTimeout: 10
+  mbPlayOnAwake: 1
+  mbUseDebug: 0
+  mTimeoutKey: 
 --- !u!1 &7622486690017532087
 GameObject:
   m_ObjectHideFlags: 0

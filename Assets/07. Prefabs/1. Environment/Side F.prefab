@@ -5779,7 +5779,7 @@ MonoBehaviour:
   WhiteColors: []
   SymbolColor: 1
   mPaintedColor: 0
-  ActivationEvent:
+  OnClearEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1931180556282373324}
@@ -5794,6 +5794,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 3676363447578258623}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.Compartment.Compartments,
+          Assembly-CSharp
+        m_MethodName: RemoveTimeout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnFailEvent:
+    m_PersistentCalls:
+      m_Calls: []
   DeactivationEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5869,6 +5885,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  bClamp: 0
 --- !u!1 &6193453420146304678
 GameObject:
   m_ObjectHideFlags: 0
@@ -6316,6 +6333,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  bClamp: 0
 --- !u!1 &8045167476541721723
 GameObject:
   m_ObjectHideFlags: 0

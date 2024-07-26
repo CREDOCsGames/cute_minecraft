@@ -55,6 +55,7 @@ namespace PlatformGame.Character
                 case CharacterState.ReleaseRest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
                 case CharacterState.Pray: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Watering: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+                case CharacterState.Die: return (flags & CharacterStateFlags.None) == CharacterStateFlags.None;
 
                 default: Debug.Assert(false, $"Undefined values : {state}"); return false;
             }

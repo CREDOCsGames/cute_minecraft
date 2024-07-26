@@ -30,6 +30,7 @@ namespace PlatformGame.Contents
             mCoroutineRunner = mLoadingWindow.CoroutineRunner;
             mTitle = mLoadingWindow.LoadSceneNameText;
             mProgressBar = mLoadingWindow.ProgressBar;
+            mLoadingWindow.ShowWindow(false);
         }
 
         public void LoadNext()
