@@ -29,7 +29,7 @@ namespace PlatformGame.Character.Movement
                 return;
             }
 
-            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Running))
+            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Run))
             {
                 return;
             }

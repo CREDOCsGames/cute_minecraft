@@ -8037,8 +8037,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8909505949129107049, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: mOnChangedState.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8909505949129107049, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
+      propertyPath: mOnChangedState.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 173dbdb5162ab3f489ea5b716891d2ea, type: 3}
     - target: {fileID: 8909505949129107049, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       propertyPath: mOnChangedState.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -8084,8 +8088,8 @@ PrefabInstance:
       addedObject: {fileID: 5009886216201404053}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 4286571686665992587}
+      insertIndex: 3
+      addedObject: {fileID: 8228797217790809119}
     - targetCorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
       insertIndex: 4
       addedObject: {fileID: 5285587408460059751}
@@ -8119,7 +8123,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7018736071673053955, guid: bca6a0b519605b347a7ff9ae3f2d08a5, type: 3}
   m_PrefabInstance: {fileID: 2607823967141724443}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4286571686665992587
+--- !u!114 &8228797217790809119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8128,26 +8132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4996556122173243928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a281d54937fb6408e415038b5add6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c7fb616409f6e546bf350df58614dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mAnimator: {fileID: 4940914859081684397}
-  BeforeController: {fileID: 9100000, guid: 4951f6355d5026640bd8c9c3c392cd6e, type: 2}
-  EditorStateTriggers:
-  - State: 0
-    Trigger: Idle
-  - State: 1
-    Trigger: Walk
-  - State: 2
-    Trigger: Run
-  - State: 3
-    Trigger: Jump
-  - State: 4
-    Trigger: Fall
-  - State: 5
-    Trigger: Land
-  - State: 6
-    Trigger: Guard
+  mCharacter: {fileID: 6887189516238088050}
 --- !u!114 &5285587408460059751
 MonoBehaviour:
   m_ObjectHideFlags: 0

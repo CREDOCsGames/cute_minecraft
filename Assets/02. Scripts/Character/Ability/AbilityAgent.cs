@@ -12,7 +12,7 @@
             }
         }
 
-        public void Use(ActionData actionData)
+        public void UseAbility(ActionData actionData)
         {
             if (mActionTimer.IsStart)
             {

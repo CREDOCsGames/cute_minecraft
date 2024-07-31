@@ -16,7 +16,7 @@ namespace PlatformGame.Character.Movement
         void FixedUpdate()
         {
             if (mCharacter.State is CharacterState.Walk
-                                or CharacterState.Running)
+                                or CharacterState.Run)
             {
                 LimitMoveSpeed();
             }
