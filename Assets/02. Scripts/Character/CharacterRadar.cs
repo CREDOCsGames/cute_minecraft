@@ -6,6 +6,7 @@ namespace PlatformGame.Character
 {
     public class CharacterRadar : MonoBehaviour
     {
+        public string CharacterName;
         public void Rest()
         {
             GameManager.Instance.JoinCharacters.First().Rest();
@@ -24,6 +25,12 @@ namespace PlatformGame.Character
         public void PlayerAnim(string anim)
         {
             GameManager.Instance.JoinCharacters.First().Model.GetComponent<Animator>().Play(anim);
+        }
+        public void SelectAndDoAction(ActionData action)
+        {
+            Debug.Assert(!string.IsNullOrEmpty(CharacterName));
+            var character = Character.Instances.Where(x => x.ID.Name.Equals(CharacterName)).First();
+            character.DoAction(action.ID);
         }
     }
 

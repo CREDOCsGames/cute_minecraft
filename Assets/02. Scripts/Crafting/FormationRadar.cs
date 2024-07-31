@@ -38,6 +38,7 @@ namespace PlatformGame
         {
             var pc = GameManager.Instance.JoinCharacters.First();
             var formation = pc.transform.GetComponentInChildren<FormationManager>();
+            Debug.Assert(formation != null, $"Not found FormationManager : {pc.name}");
             return formation;
         }
 
