@@ -37,6 +37,9 @@ namespace PlatformGame.Character
 
         [SerializeField] Rigidbody mRigid;
         public Rigidbody Rigid => mRigid;
+        [SerializeField] Animator mAnimator;
+        public Animator Animator => mAnimator;
+
         [SerializeField] MovementComponent mMovement;
         public MovementComponent Movement => mMovement;
         [SerializeField] Transform mModel;
@@ -51,27 +54,6 @@ namespace PlatformGame.Character
         [SerializeField] UnityEvent<CharacterState> mOnChangedState;
         public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
 
-        public void ReleaseRest()
-        {
-            DoAction(4290000009);
-            foreach (var item in GetComponents<Collider>())
-            {
-                item.enabled = true;
-            }
-            Rigid.isKinematic = false;
-        }
-
-        public void Rest()
-        {
-            DoAction(4290000008);
-            foreach (var item in GetComponents<Collider>())
-            {
-                item.enabled = false;
-            }
-            Rigid.isKinematic = true;
-            Rigid.velocity = Vector3.zero;
-        }
-
         public void DoAction(uint actionID)
         {
             mHasAbilities.Library.TryGetValue(actionID, out var action);
@@ -83,7 +65,7 @@ namespace PlatformGame.Character
             }
             State = action.BeState;
 
-            mAgent.Use(action);
+            mAgent.UseAbility(action);
 
             if (!action.Movement)
             {
