@@ -60,6 +60,13 @@
 
 # 빌드 파일 링크
 
+### 레벨 확인 (카메라 이동)
+>#<a href="https://drive.google.com/file/d/1tsTAlGS60nx4s4pEiH86oCffGzJ0wPrL/view?usp=drive_link">build</a>   
+이동 조작 : wasd, 방향키   
+업다운 조작 : e,q   
+회전 조작 : 마우스   
+
+
 ### 레벨 배치 & 큐브맵 회전 연출
 >#<a href="https://drive.google.com/file/d/1lNL1erf1I2s2jIMyIjV_Fs8eyf4j4S0C/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
