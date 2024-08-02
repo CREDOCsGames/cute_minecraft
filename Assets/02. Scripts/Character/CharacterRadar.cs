@@ -6,25 +6,36 @@ namespace PlatformGame.Character
 {
     public class CharacterRadar : MonoBehaviour
     {
-        public void Rest()
-        {
-            GameManager.Instance.JoinCharacters.First().Rest();
-        }
-
-        public void ReleaseRest()
-        {
-            GameManager.Instance.JoinCharacters.First().ReleaseRest();
-        }
+        public string CharacterName;
 
         public void DoAction(ActionData action)
         {
-            GameManager.Instance.JoinCharacters.First().DoAction(action.ID);
+            var character = FindCharacter();
+            character.DoAction(action.ID);
         }
 
-        public void PlayerAnim(string anim)
+        public void SelectAndDoAction(ActionData action)
         {
-            GameManager.Instance.JoinCharacters.First().Model.GetComponent<Animator>().Play(anim);
+            var character = FindCharacter();
+            character.DoAction(action.ID);
         }
-    }
 
+        public void ChangeAnimator(RuntimeAnimatorController controller)
+        {
+            var character = FindCharacter();
+            character.Animator.runtimeAnimatorController = controller;
+        }
+
+        Character FindCharacter()
+        {
+            Debug.Assert(!string.IsNullOrEmpty(CharacterName));
+            var character = Character.Instances.Where(x => x.ID.Name.Equals(CharacterName))?.First();
+            Debug.Assert(character != null, $"Not found Character : {CharacterName}");
+
+            return character;
+        }
+
+
+
+    }
 }

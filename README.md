@@ -1,5 +1,6 @@
 # 팀 목표
->일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>
+>일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
+>리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 ```
 ν 6월 : 방해요인이 없는 프로토타입
 → 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
@@ -56,9 +57,17 @@
 ><a href="https://drive.google.com/file/d/1l6LP5LUDx_e_HMO5gKJ52nG1ULId7ynI/view?usp=drive_link">크래프팅 기획서</a>   # <a href="https://1drv.ms/p/c/7ded37d39663fb50/EVtNDqxnQWNOjJKTd4yxoFQB7GxF6mXaPmWL2pc4am2DDw?e=ulqCNa">PPT</a>   
 
 ### 레벨
-><a>용사 vs 마왕 레벨 기획서</a>   #<a href="https://docs.google.com/presentation/d/111KrGqQYLcF8r0YrXrpP6VpJC7vcwSam/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
+><a>라이어게임 모드 레벨 기획서</a>   #<a href="https://docs.google.com/presentation/d/111KrGqQYLcF8r0YrXrpP6VpJC7vcwSam/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
+
 
 # 빌드 파일 링크
+
+### 레벨 확인 (카메라 이동)
+>#<a href="https://drive.google.com/file/d/1tsTAlGS60nx4s4pEiH86oCffGzJ0wPrL/view?usp=drive_link">build</a>   
+이동 조작 : wasd   
+업다운 조작 : e,q   
+회전 조작 : 마우스   
+
 
 ### 레벨 배치 & 큐브맵 회전 연출
 >#<a href="https://drive.google.com/file/d/1lNL1erf1I2s2jIMyIjV_Fs8eyf4j4S0C/view?usp=drive_link">build</a>   

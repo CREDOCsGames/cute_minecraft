@@ -12,7 +12,7 @@ namespace PlatformGame.Character
         Jump = 1 << 3,
         Fall = 1 << 4,
         Action = 1 << 5,
-        Rest = 1 << 6
+        Die = 1 << 6
     }
 
     [Serializable]
@@ -20,19 +20,13 @@ namespace PlatformGame.Character
     {
         Idle,
         Walk,
-        Running,
-        Jumping,
-        Falling,
+        Run,
+        Jump,
+        Fall,
         Land,
-        Attack,
-        Attack2,
-        AttackDelay,
-        Interaction,
-        Die,
-        Rest,
-        ReleaseRest,
-        Pray,
-        Watering
+        Action1,
+        Action2,
+        Die
     }
 
     public static class StateCheck
@@ -43,18 +37,12 @@ namespace PlatformGame.Character
             {
                 case CharacterState.Idle: return (flags & CharacterStateFlags.Idle) == CharacterStateFlags.Idle;
                 case CharacterState.Walk: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
-                case CharacterState.Running: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
-                case CharacterState.Jumping: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
-                case CharacterState.Falling: return (flags & CharacterStateFlags.Fall) == CharacterStateFlags.Fall;
-                case CharacterState.Attack: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
-                case CharacterState.Attack2: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
-                case CharacterState.AttackDelay: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+                case CharacterState.Run: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
+                case CharacterState.Jump: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
+                case CharacterState.Fall: return (flags & CharacterStateFlags.Fall) == CharacterStateFlags.Fall;
+                case CharacterState.Action1: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
+                case CharacterState.Action2: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Land: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
-                case CharacterState.Interaction: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
-                case CharacterState.Rest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
-                case CharacterState.ReleaseRest: return (flags & CharacterStateFlags.Rest) == CharacterStateFlags.Rest;
-                case CharacterState.Pray: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
-                case CharacterState.Watering: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Die: return (flags & CharacterStateFlags.None) == CharacterStateFlags.None;
 
                 default: Debug.Assert(false, $"Undefined values : {state}"); return false;

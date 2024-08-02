@@ -401,11 +401,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7351925729351371153}
   - component: {fileID: 6613404235241043788}
-  - component: {fileID: 4371885061125462275}
   - component: {fileID: 3792892135720315714}
   - component: {fileID: 5545845886232254816}
   - component: {fileID: 4775442148313315794}
   - component: {fileID: 5202385407690847571}
+  - component: {fileID: 8916677818815173628}
   m_Layer: 0
   m_Name: Craft Item
   m_TagString: Player
@@ -443,8 +443,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mID:
-    mName: 
+    mName: "\uACB0\uC815"
   mRigid: {fileID: 5545845886232254816}
+  mAnimator: {fileID: 4666320331323082131}
   mMovement: {fileID: 3792892135720315714}
   mModel: {fileID: 7621151384159328647}
   mHasAbilities: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
@@ -453,23 +454,6 @@ MonoBehaviour:
   mOnChangedState:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4371885061125462275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685128091545227814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a281d54937fb6408e415038b5add6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mAnimator: {fileID: 4666320331323082131}
-  BeforeController: {fileID: 9100000, guid: e518e193a3a60e646ae61c78507044fb, type: 2}
-  EditorStateTriggers:
-  - State: 10
-    Trigger: Die
 --- !u!114 &3792892135720315714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +553,19 @@ MonoBehaviour:
   mbPlayOnAwake: 1
   mbUseDebug: 0
   mTimeoutKey: 
+--- !u!114 &8916677818815173628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685128091545227814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7fb616409f6e546bf350df58614dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mCharacter: {fileID: 6613404235241043788}
 --- !u!1 &7622486690017532087
 GameObject:
   m_ObjectHideFlags: 0

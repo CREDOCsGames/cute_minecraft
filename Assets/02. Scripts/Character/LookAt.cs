@@ -29,7 +29,7 @@ namespace PlatformGame.Character.Movement
                 return;
             }
 
-            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Running))
+            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Run))
             {
                 return;
             }
@@ -53,7 +53,8 @@ namespace PlatformGame.Character.Movement
 
         void LookAtTarget()
         {
-            var viewPos = mTarget.position; ;
+            Debug.Assert(mTarget != null, $"Not found target : {name}");
+            var viewPos = mTarget.position;
             viewPos.y = transform.position.y;
             transform.LookAt(viewPos);
         }

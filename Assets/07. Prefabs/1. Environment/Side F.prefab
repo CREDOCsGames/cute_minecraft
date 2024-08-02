@@ -336,6 +336,128 @@ Transform:
   - {fileID: 5515183736423089161}
   m_Father: {fileID: 1738132982790643769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1066874312662237537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288740092895721608}
+  - component: {fileID: 5845896215073340206}
+  - component: {fileID: 8595170996429040162}
+  m_Layer: 0
+  m_Name: "\uC131\uACF5 \uC5F0\uCD9C"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288740092895721608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066874312662237537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00000076921367, y: 0.0000005078008, z: -0.00000032319886, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3835905386046496556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5845896215073340206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066874312662237537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716c702ba6677644a991ffdd09247a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Commands:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3837638698162916943}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7759595719582580139}
+        m_TargetAssemblyTypeName: PlatformGame.FormationRadar, Assembly-CSharp
+        m_MethodName: CombackPet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7759595719582580139}
+        m_TargetAssemblyTypeName: PlatformGame.FormationRadar, Assembly-CSharp
+        m_MethodName: HideChatBalloon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4493741223797626428}
+        m_TargetAssemblyTypeName: PlatformGame.FormationRadar, Assembly-CSharp
+        m_MethodName: CombackPet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4493741223797626428}
+        m_TargetAssemblyTypeName: PlatformGame.FormationRadar, Assembly-CSharp
+        m_MethodName: HideChatBalloon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  bClamp: 1
+--- !u!114 &8595170996429040162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066874312662237537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1d8dc4c12e90c438bef62835e58542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PetName: "\uC870\uC5B8\uC790"
 --- !u!1 &1094530983951904040
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,10 +6207,10 @@ MonoBehaviour:
   mRunEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6193453420146304678}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 4461713720694088203}
+        m_TargetAssemblyTypeName: CommandList, Assembly-CSharp
+        m_MethodName: InvokeCommand
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6100,6 +6222,18 @@ MonoBehaviour:
   mEndEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7082846021172149546}
+        m_TargetAssemblyTypeName: CommandList, Assembly-CSharp
+        m_MethodName: InvokeCommand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6193453420146304678}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -6224,7 +6358,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7082846021172149546}
+      - m_Target: {fileID: 5845896215073340206}
         m_TargetAssemblyTypeName: CommandList, Assembly-CSharp
         m_MethodName: InvokeCommand
         m_Mode: 1
@@ -12015,6 +12149,7 @@ Transform:
   - {fileID: 3593083220235378799}
   - {fileID: 130071577166996266}
   - {fileID: 3543795271248973393}
+  - {fileID: 288740092895721608}
   - {fileID: 8363788745287951346}
   - {fileID: 37692452621352328}
   - {fileID: 5811369285360226509}
