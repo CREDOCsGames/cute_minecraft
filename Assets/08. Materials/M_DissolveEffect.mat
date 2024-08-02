@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_DissolveEffect
-  m_Shader: {fileID: 4800000, guid: 8b05d49618da25843a494fa0753b4fab, type: 3}
+  m_Shader: {fileID: 4800000, guid: f7eb639cc2870694ba22537e1b45a59c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -84,6 +84,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 26b3e85120468a64396a93b6019cf05f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -117,8 +121,12 @@ Material:
     - _Cull: 0
     - _Cutoff: 1
     - _Cuton: 0
+    - _DepthFadeDistance: 0
+    - _DistortionAmount: 0.292
     - _Distribution: 1
     - _EdgeWidth: 0.17
+    - _FresnelPower: 0
+    - _FresnelScale: 0
     - _GlowBaseFrequency76: 1.137
     - _GlowColorIntensity77: 4.03
     - _MudDirtMix: 0
@@ -127,6 +135,7 @@ Material:
     - _StartPoint: 0.75
     - _TestBaseIntensityVariation78: 0
     - _Thickness: 0.5
+    - _TimeScale: 0
     - _UnderwaterInfluence: 0
     - __dirty: 0
     - temp3: 1
@@ -135,6 +144,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeColor: {r: 0.25490198, g: 1, b: 1, a: 1}
     - _EmberColorTint1551673: {r: 0.6901961, g: 0.2588228, b: 0.06274459, a: 1}
+    - _ForcefieldTint: {r: 0, g: 0, b: 0, a: 0}
+    - _IntersectionColor: {r: 0.43382347, g: 0.43772817, b: 1, a: 0}
     - _MudDirt: {r: 0.58823526, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 0.5294118, g: 0.42642888, b: 0, a: 0}
