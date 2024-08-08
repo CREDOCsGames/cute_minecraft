@@ -54,7 +54,7 @@ namespace PlatformGame.Character.Controller
             }
             SetButtonAction(block.ButtonAction);
             mButtonAnim.transform.SetParent(block.transform);
-            mButtonAnim.transform.localPosition = Vector3.zero + Vector3.up;
+            mButtonAnim.transform.localPosition = Vector3.right + Vector3.up + Vector3.back;
             mButtonAnim.gameObject.SetActive(true);
             mButtonAnim.Play("Push");
             mBlockEvent = block.ButtonEvent;

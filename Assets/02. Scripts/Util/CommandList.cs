@@ -21,7 +21,7 @@ public class CommandList : MonoBehaviour
 
         if (Commands.Count <= mIndex)
         {
-            Debug.LogWarning($"Index out of range : {mIndex}/{Commands.Count}");
+            Debug.LogWarning($"Index out of range : {mIndex}/{Commands.Count} {name}");
             return;
         }
 
