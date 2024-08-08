@@ -54,7 +54,7 @@
 #### 콘텐츠
 ><a href="https://youtu.be/akHYBZMRwM0">구획 기획서</a>   #<a href="https://docs.google.com/presentation/d/1nfAR3PX-h2FJDeH4njCSLbltR7_sBVey/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
 ><a href="https://www.youtube.com/watch?v=W4UsW0bN_BQ">블록퍼즐 기획서</a>   # <a href="https://1drv.ms/p/c/875d85bddfcdb560/EellX9WRkWpHi124jf4If_cBmZWwYAZP3IISC3soB-i73Q?e=z4bihR">PPT</a>   
-><a href="https://drive.google.com/file/d/1l6LP5LUDx_e_HMO5gKJ52nG1ULId7ynI/view?usp=drive_link">크래프팅 기획서</a>   # <a href="https://1drv.ms/p/c/7ded37d39663fb50/EcYkJ2BfY4hFmkrV3SfWL8cBXbevi98JF0ZGgb41Yfxs2w?e=moKe4O">PPT</a>   
+><a href="https://drive.google.com/file/d/1l6LP5LUDx_e_HMO5gKJ52nG1ULId7ynI/view?usp=drive_link">크래프팅 기획서</a>   # <a href="https://docs.google.com/presentation/d/19LhS84Il7u0AOZi9ekSM8Vv-s6f6ZF0d/edit?usp=drive_link&ouid=105196213292953665915&rtpof=true&sd=true">PPT</a>   
 
 ### 레벨
 ><a>라이어게임 모드 레벨 기획서</a>   #<a href="https://docs.google.com/presentation/d/111KrGqQYLcF8r0YrXrpP6VpJC7vcwSam/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
