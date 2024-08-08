@@ -20,7 +20,8 @@ namespace PlatformGame.Character.Combat
         public static void CreateObject(GameObject prefab, Transform transform)
         {
             var obj = GameObject.Instantiate(prefab);
-            obj.transform.SetPositionAndRotation(transform.position + (Vector3.up * 0.5f), Quaternion.identity);
+
+            obj.transform.SetPositionAndRotation(transform.position + Vector3.right + Vector3.up + Vector3.back + (Vector3.up * 1.5f), Quaternion.identity);
         }
 
         public override void UseAbility(AbilityCollision collision)

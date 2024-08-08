@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8686273163984216995}
   - component: {fileID: 4579808719545377832}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3849267997661630850}
   - component: {fileID: 1762071151490478707}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 2974106984519865260}
   - component: {fileID: 961832364105226613}
   - component: {fileID: 1446525121669638131}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 994883254892766965}
   - component: {fileID: 6945600112694408019}
   - component: {fileID: 7217074419225193861}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 4775442148313315794}
   - component: {fileID: 5202385407690847571}
   - component: {fileID: 8916677818815173628}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Craft Item
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 144
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 7618712648038672711}
   - component: {fileID: 7610636070135686753}
   - component: {fileID: 9020957680536429654}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 7618505199356285049}
   - component: {fileID: 7610833899730434859}
   - component: {fileID: 747314147382108630}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 7616951776072054737}
   - component: {fileID: 7610569963704764799}
   - component: {fileID: 5358642216418994641}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 7618291812497282655}
   - component: {fileID: 7609359267983542835}
   - component: {fileID: 4665536205869231781}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 7618508558382286789}
   - component: {fileID: 7610841635780320407}
   - component: {fileID: 5883524086459644828}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 7618530126899384855}
   - component: {fileID: 7608891407133476001}
   - component: {fileID: 4531648679649910298}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 7618299707264688215}
   - component: {fileID: 7611038698424903969}
   - component: {fileID: 2380658026376607201}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: BetterCrystal01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,7 +1248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7621151384159328647}
   - component: {fileID: 3974644874023684053}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Craft Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1521,7 +1521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8206070634150816031, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Layer
@@ -1633,6 +1633,10 @@ PrefabInstance:
     - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_Name
       value: HitBoxCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalScale.x
