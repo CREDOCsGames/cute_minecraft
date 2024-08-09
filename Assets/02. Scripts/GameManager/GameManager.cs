@@ -1,129 +1,69 @@
-using PlatformGame.Character.Controller;
-using PlatformGame.Contents;
-using PlatformGame.Contents.Loader;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using UnityEngine;
-using static PlatformGame.Character.Character;
+using UnityEngine.Events;
 
 namespace PlatformGame
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singleton<GameManager>
     {
-        static GameManager mInstance;
-        public static GameManager Instance
-        {
-            get
-            {
-                Debug.Assert(mInstance != null, $"Not found : Game Manager");
-                return mInstance;
-            }
-            private set => mInstance = value;
-        }
-        public List<Character.Character> JoinCharacters => JoinCharactersController.Select(x => x.ControlledCharacter).ToList();
-        float mLastSwapTime;
-        Contents.ContentsLoader mContents;
-        ActionController mCurrentController;
-        List<ActionController> JoinCharactersController
-        {
-            get
-            {
-                var playerControllers = ActionController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
-                Debug.Assert(playerControllers.Count > 0 && playerControllers.All(x => x),
-                    $"No controllers with the {TAG_PLAYER} tag found.");
-                return playerControllers;
-            }
-        }
-        [Header("[Debug]")]
-        [SerializeField, ReadOnly(false)] LoaderType mLoaderType;
-        [SerializeField, ReadOnly(false)] bool mbGameStart;
+        public bool IsGameStart { get; private set; }
+
+        [Header("[Options]")]
+        [SerializeField] UnityEvent OnStartGame;
+        [SerializeField] UnityEvent OnStopGame;
+        [SerializeField] UnityEvent OnExitGame;
 
         public void ExitGame()
         {
-            Application.Quit();
+            OnExitGame.Invoke();
+            Debug.Assert(OnExitGame.GetPersistentEventCount() > 0, $"You need to tie the shutdown logic to an event : {name}");
         }
 
-        public void LoadGame(float pauseTime = 0f)
+        public void StartGame()
         {
-            PauseGame();
-            Invoke(nameof(StopGame), pauseTime);
-            Invoke(nameof(MoveNext), pauseTime);
+            IsGameStart = true;
+            OnStartGame.Invoke();
         }
 
-        void MoveNext()
+        public void StopGame()
         {
-            Debug.Log("Load");
-            mContents.LoadNextLevel();
+            IsGameStart = false;
+            OnStopGame.Invoke();
         }
 
-        void StartGame()
+        public void AddOnStartGameEvent(UnityAction action)
         {
-            Debug.Log("Start Game");
-            mbGameStart = true;
-            ControlDefaultCharacter();
-        }
-        void StopGame()
-        {
-            Debug.Log("Stop Game");
-            mbGameStart = false;
+            OnStartGame.AddListener(action);
         }
 
-        void PauseGame()
+        public void RemoveOnStartGameEvent(UnityAction action)
         {
-            Debug.Log("Pause Game");
-            ReleaseController();
+            OnStartGame.RemoveListener(action);
         }
 
-        void ResumeGame()
+        public void AddOnStopGameEvent(UnityAction action)
         {
-            mbGameStart = true;
-            ControlDefaultCharacter();
+            OnStopGame.AddListener(action);
         }
 
-        void ControlDefaultCharacter()
+        public void RemoveOnStopGameEvent(UnityAction action)
         {
-            JoinCharactersController.ForEach(x => x.SetActive(false));
-            var defaultCharacter = JoinCharactersController.First();
-            ReplaceControlWith(defaultCharacter);
+            OnStopGame.RemoveListener(action);
         }
 
-        void ReplaceControlWith(ActionController controller)
+        public void AddOnExitGameEvent(UnityAction action)
         {
-            mCurrentController?.SetActive(false);
-            mCurrentController = controller;
-            mCurrentController.SetActive(true);
+            OnExitGame.AddListener(action);
         }
 
-        void ReleaseController()
+        public void RemoveOnExitGameEvent(UnityAction action)
         {
-            mCurrentController?.SetActive(false);
-            mCurrentController = null;
+            OnExitGame.RemoveListener(action);
         }
 
-        void Awake()
+        protected override void Awake()
         {
-            Debug.Assert(mInstance == null, $"already exists {gameObject.name}.");
-            Instance = this;
+            base.Awake();
             DontDestroyOnLoad(gameObject);
-            mContents = new Contents.ContentsLoader(mLoaderType);
-            LoadGame();
-        }
-
-        void Update()
-        {
-            if (mbGameStart)
-            {
-                return;
-            }
-
-            if (mContents.State != WorkState.Ready)
-            {
-                return;
-            }
-            
-            Debug.Log("Loaded");
-            StartGame();
         }
 
     }

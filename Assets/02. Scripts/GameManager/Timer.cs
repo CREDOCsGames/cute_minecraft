@@ -76,7 +76,6 @@ namespace PlatformGame
 
         public void SetTimeout(float timeout)
         {
-            Debug.Assert(0 < timeout, $"The timeout({timeout}) must be greater than 0 seconds.");
             Timeout = timeout;
         }
 

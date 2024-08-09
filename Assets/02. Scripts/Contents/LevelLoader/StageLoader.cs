@@ -11,34 +11,43 @@ namespace PlatformGame.Contents
     {
         public WorkState State { get; private set; }
         static int mStageLevel;
-        readonly StageList Stages;
-        readonly Slider mProgressBar;
-        readonly TextMeshProUGUI mTitle;
-        readonly LoadingWindow mLoadingWindow;
-        readonly MonoBehaviour mCoroutineRunner;
-
-        public StageLoader()
+        StageList mStages;
+        StageList Stages
         {
-            // TODO : 래핑
-            Stages = Resources.Load<StageList>("StageLevels");
-            Debug.Assert(Stages);
-            // TODOEND
-
-            Debug.Assert(Stages.Names.Count > 0);
-
-            mLoadingWindow = UIWindowContainer.GetLoadingWindow();
-            mCoroutineRunner = mLoadingWindow.CoroutineRunner;
-            mTitle = mLoadingWindow.LoadSceneNameText;
-            mProgressBar = mLoadingWindow.ProgressBar;
-            mLoadingWindow.ShowWindow(false);
+            get
+            {
+                if (mStages == null)
+                {
+                    mStages = Resources.Load<StageList>("StageLevels");
+                }
+                Debug.Assert(mStages);
+                Debug.Assert(mStages.Names.Count > 0);
+                return mStages;
+            }
         }
+        Slider mProgressBar => LoadingWindow.ProgressBar;
+        TextMeshProUGUI mTitle => LoadingWindow.LoadSceneNameText;
+        LoadingWindow mLoadingWindow;
+        LoadingWindow LoadingWindow
+        {
+            get
+            {
+                if(mLoadingWindow == null)
+                {
+                    mLoadingWindow = UIWindowContainer.GetLoadingWindow();
+                    mLoadingWindow.ShowWindow(false);
+                }
+                return mLoadingWindow;
+            }
+        }
+        MonoBehaviour mCoroutineRunner => LoadingWindow.CoroutineRunner;
 
         public void LoadNext()
         {
             State = WorkState.Action;
             var sceneName = Stages.Names[mStageLevel];
             mStageLevel = Mathf.Min(mStageLevel + 1, Stages.Names.Count - 1);
-            mLoadingWindow.ShowWindow(true);
+            LoadingWindow.ShowWindow(true);
             mCoroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
         }
 
@@ -66,7 +75,7 @@ namespace PlatformGame.Contents
                 yield return new WaitForSeconds(1);
             }
 
-            mLoadingWindow.ShowWindow(false);
+            LoadingWindow.ShowWindow(false);
             State = WorkState.Ready;
         }
     }
