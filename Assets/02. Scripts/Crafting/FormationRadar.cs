@@ -36,7 +36,7 @@ namespace PlatformGame
 
         static FormationManager FindFormation()
         {
-            var pc = GameManager.Instance.JoinCharacters.First();
+            var pc = PlayerCharacterManager.Instance.ControlledCharacter;
             var formation = pc.transform.GetComponentInChildren<FormationManager>();
             Debug.Assert(formation != null, $"Not found FormationManager : {pc.name}");
             return formation;
