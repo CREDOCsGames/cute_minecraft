@@ -377,12 +377,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCubeController: {fileID: 34060435}
-  OnLoaded:
+  OnStartLoad:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
-        m_MethodName: ReleaseRest
+        m_MethodName: Rest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -392,12 +392,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnStartLoad:
+  OnLoaded:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
-        m_MethodName: Rest
+        m_MethodName: ReleaseRest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4765,6 +4765,17 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &927383613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2600983528259882227, guid: 72a321835470ef142a353df856c16156, type: 3}
+  m_PrefabInstance: {fileID: 701280989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc93588ab1cf7a4baf4815ecbdcdf71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &952959217 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3191078367036516975, guid: 6e4dcb3d51934044f85b96d992262f6e, type: 3}
@@ -5793,6 +5804,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5572161696235927316, guid: 484f000f36f08d5409eb15fa58fcfd74, type: 3}
   m_PrefabInstance: {fileID: 1153918596}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1293896132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5094880667601365317, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
+  m_PrefabInstance: {fileID: 1507635339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1293896136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293896132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStartTimer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ReplaceControlWith
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 927383613}
+          m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Controller.ActionController,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStopTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPauseTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResumeTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls: []
+  mTimeout: 0
+  mbPlayOnAwake: 1
+  mbUseDebug: 0
+  mTimeoutKey: 
 --- !u!1 &1375170700
 GameObject:
   m_ObjectHideFlags: 0
@@ -5993,7 +6056,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5094880667601365317, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1293896136}
   m_SourcePrefab: {fileID: 100100000, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
 --- !u!1 &1519750218
 GameObject:
