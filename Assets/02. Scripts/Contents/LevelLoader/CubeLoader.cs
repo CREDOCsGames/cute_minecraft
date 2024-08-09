@@ -9,8 +9,8 @@ namespace PlatformGame.Contents.Loader
     {
         public WorkState State { get; private set; }
         [SerializeField] Character.Controller.ControllerComponent mCubeController;
-        public UnityEvent OnLoaded;
         public UnityEvent OnStartLoad;
+        public UnityEvent OnLoaded;
 
         void Awake()
         {

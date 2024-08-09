@@ -31,7 +31,7 @@ namespace PlatformGame.Contents
         void ResetEntrylist()
         {
             mEntrylist.Clear();
-            var characters = GameManager.Instance.JoinCharacters;
+            var characters = PlayerCharacterManager.Instance.JoinCharacters;
             foreach (var character in characters)
             {
                 mEntrylist.Add(character, false);

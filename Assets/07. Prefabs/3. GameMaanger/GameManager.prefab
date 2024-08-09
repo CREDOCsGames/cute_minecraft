@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4303004049449638975}
   - component: {fileID: 5672216508156639871}
+  - component: {fileID: 5618395987445713130}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,6 +45,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9effd44f64f365d4599cc9bd7215f5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mJoinCharactersController: []
-  mLoaderType: 0
-  bGameStart: 0
+  OnStartGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ControlDefaultCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStopGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ReleaseController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExitGame:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5618395987445713130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094880667601365317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53430fa345ae64945bd2947ca411c764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStartLoad:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5672216508156639871}
+        m_TargetAssemblyTypeName: PlatformGame.GameManager, Assembly-CSharp
+        m_MethodName: StopGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5672216508156639871}
+        m_TargetAssemblyTypeName: PlatformGame.GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
