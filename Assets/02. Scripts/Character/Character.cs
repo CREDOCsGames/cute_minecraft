@@ -54,6 +54,11 @@ namespace PlatformGame.Character
         [SerializeField] UnityEvent<CharacterState> mOnChangedState;
         public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
 
+        public void DoAction(ActionData data)
+        {
+            DoAction(data.ID);
+        }
+
         public void DoAction(uint actionID)
         {
             mHasAbilities.Library.TryGetValue(actionID, out var action);
