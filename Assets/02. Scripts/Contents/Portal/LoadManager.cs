@@ -1,12 +1,9 @@
-using PlatformGame.Contents.Loader;
-using System.Collections;
 using UnityEngine;
 
 namespace PlatformGame.Contents
 {
     public class LoadManager : MonoBehaviour
     {
-        GameManager mGameManager;
         ContentsLoader mContentsLoader;
         public LoaderType LoaderType;
         [Range(0, 1000)] public float LoadDelay = 0f;
@@ -24,7 +21,6 @@ namespace PlatformGame.Contents
 
         void Start()
         {
-            mGameManager = GameManager.Instance;
             mContentsLoader = ContentsLoader.Instance;
         }
 

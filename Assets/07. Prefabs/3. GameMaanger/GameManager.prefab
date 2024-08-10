@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4303004049449638975}
   - component: {fileID: 5672216508156639871}
   - component: {fileID: 5618395987445713130}
+  - component: {fileID: 2473392941546071708}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9effd44f64f365d4599cc9bd7215f5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStartGame:
+  OnStartTimer:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
@@ -60,7 +61,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnStopGame:
+  OnStopTimer:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
@@ -75,9 +76,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnExitGame:
+  OnPauseTimer:
     m_PersistentCalls:
       m_Calls: []
+  OnResumeTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls: []
+  mTimeout: 0
+  mbPlayOnAwake: 0
+  mbUseDebug: 0
+  mTimeoutKey: 
 --- !u!114 &5618395987445713130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,8 +108,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5672216508156639871}
-        m_TargetAssemblyTypeName: PlatformGame.GameManager, Assembly-CSharp
-        m_MethodName: StopGame
+        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
+        m_MethodName: StopTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -108,9 +122,9 @@ MonoBehaviour:
   OnLoaded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5672216508156639871}
-        m_TargetAssemblyTypeName: PlatformGame.GameManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 2473392941546071708}
+        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
+        m_MethodName: StartTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -120,3 +134,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2473392941546071708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094880667601365317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStartTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPauseTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResumeTimer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5672216508156639871}
+        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mTimeout: 2
+  mbPlayOnAwake: 0
+  mbUseDebug: 0
+  mTimeoutKey: 

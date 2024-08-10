@@ -4530,10 +4530,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 305110884}
-  - {fileID: 999515089}
-  - {fileID: 982613692}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -715054532
     m_VirtualCamera: {fileID: 999515089}
@@ -5370,9 +5367,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_ShowDebugText: 0
   m_Loop: 0
-  m_ChildCameras:
-  - {fileID: 1533863491}
-  - {fileID: 1807550649}
+  m_ChildCameras: []
   m_Instructions:
   - m_VirtualCamera: {fileID: 1533863491}
     m_Hold: 3
@@ -5975,6 +5970,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1116442723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5094880667601365317, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
+  m_PrefabInstance: {fileID: 1507635339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1116442724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116442723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb1c6ec1c6272c449ada6ab18bfcf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ReplaceControlWith
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2011794904}
+          m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Controller.ActionController,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisableEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1127330274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,7 +6466,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5094880667601365317, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1116442724}
   m_SourcePrefab: {fileID: 100100000, guid: e1321f3bc5cd6a248a1632cb540cb019, type: 3}
 --- !u!1 &1519750218
 GameObject:
@@ -6919,6 +6953,7 @@ GameObject:
   - component: {fileID: 1607465243}
   - component: {fileID: 1607465242}
   - component: {fileID: 1607465244}
+  - component: {fileID: 1607465245}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -6985,6 +7020,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTimeScale: 0
+--- !u!114 &1607465245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607465241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb1c6ec1c6272c449ada6ab18bfcf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisableEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1614307353
 GameObject:
   m_ObjectHideFlags: 0
@@ -7557,6 +7610,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2011794904 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2600983528259882227, guid: 72a321835470ef142a353df856c16156, type: 3}
+  m_PrefabInstance: {fileID: 701280989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc93588ab1cf7a4baf4815ecbdcdf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2018876744

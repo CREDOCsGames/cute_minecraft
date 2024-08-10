@@ -22,7 +22,7 @@ namespace PlatformGame
             }
             else
             {
-                Debug.Assert(false, $"instance already exists. removed it : {name}");
+                Debug.LogWarning($"instance already exists. removed it : {name}");
                 Destroy(gameObject);
             }
         }
