@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9effd44f64f365d4599cc9bd7215f5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStartTimer:
+  OnStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
@@ -61,7 +61,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnStopTimer:
+  OnStop:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
@@ -76,10 +76,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPauseTimer:
+  OnPause:
     m_PersistentCalls:
       m_Calls: []
-  OnResumeTimer:
+  OnResume:
     m_PersistentCalls:
       m_Calls: []
   OnTick:
@@ -109,7 +109,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5672216508156639871}
         m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: StopTimer
+        m_MethodName: DoStop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2473392941546071708}
         m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: StartTimer
+        m_MethodName: DoStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -146,16 +146,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStartTimer:
+  OnStart:
     m_PersistentCalls:
       m_Calls: []
-  OnStopTimer:
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
-  OnPauseTimer:
+  OnPause:
     m_PersistentCalls:
       m_Calls: []
-  OnResumeTimer:
+  OnResume:
     m_PersistentCalls:
       m_Calls: []
   OnTick:
@@ -166,7 +166,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5672216508156639871}
         m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: StartTimer
+        m_MethodName: DoStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
