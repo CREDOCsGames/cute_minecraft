@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -15,5 +13,6 @@ public class TimeManager : MonoBehaviour
     public void SetScale(float t)
     {
         mTimeScale = t;
+        Time.timeScale = mTimeScale;
     }
 }

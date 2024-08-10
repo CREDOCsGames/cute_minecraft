@@ -331,15 +331,7 @@ MonoBehaviour:
   InputEvents:
     m_PersistentCalls:
       m_Calls: []
-  EditorInputMap:
-  - Key: Right
-    ActionData: {fileID: 11400000, guid: 7b3f1e48474a27c43bfa98c907a1011e, type: 2}
-  - Key: Left
-    ActionData: {fileID: 11400000, guid: a7e234ebe2d821c4eb667f1fa7e74742, type: 2}
-  - Key: Up
-    ActionData: {fileID: 11400000, guid: 5fa428c1978ba9346a1e5a7eebe21594, type: 2}
-  - Key: Down
-    ActionData: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
+  EditorInputMap: []
   EditorBeforeCharacter: {fileID: 34060442}
 --- !u!114 &34060436
 MonoBehaviour:
@@ -354,36 +346,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCubeController: {fileID: 34060435}
-  OnLoaded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ReleaseRest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnStartLoad:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Rest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  OnLoaded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &34060437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7541,8 +7509,8 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1615479450}
-          m_TargetAssemblyTypeName: LoadGamePlay, Assembly-CSharp
-          m_MethodName: LoadLevel
+          m_TargetAssemblyTypeName: PlatformGame.Contents.LoadManager, Assembly-CSharp
+          m_MethodName: Load
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7561,10 +7529,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1615479446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ee38409bf94574aa911f2eb2f3c25a, type: 3}
+  m_Script: {fileID: 11500000, guid: cdf1608d8e1afbc44a12282f6b1c16f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScene: Dice Scene
+  LoaderType: 0
+  LoadDelay: 0
 --- !u!1001 &1698608070
 PrefabInstance:
   m_ObjectHideFlags: 0
