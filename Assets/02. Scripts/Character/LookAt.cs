@@ -5,13 +5,13 @@ namespace PlatformGame.Character.Movement
 {
     enum LookAtType
     {
-        None, MoveDir, Target
+        None, MoveDir, Target, MainCamera
     }
 
     public class LookAt : MonoBehaviour
     {
         Character mCharacter;
-        static Vector3 m3DVelocity;
+        Vector3 m3DVelocity;
         [SerializeField] LookAtType mType;
         [SerializeField] Transform mTarget;
 
@@ -53,10 +53,20 @@ namespace PlatformGame.Character.Movement
 
         void LookAtTarget()
         {
-            Debug.Assert(mTarget != null, $"Not found target : {name}");
+            if (mTarget == null)
+            {
+                mType = LookAtType.None;
+                return;
+            }
             var viewPos = mTarget.position;
             viewPos.y = transform.position.y;
             transform.LookAt(viewPos);
+        }
+
+        void LookAtMainCamera()
+        {
+            mTarget = Camera.main.transform;
+            LookAtTarget();
         }
 
         void Awake()
@@ -72,6 +82,7 @@ namespace PlatformGame.Character.Movement
                 case LookAtType.None: break;
                 case LookAtType.MoveDir: LookAtMoveDir(); break;
                 case LookAtType.Target: LookAtTarget(); break;
+                case LookAtType.MainCamera: LookAtMainCamera(); break;
                 default: break;
             }
         }
