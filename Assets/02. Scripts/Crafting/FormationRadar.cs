@@ -34,6 +34,11 @@ namespace PlatformGame
             pet.Chat.Show(false);
         }
 
+        public void AddRole(Role role)
+        {
+            FindFormation()?.AddRole(role);
+        }
+
         static FormationManager FindFormation()
         {
             var pc = PlayerCharacterManager.Instance.ControlledCharacter;
@@ -41,6 +46,8 @@ namespace PlatformGame
             Debug.Assert(formation != null, $"Not found FormationManager : {pc.name}");
             return formation;
         }
+
+        
 
         static Role FindPet(string petName)
         {
