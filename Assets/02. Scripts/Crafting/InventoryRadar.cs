@@ -11,7 +11,6 @@ namespace PlatformGame
         {
             var inventory = Radar(myTransform);
             inventory.Get();
-
         }
 
         private static GetItem Radar(Transform myTransform)
