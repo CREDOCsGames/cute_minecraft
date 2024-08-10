@@ -8,6 +8,11 @@ namespace PlatformGame.Input
 {
     public static class ActionKey
     {
+        public enum Button
+        {
+            Up, Down, Right, Left, Jump, Tab, Attack, Guard, DebugLoad
+        }
+
         public const string KEY_UP = "Up";
         public const string KEY_DOWN = "Down";
         public const string KEY_RIGHT = "Right";
@@ -16,7 +21,7 @@ namespace PlatformGame.Input
         public const string KEY_SWAP = "Tab";
         public const string KEY_ATTACK = "Attack";
         public const string KEY_GUARD = "Guard";
-        public const string KEY_Debug = "Debug Load";
+        public const string KEY_Debug = "DebugLoad";
 
         static readonly Dictionary<string, bool> mKeyDownMap = new Dictionary<string, bool>
         {

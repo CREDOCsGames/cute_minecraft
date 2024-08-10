@@ -6,10 +6,10 @@ namespace PlatformGame
 
     public class TimerComponent : MonoBehaviour
     {
-        public UnityEvent<TimerComponent> OnStartTimer;
-        public UnityEvent<TimerComponent> OnStopTimer;
-        public UnityEvent<TimerComponent> OnPauseTimer;
-        public UnityEvent<TimerComponent> OnResumeTimer;
+        public UnityEvent<TimerComponent> OnStart;
+        public UnityEvent<TimerComponent> OnStop;
+        public UnityEvent<TimerComponent> OnPause;
+        public UnityEvent<TimerComponent> OnResume;
         public UnityEvent<TimerComponent> OnTick;
         public UnityEvent<TimerComponent> OnTimeout;
 
@@ -38,22 +38,22 @@ namespace PlatformGame
             mTimer.Stop();
         }
 
-        public void StartTimer()
+        public void DoStart()
         {
             mTimer.Start();
         }
 
-        public void PauseTimer()
+        public void DoPause()
         {
             mTimer.Pause();
         }
 
-        public void ResumeTimer()
+        public void DoResume()
         {
             mTimer.Resume();
         }
 
-        public void StopTimer()
+        public void DoStop()
         {
             mTimer.Stop();
         }
@@ -71,10 +71,10 @@ namespace PlatformGame
 
         void Awake()
         {
-            mTimer.OnPauseEvent += (t) => OnPauseTimer.Invoke(this);
-            mTimer.OnResumeEvent += (t) => OnResumeTimer.Invoke(this);
-            mTimer.OnStartEvent += (t) => OnStartTimer.Invoke(this);
-            mTimer.OnStopEvent += (t) => OnStopTimer.Invoke(this);
+            mTimer.OnPauseEvent += (t) => OnPause.Invoke(this);
+            mTimer.OnResumeEvent += (t) => OnResume.Invoke(this);
+            mTimer.OnStartEvent += (t) => OnStart.Invoke(this);
+            mTimer.OnStopEvent += (t) => OnStop.Invoke(this);
             mTimer.OnTickEvent += (t) => OnTick.Invoke(this);
             mTimer.OnTimeoutEvent += (t) => OnTimeout.Invoke(this);
 
@@ -85,7 +85,7 @@ namespace PlatformGame
         {
             if (mbPlayOnAwake)
             {
-                StartTimer();
+                DoStart();
             }
         }
 
