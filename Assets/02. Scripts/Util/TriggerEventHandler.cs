@@ -5,23 +5,23 @@ namespace PlatformGame.Util
 {
     public class TriggerEventHandler : MonoBehaviour
     {
-        public UnityEvent mOnCollisionEnter;
-        public UnityEvent mOnCollisionExit;
-        public UnityEvent mOnCollisionStay;
+        public UnityEvent<Collider> mOnCollisionEnter;
+        public UnityEvent<Collider> mOnCollisionExit;
+        public UnityEvent<Collider> mOnCollisionStay;
 
         void OnTriggerEnter(Collider coll)
         {
-            mOnCollisionEnter.Invoke();
+            mOnCollisionEnter.Invoke(coll);
         }
 
         void OnTriggerExit(Collider coll)
         {
-            mOnCollisionExit.Invoke();
+            mOnCollisionExit.Invoke(coll);
         }
 
         void OnTriggerStay(Collider coll)
         {
-            mOnCollisionStay.Invoke();
+            mOnCollisionStay.Invoke(coll);
         }
     }
 
