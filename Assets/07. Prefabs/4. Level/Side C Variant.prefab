@@ -1744,6 +1744,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1270217248879098946}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeAnimator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlatformGame.Character.CharacterRadar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 9100000, guid: e4ff6d88bbe763f4a83d2e18fd7f3e89, type: 2}
+    - target: {fileID: 2852718363147028174, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+      propertyPath: Commands.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.RuntimeAnimatorController, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5655576781905737967, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: m_Name
       value: Side C Variant
@@ -1764,6 +1800,17 @@ PrefabInstance:
       addedObject: {fileID: 8230387200431173307}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+--- !u!114 &1270217248879098946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4572103199544294081, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
+  m_PrefabInstance: {fileID: 3374296154069042819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f1409e11610cd41982c581abda88aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5713963496314315492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7034618218951844967, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
