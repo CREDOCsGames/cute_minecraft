@@ -42,28 +42,17 @@ namespace PlatformGame.Character.Collision
         }
         public bool IsDelay => Time.time < mLastHitTime + HitDelay;
         float mLastHitTime;
-        HitEvent mAbilityEvent;
         Pipeline<HitBoxCollision> mHitPipeline;
-        [SerializeField] UnityEvent<HitBoxCollision> mEffectEvent;
+        [SerializeField] UnityEvent<HitBoxCollision> mHitEvent;
 
         void StartDelay()
         {
             mLastHitTime = Time.time;
         }
 
-        public void SetAbilityEvent(HitEvent hitEvent)
+        void InvokeHitEvent(HitBoxCollision collision)
         {
-            mAbilityEvent = hitEvent;
-        }
-
-        void InvokeAbilityEvent(HitBoxCollision collision)
-        {
-            mAbilityEvent?.Invoke(collision);
-        }
-
-        void InvokeEffectEvent(HitBoxCollision collision)
-        {
-            mEffectEvent.Invoke(collision);
+            mHitEvent.Invoke(collision);
         }
 
         void SendCollisionData(IHitBox victim)
@@ -125,10 +114,8 @@ namespace PlatformGame.Character.Collision
         void Awake()
         {
             mLastHitTime = Time.time - HitDelay + 0.1f;
-
             mHitPipeline = Pipelines.Instance.HitBoxColliderPipeline;
-            mHitPipeline.InsertPipe(InvokeEffectEvent);
-            mHitPipeline.InsertPipe(InvokeAbilityEvent);
+            mHitPipeline.InsertPipe(InvokeHitEvent);
         }
 
     }
