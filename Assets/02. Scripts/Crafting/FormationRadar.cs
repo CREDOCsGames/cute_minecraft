@@ -47,6 +47,8 @@ namespace PlatformGame
             return formation;
         }
 
+        
+
         static Role FindPet(string petName)
         {
             var formation = FindFormation();
