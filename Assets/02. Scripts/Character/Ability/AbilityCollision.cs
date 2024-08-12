@@ -1,15 +1,16 @@
 using System;
+using UnityEngine;
 
 namespace PlatformGame.Character.Combat
 {
     [Serializable]
     public struct AbilityCollision
     {
-        public readonly Character Caster;
-        public readonly Character Victim;
+        public readonly Transform Caster;
+        public readonly Transform Victim;
         public readonly Ability Ability;
 
-        public AbilityCollision(Character caster, Character victim, Ability ability)
+        public AbilityCollision(Transform caster, Transform victim, Ability ability)
         {
             Caster = caster;
             Victim = victim;

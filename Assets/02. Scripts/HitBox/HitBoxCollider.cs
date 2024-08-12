@@ -9,14 +9,14 @@ namespace PlatformGame.Character.Collision
 
     public struct HitBoxCollision
     {
-        public Character Victim;
-        public Character Attacker;
+        public Transform Victim;
+        public Transform Attacker;
         public HitBoxCollider Subject;
     }
 
     public interface IHitBox
     {
-        public Character Actor { get; set; }
+        public Transform Actor { get; set; }
         public bool IsDelay { get; }
         public bool IsAttacker { get; set; }
         public void DoHit(HitBoxCollision collision);
@@ -34,8 +34,8 @@ namespace PlatformGame.Character.Collision
             set => mbAttacker = value;
         }
 
-        [SerializeField] Character mActor;
-        public Character Actor
+        [SerializeField] Transform mActor;
+        public Transform Actor
         {
             get => mActor;
             set => mActor = value;
@@ -45,7 +45,7 @@ namespace PlatformGame.Character.Collision
         Pipeline<HitBoxCollision> mHitPipeline;
         [SerializeField] UnityEvent<HitBoxCollision> mHitEvent;
 
-        void StartDelay()
+        public void StartDelay()
         {
             mLastHitTime = Time.time;
         }

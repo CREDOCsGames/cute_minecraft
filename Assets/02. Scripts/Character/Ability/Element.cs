@@ -19,7 +19,7 @@ namespace PlatformGame.Character.Combat
             Burn(victim, attacker);
         }
 
-        public static void Burn(Character victim, Character attacker)
+        public static void Burn(Transform victim, Transform attacker)
         {
             var obj = Instantiate(attacker);
             obj.transform.position = victim.transform.position;

@@ -98,17 +98,18 @@ namespace PlatformGame.Character.Movement
         IEnumerator RotateObject(Vector3 axis)
         {
             var time = 0f;
-            var startRotation = mTransform.rotation;
+            var transform = mTransform;
+            var startRotation = transform.rotation;
             var endRotation = Quaternion.AngleAxis(mRotationAmount, axis) * startRotation;
 
             while (time < 1f)
             {
-                mTransform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+                transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
                 time += Time.deltaTime * mRotationSpeed;
                 yield return null;
             }
 
-            mTransform.rotation = endRotation;
+            transform.rotation = endRotation;
         }
     }
 }

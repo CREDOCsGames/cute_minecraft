@@ -13,7 +13,12 @@ namespace PlatformGame.Character.Collision
                 return;
             }
 
-            var victim = collision.Victim;
+            var victim = collision.Victim.GetComponent<Character>();
+            if(victim == null)
+            {
+                return;
+            }
+
             if (!victim.Attribute.IsInclude(AttributeFlags.NonStatic))
             {
                 return;

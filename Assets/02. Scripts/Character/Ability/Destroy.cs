@@ -9,8 +9,16 @@ namespace PlatformGame.Character.Combat
         const uint STATE_DIE = 4290000010;
         public override void UseAbility(AbilityCollision collision)
         {
-            var victim = collision.Victim;
-            DestroyTo(victim);
+            var victim = collision.Victim.GetComponent<Character>();
+            if (victim == null)
+            {
+                DestroyTo(collision.Victim);
+            }
+            else
+            {
+
+                DestroyTo(victim);
+            }
         }
 
         public static void DestroyTo(Character character)
@@ -24,9 +32,9 @@ namespace PlatformGame.Character.Combat
             GameObject.Destroy(character.gameObject, destroyDelay);
         }
 
-        public static void DestroyTo(GameObject gameObject)
+        public static void DestroyTo(Transform gameObject)
         {
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject.gameObject);
         }
     }
 }

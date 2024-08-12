@@ -11,14 +11,23 @@ namespace PlatformGame.Character.Combat
 
         public override void UseAbility(AbilityCollision collision)
         {
-            var victim = collision.Victim;
+            var victim = collision.Victim.GetComponent<Character>();
+            if (victim == null)
+            {
+                return;
+            }
             var rigid = victim.Rigid;
             if (rigid == null)
             {
                 return;
             }
 
-            var attacker = collision.Caster;
+            var attacker = collision.Caster.GetComponent<Character>();
+            if (attacker == null)
+            {
+                return;
+            }
+
             var force = attacker.Model.forward;
             force.y = UpperPower;
             force *= PowerMultiply;
