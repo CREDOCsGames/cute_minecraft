@@ -81,7 +81,7 @@ namespace PlatformGame
             mTimer.SetTimeout(mTimeout);
         }
 
-        void Start()
+        void OnEnable()
         {
             if (mbPlayOnAwake)
             {
