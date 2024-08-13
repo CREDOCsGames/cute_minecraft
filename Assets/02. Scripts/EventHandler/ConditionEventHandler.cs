@@ -68,7 +68,15 @@ namespace PlatformGame.Util
                 Debug.Log($"Conditions that don't exist : {condition}");
                 return;
             }
-            mConditionStatusMap[condition] = !mConditionStatusMap[condition];
+
+            if (mConditionStatusMap[condition])
+            {
+                CancleCondition(condition);
+            }
+            else
+            {
+                MeetCondition(condition);
+            }
         }
 
         public void ResetAllConditions()
