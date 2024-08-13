@@ -13,7 +13,7 @@ namespace PlatformGame.Character
 
         void Awake()
         {
-            ButtonEvent.AddListener(RemoveComponent);
+            // ButtonEvent.AddListener(RemoveComponent);
         }
 
         public void SetEnable(bool enable)
@@ -21,9 +21,14 @@ namespace PlatformGame.Character
             IsEnable = enable;
         }
 
+        public void Invoke()
+        {
+            ButtonEvent.Invoke();
+        }
+
         void RemoveComponent()
         {
-            Destroy(gameObject.GetComponent<BlockEvent>());
+            // Destroy(gameObject.GetComponent<BlockEvent>());
         }
     }
 }
