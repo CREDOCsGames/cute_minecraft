@@ -9,6 +9,7 @@ namespace PlatformGame.Util
     {
         Dictionary<ConditionData, bool> mConditionStatusMap = new();
         public UnityEvent CompletionEvent;
+        public UnityEvent ResetAllEvetn;
 
         public void AddCondition(ConditionData condition)
         {
@@ -53,6 +54,21 @@ namespace PlatformGame.Util
                 return;
             }
             mConditionStatusMap[condition] = false;
+
+            if (mConditionStatusMap.All(x => !x.Value))
+            {
+                ResetAllEvetn.Invoke();
+            }
+        }
+
+        public void ToggleCondition(ConditionData condition)
+        {
+            if (!mConditionStatusMap.ContainsKey(condition))
+            {
+                Debug.Log($"Conditions that don't exist : {condition}");
+                return;
+            }
+            mConditionStatusMap[condition] = !mConditionStatusMap[condition];
         }
 
         public void ResetAllConditions()
