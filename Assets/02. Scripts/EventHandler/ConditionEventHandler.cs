@@ -81,10 +81,12 @@ namespace PlatformGame.Util
 
         public void ResetAllConditions()
         {
-            foreach (var condition in mConditionStatusMap.Keys)
+            var keys = mConditionStatusMap.Keys.ToList();
+            foreach (var key in keys)
             {
-                mConditionStatusMap[condition] = false;
+                mConditionStatusMap[key] = false;
             }
+            ResetAllEvetn.Invoke();
         }
 
     }
