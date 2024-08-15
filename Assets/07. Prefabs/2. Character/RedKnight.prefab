@@ -8868,19 +8868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4716100819783425547}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   OnStop:
     m_PersistentCalls:
       m_Calls: []
@@ -8909,7 +8897,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   mTimeout: 0.5
-  mbPlayOnAwake: 0
+  mbPlayOnAwake: 1
   mbUseDebug: 0
   mTimeoutKey: 
 --- !u!1 &4947379134204757860
@@ -11790,19 +11778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8190278884631932097}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   OnStop:
     m_PersistentCalls:
       m_Calls: []
@@ -11830,10 +11806,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4961982732086550268}
-        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: DoStart
-        m_Mode: 1
+      - m_Target: {fileID: 4716100819783425547}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11843,7 +11819,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   mTimeout: 0.5
-  mbPlayOnAwake: 0
+  mbPlayOnAwake: 1
   mbUseDebug: 0
   mTimeoutKey: 
 --- !u!1 &8203391690963304691
@@ -17359,20 +17335,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5566086503442224138}
-        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: DoStart
-        m_Mode: 1
+      - m_Target: {fileID: 8190278884631932097}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   mTimeout: 0.5
-  mbPlayOnAwake: 0
+  mbPlayOnAwake: 1
   mbUseDebug: 0
   mTimeoutKey: 
 --- !u!1 &8858174112637653945
