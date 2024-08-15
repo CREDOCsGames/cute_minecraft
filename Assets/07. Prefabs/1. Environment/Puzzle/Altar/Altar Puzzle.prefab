@@ -263,10 +263,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2453222262574987998}
     m_Modifications:
-    - target: {fileID: 1025003024710081355, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -297,7 +293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CancleCondition
+      value: MeetCondition
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -305,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: MeetCondition
+      value: CancleCondition
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -322,11 +318,11 @@ PrefabInstance:
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: 2dfc176927b91ae4783bd878c561c0be, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: 2dfc176927b91ae4783bd878c561c0be, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: PlatformGame.Util.ConditionData, Assembly-CSharp
@@ -375,21 +371,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5706301222710115672, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: m_Name
       value: BrazzierBL
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7567578817002428684, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8573165846158624192, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: OnEnableEvent.m_PersistentCalls.m_Calls.Array.size
@@ -518,10 +502,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2453222262574987998}
     m_Modifications:
-    - target: {fileID: 1025003024710081355, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -630,21 +610,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5706301222710115672, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: m_Name
       value: BrazzierFR
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7567578817002428684, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -904,10 +872,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2453222262574987998}
     m_Modifications:
-    - target: {fileID: 1025003024710081355, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -938,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CancleCondition
+      value: MeetCondition
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -946,7 +910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: MeetCondition
+      value: CancleCondition
       objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -963,11 +927,11 @@ PrefabInstance:
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: 3d083a98c5c0f2d4a9cc302e7e69469b, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: 3d083a98c5c0f2d4a9cc302e7e69469b, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: PlatformGame.Util.ConditionData, Assembly-CSharp
@@ -1016,21 +980,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5706301222710115672, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: m_Name
       value: BrazzierFL
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7567578817002428684, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8573165846158624192, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: OnEnableEvent.m_PersistentCalls.m_Calls.Array.size
@@ -1093,10 +1045,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2453222262574987998}
     m_Modifications:
-    - target: {fileID: 1025003024710081355, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1152,11 +1100,11 @@ PrefabInstance:
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: fe6b97114fde8ce49862959946e5ea28, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: CompletionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: dd73605f53fe7ea44a4e521502065498, type: 2}
+      objectReference: {fileID: 11400000, guid: fe6b97114fde8ce49862959946e5ea28, type: 2}
     - target: {fileID: 2832356074016959447, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: ResetAllEvetn.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: PlatformGame.Util.ConditionData, Assembly-CSharp
@@ -1205,21 +1153,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5706301222710115672, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: m_Name
       value: BrazzierBR
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414826117959498863, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7567578817002428684, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7744040126041856584, guid: 2ed5d3efadd18394cb72c6ef519db983, type: 3}
       propertyPath: mHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
