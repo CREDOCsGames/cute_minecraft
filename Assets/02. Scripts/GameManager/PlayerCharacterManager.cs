@@ -30,16 +30,20 @@ namespace PlatformGame
             get => mCurrentController.ControlledCharacter;
         }
         ActionController mCurrentController;
-
+        ActionController mDefaultCharacter;
         public void ControlDefaultCharacter()
         {
             if (JoinCharactersController.Count == 0)
             {
                 return;
             }
-            JoinCharactersController.ForEach(x => x.SetActive(false));
-            var defaultCharacter = JoinCharactersController.First();
-            ReplaceControlWith(defaultCharacter);
+            if(mDefaultCharacter == null)
+            {
+                JoinCharactersController.ForEach(x => x.SetActive(false));
+                mDefaultCharacter = JoinCharactersController.First();
+            }
+            
+            ReplaceControlWith(mDefaultCharacter);
         }
 
         public void ReplaceControlWith(ActionController controller)
@@ -47,6 +51,12 @@ namespace PlatformGame
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
             mCurrentController.SetActive(true);
+        }
+
+        public void SetDefaultCharacter(ActionController controller)
+        {
+            Debug.Assert(controller.tag == TAG_PLAYER);
+            mDefaultCharacter = controller;
         }
 
         public void ReleaseController()
