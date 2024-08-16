@@ -20,6 +20,12 @@ namespace PlatformGame
                 var playerControllers = ActionController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 if (playerControllers.Count == 0)
                 {
+                    
+                    playerControllers = FindObjectsOfType<ActionController>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                }
+
+                if (playerControllers.Count == 0)
+                {
                     Debug.Log($"No controllers with the {TAG_PLAYER} tag found.");
                 }
                 return playerControllers;
@@ -30,20 +36,20 @@ namespace PlatformGame
             get => mCurrentController.ControlledCharacter;
         }
         ActionController mCurrentController;
-        ActionController mDefaultCharacter;
+        ActionController mDefaultController;
         public void ControlDefaultCharacter()
         {
             if (JoinCharactersController.Count == 0)
             {
                 return;
             }
-            if(mDefaultCharacter == null)
+            if(mDefaultController == null)
             {
                 JoinCharactersController.ForEach(x => x.SetActive(false));
-                mDefaultCharacter = JoinCharactersController.First();
+                mDefaultController = JoinCharactersController.First();
             }
             
-            ReplaceControlWith(mDefaultCharacter);
+            ReplaceControlWith(mDefaultController);
         }
 
         public void ReplaceControlWith(ActionController controller)
@@ -56,13 +62,22 @@ namespace PlatformGame
         public void SetDefaultCharacter(ActionController controller)
         {
             Debug.Assert(controller.tag == TAG_PLAYER);
-            mDefaultCharacter = controller;
+            mDefaultController = controller;
         }
 
         public void ReleaseController()
         {
             mCurrentController?.SetActive(false);
             mCurrentController = null;
+        }
+
+        public void Warp(Transform transform)
+        {
+            if(mDefaultController == null)
+            {
+                return;
+            }
+            mDefaultController.ControlledCharacter.transform.position = transform.position;
         }
 
     }
