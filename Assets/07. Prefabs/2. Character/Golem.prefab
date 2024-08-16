@@ -69,7 +69,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -217,19 +217,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Right
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3556886107286537010}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Die
+          m_StringArgument: Light
           m_BoolArgument: 0
         m_CallState: 2
   SpotsEvent:
@@ -247,16 +235,16 @@ MonoBehaviour:
           m_StringArgument: Darkness
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3556886107286537010}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: Warp
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Idle
+          m_StringArgument: Darkness
           m_BoolArgument: 0
         m_CallState: 2
   mSides:
@@ -356,11 +344,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e1b1048f9744e74fa3a3c0f02c10f0f, type: 3}
---- !u!95 &3556886107286537010 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 2e1b1048f9744e74fa3a3c0f02c10f0f, type: 3}
-  m_PrefabInstance: {fileID: 3556886107293939282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3556886107293543578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400072, guid: 2e1b1048f9744e74fa3a3c0f02c10f0f, type: 3}
