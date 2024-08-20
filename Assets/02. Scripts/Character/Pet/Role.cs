@@ -30,11 +30,13 @@ namespace PlatformGame.Character
         void StopTrace()
         {
             mbStop = true;
+            StopAllCoroutines();
         }
 
         void StartTrace()
         {
             mbStop = false;
+            TraceFormation();
         }
 
         protected virtual void Awake()

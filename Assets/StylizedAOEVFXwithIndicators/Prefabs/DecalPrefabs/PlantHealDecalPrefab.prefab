@@ -52,27 +52,121 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: Intensity
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: Diameter
+        m_Overridden: 0
+      - m_Value: 2
+        m_Name: Anticipation
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: Dissapation
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.4341537, y: 0.90466136, z: 0.40197787, w: 0}
+        m_Name: BrightColor
+        m_Overridden: 1
+      - m_Value: {x: 0.027320892, y: 0.29613832, z: 0.049706575, w: 0.49019608}
+        m_Name: DarkColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: ShockwaveSize
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: IndicatorCurve
+        m_Overridden: 0
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: -0.3
+            inSlope: 0.0025520104
+            outSlope: 0.0025520104
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.875463
+            value: -0.29776582
+            inSlope: 0.090133406
+            outSlope: 0.090133406
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 2.3909829
+            outSlope: 2.3909829
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: DissolveCurve
+        m_Overridden: 0
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2800000, guid: 88ef4e366b54eb54fa758d44abac2d15, type: 3}
+        m_Name: IndicatorTexture
+        m_Overridden: 0
+      - m_Value: {fileID: 2800000, guid: ee81c33fbf27c9244b395ddda61343cf, type: 3}
+        m_Name: LUT
+        m_Overridden: 0
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: UseLUT
+        m_Overridden: 0
+      - m_Value: 1
+        m_Name: MakeGlowWithBloom
+        m_Overridden: 0
 --- !u!73398921 &3492724286977114396
 VFXRenderer:
   serializedVersion: 1
@@ -169,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: bc59d7259c605e7468188437db3be9cc, type: 2}
+  m_Material: {fileID: 2100000, guid: 31d0dcc6f2dd4e4408d18036a2c93862, type: 2}
   m_DrawDistance: 1000
   m_FadeScale: 1
   m_StartAngleFade: 180

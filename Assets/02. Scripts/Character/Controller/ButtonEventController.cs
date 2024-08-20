@@ -40,7 +40,7 @@ namespace PlatformGame.Character.Controller
             }
 
             mBlockEvent?.Invoke();
-            mBlockEvent = null;
+            // mBlockEvent = null;
             mButtonAnim.gameObject.SetActive(false);
         }
 
