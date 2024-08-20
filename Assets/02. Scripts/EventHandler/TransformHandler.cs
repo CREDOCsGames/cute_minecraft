@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TransformHandler : MonoBehaviour
 {
-    Transform mTransform;
+    Vector3 mFirstLocalPos;
+    Quaternion mFirstLocalRot;
 
     public void SetLocalPositionX(float x)
     {
@@ -54,9 +55,26 @@ public class TransformHandler : MonoBehaviour
     {
         transform.eulerAngles = rot;
     }
+    public void SetFirstLocalPosition()
+    {
+        transform.localPosition = mFirstLocalPos;
+    }
+    public void SetFirstLoaclRotation()
+    {
+        transform.localRotation = mFirstLocalRot;
+    }
 
+    public void SetPosition(Transform transform)
+    {
+        this.transform.position = transform.position;
+    }
+    public void SetRotation(Transform transform)
+    {
+        this.transform.rotation = transform.rotation;
+    }
     void Awake()
     {
-        mTransform = GetComponent<Transform>();
+        mFirstLocalPos = transform.localPosition;
+        mFirstLocalRot = transform.localRotation;
     }
 }
