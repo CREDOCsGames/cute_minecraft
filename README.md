@@ -9,7 +9,7 @@
 
 # 목표 달성
 >6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
->7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/HGYjXGCR69g">진행도 체크</a>   
+>7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/xMm53i5QQvU">진행도 체크</a>   
 
 ### ※ 회의록
 <details>
@@ -61,6 +61,11 @@
 
 
 # 빌드 파일 링크
+### 테마 모드 1차 빌드
+>#<a href="https://drive.google.com/file/d/1NwBtn3lbGALS9ikNb8WnBT_qVrZKiz8-/view?usp=drive_link">build</a>   
+이동 조작 : wasd, 방향키   
+버튼 이벤트 액션 : 마우스 좌클릭   
+플레이 영역 결정 : Left shift 
 
 ### 레벨 확인 (카메라 이동)
 >#<a href="https://drive.google.com/file/d/1tsTAlGS60nx4s4pEiH86oCffGzJ0wPrL/view?usp=drive_link">build</a>   
