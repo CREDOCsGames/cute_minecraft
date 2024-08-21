@@ -8,21 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cfxr ember blur hdr ab
-  m_Shader: {fileID: 4800000, guid: 77e1a76a38ecd5a46a270afb12894dd5, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
+  m_Shader: {fileID: -6465566751694194690, guid: 1a29b4d27eb8b04479ef89c00dea533d,
+    type: 3}
   m_ValidKeywords:
-  - _CUSTOMWIND_ON
-  - _TRANSLUCENCYONOFF_ON
-  m_InvalidKeywords:
-  - _
   - _ALPHABLEND_ON
   - _CFXR_DITHERED_SHADOWS_ON
+  - _FADING_ON
+  m_InvalidKeywords:
+  - _
   - _CFXR_HDR_BOOST
   - _CFXR_OVERLAYBLEND_RGBA
   - _CFXR_OVERLAYTEX_OFF
   - _CFXR_SINGLE_CHANNEL
-  - _FADING_ON
   - _OVERLAYTEX_OFF
   - _SINGLECHANNEL_ON
   m_LightmapFlags: 4
@@ -31,30 +28,9 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Albedo:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - BurntTileNormals:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Masks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normals:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -87,14 +63,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EnvMapSampler:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _FalloffSampler:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _GradientMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -103,28 +71,12 @@ Material:
         m_Texture: {fileID: 2800000, guid: 209460ccb2aaaf847a61d7e73c92f193, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 8bf41584f63c1ce438646a267dcf1b8f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMapSampler:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OpacityRange:
-        m_Texture: {fileID: 2800000, guid: 8c4a7fca2884fab419769ccc0355c0c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OverlayTex:
@@ -135,60 +87,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _RimLightSampler:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SecondColorTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecularReflectionSampler:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - BaseEmber: 0
-    - GlowBaseFrequency: 1.1
-    - GlowColorIntensity: 0
-    - GlowEmissionMultiplier: 1
-    - GlowOverride: 1
-    - _AlbedoMix: 0.5
-    - _Alpha: 1
-    - _AlphaCutoff: 0.5
     - _BacklightTransmittance: 1
     - _BlendingType: 0
     - _BumpScale: 1
-    - _BurnOffset: 1
-    - _BurnTilling: 1
     - _CFXR_DITHERED_SHADOWS: 1
     - _CFXR_OVERLAYBLEND: 0
     - _CFXR_OVERLAYTEX: 0
-    - _CUSTOMCOLORSTINTING: 0
-    - _CUSTOMWIND: 1
-    - _CharcoalMix: 1
-    - _CharcoalNormalTile: 5
-    - _Cull: 2
     - _Cutoff: 0.5
-    - _Cuton: 0
-    - _DepthBias: 0.00012
     - _DetailNormalMapScale: 1
     - _DirLightScreenAtten: 1
     - _DirectLightingMix: 0.5
@@ -200,53 +111,29 @@ Material:
     - _EdgeFadeMax: 2
     - _EdgeFadeMin: 3
     - _EdgeFadePow: 2
-    - _EdgeThickness: 1
-    - _EdgeWidth: 0.05
-    - _EnvironmentReflections: 1
     - _FadeAlongU: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Gradient: 1
     - _HdrBoost: 1
     - _HdrMultiply: 10
     - _IndirectLightingMix: 0.5
     - _InvertDissolveTex: 0
-    - _LeavesThickness: 0.5
     - _LightingWorldPosStrength: 0.2
     - _Metallic: 0
     - _Mode: 0
     - _OVERLAYBLEND: 0
     - _OVERLAYTEX: 0
     - _OcclusionStrength: 1
-    - _OpacityRangeMultiply: 3
     - _Parallax: 0.02
-    - _Precision: 0.31
-    - _QueueControl: -1
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _SNOWONOFF: 0
     - _SecondColorSmooth: 0.2
     - _ShadowStrength: 0.5
     - _SingleChannel: 1
-    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
-    - _SnowAmount: 1
-    - _SnowCoverage: 0.45
-    - _SnowFade: 0.83
-    - _SnowGradient: 0.83
     - _SoftParticlesFadeDistanceFar: 1
     - _SoftParticlesFadeDistanceNear: 0
     - _SpecularHighlights: 1
-    - _SpecularPower: 20
     - _SrcBlend: 5
-    - _TRANSLUCENCYONOFF: 1
-    - _TransAmbient: 0.1
-    - _TransDirect: 0.9
-    - _TransNormal: 0.5
-    - _TransScattering: 2
-    - _TransShadow: 0.5
-    - _TransStrength: 1
     - _UVDistortionAdd: 0
     - _UVSec: 0
     - _UseAlphaClip: 0
@@ -265,23 +152,12 @@ Material:
     - _UseSecondColor: 0
     - _UseUV2Distortion: 0
     - _UseUVDistortion: 0
-    - _WINDMASKONOFF: 0
-    - _WindDensity: 3.3
-    - _WindMovement: 0.5
-    - _WindStrength: 0.3
     - _ZWrite: 0
-    - __dirty: 1
     m_Colors:
-    - EmberColorTint: {r: 0.9926471, g: 0.6777384, b: 0, a: 1}
-    - _BaseColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveScroll: {r: 0, g: 0, b: 0, a: 0}
     - _DistortScrolling: {r: 0, g: 0, b: 1, a: 1}
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 1, g: 0, b: 0, a: 1}
     - _OverlayTex_Scroll: {r: 0.1, g: 0.1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TopColor: {r: 0, g: 0.2178235, b: 1, a: 1}
-    - _WireColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
