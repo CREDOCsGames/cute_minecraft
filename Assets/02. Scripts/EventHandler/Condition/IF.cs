@@ -17,7 +17,7 @@ namespace PlatformGame.Util
 
         protected virtual bool InvokeConditions()
         {
-            if(IsTrue())
+            if (IsTrue())
             {
                 OnTrueEvent();
                 return true;
@@ -57,9 +57,17 @@ namespace PlatformGame.Util
             mConditions.Remove(condition);
         }
 
+        public void SetFalseAllCondition()
+        {
+            foreach (var condition in mConditions)
+            {
+                condition.SetFalseAll();
+            }
+        }
+
         bool IsTrue()
         {
-            if(mConditions.Count == 0)
+            if (mConditions.Count == 0)
             {
                 return true;
             }
