@@ -36,6 +36,11 @@ namespace PlatformGame.Util
             mConditionState.Item2 = false;
         }
 
+        public override void SetFalseAll()
+        {
+            CancleCondition(mCondition);
+        }
+
         public void ToggleCondition(ConditionData condition)
         {
             if (!ContainCondition(condition))
