@@ -36,6 +36,11 @@ namespace PlatformGame.Util
             mConditionState.Item2 = false;
         }
 
+        public override void SetFalseAll()
+        {
+            CancleCondition(mCondition);
+        }
+
         public void ToggleCondition(ConditionData condition)
         {
             if (!ContainCondition(condition))
@@ -47,10 +52,13 @@ namespace PlatformGame.Util
 
         bool ContainCondition(ConditionData condition)
         {
+            if (!mConditionState.Item1)
+            {
+                return false;
+            }
+
             if (mConditionState.Item1 != condition)
             {
-                Debug.Log($"Unequal conditions : {mConditionState.Item1?.name ?? "null"}" +
-                    $", {condition.name}");
                 return false;
             }
             return true;
@@ -58,7 +66,7 @@ namespace PlatformGame.Util
 
         void Awake()
         {
-            if( mCondition == null )
+            if (mCondition == null)
             {
                 return;
             }

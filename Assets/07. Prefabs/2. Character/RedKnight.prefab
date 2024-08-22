@@ -2183,14 +2183,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2169096039844791906}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 721605057207481738}
   - {fileID: 3332941407062706858}
-  m_Father: {fileID: 7149434122134899404}
+  m_Father: {fileID: 4789593497526039444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2565979669395174957
 MonoBehaviour:
@@ -2866,7 +2866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6896234898173800921
 Transform:
   m_ObjectHideFlags: 0
@@ -18497,6 +18497,14 @@ PrefabInstance:
       propertyPath: mHasAbilities
       value: 
       objectReference: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
+    - target: {fileID: 6887189516238088050, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      propertyPath: mOnChangedState.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887189516238088050, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      propertyPath: mOnChangedState.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5917296235119771172}
     - target: {fileID: 6990258529267294280, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.5
@@ -18553,6 +18561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pushing Attack Box
       objectReference: {fileID: 0}
+    - target: {fileID: 8228797217790809119, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      propertyPath: mAnimator
+      value: 
+      objectReference: {fileID: 7259060468889059222}
     - target: {fileID: 9200406533968314242, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -18593,6 +18605,9 @@ PrefabInstance:
       addedObject: {fileID: 6896234898173800921}
     - targetCorrespondingSourceObject: {fileID: 7085559707975965103, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 789965315716131008}
+    - targetCorrespondingSourceObject: {fileID: 7085559707975965103, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4689457283794954736}
     - targetCorrespondingSourceObject: {fileID: 4835492296396726519, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       insertIndex: 0
@@ -18603,9 +18618,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4835492296396726519, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       insertIndex: 2
       addedObject: {fileID: 3289136767776219372}
-    - targetCorrespondingSourceObject: {fileID: 4835492296396726519, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 789965315716131008}
     - targetCorrespondingSourceObject: {fileID: 4430827815380156397, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 251856410355110665}
@@ -18633,6 +18645,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7085559707975965103, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
   m_PrefabInstance: {fileID: 2318503798268832315}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5917296235119771172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8228797217790809119, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
+  m_PrefabInstance: {fileID: 2318503798268832315}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312631634711652387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7fb616409f6e546bf350df58614dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7149434122134899404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4835492296396726519, guid: d75189d81123e574293dcf7fdba98cc5, type: 3}
@@ -20014,7 +20037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalScale.x
@@ -20034,11 +20057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6000001
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.78599995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalRotation.w

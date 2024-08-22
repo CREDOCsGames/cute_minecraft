@@ -7,6 +7,7 @@ namespace PlatformGame.Character
     {
         [Header("References")]
         [SerializeField] Character mCharacter;
+        [SerializeField] Animator mAnimator;
         string[] mTriggers;
 
         void Awake()
@@ -20,9 +21,9 @@ namespace PlatformGame.Character
         {
             foreach (var trigger in mTriggers)
             {
-                mCharacter.Animator.ResetTrigger(trigger);
+                mAnimator.ResetTrigger(trigger);
             }
-            mCharacter.Animator.SetTrigger(state.ToString());
+            mAnimator.SetTrigger(state.ToString());
         }
 
         void OnDestroy()

@@ -19,7 +19,7 @@ namespace PlatformGame.Character.Movement
             {
                 duration += Time.fixedDeltaTime;
                 var t = Mathf.Clamp(duration / mTime, 0, 1);
-                start.transform.position = Vector3.Slerp(s, e, t);
+                start.transform.position = Vector3.Lerp(s, e, t);
                 if(t == 1)
                 {
                     break;
