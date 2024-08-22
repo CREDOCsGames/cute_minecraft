@@ -80,5 +80,11 @@ namespace PlatformGame
             ControlledCharacter.transform.position = transform.position;
         }
 
+
+        public void SetAnimator(RuntimeAnimatorController controller)
+        {
+            ControlledCharacter.Animator.runtimeAnimatorController = controller;
+            Debug.Log(ControlledCharacter.name);
+        }
     }
 }
