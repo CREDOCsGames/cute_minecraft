@@ -1137,7 +1137,6 @@ GameObject:
   - component: {fileID: 5131403609297574282}
   - component: {fileID: 5007226754846221003}
   - component: {fileID: 3815076513362926205}
-  - component: {fileID: 5697758229854503787}
   m_Layer: 5
   m_Name: Cube
   m_TagString: Untagged
@@ -1335,40 +1334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e8fb7e27b8694ebb5b60eb7247747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5697758229854503787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3277805229648463742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPause:
-    m_PersistentCalls:
-      m_Calls: []
-  OnResume:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTick:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTimeout:
-    m_PersistentCalls:
-      m_Calls: []
-  mTimeout: 0
-  mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1 &3330616976865261789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,7 +2661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5544911374938244521}
-  - component: {fileID: 5767090653968257417}
+  - component: {fileID: 7266856306585405155}
   m_Layer: 5
   m_Name: Controller
   m_TagString: Untagged
@@ -2719,7 +2684,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1134463944142365700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5767090653968257417
+--- !u!114 &7266856306585405155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2728,24 +2693,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 6979413186996979716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0486c5164ba93419c422ecf22dc23f, type: 3}
+  m_Script: {fileID: 11500000, guid: 110faf8312b40af4dbaa51362e524d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControlledCharacter: {fileID: 3735394995416582881}
   mIsActive: 0
-  InputEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  EditorInputMap:
-  - Key: Right
-    ActionData: {fileID: 11400000, guid: 7b3f1e48474a27c43bfa98c907a1011e, type: 2}
-  - Key: Left
-    ActionData: {fileID: 11400000, guid: a7e234ebe2d821c4eb667f1fa7e74742, type: 2}
-  - Key: Up
-    ActionData: {fileID: 11400000, guid: 5fa428c1978ba9346a1e5a7eebe21594, type: 2}
-  - Key: Down
-    ActionData: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
-  EditorBeforeCharacter: {fileID: 3735394995416582881}
+  ButtonEvents:
+  - Key: 2
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 7b3f1e48474a27c43bfa98c907a1011e, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 3
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: a7e234ebe2d821c4eb667f1fa7e74742, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 0
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 5fa428c1978ba9346a1e5a7eebe21594, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 1
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7205563454205010704
 GameObject:
   m_ObjectHideFlags: 0

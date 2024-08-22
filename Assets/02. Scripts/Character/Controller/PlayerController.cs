@@ -1,6 +1,7 @@
 using PlatformGame.Input;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,9 @@ enum InputType
 
 public class PlayerController : MonoBehaviour
 {
+    static List<PlayerController> mInstances = new();
+    public static List<PlayerController> Instances => mInstances.ToList();
+
     [Header("Controls")]
     [SerializeField] bool mIsActive;
     [SerializeField] List<ButtonData> ButtonEvents;
@@ -92,4 +96,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        mInstances.Add(this);
+    }
+
+    void OnDestroy()
+    {
+        mInstances.Remove(this);
+    }
 }
