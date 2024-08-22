@@ -203,7 +203,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2082,7 +2082,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2458314833194109232}
         m_TargetAssemblyTypeName: PlatformGame.Character.Movement.MovementComponent,
           Assembly-CSharp
-        m_MethodName: SetActive
+        m_MethodName: PlayMovement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 6aded92e9dd680f4092d7dfe4c07ca26, type: 2}
@@ -3485,7 +3485,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2458314833194109232}
         m_TargetAssemblyTypeName: PlatformGame.Character.Movement.MovementComponent,
           Assembly-CSharp
-        m_MethodName: SetActive
+        m_MethodName: PlayMovement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 6aded92e9dd680f4092d7dfe4c07ca26, type: 2}
@@ -4349,7 +4349,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2458314833194109232}
         m_TargetAssemblyTypeName: PlatformGame.Character.Movement.MovementComponent,
           Assembly-CSharp
-        m_MethodName: SetActive
+        m_MethodName: PlayMovement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 6aded92e9dd680f4092d7dfe4c07ca26, type: 2}
@@ -4556,7 +4556,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2458314833194109232}
         m_TargetAssemblyTypeName: PlatformGame.Character.Movement.MovementComponent,
           Assembly-CSharp
-        m_MethodName: SetActive
+        m_MethodName: PlayMovement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 6aded92e9dd680f4092d7dfe4c07ca26, type: 2}
@@ -4891,6 +4891,54 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1001762747187125325, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001762747187125325, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001762747187125325, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001762747187125325, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694906852428283967, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694906852428283967, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694906852428283967, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694906852428283967, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491928482552247583, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491928482552247583, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491928482552247583, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491928482552247583, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3550797864962353580, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -4901,15 +4949,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5155502413950446292, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.69
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5155502413950446292, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.69
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5155502413950446292, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.69
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5155502413950446292, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4966,6 +5014,22 @@ PrefabInstance:
     - target: {fileID: 5532626572564967534, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632348512987674929, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632348512987674929, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632348512987674929, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6899999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632348512987674929, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7869806457535416896, guid: 52bf017677b522049a18e1fd6228735c, type: 3}
       propertyPath: m_Layer
