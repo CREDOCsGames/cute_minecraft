@@ -997,11 +997,11 @@ PrefabInstance:
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mEndEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 34788859651827717}
+      objectReference: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mRunEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 34788859651827717}
+      objectReference: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mEndEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -1012,19 +1012,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mEndEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeAnimator
+      value: SetAnimator
       objectReference: {fileID: 0}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mRunEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeAnimator
+      value: SetAnimator
       objectReference: {fileID: 0}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mEndEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlatformGame.Character.CharacterRadar, Assembly-CSharp
+      value: PlatformGame.PlayerCharacterManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mRunEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlatformGame.Character.CharacterRadar, Assembly-CSharp
+      value: PlatformGame.PlayerCharacterManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8092363473944576157, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
       propertyPath: mEndEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
@@ -1098,17 +1098,6 @@ PrefabInstance:
       addedObject: {fileID: 4769040980933038815}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
---- !u!114 &34788859651827717 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4572103199544294081, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}
-  m_PrefabInstance: {fileID: 4542100033531777732}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f1409e11610cd41982c581abda88aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2119632081776652575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2477742648625079259, guid: f2dca50f2c0edbc4696671b4dbe6110f, type: 3}

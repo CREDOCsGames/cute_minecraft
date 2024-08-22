@@ -28,7 +28,7 @@ namespace PlatformGame.Contents
                    NeedCharacters <= mEntrylist.Count(x => x.Value);
         }
 
-        void ResetEntrylist()
+        public void ResetEntrylist()
         {
             mEntrylist.Clear();
             var characters = PlayerCharacterManager.Instance.JoinCharacters;
