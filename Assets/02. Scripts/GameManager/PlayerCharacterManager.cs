@@ -13,15 +13,15 @@ namespace PlatformGame
         {
             get => Character.Character.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
         }
-        public List<ActionController> JoinCharactersController
+        public List<PlayerController> JoinCharactersController
         {
             get
             {
-                var playerControllers = ActionController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                var playerControllers = PlayerController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 if (playerControllers.Count == 0)
                 {
-                    
-                    playerControllers = FindObjectsOfType<ActionController>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+
+                    playerControllers = FindObjectsOfType<PlayerController>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 }
 
                 if (playerControllers.Count == 0)
@@ -33,33 +33,33 @@ namespace PlatformGame
         }
         public Character.Character ControlledCharacter
         {
-            get => mCurrentController.ControlledCharacter;
+            get => mCurrentController.GetComponentInParent<Character.Character>();
         }
-        ActionController mCurrentController;
-        ActionController mDefaultController;
+        PlayerController mCurrentController;
+        PlayerController mDefaultController;
         public void ControlDefaultCharacter()
         {
             if (JoinCharactersController.Count == 0)
             {
                 return;
             }
-            if(mDefaultController == null)
+            if (mDefaultController == null)
             {
                 JoinCharactersController.ForEach(x => x.SetActive(false));
                 mDefaultController = JoinCharactersController.First();
             }
-            
+
             ReplaceControlWith(mDefaultController);
         }
 
-        public void ReplaceControlWith(ActionController controller)
+        public void ReplaceControlWith(PlayerController controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
             mCurrentController.SetActive(true);
         }
 
-        public void SetDefaultCharacter(ActionController controller)
+        public void SetDefaultCharacter(PlayerController controller)
         {
             Debug.Assert(controller.tag == TAG_PLAYER);
             mDefaultController = controller;
@@ -73,12 +73,18 @@ namespace PlatformGame
 
         public void Warp(Transform transform)
         {
-            if(mDefaultController == null)
+            if (mDefaultController == null)
             {
                 return;
             }
-            mDefaultController.ControlledCharacter.transform.position = transform.position;
+            ControlledCharacter.transform.position = transform.position;
         }
 
+
+        public void SetAnimator(RuntimeAnimatorController controller)
+        {
+            ControlledCharacter.Animator.runtimeAnimatorController = controller;
+            Debug.Log(ControlledCharacter.name);
+        }
     }
 }

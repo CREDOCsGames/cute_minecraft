@@ -651,6 +651,191 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1610956716682375630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2177822460240087077}
+  - component: {fileID: 7082401892845214969}
+  - component: {fileID: 330528261925838436}
+  - component: {fileID: 6323328579620669378}
+  m_Layer: 0
+  m_Name: CubeLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2177822460240087077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610956716682375630}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -530.6477, y: -336.5101, z: -25.620918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4757164661824964251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7082401892845214969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610956716682375630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1284a3f692c818d429262a7fa89e8baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mCubeController: {fileID: 7266856306585405155}
+  OnStartLoad:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ReleaseController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5371068531264467751}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1758734015459985741}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ControlDefaultCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5371068531264467751}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1758734015459985741}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &330528261925838436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610956716682375630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf1608d8e1afbc44a12282f6b1c16f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoaderType: 1
+  LoadDelay: 0
+--- !u!114 &6323328579620669378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610956716682375630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStop:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
+        m_MethodName: ReplaceControlWith
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7266856306585405155}
+          m_ObjectArgumentAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mTimeout: 0.5
+  mbPlayOnAwake: 0
+  mbUseDebug: 0
+  mTimeoutKey: 
 --- !u!1 &1648709284668409728
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6104611569427362224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1137,7 +1322,6 @@ GameObject:
   - component: {fileID: 5131403609297574282}
   - component: {fileID: 5007226754846221003}
   - component: {fileID: 3815076513362926205}
-  - component: {fileID: 5697758229854503787}
   m_Layer: 5
   m_Name: Cube
   m_TagString: Untagged
@@ -1335,40 +1519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e8fb7e27b8694ebb5b60eb7247747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5697758229854503787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3277805229648463742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPause:
-    m_PersistentCalls:
-      m_Calls: []
-  OnResume:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTick:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTimeout:
-    m_PersistentCalls:
-      m_Calls: []
-  mTimeout: 0
-  mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1 &3330616976865261789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2266,7 @@ Transform:
   m_Children:
   - {fileID: 6515679827269973760}
   - {fileID: 5172759462717330490}
+  - {fileID: 2177822460240087077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4965100672397874740
@@ -2429,7 +2580,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 68.755, y: -13.385}
-  m_SizeDelta: {x: 137.51, y: 0}
+  m_SizeDelta: {x: 137.51, y: 26.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8878271294265634613
 CanvasRenderer:
@@ -2696,7 +2847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5544911374938244521}
-  - component: {fileID: 5767090653968257417}
+  - component: {fileID: 7266856306585405155}
   m_Layer: 5
   m_Name: Controller
   m_TagString: Untagged
@@ -2719,7 +2870,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1134463944142365700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5767090653968257417
+--- !u!114 &7266856306585405155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2728,24 +2879,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 6979413186996979716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0486c5164ba93419c422ecf22dc23f, type: 3}
+  m_Script: {fileID: 11500000, guid: 110faf8312b40af4dbaa51362e524d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControlledCharacter: {fileID: 3735394995416582881}
   mIsActive: 0
-  InputEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  EditorInputMap:
-  - Key: Right
-    ActionData: {fileID: 11400000, guid: 7b3f1e48474a27c43bfa98c907a1011e, type: 2}
-  - Key: Left
-    ActionData: {fileID: 11400000, guid: a7e234ebe2d821c4eb667f1fa7e74742, type: 2}
-  - Key: Up
-    ActionData: {fileID: 11400000, guid: 5fa428c1978ba9346a1e5a7eebe21594, type: 2}
-  - Key: Down
-    ActionData: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
-  EditorBeforeCharacter: {fileID: 3735394995416582881}
+  ButtonEvents:
+  - Key: 2
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 7b3f1e48474a27c43bfa98c907a1011e, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 3
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: a7e234ebe2d821c4eb667f1fa7e74742, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 0
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 5fa428c1978ba9346a1e5a7eebe21594, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 1
+    InputType: 0
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3735394995416582881}
+          m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
+          m_MethodName: DoAction
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
+            m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7205563454205010704
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,7 +3712,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -93.8}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 137.51, y: 26.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7996231614026146759
 CanvasRenderer:
