@@ -5,72 +5,60 @@ namespace PlatformGame.Util
     public class Bool : Condition
     {
         [SerializeField] ConditionData mCondition;
-        (ConditionData, bool) mConditionState = new();
+        bool mbCondition;
 
         public override bool IsTrue()
         {
-            return mConditionState.Item2;
+            return mbCondition;
         }
 
         public void SetCondition(ConditionData condition)
         {
-            mConditionState.Item1 = condition;
-            mConditionState.Item2 = false;
+            mCondition = condition;
+            mbCondition = false;
         }
 
-        public void MeetCondition(ConditionData condition)
+        public void MeetCondition()
         {
-            if (!ContainCondition(condition))
+            if (!ContainCondition(mCondition))
             {
                 return;
             }
-            mConditionState.Item2 = true;
+            mbCondition = true;
         }
 
-        public void CancleCondition(ConditionData condition)
+        public void CancleCondition()
         {
-            if (!ContainCondition(condition))
+            if (!ContainCondition(mCondition))
             {
                 return;
             }
-            mConditionState.Item2 = false;
+            mbCondition = false;
         }
 
         public override void SetFalseAll()
         {
-            CancleCondition(mCondition);
+            CancleCondition();
         }
 
-        public void ToggleCondition(ConditionData condition)
+        public void ToggleCondition()
         {
-            if (!ContainCondition(condition))
+            if (!ContainCondition(mCondition))
             {
                 return;
             }
-            mConditionState.Item2 = !mConditionState.Item2;
+            mbCondition = !mbCondition;
         }
 
-        bool ContainCondition(ConditionData condition)
+        static bool ContainCondition(ConditionData condition)
         {
-            if (!mConditionState.Item1)
+#if DEVELOPMENT
+            if (condition == null)
             {
-                return false;
+                Debug.Log($"Condition is null {condition.name}");
             }
-
-            if (mConditionState.Item1 != condition)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        void Awake()
-        {
-            if (mCondition == null)
-            {
-                return;
-            }
-            mConditionState.Item1 = mCondition;
+#endif
+            return condition;
         }
 
     }

@@ -33,4 +33,9 @@ public class CommandList : MonoBehaviour
     {
         Commands.Clear();
     }
+
+    public void Init()
+    {
+        mIndex = 0;
+    }
 }
