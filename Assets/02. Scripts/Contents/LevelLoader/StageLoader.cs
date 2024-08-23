@@ -32,7 +32,7 @@ namespace PlatformGame.Contents
         {
             get
             {
-                if(mLoadingWindow == null)
+                if (mLoadingWindow == null)
                 {
                     mLoadingWindow = UIWindowContainer.GetLoadingWindow();
                     mLoadingWindow.ShowWindow(false);
@@ -46,7 +46,9 @@ namespace PlatformGame.Contents
         {
             State = WorkState.Action;
             var sceneName = Stages.Names[mStageLevel];
-            mStageLevel = Mathf.Min(mStageLevel + 1, Stages.Names.Count - 1);
+            //mStageLevel = Mathf.Min(mStageLevel + 1, Stages.Names.Count - 1);
+            mStageLevel++;
+            mStageLevel = mStageLevel >= Stages.Names.Count ? 0 : mStageLevel;
             LoadingWindow.ShowWindow(true);
             mCoroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
         }
