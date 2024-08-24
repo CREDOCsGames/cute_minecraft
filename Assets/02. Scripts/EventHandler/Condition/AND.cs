@@ -18,11 +18,11 @@ namespace PlatformGame.Util
             return !mConditions.Any(x => !x.IsTrue());
         }
 
-        public override void SetFalseAll()
+        public override void SetFalse()
         {
             foreach(var condition in mConditions)
             {
-                condition.SetFalseAll();
+                condition.SetFalse();
             }
         }
     }
