@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3239707752572344825}
   - component: {fileID: 5313516130380544997}
   m_Layer: 0
-  m_Name: 1
+  m_Name: "\uC2DC\uC57C \uBC94\uC704"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3171581824643070946}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8457628039333355986}
+  m_Father: {fileID: 8811394366303797387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &9097912900985033685
 SphereCollider:
@@ -118,45 +118,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mOnCollisionEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f7e33237d8f4007489507c066b67f924, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.ShyBoxManager, Assembly-CSharp
+        m_MethodName: HideEnd
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: f7e33237d8f4007489507c066b67f924, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.ShyBoxManager, Assembly-CSharp
+        m_MethodName: StartShowing
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   mOnCollisionExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f7e33237d8f4007489507c066b67f924, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.ShyBoxManager, Assembly-CSharp
+        m_MethodName: HideBegin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   mOnCollisionStay:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &4645537855007717256
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8457628039333355986}
-  m_Layer: 0
-  m_Name: "\uC2DC\uC57C \uBC94\uC704"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8457628039333355986
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4645537855007717256}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2884178002822220799}
-  m_Father: {fileID: 8811394366303797387}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8071559435163743514
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,11 +170,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8811394366303797387}
-  - component: {fileID: 2630874916421141667}
-  - component: {fileID: 1249641499036363307}
-  - component: {fileID: 4567654895025384254}
   m_Layer: 0
-  m_Name: Golem
+  m_Name: "\uAC04\uC218"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,103 +191,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2972370477508643949}
-  - {fileID: 8457628039333355986}
+  - {fileID: 2884178002822220799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2630874916421141667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071559435163743514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6aaa6140d82c6f49b5e711cc42a8b11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MissesEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4567654895025384254}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Light
-          m_BoolArgument: 0
-        m_CallState: 2
-  SpotsEvent:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4567654895025384254}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Darkness
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
-        m_TargetAssemblyTypeName: PlatformGame.PlayerCharacterManager, Assembly-CSharp
-        m_MethodName: Warp
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Darkness
-          m_BoolArgument: 0
-        m_CallState: 2
-  mSides:
-  - {fileID: 5313516130380544997}
---- !u!114 &1249641499036363307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071559435163743514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 1
-  blendDistance: 0
-  weight: 0
-  sharedProfile: {fileID: 11400000, guid: d0282d6e9dd599244b362e5ba9d46c9c, type: 2}
---- !u!95 &4567654895025384254
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071559435163743514}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d9feacafefbfd14393b037164dc6485, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2771271720970795743
 PrefabInstance:
   m_ObjectHideFlags: 0

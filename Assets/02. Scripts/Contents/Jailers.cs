@@ -1,65 +1,101 @@
-using PlatformGame.Character;
-using PlatformGame.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using PlatformGame.Character.Collision;
 using UnityEngine;
 using UnityEngine.Events;
-using static PlatformGame.Character.Character;
 
-public class Jailers : MonoBehaviour
+namespace PlatformGame.Contents
 {
-    public Func<Collider, bool> ExclusionCondition;
-    public List<Collider>[] StopLayers { get; private set; }
-    public UnityEvent<Collider> MissesEvent;
-    public List<UnityEvent<Collider>> SpotsEvent;
-    [SerializeField] List<TriggerEventHandler> mSides;
-
-    void SpotsTarget(Collider prisoner, int priority)
+    public class Jailers : MonoBehaviour
     {
-        if (ExclusionCondition(prisoner))
+        Timer mTimer = new();
+
+        [Header("[Step1. Observe]")]
+        [SerializeField] UnityEvent EnterFieldOfView;
+        [SerializeField] UnityEvent LeaveFieldOfView;
+
+        [Header("[Step2. Recognition]")]
+        [SerializeField, Range(1, 100)] float TotalRecognitionTime;
+        [SerializeField] UnityEvent EnterAlertLevel1;
+        [SerializeField] UnityEvent EnterAlertLevel2;
+        [SerializeField] UnityEvent EnterAlertLevel3;
+
+        [Header("[Step4. Action]")]
+        [SerializeField] UnityEvent DoAction;
+
+        void OnAlertLevel1(Timer t = null)
         {
-            return;
+            EnterAlertLevel1.Invoke();
+            mTimer.Start();
         }
 
-        if (!StopLayers[priority].Contains(prisoner))
+        void OnAlertLevel2(Timer t = null)
         {
-            StopLayers[priority].Add(prisoner);
+            EnterAlertLevel2.Invoke();
+            mTimer.OnTimeoutEvent -= OnAlertLevel2;
+            mTimer.OnTimeoutEvent += OnAlertLevel3;
+            mTimer.Start();
         }
-        SpotsEvent[priority].Invoke(prisoner);
+
+        void OnAlertLevel3(Timer t = null)
+        {
+            EnterAlertLevel3.Invoke();
+            mTimer.OnTimeoutEvent -= OnAlertLevel3;
+            mTimer.OnTimeoutEvent += OnAction;
+            mTimer.Start();
+        }
+
+        void OnEnterFieldOfView()
+        {
+            EnterFieldOfView.Invoke();
+            mTimer.OnTimeoutEvent += OnAlertLevel2;
+            OnAlertLevel1();
+        }
+
+        void OnLeaveFieldOfView()
+        {
+            mTimer.OnTimeoutEvent -= OnAlertLevel1;
+            mTimer.OnTimeoutEvent -= OnAlertLevel2;
+            mTimer.OnTimeoutEvent -= OnAlertLevel3;
+            mTimer.OnTimeoutEvent -= OnAction;
+            mTimer.Stop();
+            LeaveFieldOfView.Invoke();
+        }
+
+        void OnAction(Timer t)
+        {
+            DoAction.Invoke();
+        }
+
+        void Awake()
+        {
+            mTimer.SetTimeout(TotalRecognitionTime / 3f);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            var box = other.GetComponent<HitBoxCollider>();
+            if (box == null)
+            {
+                return;
+            }
+
+            OnEnterFieldOfView();
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            var box = other.GetComponent<HitBoxCollider>();
+            if (box == null)
+            {
+                return;
+            }
+
+            OnLeaveFieldOfView();
+        }
+
+        void Update()
+        {
+            mTimer.Tick();
+        }
+
     }
-
-    void MissesTarget(Collider prisoner, int priority)
-    {
-        if (!StopLayers[priority].Contains(prisoner))
-        {
-            return;
-        }
-
-        StopLayers[priority].Remove(prisoner);
-
-        if (StopLayers.All(x => x.Count == 0))
-        {
-            MissesEvent.Invoke(prisoner);
-        }
-    }
-
-    void Awake()
-    {
-        ExclusionCondition = (c) => !c.GetComponent<Character>()?.CompareTag(TAG_PLAYER) ?? true;
-
-        StopLayers = new List<Collider>[mSides.Count];
-        for (int i = 0; i < mSides.Count; i++)
-        {
-            StopLayers[i] = new List<Collider>();
-        }
-
-        for (int i = 0; i < mSides.Count; i++)
-        {
-            int priority = i;
-            mSides[i].mOnCollisionEnter.AddListener((c) => SpotsTarget(c, priority));
-            mSides[i].mOnCollisionExit.AddListener((c) => MissesTarget(c, priority));
-        }
-    }
-
 }
