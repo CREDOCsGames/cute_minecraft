@@ -26,7 +26,7 @@ namespace PlatformGame.Contents.Loader
             }
 
             var map = ActionKey.GetAxisRawMap();
-            if (!map[KEY_GUARD])
+            if (!map[KEY_ATTACK])
             {
                 return;
             }

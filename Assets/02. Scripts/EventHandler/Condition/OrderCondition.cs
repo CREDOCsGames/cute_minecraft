@@ -35,7 +35,7 @@ namespace PlatformGame.Util
             return true;
         }
 
-        public override void SetFalseAll()
+        public override void SetFalse()
         {
             ClearEnter();
         }
