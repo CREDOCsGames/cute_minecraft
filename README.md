@@ -61,6 +61,11 @@
 
 
 # 빌드 파일 링크
+### 테마 모드 2차 빌드
+>#<a href="https://drive.google.com/file/d/1p0JuWJqEip6US5D_3gu-v5o5FXDbcxKI/view?usp=drive_link">build</a>   
+이동 조작 : wasd, 방향키   
+버튼 이벤트 액션 : space
+
 ### 테마 모드 1차 빌드
 >#<a href="https://drive.google.com/file/d/1NwBtn3lbGALS9ikNb8WnBT_qVrZKiz8-/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
