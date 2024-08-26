@@ -80,7 +80,6 @@ public class TransformHandler : MonoBehaviour
             }
         }
 
-        var go = transform.position + mFirstPos;
         parent.position = mFirstPos;
     }
 
