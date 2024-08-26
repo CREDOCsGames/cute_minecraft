@@ -84,7 +84,6 @@ namespace PlatformGame
         public void SetAnimator(RuntimeAnimatorController controller)
         {
             ControlledCharacter.Animator.runtimeAnimatorController = controller;
-            Debug.Log(ControlledCharacter.name);
         }
     }
 }
