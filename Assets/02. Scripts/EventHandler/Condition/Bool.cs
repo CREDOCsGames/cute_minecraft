@@ -36,7 +36,7 @@ namespace PlatformGame.Util
             mbCondition = false;
         }
 
-        public override void SetFalseAll()
+        public override void SetFalse()
         {
             CancleCondition();
         }

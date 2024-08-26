@@ -61,7 +61,7 @@ namespace PlatformGame.Util
         {
             foreach (var condition in mConditions)
             {
-                condition.SetFalseAll();
+                condition.SetFalse();
             }
         }
 
