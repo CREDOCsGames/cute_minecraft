@@ -72,6 +72,7 @@ namespace PlatformGame
 
             IsPause = false;
             OnResumeEvent?.Invoke(this);
+            LastTickTime = ServerTime;
         }
 
         public void SetTimeout(float timeout)
@@ -91,7 +92,7 @@ namespace PlatformGame
                 return;
             }
 
-            ElapsedTime += (ServerTime - LastTickTime) - Mathf.Max((LastPauseTime - LastTickTime), 0);
+            ElapsedTime += ServerTime - LastTickTime;
             LastTickTime = ServerTime;
             OnTickEvent?.Invoke(this);
 

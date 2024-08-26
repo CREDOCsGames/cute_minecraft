@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TransformHandler : MonoBehaviour
 {
     Vector3 mFirstLocalPos;
     Quaternion mFirstLocalRot;
+    Vector3 mFirstPos;
+    Quaternion mFirstRot;
 
     public void SetLocalPositionX(float x)
     {
@@ -59,6 +62,33 @@ public class TransformHandler : MonoBehaviour
     {
         transform.localPosition = mFirstLocalPos;
     }
+
+    public void SetFirstPosition()
+    {
+        transform.position = mFirstLocalPos;
+    }
+
+    public void SetFirstPositionAtParent()
+    {
+        Transform parent = transform;
+        while(true)
+        {
+            parent = parent.parent;
+            if(parent.parent == null)
+            {
+                break;
+            }
+        }
+
+        var go = transform.position + mFirstPos;
+        parent.position = mFirstPos;
+    }
+
+    public void SetFirstRotation()
+    {
+        transform.rotation = mFirstRot;
+    }
+
     public void SetFirstLoaclRotation()
     {
         transform.localRotation = mFirstLocalRot;
@@ -72,9 +102,22 @@ public class TransformHandler : MonoBehaviour
     {
         this.transform.rotation = transform.rotation;
     }
+
+    public void SetPrarent(Transform transform)
+    {
+        transform.SetParent(transform);
+    }
+
+    public void SetParentNull()
+    {
+        transform.parent = null;
+    }
+
     void Awake()
     {
         mFirstLocalPos = transform.localPosition;
         mFirstLocalRot = transform.localRotation;
+        mFirstPos = transform.position;
+        mFirstRot = transform.rotation;
     }
 }
