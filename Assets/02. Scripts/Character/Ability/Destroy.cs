@@ -23,10 +23,6 @@ namespace PlatformGame.Character.Combat
 
         public static void DestroyTo(Character character)
         {
-            if (!character.Attribute.IsInclude(AttributeFlags.Destructibility))
-            {
-                return;
-            }
             character.DoAction(STATE_DIE);
             var destroyDelay = 3f;
             GameObject.Destroy(character.gameObject, destroyDelay);

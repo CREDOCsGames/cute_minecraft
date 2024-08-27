@@ -1,4 +1,5 @@
 using PlatformGame.Contents.Loader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,17 +42,14 @@ namespace PlatformGame.Contents
 
         public void SetLoaderType(LoaderType type)
         {
+            Debug.Assert(Enum.IsDefined(typeof(LoaderType), type),$"Out of range : {(int)type}");
             switch (type)
             {
-                case LoaderType.StageLoader:
-                case LoaderType.LevelLoader:
-                    mLoader = mLoaders[(int)type];
-                    break;
                 case LoaderType.CubeLoader:
                     mLoader = FindAnyObjectByType<CubeLoader>();
                     break;
                 default:
-                    Debug.Assert(false, $"Undefined : {type}");
+                    mLoader = mLoaders[(int)type];
                     break;
             }
             Debug.Assert(mLoader != null);

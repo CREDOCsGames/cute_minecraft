@@ -49,8 +49,6 @@ namespace PlatformGame.Character
         [Header("Options")]
         [SerializeField] ActionDataList mHasAbilities;
         public ActionDataList HasAbilities => mHasAbilities;
-        [SerializeField] AttributeFlag mAttribute;
-        public AttributeFlag Attribute => mAttribute;
         [SerializeField] UnityEvent<CharacterState> mOnChangedState;
         public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
 
@@ -86,8 +84,6 @@ namespace PlatformGame.Character
             Debug.Assert(mModel, $"Model reference not found : {gameObject.name}");
             mInstances.Add(this);
             mAgent = new AbilityAgent();
-            Attribute.SetFlag(Attribute.Flags, this);
-
         }
         void Start()
         {
