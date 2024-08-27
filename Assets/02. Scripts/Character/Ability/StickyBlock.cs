@@ -19,11 +19,6 @@ namespace PlatformGame.Character.Collision
                 return;
             }
 
-            if (!victim.Attribute.IsInclude(AttributeFlags.NonStatic))
-            {
-                return;
-            }
-
             var stickyBlock = victim.GetComponent<StickyComponent>();
             if (stickyBlock == null)
             {

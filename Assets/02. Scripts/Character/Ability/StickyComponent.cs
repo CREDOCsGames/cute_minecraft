@@ -1,4 +1,3 @@
-using PlatformGame.Character.Collision;
 using UnityEngine;
 
 namespace PlatformGame.Character
@@ -47,7 +46,7 @@ namespace PlatformGame.Character
             mRoot = null;
             IsStuck = false;
 
-            mCharacter.Rigid.isKinematic = !mCharacter.Attribute.IsInclude(AttributeFlags.NonStatic);
+            mCharacter.Rigid.isKinematic = false;
         }
 
         public void StickAround()

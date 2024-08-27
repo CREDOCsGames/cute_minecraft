@@ -1,5 +1,4 @@
 using UnityEngine;
-using static PlatformGame.Character.Collision.AttributeFlags;
 
 namespace PlatformGame.Character.Combat
 {
@@ -36,11 +35,6 @@ namespace PlatformGame.Character.Combat
 
         public static void PushingTo(Character victim, Vector3 force)
         {
-            if (!victim.Attribute.IsInclude(NonStatic))
-            {
-                return;
-            }
-
             if (victim.transform.parent != null)
             {
                 victim.transform.SetParent(null, true);
