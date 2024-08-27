@@ -2,9 +2,10 @@
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 ```
-ν 6월 : 방해요인이 없는 프로토타입
-→ 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
-  8월 : 3분이 좀 더 재미있는 알파타입
+  9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입
+→ 8월 : 3분이 좀 더 재미있는 알파타입
+ν 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
+ν 6월 : 방해요인이 없는 프로토타입 
 ```
 
 # 목표 달성
