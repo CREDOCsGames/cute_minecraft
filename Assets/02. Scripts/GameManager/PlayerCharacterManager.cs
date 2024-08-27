@@ -85,5 +85,10 @@ namespace PlatformGame
         {
             ControlledCharacter.Animator.runtimeAnimatorController = controller;
         }
+
+        public void SetChild(Transform child)
+        {
+            child.SetParent(ControlledCharacter.Model.transform);
+        }
     }
 }
