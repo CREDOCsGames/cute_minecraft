@@ -20,17 +20,10 @@ namespace PlatformGame
         public float LastPauseTime => mTimer.LastPauseTime;
 
         readonly Timer mTimer = new();
-        float mElapsedTime;
 
         [Header("Options")]
         [SerializeField] float mTimeout;
         [SerializeField] bool mbPlayOnAwake = true;
-
-#if DEVELOPMENT
-        [Header("Debug")]
-        [SerializeField] bool mbUseDebug;
-        [SerializeField] string mTimeoutKey;
-#endif
 
         public void Initialize(float maxTimerTim)
         {
@@ -61,12 +54,6 @@ namespace PlatformGame
         void Update()
         {
             mTimer.Tick();
-#if DEVELOPMENT
-            if (mbUseDebug && !string.IsNullOrEmpty(mTimeoutKey) && UnityEngine.Input.GetKeyDown(mTimeoutKey))
-            {
-                DebugTimeout();
-            }
-#endif
         }
 
         void Awake()
@@ -88,14 +75,6 @@ namespace PlatformGame
                 DoStart();
             }
         }
-
-#if DEVELOPMENT
-        void DebugTimeout()
-        {
-            mElapsedTime = mTimeout < 5 ? mElapsedTime
-                                                : mTimeout - 5f;
-        }
-#endif
 
     }
 }
