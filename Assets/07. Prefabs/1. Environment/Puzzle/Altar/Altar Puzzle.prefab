@@ -374,8 +374,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 5
   mbPlayOnAwake: 0
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1 &1584115609915973871
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,17 +433,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7740205184653531859}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.Compartment.Compartments,
+          Assembly-CSharp
+        m_MethodName: ColorizeCompartments
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2453222262574987998}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5328608868494768803}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
+          m_StringArgument: Melt
+          m_BoolArgument: 1
         m_CallState: 2
   bClamp: 0
 --- !u!1 &1626556840881175310
@@ -943,8 +954,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 0.5
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1 &4705717830633007636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,8 +1144,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 0.5
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1 &5290192809166802222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1170,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9129880809571805402}
@@ -1292,6 +1299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6715735768909603846}
+  - component: {fileID: 5328608868494768803}
   m_Layer: 0
   m_Name: Snow
   m_TagString: Untagged
@@ -1319,6 +1327,27 @@ Transform:
   - {fileID: 5353794816084096110}
   m_Father: {fileID: 2453222262574987998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5328608868494768803
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7740205184653531859}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c31b665d6f73fd74cabed22234c8347a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8518104266127634038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,8 +1674,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 1
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1001 &821910091054170982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1669,7 +1696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62
+      value: 12.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1677,7 +1704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.49
+      value: 13.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1714,7 +1741,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 943fd52b029cc644a975474408af416e, type: 2}
+      objectReference: {fileID: 2100000, guid: e3bd639f50ae1a247823079047a8dc01, type: 2}
     - target: {fileID: 919132149155446097, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_Name
       value: pile of sand
@@ -1751,15 +1778,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.6
+      value: 13.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.2
+      value: -12.81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1796,7 +1823,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 943fd52b029cc644a975474408af416e, type: 2}
+      objectReference: {fileID: 2100000, guid: e3bd639f50ae1a247823079047a8dc01, type: 2}
     - target: {fileID: 919132149155446097, guid: b53f49d50b2057e419ef0d17885efd97, type: 3}
       propertyPath: m_Name
       value: pile of sand (1)
@@ -1821,7 +1848,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.98
+      value: -15.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1829,7 +1856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.48
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1862,7 +1889,7 @@ PrefabInstance:
     - target: {fileID: -8329490385228200900, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 943fd52b029cc644a975474408af416e, type: 2}
+      objectReference: {fileID: 2100000, guid: e3bd639f50ae1a247823079047a8dc01, type: 2}
     - target: {fileID: -6207452242132410602, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -3395,8 +3422,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 1
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!4 &7061207563312325300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
@@ -3588,8 +3613,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 1
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!1001 &7037003338937020635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4946,8 +4969,6 @@ MonoBehaviour:
         m_CallState: 2
   mTimeout: 1
   mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
 --- !u!4 &5267907566828481350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
@@ -4963,7 +4984,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.8
+      value: -11.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5004,7 +5025,7 @@ PrefabInstance:
     - target: {fileID: -8329490385228200900, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 943fd52b029cc644a975474408af416e, type: 2}
+      objectReference: {fileID: 2100000, guid: e3bd639f50ae1a247823079047a8dc01, type: 2}
     - target: {fileID: 919132149155446097, guid: e82fae363944cbd4c924fd0395911f72, type: 3}
       propertyPath: m_Name
       value: Snow Pile (1)
