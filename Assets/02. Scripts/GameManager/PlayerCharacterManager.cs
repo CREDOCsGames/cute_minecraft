@@ -90,5 +90,10 @@ namespace PlatformGame
         {
             child.SetParent(ControlledCharacter.Model.transform);
         }
+
+        public void SetKinematic(bool kinematic)
+        {
+            ControlledCharacter.Rigid.isKinematic = kinematic;
+        }
     }
 }
