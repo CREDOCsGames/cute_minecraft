@@ -10,18 +10,15 @@ namespace PlatformGame.Contents
     public class StageLoader : ILevelLoader
     {
         public WorkState State { get; private set; }
-        static int mStageLevel;
-        StageList mStages;
-        StageList Stages
+        StageManager mStages;
+        StageManager Stages
         {
             get
             {
                 if (mStages == null)
                 {
-                    mStages = Resources.Load<StageList>("StageLevels");
+                    mStages = Resources.Load<StageManager>("Stage/StageManager");
                 }
-                Debug.Assert(mStages);
-                Debug.Assert(mStages.Names.Count > 0);
                 return mStages;
             }
         }
@@ -45,10 +42,8 @@ namespace PlatformGame.Contents
         public void LoadNext()
         {
             State = WorkState.Action;
-            var sceneName = Stages.Names[mStageLevel];
-            //mStageLevel = Mathf.Min(mStageLevel + 1, Stages.Names.Count - 1);
-            mStageLevel++;
-            mStageLevel = mStageLevel >= Stages.Names.Count ? 0 : mStageLevel;
+            var sceneName = Stages.Stage;
+            Stages.NextStage();
             LoadingWindow.ShowWindow(true);
             mCoroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
         }
