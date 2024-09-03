@@ -1,5 +1,5 @@
 # 팀 목표
->일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
+>일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 ```
 → 9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입
