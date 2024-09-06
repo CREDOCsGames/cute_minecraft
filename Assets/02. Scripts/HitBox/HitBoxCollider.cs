@@ -28,6 +28,7 @@ namespace PlatformGame.Character.Collision
     {
         public float HitDelay;
         [SerializeField] bool mbAttacker;
+
         public bool IsAttacker
         {
             get => mbAttacker;
@@ -48,6 +49,16 @@ namespace PlatformGame.Character.Collision
         public void StartDelay()
         {
             mLastHitTime = Time.time;
+        }
+
+        public void AddHitEvent(UnityAction<HitBoxCollision> hitEvent)
+        {
+            mHitEvent.AddListener(hitEvent);
+        }
+
+        public void RemoveHitEvent(UnityAction<HitBoxCollision> hitEvent)
+        {
+            mHitEvent.RemoveListener(hitEvent);
         }
 
         void InvokeHitEvent(HitBoxCollision collision)
@@ -111,7 +122,7 @@ namespace PlatformGame.Character.Collision
             Debug.Assert(GetComponent<Rigidbody>().isKinematic, $"Not set Kinematic : {gameObject.name}");
         }
 
-        void Awake()
+        protected virtual void Awake()
         {
             mLastHitTime = Time.time - HitDelay + 0.1f;
             mHitPipeline = Pipelines.Instance.HitBoxColliderPipeline;

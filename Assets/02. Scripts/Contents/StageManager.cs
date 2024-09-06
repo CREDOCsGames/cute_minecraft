@@ -7,8 +7,10 @@ using static PlatformGame.Util.ListHelper;
 namespace PlatformGame.Contents
 {
     [CreateAssetMenu(menuName = "Custom/Data/StageManager")]
-    public class StageManager : UniqueScriptableObject<StageManager>
+    public class StageManager : ScriptableObject
     {
+        public static StageManager Instance => Resources.Load<StageManager>("Stage/StageManager");
+
         public string Stage => SceneManager.GetActiveScene().name == TitleScene ?
                                mStages.Matrix[StageIndex.y].List[StageIndex.x] :
                                TitleScene;
@@ -59,6 +61,24 @@ namespace PlatformGame.Contents
         public void PrevMode()
         {
             MoveStageIndex(new(-int.MaxValue, -1));
+        }
+
+        public void ClearCurrentStage()
+        {
+            var nextStage = mStageIndex;
+            nextStage.x++;
+            if(IsOutOfRange(mStageOpens.Matrix, nextStage.x))
+            {
+                return;
+            }
+
+            if(IsOpenStage(nextStage))
+            {
+                return;
+            }
+
+
+            OpenStage(nextStage);
         }
 
         public void OpenStage(Vector2Int stageIndex)
