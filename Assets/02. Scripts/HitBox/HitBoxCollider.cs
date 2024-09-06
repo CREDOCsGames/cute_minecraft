@@ -28,6 +28,7 @@ namespace PlatformGame.Character.Collision
     {
         public float HitDelay;
         [SerializeField] bool mbAttacker;
+
         public bool IsAttacker
         {
             get => mbAttacker;

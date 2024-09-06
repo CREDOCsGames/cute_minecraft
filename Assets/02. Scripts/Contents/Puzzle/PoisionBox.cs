@@ -20,9 +20,17 @@ namespace PlatformGame.Contents.Puzzle
         {
             base.Awake();
             AddHitEvent(OnHit);
+
         }
 
         void OnHit(HitBoxCollision collision)
+        {
+            RemoveHitEvent(OnHit);
+            IsAttacker = true;
+            AddHitEvent(OnAttack);
+        }
+
+        void OnAttack(HitBoxCollision collision)
         {
             var attacked = collision.Victim.GetComponent<IColorPiece>();
             if (attacked == null)
