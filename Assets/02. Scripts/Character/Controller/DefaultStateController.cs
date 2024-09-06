@@ -48,7 +48,7 @@ namespace PlatformGame.Character.Controller
 
         bool IsWalked()
         {
-            return (mCharacter.Rigid.velocity.magnitude < MAX_RUN_VELOCITY);
+            return (mCharacter.Rigid.velocity.magnitude < MAX_WALK_VELOCITY);
         }
 
         bool IsStopped()

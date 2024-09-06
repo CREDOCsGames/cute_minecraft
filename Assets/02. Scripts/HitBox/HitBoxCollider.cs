@@ -50,6 +50,16 @@ namespace PlatformGame.Character.Collision
             mLastHitTime = Time.time;
         }
 
+        public void AddHitEvent(UnityAction<HitBoxCollision> hitEvent)
+        {
+            mHitEvent.AddListener(hitEvent);
+        }
+
+        public void RemoveHitEvent(UnityAction<HitBoxCollision> hitEvent)
+        {
+            mHitEvent.RemoveListener(hitEvent);
+        }
+
         void InvokeHitEvent(HitBoxCollision collision)
         {
             mHitEvent.Invoke(collision);
@@ -111,7 +121,7 @@ namespace PlatformGame.Character.Collision
             Debug.Assert(GetComponent<Rigidbody>().isKinematic, $"Not set Kinematic : {gameObject.name}");
         }
 
-        void Awake()
+        protected virtual void Awake()
         {
             mLastHitTime = Time.time - HitDelay + 0.1f;
             mHitPipeline = Pipelines.Instance.HitBoxColliderPipeline;
