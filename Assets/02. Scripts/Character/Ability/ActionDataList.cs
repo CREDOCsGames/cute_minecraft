@@ -17,11 +17,11 @@ namespace PlatformGame.Character.Combat
             }
         }
 
-        public Dictionary<uint, ActionData> Library
+        public Dictionary<int, ActionData> Library
         {
             get
             {
-                var library = new Dictionary<uint, ActionData>();
+                var library = new Dictionary<int, ActionData>();
                 foreach (var item in mActions)
                 {
                     Debug.Assert(!library.ContainsKey(item.ID), $"Duplicate values : {item.ID}");

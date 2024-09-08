@@ -21,16 +21,30 @@ namespace PlatformGame.Contents.Puzzle
             set
             {
                 mColor = value;
-                CheckClear();
+                mTimer.Stop();
+                mTimer.Start();
                 Colorize.Instance.Invoke(Renderers, Color);
                 mChangeColorEvent.Invoke();
             }
         }
 
+        static bool CompareColor(Color a, Color b)
+        {
+            bool _is = false;
+            if(Mathf.Abs(a.a -  b.a) < 0.01 &&
+                Mathf.Abs(a.r - b.r) < 0.01 &&
+                Mathf.Abs(a.g - b.g) < 0.01 &&
+                Mathf.Abs(a.b - b.b) < 0.01 )
+            {
+                _is = true;
+            }
+            return _is; 
+        }
+
         static void CheckClear()
         {
             var color = mInstances.First().Color;
-            var bClear = mInstances.All(x => x.Color.Equals(color));
+            var bClear = mInstances.All(x => CompareColor(x.Color,color));
 
             if (bClear)
             {
@@ -46,6 +60,26 @@ namespace PlatformGame.Contents.Puzzle
             {
                 renderer.material = material;
             }
+
+
+            if (mInstances.First() != this)
+            {
+                return;
+            }
+
+            mTimer.OnTimeoutEvent += (t) => CheckClear();
+            mTimer.SetTimeout(1f);
+        }
+
+        static Timer mTimer = new();
+        void Update()
+        {
+            if (mInstances.First() != this)
+            {
+                return;
+            }
+
+            mTimer.Tick();
         }
 
         void OnDestroy()
