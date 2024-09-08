@@ -15,6 +15,9 @@ namespace PlatformGame.Contents.Puzzle
         public List<MeshRenderer> Renderers => mRenderers;
         [SerializeField] UnityEvent mChangeColorEvent;
 
+        Timer mFloweringTimer = new();
+        [SerializeField] GameObject Seed;
+
         public Color Color
         {
             get => mColor;
@@ -31,20 +34,20 @@ namespace PlatformGame.Contents.Puzzle
         static bool CompareColor(Color a, Color b)
         {
             bool _is = false;
-            if(Mathf.Abs(a.a -  b.a) < 0.01 &&
+            if (Mathf.Abs(a.a - b.a) < 0.01 &&
                 Mathf.Abs(a.r - b.r) < 0.01 &&
                 Mathf.Abs(a.g - b.g) < 0.01 &&
-                Mathf.Abs(a.b - b.b) < 0.01 )
+                Mathf.Abs(a.b - b.b) < 0.01)
             {
                 _is = true;
             }
-            return _is; 
+            return _is;
         }
 
         static void CheckClear()
         {
             var color = mInstances.First().Color;
-            var bClear = mInstances.All(x => CompareColor(x.Color,color));
+            var bClear = mInstances.All(x => CompareColor(x.Color, color));
 
             if (bClear)
             {
@@ -52,16 +55,9 @@ namespace PlatformGame.Contents.Puzzle
             }
         }
 
-        void Awake()
+        void OnEnable()
         {
             mInstances.Add(this);
-            var material = new Material(mRenderers.First().material);
-            foreach (var renderer in mRenderers)
-            {
-                renderer.material = material;
-            }
-
-
             if (mInstances.First() != this)
             {
                 return;
@@ -71,9 +67,28 @@ namespace PlatformGame.Contents.Puzzle
             mTimer.SetTimeout(1f);
         }
 
+        void Awake()
+        {
+            var material = new Material(mRenderers.First().material);
+            foreach (var renderer in mRenderers)
+            {
+                renderer.material = material;
+            }
+
+
+            mFloweringTimer.SetTimeout(5f);
+            mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
+        }
+
         static Timer mTimer = new();
         void Update()
         {
+            mFloweringTimer.Tick();
+            if (Seed != null && !mFloweringTimer.IsStart && !Seed.activeSelf)
+            {
+                mFloweringTimer.Start();
+            }
+
             if (mInstances.First() != this)
             {
                 return;
@@ -82,7 +97,7 @@ namespace PlatformGame.Contents.Puzzle
             mTimer.Tick();
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             mInstances.Remove(this);
         }

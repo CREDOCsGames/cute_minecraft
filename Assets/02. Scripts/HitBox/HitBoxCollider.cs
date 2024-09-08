@@ -42,7 +42,7 @@ namespace PlatformGame.Character.Collision
             get => mActor;
             set => mActor = value;
         }
-        public bool IsDelay => Time.time != mLastHitTime && Time.time < mLastHitTime + HitDelay;
+        public bool IsDelay => mLastHitTime < Time.time && Time.time < mLastHitTime + HitDelay;
         float mLastHitTime;
         Pipeline<HitBoxCollision> mHitPipeline;
         [SerializeField] UnityEvent<HitBoxCollision> mHitEvent;
@@ -74,7 +74,7 @@ namespace PlatformGame.Character.Collision
 
         void SendCollisionData(IHitBox victim)
         {
-            
+
             var attacker = this;
             var collsion = new HitBoxCollision()
             {
@@ -105,14 +105,14 @@ namespace PlatformGame.Character.Collision
             {
                 return;
             }
-            
+
             var victim = other.GetComponent<IHitBox>();
             if (victim == null)
             {
                 return;
             }
 
-            if (mLastHitTime != Time.time)
+            if (mLastHitTime < Time.time)
             {
                 mHitBoxes.Clear();
             }
@@ -125,11 +125,6 @@ namespace PlatformGame.Character.Collision
             if (!CanAttack(victim))
             {
                 return;
-            }
-
-            if(other.name == "21241")
-            {
-
             }
 
             mHitBoxes.Add(victim.Actor);
