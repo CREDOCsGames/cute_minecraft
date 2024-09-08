@@ -97,6 +97,8 @@ namespace PlatformGame.Contents
 
         bool IsOpenStage(Vector2Int stageIndex)
         {
+            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix, stageIndex.y));
+            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x));
             return mStageOpens.Matrix[stageIndex.y].List[stageIndex.x];
         }
 

@@ -57,7 +57,7 @@ namespace PlatformGame.Character
             DoAction(data.ID);
         }
 
-        public void DoAction(uint actionID)
+        public void DoAction(int actionID)
         {
             mHasAbilities.Library.TryGetValue(actionID, out var action);
             Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");

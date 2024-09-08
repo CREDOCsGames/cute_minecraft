@@ -1,5 +1,4 @@
 using PlatformGame.Character.Collision;
-using PlatformGame.Util;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,19 +14,55 @@ namespace PlatformGame.Contents.Puzzle
     {
         [SerializeField] Color mColorA;
         [SerializeField] Color mColorB;
+        BoxCollider[] mColliders;
+        Timer mTimer = new();
 
         protected override void Awake()
         {
             base.Awake();
             AddHitEvent(OnHit);
+            mColliders = GetComponents<BoxCollider>();
+            for (int i = 3; i < mColliders.Length; i++)
+            {
+                Destroy(mColliders[i]);
+            }
 
+            mTimer.SetTimeout(HitDelay);
+            mTimer.OnTimeoutEvent += (t) => gameObject.SetActive(false);
+        }
+
+        void Update()
+        {
+            mTimer.Tick();
+            if(IsDelay)
+            {
+                IsAttacker = false;
+            }
+        }
+
+        void OnEnable()
+        {
+            mColliders[0].enabled = true;
+            mColliders[1].enabled = false;
+            mColliders[2].enabled = false;
+            IsAttacker = false;
+            transform.GetChild(0).gameObject.SetActive(true);
         }
 
         void OnHit(HitBoxCollision collision)
         {
-            RemoveHitEvent(OnHit);
-            IsAttacker = true;
-            AddHitEvent(OnAttack);
+            if (!IsAttacker)
+            {
+                IsAttacker = true;
+                mColliders[0].enabled = false;
+                mColliders[1].enabled = true;
+                mColliders[2].enabled = true;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                OnAttack(collision);
+            }
         }
 
         void OnAttack(HitBoxCollision collision)
@@ -46,6 +81,7 @@ namespace PlatformGame.Contents.Puzzle
 
             var color = attacked.Color == mColorA ? mColorB : mColorA;
             attacked.Color = color;
+            mTimer.Start();
         }
     }
 

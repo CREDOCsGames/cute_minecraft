@@ -46,21 +46,25 @@ namespace PlatformGame.Debugger
         [Conditional("DEVELOPMENT")]
         public void PrintLog(HitBoxCollision collision)
         {
-            var subject = collision.Subject;
-            var instanceID = subject.transform.GetInstanceID();
-            var hitLog = subject.IsAttacker ? "Attack" : "Hit";
-            DebugWrapper.LogMessage(instanceID, $"{ID_HITBOXCOLLIDER}{subject.name}, {hitLog}");
+            Debug.Log($"{collision.Attacker.name} -> {collision.Victim}: Hit");
         }
 
         [Conditional("DEVELOPMENT")]
         public static void PrintLog(Transform who, CharacterState state)
         {
-            DebugWrapper.LogMessage(who.GetInstanceID(), $"{ID_CHARACTERSTATE}{state}");
+            Debug.Log($"{who.name}: {state}");
         }
 
+        [Conditional("DEVELOPMENT")]
         public static void PrintLog(string text)
         {
             Debug.Log(text);
+        }
+
+        [Conditional("DEVELOPMENT")]
+        public static void PrintLog(Character.Character character)
+        {
+            Debug.Log(character.State);
         }
     }
 }

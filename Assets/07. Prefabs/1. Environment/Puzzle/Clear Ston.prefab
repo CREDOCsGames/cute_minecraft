@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2326349488756931483}
   - component: {fileID: 2244358628275043634}
-  - component: {fileID: 1253399448527132680}
   m_Layer: 0
   m_Name: Clear Ston
   m_TagString: Untagged
@@ -49,45 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoaderType: 0
   LoadDelay: 2
---- !u!114 &1253399448527132680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5609220877063318737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e17407d9bd54f846bbb5223a7356adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mClearEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1476295395920045064}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4937846091506061339}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1782777868633692505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,9 +454,33 @@ MonoBehaviour:
   mHitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1253399448527132680}
-        m_TargetAssemblyTypeName: PlatformGame.Contents.Puzzle.PuzzleClear, Assembly-CSharp
-        m_MethodName: InvokeClearEvent
+      - m_Target: {fileID: 1476295395920045064}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4937846091506061339}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2244358628275043634}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.LoadManager, Assembly-CSharp
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
