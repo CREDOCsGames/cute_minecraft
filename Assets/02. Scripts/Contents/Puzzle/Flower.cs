@@ -76,7 +76,7 @@ namespace PlatformGame.Contents.Puzzle
             }
 
 
-            mFloweringTimer.SetTimeout(5f);
+            mFloweringTimer.SetTimeout(6f);
             mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
         }
 
