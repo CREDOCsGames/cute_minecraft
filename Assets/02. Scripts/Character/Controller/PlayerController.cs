@@ -10,7 +10,7 @@ class ButtonData
 {
     public ActionKey.Button Key;
     public InputType InputType;
-    public UnityEvent Action;
+    public UnityEvent Event;
 }
 
 enum InputType
@@ -38,27 +38,34 @@ public class PlayerController : MonoBehaviour
         IsActive = able;
     }
 
-    public void ChangeEvent(string key, UnityEvent action)
+    public void AddEventListener(string key, UnityAction action)
     {
-        var origin = ButtonEvents.FindIndex(x => x.Key.ToString() == key);
-        if (origin == -1)
+        if(TryGetKeyIndex(key, out var index))
         {
-            Debug.Log($"Faild. Not found key : {key}");
-            return;
+            ButtonEvents[index].Event.AddListener(action);
         }
-        ButtonEvents[origin].Action = action;
     }
 
-    public UnityEvent GetEvent(string key)
+    public void RemoveEventListener(string key, UnityAction action)
     {
-        var origin = ButtonEvents.FindIndex(x => x.Key.ToString() == key);
-        Debug.Assert(origin != -1, $"Not found : {key}");
-        return ButtonEvents[origin].Action;
+        if(TryGetKeyIndex(key, out var index))
+        {
+            ButtonEvents[index].Event.RemoveListener(action);
+        }
     }
 
-    public bool ExitsKey(string key)
+    public void ChangeEvent(string key, UnityEvent e)
     {
-        return ButtonEvents.FindIndex(x => x.Key.ToString() == key) != -1;
+        if(TryGetKeyIndex(key, out int index))
+        {
+            ButtonEvents[index].Event = e;
+        }
+    }
+
+    bool TryGetKeyIndex(string key, out int index)
+    {
+        index = ButtonEvents.FindIndex(x => x.Key.ToString() == key);
+        return index != -1;
     }
 
     void Update()
@@ -92,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-            input.Action.Invoke();
+            input.Event.Invoke();
         }
     }
 

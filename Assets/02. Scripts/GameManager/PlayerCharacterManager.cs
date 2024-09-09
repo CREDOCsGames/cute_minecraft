@@ -1,3 +1,4 @@
+using PlatformGame.Character.Combat;
 using PlatformGame.Character.Controller;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +95,11 @@ namespace PlatformGame
         public void SetKinematic(bool kinematic)
         {
             ControlledCharacter.Rigid.isKinematic = kinematic;
+        }
+
+        public void DoAction(ActionData data)
+        {
+            ControlledCharacter.DoAction(data);
         }
     }
 }

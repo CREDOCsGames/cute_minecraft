@@ -1,4 +1,3 @@
-using PlatformGame.Character.Collision;
 using UnityEngine;
 
 namespace PlatformGame.Character.Combat
@@ -6,7 +5,6 @@ namespace PlatformGame.Character.Combat
     [CreateAssetMenu(menuName = "Custom/Ability/Destroy")]
     public class Destroy : Ability
     {
-        const uint STATE_DIE = 4290000010;
         public override void UseAbility(AbilityCollision collision)
         {
             var victim = collision.Victim.GetComponent<Character>();
@@ -23,7 +21,7 @@ namespace PlatformGame.Character.Combat
 
         public static void DestroyTo(Character character)
         {
-            character.DoAction(STATE_DIE);
+            character.DoAction("State(Die)".GetHashCode());
             var destroyDelay = 3f;
             GameObject.Destroy(character.gameObject, destroyDelay);
         }

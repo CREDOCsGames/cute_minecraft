@@ -8,18 +8,18 @@ namespace PlatformGame.Character.Controller
     [RequireComponent(typeof(Character))]
     public class DefaultStateController : MonoBehaviour
     {
-        const uint STATE_IDLE = 4290000000;
-        const uint STATE_WALK = 4290000001;
-        const uint STATE_RUNNING = 4290000002;
-        const uint STATE_JUMPING = 4290000003;
-        const uint STATE_FALLING = 4290000004;
-        const uint STATE_LAND = 4290000005;
+        int STATE_IDLE => "State(Idle)".GetHashCode();
+        int STATE_WALK = "State(Walk)".GetHashCode();
+        int STATE_RUNNING = "State(Running)".GetHashCode();
+        int STATE_JUMPING = "State(Jumping)".GetHashCode();
+        int STATE_FALLING = "State(Falling)".GetHashCode();
+        int STATE_LAND = "State(Land)".GetHashCode();
         Character mCharacter;
 
         void ReturnBasicState()
         {
             var velY = Math.Round(mCharacter.Rigid.velocity.y, 1);
-            uint actionID;
+            int actionID;
 
             if (mCharacter.IsAction)
             {
@@ -48,7 +48,7 @@ namespace PlatformGame.Character.Controller
 
         bool IsWalked()
         {
-            return (mCharacter.Rigid.velocity.magnitude < MAX_WALK_VELOCITY);
+            return (mCharacter.Rigid.velocity.magnitude < MAX_RUN_VELOCITY);
         }
 
         bool IsStopped()

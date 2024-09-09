@@ -1,4 +1,5 @@
 using PlatformGame.Pipeline;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -41,14 +42,19 @@ namespace PlatformGame.Character.Collision
             get => mActor;
             set => mActor = value;
         }
-        public bool IsDelay => Time.time < mLastHitTime + HitDelay;
+        public bool IsDelay => mLastHitTime < Time.time && Time.time < mLastHitTime + HitDelay;
         float mLastHitTime;
         Pipeline<HitBoxCollision> mHitPipeline;
         [SerializeField] UnityEvent<HitBoxCollision> mHitEvent;
-
+        List<Transform> mHitBoxes = new();
         public void StartDelay()
         {
             mLastHitTime = Time.time;
+        }
+
+        public void SetAttacker(bool bAttacker)
+        {
+            IsAttacker = bAttacker;
         }
 
         public void AddHitEvent(UnityAction<HitBoxCollision> hitEvent)
@@ -68,6 +74,7 @@ namespace PlatformGame.Character.Collision
 
         void SendCollisionData(IHitBox victim)
         {
+
             var attacker = this;
             var collsion = new HitBoxCollision()
             {
@@ -80,7 +87,6 @@ namespace PlatformGame.Character.Collision
 
         public void DoHit(HitBoxCollision collision)
         {
-            StartDelay();
             collision.Subject = this;
             mHitPipeline.Invoke(collision);
         }
@@ -88,7 +94,7 @@ namespace PlatformGame.Character.Collision
         bool CanAttack(IHitBox targetHitBox)
         {
             return IsAttacker &&
-                   !targetHitBox.IsDelay &&
+                   !IsDelay &&
                    !targetHitBox.IsAttacker &&
                    !Actor.Equals(targetHitBox.Actor);
         }
@@ -106,11 +112,23 @@ namespace PlatformGame.Character.Collision
                 return;
             }
 
+            if (mLastHitTime < Time.time)
+            {
+                mHitBoxes.Clear();
+            }
+
+            if (mHitBoxes.Contains(victim.Actor))
+            {
+                return;
+            }
+
             if (!CanAttack(victim))
             {
                 return;
             }
 
+            mHitBoxes.Add(victim.Actor);
+            StartDelay();
             SendCollisionData(victim);
         }
 

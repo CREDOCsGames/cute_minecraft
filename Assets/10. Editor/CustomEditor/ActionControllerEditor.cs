@@ -98,7 +98,7 @@ public class ActionControllerEditor : ReorderableListEditor
             return;
         }
 
-        var id = uint.Parse(mAbilities[selectedAction]);
+        var id = int.Parse(mAbilities[selectedAction]);
         mController.EditorInputMap[index].ActionData = mControlledCharacter.HasAbilities.Library[id];
     }
 
