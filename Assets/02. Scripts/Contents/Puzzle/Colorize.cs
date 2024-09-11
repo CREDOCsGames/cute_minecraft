@@ -27,6 +27,12 @@ namespace PlatformGame.Util
 
         void LateColor(List<MeshRenderer> materials, Color color)
         {
+            var coroutineRunner = CoroutineRunner.Instance;
+            if(coroutineRunner == null)
+            {
+                Fixed(materials, color);
+                return;
+            }
             CoroutineRunner.Instance.StartCoroutine(Late(materials, color));
         }
 
