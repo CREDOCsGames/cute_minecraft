@@ -6,13 +6,6 @@ namespace PlatformGame.Contents
 {
     public class Lantern : MonoBehaviour
     {
-        [SerializeField] bool mbOn;
-        public bool IsOn
-        {
-            get => mbOn;
-            set => mbOn = value;
-            
-        }
         [SerializeField] float mRange;
         [SerializeField, Range(1, 100)] float mDistributionAmount;
         [SerializeField, Range(0.1f, 100f)] float mDistributionInterval;
@@ -48,6 +41,7 @@ namespace PlatformGame.Contents
             var delay = new WaitForSeconds(mDistributionInterval);
             while (true)
             {
+                mBettery.FullChargeBettery();
                 DistributeElectricityInRange();
                 yield return delay;
             }
@@ -56,7 +50,6 @@ namespace PlatformGame.Contents
         void Awake()
         {
             mBettery = GetComponent<Bettery>();
-            
         }
 
         void OnEnable()
@@ -66,7 +59,7 @@ namespace PlatformGame.Contents
 
         void OnDisable()
         {
-            IsOn = false;
+            StopAllCoroutines();
         }
 
     }

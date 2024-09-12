@@ -15,6 +15,7 @@ namespace PlatformGame.Contents
     public class Bettery : InstancesMonobehaviour<Bettery>
     {
         [SerializeField, Range(1, 100)] float mCapacity;
+        public float Capacity => mCapacity;
         [SerializeField, Range(0, 100)] float mAmount;
         public float Amount
         {

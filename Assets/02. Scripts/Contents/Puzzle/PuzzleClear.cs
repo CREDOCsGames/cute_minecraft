@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 namespace PlatformGame.Contents.Puzzle
 {
-    [RequireComponent(typeof(LoadManager))]
     public class PuzzleClear : MonoBehaviour
     {
         static List<PuzzleClear> mInstances = new();
@@ -15,13 +14,22 @@ namespace PlatformGame.Contents.Puzzle
             {
                 var criterion = PlayerCharacterManager.Instance?.ControlledCharacter?.transform;
                 var first = mInstances.First();
-                Debug.Assert(first == null, $"Not found PuzzleClear in Scene.");
+                Debug.Assert(first != null, $"Not found PuzzleClear in Scene.");
                 criterion = criterion == null ? first.transform : criterion;
                 var minDistance = mInstances.OrderBy(x => Vector3.Distance(x.transform.position, PlayerCharacterManager.Instance.ControlledCharacter.transform.position)).First();
                 return minDistance == null ? first : minDistance;
             }
         }
         [SerializeField] UnityEvent mClearEvent;
+
+        void Awake()
+        {
+            mInstances.Add(this);
+        }
+        private void OnDestroy()
+        {
+            mInstances.Remove(this);
+        }
 
         public void InvokeClearEvent()
         {
