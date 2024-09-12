@@ -9,6 +9,7 @@
 ```
 
 # 목표 달성
+>9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입 #<a href="https://youtu.be/g9BrfmrtZ6w">진행도 체크</a>   
 >8월 : 3분이 좀 더 재미있는 알파타입 #<a href="https://youtu.be/z8W7RxiKq7U">플레이 영상</a>   
 >7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/xMm53i5QQvU">플레이 영상</a>   
 >6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
@@ -31,7 +32,14 @@
 
 ### ※ 프로젝트 이슈
 ```
-7/13(토) 이슈
+09/03(화) 이슈
+! 팀원들의 개인사정으로 인한 커뮤니케이션 부족.
+
+-> 대책
+1. 작업 시 디스코드 음성 채팅방에 들어와서 진행합니다.
+2. 일정표에 각자의 회의 가능 시간을 기입합니다.
+
+07/13(토) 이슈
 ! 기획자 전원의 발표 준비 미숙으로 인해 발표가 취소되는 상황이 발생.
 
 → 대책
@@ -63,16 +71,19 @@
 
 
 # 빌드 파일 링크
+
 ### 테마 모드 2차 빌드
 >#<a href="https://drive.google.com/file/d/1p0JuWJqEip6US5D_3gu-v5o5FXDbcxKI/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : space
+
 
 ### 테마 모드 1차 빌드
 >#<a href="https://drive.google.com/file/d/1NwBtn3lbGALS9ikNb8WnBT_qVrZKiz8-/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : 마우스 좌클릭   
 플레이 영역 결정 : Left shift 
+
 
 ### 레벨 확인 (카메라 이동)
 >#<a href="https://drive.google.com/file/d/1tsTAlGS60nx4s4pEiH86oCffGzJ0wPrL/view?usp=drive_link">build</a>   
@@ -93,15 +104,18 @@
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : 마우스 좌클릭   
 
+
 #### 더블 점프 펫
 >#<a href="https://drive.google.com/file/d/1PlcLq0hKbdb1EzfmntonaNO3yQESJEeH/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : 마우스 좌클릭   
 
+
 #### 전투
 >#<a href="https://drive.google.com/file/d/1IizCPwd5lgrprw05d08igH5widwSBZ_B/view?usp=drive_link">build</a>   
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : 마우스 좌클릭   
+
 
 #### 큐브 특성
 >#<a href="https://drive.google.com/file/d/1PFVbyEVSnUtqjqbctOvyuKhADu1GULuD/view?usp=drive_link">build</a>   

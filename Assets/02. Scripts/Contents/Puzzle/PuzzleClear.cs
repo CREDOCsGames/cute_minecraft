@@ -1,25 +1,39 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace PlatformGame.Contents.Puzzle
 {
-    [RequireComponent(typeof(LoadManager))]
-    public class PuzzleClear : Singleton<PuzzleClear>
+    public class PuzzleClear : MonoBehaviour
     {
-        [SerializeField] UnityEvent mClearEvent;
-        LoadManager mLoadManager;
-
-        protected override void Awake()
+        static List<PuzzleClear> mInstances = new();
+        public static PuzzleClear Instance
         {
-            base.Awake();
-            mLoadManager = GetComponent<LoadManager>();
+            get
+            {
+                var criterion = PlayerCharacterManager.Instance?.ControlledCharacter?.transform;
+                var first = mInstances.First();
+                Debug.Assert(first != null, $"Not found PuzzleClear in Scene.");
+                criterion = criterion == null ? first.transform : criterion;
+                var minDistance = mInstances.OrderBy(x => Vector3.Distance(x.transform.position, PlayerCharacterManager.Instance.ControlledCharacter.transform.position)).First();
+                return minDistance == null ? first : minDistance;
+            }
+        }
+        [SerializeField] UnityEvent mClearEvent;
+
+        void Awake()
+        {
+            mInstances.Add(this);
+        }
+        private void OnDestroy()
+        {
+            mInstances.Remove(this);
         }
 
         public void InvokeClearEvent()
         {
-            StageManager.Instance.ClearCurrentStage();
             mClearEvent.Invoke();
-            // mLoadManager.Load();
         }
     }
 

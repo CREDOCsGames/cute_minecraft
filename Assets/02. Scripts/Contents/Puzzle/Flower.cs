@@ -31,11 +31,10 @@ namespace PlatformGame.Contents.Puzzle
             }
         }
 
-        static bool CompareColor(Color a, Color b)
+        public static bool CompareColor(Color a, Color b)
         {
             bool _is = false;
-            if (Mathf.Abs(a.a - b.a) < 0.01 &&
-                Mathf.Abs(a.r - b.r) < 0.01 &&
+            if (Mathf.Abs(a.r - b.r) < 0.01 &&
                 Mathf.Abs(a.g - b.g) < 0.01 &&
                 Mathf.Abs(a.b - b.b) < 0.01)
             {
@@ -76,7 +75,7 @@ namespace PlatformGame.Contents.Puzzle
             }
 
 
-            mFloweringTimer.SetTimeout(5f);
+            mFloweringTimer.SetTimeout(6f);
             mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
         }
 
