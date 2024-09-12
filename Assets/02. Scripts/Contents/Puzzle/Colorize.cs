@@ -16,7 +16,9 @@ namespace PlatformGame.Util
         {
             for (int i = 0; i < materials.Count; i++)
             {
-                materials[i].material.color = color;
+                var c = materials[i].material.color;
+                c.r = color.r; c.g = color.g; c.b = color.b;
+                materials[i].material.color = c;
             }
         }
 

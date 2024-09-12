@@ -34,7 +34,7 @@ namespace PlatformGame.Contents.Puzzle
         void Update()
         {
             mTimer.Tick();
-            if(IsDelay)
+            if (IsDelay)
             {
                 IsAttacker = false;
             }
@@ -79,7 +79,7 @@ namespace PlatformGame.Contents.Puzzle
                 return;
             }
 
-            var color = attacked.Color == mColorA ? mColorB : mColorA;
+            var color = Flower.CompareColor(attacked.Color, mColorA) ? mColorB : mColorA;
             attacked.Color = color;
             mTimer.Start();
         }
