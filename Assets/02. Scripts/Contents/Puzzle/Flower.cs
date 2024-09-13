@@ -68,14 +68,8 @@ namespace PlatformGame.Contents.Puzzle
 
         void Awake()
         {
-            var material = new Material(mRenderers.First().material);
-            foreach (var renderer in mRenderers)
-            {
-                renderer.material = material;
-            }
-
-
-            mFloweringTimer.SetTimeout(6f);
+            Color = mColor;
+            mFloweringTimer.SetTimeout(2f);
             mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
         }
 
