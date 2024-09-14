@@ -1,5 +1,4 @@
 using PlatformGame.Character.Combat;
-using PlatformGame.Character.Controller;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -34,7 +33,11 @@ namespace PlatformGame
         }
         public Character.Character ControlledCharacter
         {
-            get => mCurrentController.GetComponentInParent<Character.Character>();
+
+            get
+            {
+                return mCurrentController?.GetComponentInParent<Character.Character>();
+            }
         }
         PlayerController mCurrentController;
         PlayerController mDefaultController;
@@ -49,7 +52,6 @@ namespace PlatformGame
                 JoinCharactersController.ForEach(x => x.SetActive(false));
                 mDefaultController = JoinCharactersController.First();
             }
-
             ReplaceControlWith(mDefaultController);
         }
 

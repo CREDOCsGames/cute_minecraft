@@ -1,3 +1,4 @@
+using PlatformGame.Manager;
 using PlatformGame.Util;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,14 @@ using UnityEngine.Events;
 
 namespace PlatformGame.Contents.Puzzle
 {
-    public class Flower : MonoBehaviour, IColorPiece
+    public class Flower : PuzzlePiece, IColorPiece
     {
         static List<Flower> mInstances = new();
         [SerializeField] Color mColor;
-
+        [Header("[Refer to the part you want the color to change]")]
         [SerializeField] List<MeshRenderer> mRenderers;
         public List<MeshRenderer> Renderers => mRenderers;
+        [Header("[Options]")]
         [SerializeField] UnityEvent mChangeColorEvent;
 
         Timer mFloweringTimer = new();
@@ -45,12 +47,20 @@ namespace PlatformGame.Contents.Puzzle
 
         static void CheckClear()
         {
-            var color = mInstances.First().Color;
-            var bClear = mInstances.All(x => CompareColor(x.Color, color));
+            bool bClear;
+            if(!mInstances.Any())
+            {
+                bClear = true;
+            }
+            else
+            {
+                var color = mInstances.First().Color;
+                bClear = mInstances.All(x => CompareColor(x.Color, color));
+            }
 
             if (bClear)
             {
-                PuzzleClear.Instance.InvokeClearEvent();
+                GameManager.PuzzleArea.OnClear();
             }
         }
 
@@ -61,9 +71,6 @@ namespace PlatformGame.Contents.Puzzle
             {
                 return;
             }
-
-            mTimer.OnTimeoutEvent += (t) => CheckClear();
-            mTimer.SetTimeout(1f);
         }
 
         void Awake()
@@ -73,7 +80,7 @@ namespace PlatformGame.Contents.Puzzle
             mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
         }
 
-        static Timer mTimer = new();
+        static Timer mTimer = new(1f,(t)=>CheckClear());
         void Update()
         {
             mFloweringTimer.Tick();
@@ -86,7 +93,6 @@ namespace PlatformGame.Contents.Puzzle
             {
                 return;
             }
-
             mTimer.Tick();
         }
 
