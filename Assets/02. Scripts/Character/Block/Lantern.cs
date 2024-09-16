@@ -61,6 +61,12 @@ namespace PlatformGame.Contents
         {
             StopAllCoroutines();
         }
+#if UNITY_EDITOR
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, mRange);
+        }
+#endif
 
     }
 }

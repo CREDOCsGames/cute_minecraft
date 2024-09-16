@@ -26,6 +26,13 @@ namespace PlatformGame
 
         static float ServerTime => Server.ServerTime.Time;
 
+        public Timer() { }
+        public Timer(float timeout, Action<Timer> timeOutAction)
+        {
+            SetTimeout(timeout);
+            OnTimeoutEvent += timeOutAction;
+        }
+
         public void Start()
         {
             if (IsStart)

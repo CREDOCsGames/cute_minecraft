@@ -1,6 +1,7 @@
 ﻿using PlatformGame.Character.Collision;
 using PlatformGame.Character.Combat;
 using PlatformGame.Character.Movement;
+using PlatformGame.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -10,7 +10,7 @@ namespace PlatformGame.Contents.Loader
 
         public void LoadNext()
         {
-            mEndTime = Time.time + 3f;
+            mEndTime = Time.time + 2f;
         }
     }
 }

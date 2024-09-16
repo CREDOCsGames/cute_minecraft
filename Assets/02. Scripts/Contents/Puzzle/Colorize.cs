@@ -16,9 +16,9 @@ namespace PlatformGame.Util
         {
             for (int i = 0; i < materials.Count; i++)
             {
-                var c = materials[i].material.color;
+                var c = materials[i].sharedMaterial.color;
                 c.r = color.r; c.g = color.g; c.b = color.b;
-                materials[i].material.color = c;
+                materials[i].sharedMaterial.color = c;
             }
         }
 
@@ -30,7 +30,7 @@ namespace PlatformGame.Util
         void LateColor(List<MeshRenderer> materials, Color color)
         {
             var coroutineRunner = CoroutineRunner.Instance;
-            if(coroutineRunner == null)
+            if (coroutineRunner == null)
             {
                 Fixed(materials, color);
                 return;

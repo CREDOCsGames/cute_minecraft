@@ -24,6 +24,7 @@ namespace PlatformGame.Util
         {
             var color = mColor;
             color.a = alpha;
+
             mRenderer.material.SetColor("_Color", color);
         }
     }
