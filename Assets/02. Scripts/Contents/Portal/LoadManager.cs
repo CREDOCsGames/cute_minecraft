@@ -4,7 +4,6 @@ namespace PlatformGame.Contents
 {
     public class LoadManager : MonoBehaviour
     {
-        ContentsLoader mContentsLoader;
         public LoaderType LoaderType;
         [Range(0, 1000)] public float LoadDelay = 0f;
 
@@ -15,14 +14,8 @@ namespace PlatformGame.Contents
 
         void StartLoad()
         {
-            mContentsLoader.SetLoaderType(LoaderType);
-            mContentsLoader.LoadContents();
+            ContentsLoader.SetLoaderType(LoaderType);
+            ContentsLoader.LoadContents();
         }
-
-        void Start()
-        {
-            mContentsLoader = ContentsLoader.Instance;
-        }
-
     }
 }

@@ -4,7 +4,6 @@ public class TimeManager : MonoBehaviour
 {
     public float mTimeScale;
 
-    // Update is called once per frame
     void Update()
     {
         Time.timeScale = mTimeScale;
@@ -14,5 +13,9 @@ public class TimeManager : MonoBehaviour
     {
         mTimeScale = t;
         Time.timeScale = mTimeScale;
+    }
+    void OnDestroy()
+    {
+        SetScale(1f);
     }
 }

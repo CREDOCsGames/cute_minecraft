@@ -1,34 +1,32 @@
 using PlatformGame.Contents.Loader;
+using PlatformGame.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace PlatformGame.Contents
 {
     public enum LoaderType
     {
         StageLoader,
-        CubeLoader,
         LevelLoader
     }
 
-    public class ContentsLoader : Singleton<ContentsLoader>
+    public static class ContentsLoader
     {
-        public WorkState State => mLoader.State;
+        public static WorkState State => mLoader.State;
 
-        ILevelLoader mLoader = new LevelLoader();
-        List<ILevelLoader> mLoaders = new()
+        static ILevelLoader mLoader = new LevelLoader();
+        static List<ILevelLoader> mLoaders = new()
         {
             new StageLoader(),
-            null,
             new LevelLoader(),
         };
-        [SerializeField] UnityEvent OnStartLoad;
-        [SerializeField] UnityEvent OnLoaded;
+        public static event Action OnStartLoad;
+        public static event Action OnLoaded;
 
-        public void LoadContents()
+        public static void LoadContents()
         {
             if (!(State is WorkState.Ready))
             {
@@ -36,52 +34,18 @@ namespace PlatformGame.Contents
                 return;
             }
             mLoader.LoadNext();
-            OnStartLoad.Invoke();
-            StartCoroutine(CheckLoad());
+            OnStartLoad?.Invoke();
+            CoroutineRunner.Instance.StartCoroutine(CheckLoad());
         }
 
-        public void SetLoaderType(LoaderType type)
+        public static void SetLoaderType(LoaderType type)
         {
             Debug.Assert(Enum.IsDefined(typeof(LoaderType), type),$"Out of range : {(int)type}");
-            switch (type)
-            {
-                case LoaderType.CubeLoader:
-                    mLoader = FindAnyObjectByType<CubeLoader>();
-                    break;
-                default:
-                    mLoader = mLoaders[(int)type];
-                    break;
-            }
+            mLoader = mLoaders[(int)type];
             Debug.Assert(mLoader != null);
         }
 
-        public void AddOnStartLoadEvent(UnityAction action)
-        {
-            OnStartLoad.AddListener(action);
-        }
-
-        public void RemoveOnStartLoadEvent(UnityAction action)
-        {
-            OnStartLoad.RemoveListener(action);
-        }
-
-        public void AddOnLoadedEvent(UnityAction action)
-        {
-            OnLoaded.AddListener(action);
-        }
-
-        public void RemoveOnLoadedEvent(UnityAction action)
-        {
-            OnLoaded.RemoveListener(action);
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-            DontDestroyOnLoad(gameObject);
-        }
-
-        IEnumerator CheckLoad()
+        static IEnumerator CheckLoad()
         {
             WaitForSeconds mWait = new WaitForSeconds(0.5f);
             while (State != WorkState.Ready)
@@ -89,7 +53,7 @@ namespace PlatformGame.Contents
                 yield return mWait;
             }
 
-            OnLoaded.Invoke();
+            OnLoaded?.Invoke();
         }
     }
 }
