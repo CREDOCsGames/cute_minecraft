@@ -13,13 +13,17 @@ namespace PlatformGame.Manager
         public static Selection StageSelect { get; private set; } = new();
         public static Timer GameTimer { get; private set; } = new();
 
+        public static LanternComponent Lantern;
+
+        static bool VisitTitle;
+
         static GameManager()
         {
             PuzzleArea.OnEnterEvent += PuzzlePiece.EnablePieceInArea;
             PuzzleArea.OnClearEvent += PuzzlePiece.DisablePieceInArea;
             PuzzleArea.OnExitEvent += PuzzlePiece.DisablePieceInArea;
 
-            Title.OnEnterEvent += Title.Skip;
+            Title.OnEnterEvent += () => { if (VisitTitle) Title.Skip(); };
 
             StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
 

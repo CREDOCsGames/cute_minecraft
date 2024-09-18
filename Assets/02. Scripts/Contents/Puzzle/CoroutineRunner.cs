@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 namespace PlatformGame.Util
 {
@@ -16,6 +18,17 @@ namespace PlatformGame.Util
                 }
                 return mInstance;
             }
+        }
+
+        public static void InvokeDelayAction(Action action, float delay)
+        {
+            Instance.StartCoroutine(DelayAction(action, delay));
+        }
+
+        static IEnumerator DelayAction(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action.Invoke();
         }
 
     }

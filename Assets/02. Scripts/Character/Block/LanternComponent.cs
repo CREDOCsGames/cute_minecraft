@@ -1,15 +1,47 @@
+using PlatformGame.Manager;
 using PlatformGame.Util;
 using System.Collections;
 using UnityEngine;
 
 namespace PlatformGame.Contents
 {
-    public class Lantern : MonoBehaviour
+    public class LanternComponent : MonoBehaviour
     {
         [SerializeField] float mRange;
         [SerializeField, Range(1, 100)] float mDistributionAmount;
         [SerializeField, Range(0.1f, 100f)] float mDistributionInterval;
         Bettery mBettery;
+        int mCount;
+        public int Count
+        {
+            get => mCount;
+            set
+            {
+                mCount = value;
+                if (ClearCount == mCount)
+                {
+                    GameManager.PuzzleArea.OnClear();
+                }
+                if (ClearCount < 2)
+                {
+                    return;
+                }
+                var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                sphere.transform.SetParent(transform);
+                sphere.transform.SetLocalPositionAndRotation(Vector3.down * (2f + mCount), Quaternion.identity);
+            }
+        }
+        [SerializeField] int ClearCount;
+
+        public void SetGameManger()
+        {
+            GameManager.Lantern = this;
+        }
+
+        public void ResetGameManager()
+        {
+            GameManager.Lantern = null;
+        }
 
         void DistributeElectricity(Bettery bettery)
         {

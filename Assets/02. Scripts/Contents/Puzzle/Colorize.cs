@@ -9,11 +9,23 @@ namespace PlatformGame.Util
     {
         public void Invoke(List<MeshRenderer> materials, Color color)
         {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                Fixed(materials, color);
+                return;
+            }
+#endif
             LateColor(materials, color);
         }
 
         void Fixed(List<MeshRenderer> materials, Color color)
         {
+            if (!Application.isPlaying)
+            {
+                materials.ForEach(x => MaterialUtil.CopyMaterials(x));
+            }
+
             for (int i = 0; i < materials.Count; i++)
             {
                 var c = materials[i].sharedMaterial.color;

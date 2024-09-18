@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityTransform;
 using PlatformGame.Manager;
 using PlatformGame.Util;
 using System.Collections.Generic;
@@ -26,10 +27,10 @@ namespace PlatformGame.Contents.Puzzle
             set
             {
                 mColor = value;
-                mTimer.Stop();
-                mTimer.Start();
                 Colorize.Instance.Invoke(Renderers, Color);
                 mChangeColorEvent.Invoke();
+                mTimer.Stop();
+                mTimer.Start();
             }
         }
 
@@ -48,7 +49,7 @@ namespace PlatformGame.Contents.Puzzle
         static void CheckClear()
         {
             bool bClear;
-            if(!mInstances.Any())
+            if (!mInstances.Any())
             {
                 bClear = true;
             }
@@ -60,7 +61,9 @@ namespace PlatformGame.Contents.Puzzle
 
             if (bClear)
             {
-                GameManager.PuzzleArea.OnClear();
+                mInstances.ForEach(x => x.IsClear = true);
+                mInstances.ForEach(x => x.enabled = false);
+                GameManager.Lantern.Count++;
             }
         }
 
@@ -80,7 +83,7 @@ namespace PlatformGame.Contents.Puzzle
             mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
         }
 
-        static Timer mTimer = new(1f,(t)=>CheckClear());
+        static Timer mTimer = new(1f, (t) => CheckClear());
         void Update()
         {
             mFloweringTimer.Tick();

@@ -2,7 +2,7 @@ using PlatformGame.Manager;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SelectionEventHandler : MonoBehaviour
+public class SelectionComponent : MonoBehaviour
 {
     enum Type { Title, StageSelect }
     [SerializeField] Type AreaType;
@@ -11,17 +11,17 @@ public class SelectionEventHandler : MonoBehaviour
     [SerializeField] UnityEvent OnChangeEvent;
     Selection mSelection;
 
-    public void OnEnter()
+    public void OnEnable()
     {
         mSelection.OnEnter();
     }
 
-    public void OnSelection()
+    public void OnDisable()
     {
         mSelection.OnSelect();
     }
 
-    public void OnCange()
+    public void OnChange()
     {
         mSelection.OnChange();
     }

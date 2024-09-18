@@ -40,7 +40,7 @@ public static class AreaManager
 
     public static void DisConnect()
     {
-        mActiveBridges.ForEach(x => x.DisConnect());
+        mActiveBridges.ForEach(x => x.Disconnect());
     }
 
     public static void NumberingAreas()
