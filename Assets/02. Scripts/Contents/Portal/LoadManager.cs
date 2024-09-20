@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame.Contents
 {
@@ -6,6 +7,7 @@ namespace PlatformGame.Contents
     {
         public LoaderType LoaderType;
         [Range(0, 1000)] public float LoadDelay = 0f;
+        [SerializeField] UnityEvent LoadEvent;
 
         public void Load()
         {
@@ -14,6 +16,7 @@ namespace PlatformGame.Contents
 
         void StartLoad()
         {
+            LoadEvent.Invoke();
             ContentsLoader.SetLoaderType(LoaderType);
             ContentsLoader.LoadContents();
         }

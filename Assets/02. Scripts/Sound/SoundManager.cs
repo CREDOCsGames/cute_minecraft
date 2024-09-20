@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -11,15 +12,18 @@ public class SoundManager : MonoBehaviour
         {
             if (m_instance == null)
             {
-                m_instance = FindObjectOfType<SoundManager>();
+                m_instance = new GameObject().AddComponent<SoundManager>();
+                DontDestroyOnLoad(m_instance.gameObject);
+                m_MusicChannel = m_instance.AddComponent<AudioSource>();
+                m_SoundList = Resources.Load<SoundList>("SoundList");
+                m_instance.Awake();
             }
             return m_instance;
         }
     }
 
-    public SoundList m_SoundList;
-
-    public AudioSource m_MusicChannel;
+    static SoundList m_SoundList;
+    static AudioSource m_MusicChannel;
 
     public int m_InitSoundChannelCount = 10;
     private List<AudioSource> m_SoundChannels;
@@ -98,6 +102,7 @@ public class SoundManager : MonoBehaviour
 
         if (m_SoundList.AudioClips.TryGetValue(clipName, out AudioClip clip))
         {
+            StopMusic();
             m_MusicChannel.clip = clip;
             m_MusicChannel.Play();
             return m_MusicChannel.clip.length;

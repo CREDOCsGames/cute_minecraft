@@ -1,6 +1,7 @@
 using PlatformGame.Contents;
 using PlatformGame.Contents.Puzzle;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlatformGame.Manager
 {
@@ -30,6 +31,8 @@ namespace PlatformGame.Manager
             };
 
             StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
+            StageArea.OnEnterEvent += (area) => { SoundManager.Instance.PlayMusic($"Stage_{StageManager.Instance.StageIndex.x}"); };
+
 
             ContentsLoader.OnStartLoad += GameTimer.Stop;
             ContentsLoader.OnLoaded += GameTimer.Start;
@@ -44,8 +47,6 @@ namespace PlatformGame.Manager
 
             ContentsLoader.SetLoaderType(LoaderType.LevelLoader);
             ContentsLoader.LoadContents();
-
-
 
             Debug.Log("Run Game");
         }
