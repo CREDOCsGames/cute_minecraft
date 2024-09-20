@@ -3,19 +3,20 @@ using static PlatformGame.Character.Status.MovementInfo;
 
 namespace PlatformGame.Character.Movement
 {
-    [RequireComponent(typeof(Character))]
     public class LimitSpeed : MonoBehaviour
     {
         Character mCharacter;
+        Rigidbody mRigid;
 
         void Awake()
         {
             mCharacter = GetComponent<Character>();
+            mRigid = GetComponent<Rigidbody>();
         }
 
         void FixedUpdate()
         {
-            if (mCharacter.State is CharacterState.Walk
+            if (mCharacter == null || mCharacter.State is CharacterState.Walk
                                 or CharacterState.Run)
             {
                 LimitMoveSpeed();
@@ -24,7 +25,7 @@ namespace PlatformGame.Character.Movement
 
         void LimitMoveSpeed()
         {
-            var currentVelocity = mCharacter.Rigid.velocity;
+            var currentVelocity = mRigid.velocity;
             var currentSpeed = currentVelocity.magnitude;
 
             if (currentSpeed <= MAX_RUN_VELOCITY)
@@ -33,8 +34,8 @@ namespace PlatformGame.Character.Movement
             }
 
             var limitedVelocity = currentVelocity.normalized * MAX_RUN_VELOCITY;
-            limitedVelocity.y = mCharacter.Rigid.velocity.y;
-            mCharacter.Rigid.velocity = limitedVelocity;
+            limitedVelocity.y = mRigid.velocity.y;
+            mRigid.velocity = limitedVelocity;
         }
     }
 }

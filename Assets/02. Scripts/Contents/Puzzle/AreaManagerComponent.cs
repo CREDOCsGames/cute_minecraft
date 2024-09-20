@@ -32,7 +32,8 @@ public class AreaManagerComponent : MonoBehaviour
     void Start()
     {
         // Memory Up
-        var GM = GameManager.StageArea;
+        GameManager.StageArea.OnEnter();
+
 
         AreaManager.AreaRange = AreaRange;
         AreaManager.BridgeLimitDistance = BridgeLimitDistance;
@@ -41,6 +42,7 @@ public class AreaManagerComponent : MonoBehaviour
 
     void OnDestroy()
     {
+        GameManager.StageArea.OnExit();
         GameManager.PuzzleArea.Range = Area.zero;
     }
 

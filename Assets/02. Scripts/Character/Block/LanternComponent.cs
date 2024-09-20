@@ -18,6 +18,7 @@ namespace PlatformGame.Contents
             set
             {
                 mCount = value;
+                SoundManager.Instance.PlaySound("Success");
                 if (ClearCount == mCount)
                 {
                     GameManager.PuzzleArea.OnClear();

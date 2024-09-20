@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1633907854034694481}
   - component: {fileID: 618215818298846345}
   - component: {fileID: 2213467943295964542}
+  - component: {fileID: 722942734624639515}
   m_Layer: 0
   m_Name: JumpWall_right
   m_TagString: Untagged
@@ -139,6 +140,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 722942734624639515}
+        m_TargetAssemblyTypeName: PlaySoundHandler, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Move_Stone
+          m_BoolArgument: 0
+        m_CallState: 2
   OnExitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -146,3 +159,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   TagFillter: Player
+--- !u!114 &722942734624639515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995155654788029905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e71e6e2937893849bb59a18bb481114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

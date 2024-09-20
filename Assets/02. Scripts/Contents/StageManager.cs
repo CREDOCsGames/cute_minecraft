@@ -19,7 +19,7 @@ namespace PlatformGame.Contents
         [SerializeField] MatrixString mStages;
         [SerializeField] Vector2Int mStageIndex;
         [SerializeField] string mTitleScene;
-        string TitleScene
+        public string TitleScene
         {
             get
             {
@@ -27,10 +27,10 @@ namespace PlatformGame.Contents
                 return mTitleScene;
             }
         }
-        Vector2Int StageIndex
+        public Vector2Int StageIndex
         {
             get => mStageIndex;
-            set
+            private set
             {
                 value.y = Mathf.Clamp(value.y, 0, mStages.Matrix.Count - 1);
                 value.x = Mathf.Clamp(value.x, 0, mStages.Matrix[value.y].List.Count - 1);
