@@ -23,7 +23,11 @@ namespace PlatformGame.Manager
             PuzzleArea.OnClearEvent += PuzzlePiece.DisablePieceInArea;
             PuzzleArea.OnExitEvent += PuzzlePiece.DisablePieceInArea;
 
-            Title.OnEnterEvent += () => { if (VisitTitle) Title.Skip(); };
+            Title.OnEnterEvent += () =>
+            {
+                if (VisitTitle) Title.Skip();
+                VisitTitle = true;
+            };
 
             StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
 
@@ -40,6 +44,8 @@ namespace PlatformGame.Manager
 
             ContentsLoader.SetLoaderType(LoaderType.LevelLoader);
             ContentsLoader.LoadContents();
+
+
 
             Debug.Log("Run Game");
         }

@@ -3694,6 +3694,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 1147538ab5dc23649a06578797f8925b, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.Debugger.DebugLog, Assembly-CSharp
+        m_MethodName: PrintLog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\uC2DC\uC791"
+          m_BoolArgument: 0
+        m_CallState: 2
   OnStop:
     m_PersistentCalls:
       m_Calls: []
@@ -4072,7 +4084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1132379421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4104,30 +4116,6 @@ MonoBehaviour:
   OnSelectEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1132379422}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1132379420}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1051452481}
         m_TargetAssemblyTypeName: MovieEventHandler, Assembly-CSharp
         m_MethodName: OnPlay
@@ -4186,14 +4174,26 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1132379422}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - Key: 2
     InputType: 0
     Event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1132379421}
-          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
-          m_MethodName: OnChange
+        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
+          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
+          m_MethodName: NextStage
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4203,9 +4203,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
-          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
-          m_MethodName: NextStage
+        - m_Target: {fileID: 1132379421}
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnChange
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4220,9 +4220,9 @@ MonoBehaviour:
     Event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1132379421}
-          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
-          m_MethodName: OnChange
+        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
+          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
+          m_MethodName: PrevStage
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4232,9 +4232,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
-          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
-          m_MethodName: PrevStage
+        - m_Target: {fileID: 1132379421}
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnChange
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5154,6 +5154,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1132379420}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnChangeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5720,6 +5732,38 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 876097129}
   m_SourcePrefab: {fileID: 100100000, guid: 301acb4c63ca54e47b7b1245fe2ab149, type: 3}
+--- !u!1 &1578495218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1578495219}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1578495219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578495218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.5293975, y: 6.4, z: -21.530794}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2107572337}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1581741531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 301acb4c63ca54e47b7b1245fe2ab149, type: 3}
@@ -6959,12 +7003,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107572333}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.14, y: -5.39, z: -0.54}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.6106029, y: 1.181066, z: 20.990793}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1578495219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2107572338
 Animator:
@@ -7193,7 +7237,7 @@ SceneRoots:
   - {fileID: 1314439592}
   - {fileID: 382314198}
   - {fileID: 1064619418}
-  - {fileID: 2107572337}
   - {fileID: 1301991580}
   - {fileID: 1132379423}
   - {fileID: 1051452482}
+  - {fileID: 1578495219}

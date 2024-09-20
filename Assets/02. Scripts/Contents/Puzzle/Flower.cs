@@ -62,7 +62,7 @@ namespace PlatformGame.Contents.Puzzle
             if (bClear)
             {
                 mInstances.ForEach(x => x.IsClear = true);
-                mInstances.ForEach(x => x.enabled = false);
+                mInstances.ToList().ForEach(x => x.enabled = false);
                 GameManager.Lantern.Count++;
             }
         }
