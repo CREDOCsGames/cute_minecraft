@@ -96,8 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 087752ba0ebc9854181fffcf9a111314, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5465ebe1eb2fafa43b60b884ac9f7500, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: d6e3ab94e15ac934e9b02d45e9276020, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7832,7 +7832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &496108541
 Transform:
   m_ObjectHideFlags: 0
@@ -19422,7 +19422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7455418627374873460, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8078943411719288319, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21394,7 +21394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1270669759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22782,15 +22782,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349337193}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.4, y: 14.2, z: -32.04}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 28.7, y: 11.73, z: -5.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1039952439}
   - {fileID: 832928975}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1349337195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22842,6 +22842,10 @@ PrefabInstance:
     - target: {fileID: 1663967817513044, guid: 43594efb0e0472c4887438147150ede1, type: 3}
       propertyPath: m_Name
       value: Ground_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663967817513044, guid: 43594efb0e0472c4887438147150ede1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1663967817513044, guid: 43594efb0e0472c4887438147150ede1, type: 3}
       propertyPath: m_StaticEditorFlags
