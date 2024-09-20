@@ -9,7 +9,7 @@
 ```
 
 # 목표 달성
->9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입 #<a href="https://youtu.be/g9BrfmrtZ6w">진행도 체크</a>   
+>9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입 #<a href="https://youtu.be/PSZ3Gj9xwZA">진행도 체크</a>   
 >8월 : 3분이 좀 더 재미있는 알파타입 #<a href="https://youtu.be/z8W7RxiKq7U">플레이 영상</a>   
 >7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/xMm53i5QQvU">플레이 영상</a>   
 >6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
@@ -71,6 +71,10 @@
 
 
 # 빌드 파일 링크
+### 스테이지 (플라워 1-3)
+>#<a href="https://drive.google.com/file/d/1S74nj52vCjxIBL506jNIgXIqvSDnQxzG/view?usp=sharing">build</a>   
+이동 조작 : wasd, 방향키   
+버튼 이벤트 액션 : space   
 
 ### 테마 모드 2차 빌드
 >#<a href="https://drive.google.com/file/d/1p0JuWJqEip6US5D_3gu-v5o5FXDbcxKI/view?usp=drive_link">build</a>   
