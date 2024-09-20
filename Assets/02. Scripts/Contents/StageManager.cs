@@ -67,12 +67,12 @@ namespace PlatformGame.Contents
         {
             var nextStage = mStageIndex;
             nextStage.x++;
-            if(IsOutOfRange(mStageOpens.Matrix, nextStage.x))
+            if (IsOutOfRange(mStageOpens.Matrix, nextStage.x))
             {
                 return;
             }
 
-            if(IsOpenStage(nextStage))
+            if (IsOpenStage(nextStage))
             {
                 return;
             }
@@ -83,22 +83,25 @@ namespace PlatformGame.Contents
 
         public void OpenStage(Vector2Int stageIndex)
         {
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix, stageIndex.y));
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x));
+            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) || IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+                return;
+
             mStageOpens.Matrix[stageIndex.y].List[stageIndex.x] = true;
         }
 
         public void CloseStage(Vector2Int stageIndex)
         {
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix, stageIndex.y));
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x));
+            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) || IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+                return;
+
             mStageOpens.Matrix[stageIndex.y].List[stageIndex.x] = false;
         }
 
         bool IsOpenStage(Vector2Int stageIndex)
         {
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix, stageIndex.y));
-            Debug.Assert(!IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x));
+            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) || IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+                return false;
+
             return mStageOpens.Matrix[stageIndex.y].List[stageIndex.x];
         }
 

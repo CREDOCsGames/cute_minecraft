@@ -137,7 +137,6 @@ namespace PlatformGame.Character.Collision
         {
             Debug.Assert(Actor, $"Actor not found : {gameObject.name}");
             Debug.Assert(GetComponents<Collider>().Any(x => x.isTrigger), $"Trigger not found : {gameObject.name}");
-            Debug.Assert(GetComponent<Rigidbody>().isKinematic, $"Not set Kinematic : {gameObject.name}");
         }
 
         protected virtual void Awake()

@@ -8,7 +8,7 @@ namespace PlatformGame.Util
 
         public void SetParent(Collider collider)
         {
-            if(!string.IsNullOrEmpty(Tag) && !collider.CompareTag(Tag))
+            if (!string.IsNullOrEmpty(Tag) && !collider.CompareTag(Tag))
             {
                 return;
             }
@@ -19,6 +19,11 @@ namespace PlatformGame.Util
         public void SetParentNull()
         {
             transform.SetParent(null);
+        }
+
+        public void SetActiveFalse(Collider collider)
+        {
+            collider.gameObject.SetActive(false);
         }
     }
 
