@@ -73,7 +73,10 @@ public class AreaManagerComponent : MonoBehaviour
         }
         else
         {
-            if (area.HalfRange.Contains(pos))
+            var enterRange = area.HalfRange;
+            enterRange.extents *= 0.8f;
+            enterRange.extents = new Vector3(enterRange.extents.x, area.HalfRange.extents.y, enterRange.extents.z);
+            if (enterRange.Contains(pos))
             {
                 EnterArea(mSectorNum.Value);
             }

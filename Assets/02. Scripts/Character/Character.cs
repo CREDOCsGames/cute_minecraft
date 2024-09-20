@@ -45,7 +45,7 @@ namespace PlatformGame.Character
         public MovementComponent Movement => mMovement;
         [SerializeField] Transform mModel;
         public Transform Model => mModel;
-        AbilityAgent mAgent;
+        readonly AbilityAgent mAgent = new();
 
         [Header("Options")]
         [SerializeField] ActionDataList mHasAbilities;
@@ -84,7 +84,6 @@ namespace PlatformGame.Character
             Debug.Assert(mMovement, $"Movement reference not found : {gameObject.name}");
             Debug.Assert(mModel, $"Model reference not found : {gameObject.name}");
             mInstances.Add(this);
-            mAgent = new AbilityAgent();
         }
         void Start()
         {

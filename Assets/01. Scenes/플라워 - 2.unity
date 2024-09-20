@@ -7464,15 +7464,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4789593497526039444, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.05
+      value: 4.86
       objectReference: {fileID: 0}
     - target: {fileID: 4789593497526039444, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.2
+      value: 8.8
       objectReference: {fileID: 0}
     - target: {fileID: 4789593497526039444, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.08
+      value: 30.06
       objectReference: {fileID: 0}
     - target: {fileID: 4789593497526039444, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7528,7 +7528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7019437821180286934, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2300005
+      value: 2.2299995
       objectReference: {fileID: 0}
     - target: {fileID: 7019437821180286934, guid: 72a321835470ef142a353df856c16156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12302,6 +12302,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 832928977}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   mEndEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -12864,6 +12876,10 @@ PrefabInstance:
       propertyPath: mRange
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 6073185575251611979, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+      propertyPath: ClearCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7455418627374873460, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
       propertyPath: m_Name
       value: Lanterns
@@ -12917,6 +12933,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+--- !u!114 &881522150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6073185575251611979, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+  m_PrefabInstance: {fileID: 881522149}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2213902b4e23b87409a07445f80c8b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &895582998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16681,10 +16708,34 @@ MonoBehaviour:
     m_Extent: {x: 16, y: 24, z: 16}
   OnEnterEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 881522150}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.LanternComponent, Assembly-CSharp
+        m_MethodName: SetGameManger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnExitEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 881522150}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.LanternComponent, Assembly-CSharp
+        m_MethodName: ResetGameManager
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnClearEvent:
     m_PersistentCalls:
       m_Calls:
@@ -17554,7 +17605,7 @@ Transform:
   m_GameObject: {fileID: 1229074575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19580,7 +19631,7 @@ Transform:
   m_GameObject: {fileID: 1417772273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.5, z: 0}
+  m_LocalPosition: {x: 0, y: 9.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22220,7 +22271,7 @@ Transform:
   m_GameObject: {fileID: 1578008086}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0013536869, y: 0.997397, z: -0.069420494, w: 0.01944906}
-  m_LocalPosition: {x: 6.8437557, y: 17.43, z: -20.794022}
+  m_LocalPosition: {x: 4.6537557, y: 11.03, z: 35.345978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24457,10 +24508,34 @@ MonoBehaviour:
     m_Extent: {x: 15, y: 20, z: 15}
   OnEnterEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1983357369}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.LanternComponent, Assembly-CSharp
+        m_MethodName: SetGameManger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnExitEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1983357369}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.LanternComponent, Assembly-CSharp
+        m_MethodName: ResetGameManager
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnClearEvent:
     m_PersistentCalls:
       m_Calls:
@@ -27137,6 +27212,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6073185575251611979, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+      propertyPath: ClearCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7455418627374873460, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
       propertyPath: m_Name
       value: Lanterns
@@ -27190,6 +27269,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+--- !u!114 &1983357369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6073185575251611979, guid: fcd2393516281444cba0db0fea5d75ba, type: 3}
+  m_PrefabInstance: {fileID: 1983357368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2213902b4e23b87409a07445f80c8b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1991714604
 PrefabInstance:
   m_ObjectHideFlags: 0

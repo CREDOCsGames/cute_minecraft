@@ -7,6 +7,17 @@ namespace PlatformGame.Character.Movement
     public class MovementComponent : MonoBehaviour
     {
         Rigidbody mRigid;
+        Rigidbody Rigid
+        {
+            get
+            {
+                if(mRigid == null)
+                {
+                    mRigid = GetComponent<Rigidbody>();
+                }
+                return mRigid;
+            }
+        }
         MovementAction mBeforeAction;
         [SerializeField] MovementAction mDefaultActionOrNull;
 
@@ -14,7 +25,7 @@ namespace PlatformGame.Character.Movement
         {
             RemoveMovement();
             mBeforeAction = movement;
-            movement.PlayAction(mRigid, this);
+            movement.PlayAction(Rigid, this);
 
         }
 
@@ -31,7 +42,6 @@ namespace PlatformGame.Character.Movement
 
         void Awake()
         {
-            mRigid = GetComponent<Rigidbody>();
             if (mDefaultActionOrNull != null)
             {
                 PlayMovement(mDefaultActionOrNull);
