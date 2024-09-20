@@ -4116,6 +4116,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1132379420}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1051452481}
         m_TargetAssemblyTypeName: MovieEventHandler, Assembly-CSharp
         m_MethodName: OnPlay
@@ -4130,7 +4142,19 @@ MonoBehaviour:
         m_CallState: 2
   OnChangeEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
+        m_MethodName: SetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1457424416}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1132379422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4151,8 +4175,66 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1132379421}
-          m_TargetAssemblyTypeName: SelectionEventHandler, Assembly-CSharp
-          m_MethodName: OnSelection
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnDisable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 2
+    InputType: 0
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1132379421}
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
+          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
+          m_MethodName: NextStage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: 3
+    InputType: 0
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1132379421}
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
+          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
+          m_MethodName: PrevStage
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5072,18 +5154,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1132379421}
-        m_TargetAssemblyTypeName: SelectionEventHandler, Assembly-CSharp
-        m_MethodName: OnEnter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnChangeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5122,8 +5192,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1301991579}
-          m_TargetAssemblyTypeName: SelectionEventHandler, Assembly-CSharp
-          m_MethodName: OnSelection
+          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
+          m_MethodName: OnDisable
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

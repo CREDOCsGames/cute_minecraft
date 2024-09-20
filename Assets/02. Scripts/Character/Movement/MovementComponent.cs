@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame.Character.Movement
 {
@@ -14,6 +15,7 @@ namespace PlatformGame.Character.Movement
             RemoveMovement();
             mBeforeAction = movement;
             movement.PlayAction(mRigid, this);
+
         }
 
         public void RemoveMovement()

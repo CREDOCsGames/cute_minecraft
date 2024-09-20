@@ -1,7 +1,6 @@
 using PlatformGame;
 using PlatformGame.Manager;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AreaManagerComponent : MonoBehaviour
 {
@@ -81,6 +80,8 @@ public class AreaManagerComponent : MonoBehaviour
         }
 
 
+
     }
+
 
 }

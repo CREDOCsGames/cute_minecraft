@@ -32,7 +32,7 @@ namespace PlatformGame.Character.Movement
                 RotateVertical(AxisX);
             }
 
-            if(AxisZ != 0)
+            if (AxisZ != 0)
             {
                 RotateForward(AxisZ);
             }

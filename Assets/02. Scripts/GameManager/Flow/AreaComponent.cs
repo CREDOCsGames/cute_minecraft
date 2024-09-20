@@ -1,4 +1,7 @@
 using PlatformGame.Util;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,8 +24,24 @@ namespace PlatformGame.Manager
 
         [Header("[Extents of at least 5]")]
         [SerializeField] Bounds mRange;
-        public Bounds Range => mRange;
-        public Bounds HalfRange { get; private set; }
+        public Bounds Range
+        {
+            get
+            {
+                var runtimeRange = mRange;
+                runtimeRange.center = transform.position + mRange.center;
+                return runtimeRange;
+            }
+        }
+        public Bounds HalfRange
+        {
+            get
+            {
+                var half = Range;
+                half.extents /= 2;
+                return half;
+            }
+        }
 
         [Header("[Options]")]
         public UnityEvent<Bounds> OnEnterEvent;
@@ -34,18 +53,18 @@ namespace PlatformGame.Manager
         public void OnEnter()
         {
             mArea.Range = Range;
-            mArea.OnEnterEvent += (area) => OnEnterEvent.Invoke(area);
-            mArea.OnExitEvent += (area) => OnExitEvent.Invoke(area);
-            mArea.OnClearEvent += (area) => OnClearEvent.Invoke(area);
+            mArea.OnEnterEvent += InvokeEnterEvent;
+            mArea.OnExitEvent += InvokeExitEvnet;
+            mArea.OnClearEvent += InvokeClearEvent;
             mArea.OnEnter();
         }
 
         public void OnExit()
         {
             mArea.OnExit();
-            mArea.OnEnterEvent -= (area) => OnEnterEvent.Invoke(area);
-            mArea.OnExitEvent -= (area) => OnExitEvent.Invoke(area);
-            mArea.OnClearEvent -= (area) => OnClearEvent.Invoke(area);
+            mArea.OnEnterEvent -= InvokeEnterEvent;
+            mArea.OnExitEvent -= InvokeExitEvnet;
+            mArea.OnClearEvent -= InvokeClearEvent;
             mArea.Range = Area.zero;
         }
 
@@ -54,16 +73,25 @@ namespace PlatformGame.Manager
             mArea.OnClear();
         }
 
-        void Awake()
+        void InvokeEnterEvent(Bounds bounds)
         {
-            mRange.center = transform.position + mRange.center;
-            var half = Range;
-            half.extents /= 2;
-            HalfRange = half;
+            OnEnterEvent.Invoke(bounds);
+        }
+
+        void InvokeExitEvnet(Bounds bounds)
+        {
+            OnExitEvent.Invoke(bounds);
+        }
+
+        void InvokeClearEvent(Bounds bounds)
+        {
+            OnClearEvent.Invoke(bounds);
         }
 
 #if UNITY_EDITOR
-        [SerializeField] int AreaRange = 10;
+        [Header("[Debug]")]
+        [SerializeField] bool UseViewAreaRange;
+        [SerializeField] bool UseViewBridgeRange;
         void OnDrawGizmosSelected()
         {
             if (Application.isPlaying)
@@ -81,10 +109,24 @@ namespace PlatformGame.Manager
             }
 
             var originColor = Gizmos.color;
-            Gizmos.color = Color.yellow;
-            AreaManager.AreaRange = AreaRange;
-            Gizmos.DrawWireCube(AreaManager.GetSectorNum(transform.position + Range.center) * AreaRange, Vector3.one * AreaRange);
-            Gizmos.color = originColor;
+            var style = new GUIStyle();
+
+            if (UseViewAreaRange)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireCube(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, Vector3.one * AreaManager.AreaRange);
+                style.normal.textColor = Color.yellow;
+                Handles.Label(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, "Area", style);
+            }
+
+            if (UseViewBridgeRange)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(Range.center + Vector3.up * Range.extents.y / 2, AreaManager.BridgeLimitDistance + Mathf.Max(Range.extents.x, Range.extents.z));
+                Gizmos.color = originColor;
+                style.normal.textColor = Color.blue;
+                Handles.Label(transform.position, "Bridge Range", style);
+            }
         }
 #endif
     }

@@ -5,8 +5,9 @@ namespace PlatformGame.Contents.Puzzle
     public class Bridge
     {
         public bool IsConnected => mInstance;
-        Vector3 mPointA;
-        Vector3 mPointB;
+        public bool IsConnectable => Vector3.Distance(PointA, PointB) <= mLimit && Vector3.Distance(PointA, PointB) > 5;
+        public Vector3 PointA { get; private set; }
+        public Vector3 PointB { get; private set; }
         GameObject mInstance;
         float mLimit;
         static readonly Material M_LED = Resources.Load<Material>("Materials/M_LED_Bridge");
@@ -34,38 +35,39 @@ namespace PlatformGame.Contents.Puzzle
             var indexBasis = (int)Mathf.Repeat(angle, 360f) / 90;
             var indexArea = (int)Mathf.Repeat(indexBasis + 2, 4);
 
-            mPointA = basis.center + Vector3.Scale(mDirections[indexBasis], basis.extents);
-            mPointB = area.center + Vector3.Scale(mDirections[indexArea], area.extents);
+            PointA = basis.center + Vector3.Scale(mDirections[indexBasis], basis.extents);
+            PointB = area.center + Vector3.Scale(mDirections[indexArea], area.extents);
         }
 
         public void ConnectAtoB()
         {
-            if (Vector3.Distance(mPointA, mPointB) > mLimit)
+            if (!IsConnectable)
             {
                 return;
             }
 
             mInstance = GameObject.CreatePrimitive(PrimitiveType.Cube);
             mInstance.GetComponent<MeshRenderer>().material = M_LED;
+            mInstance.layer = LayerMask.NameToLayer("Bridge");
 
-            Vector3 size = new Vector3(1, 1, Vector3.Distance(mPointA, mPointB) + 2);
+            Vector3 size = new Vector3(1, 1, Vector3.Distance(PointA, PointB) + 1);
             mInstance.transform.localScale = size;
 
-            Vector3 center = (mPointA + mPointB) / 2 - Vector3.up * size.y / 2;
+            Vector3 center = (PointA + PointB) / 2 - Vector3.up * size.y / 2;
             mInstance.transform.position = center;
 
-            mInstance.transform.LookAt(mPointB);
+            mInstance.transform.LookAt(PointB);
 
-            CerateWall();
+            CerateColliderWall();
         }
 
-        void CerateWall()
+        void CerateColliderWall()
         {
             var obj = new GameObject();
             obj.transform.SetParent(mInstance.transform);
 
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.localScale = Vector3.up * Mathf.Abs(mPointA.y - mPointB.y) + Vector3.right + Vector3.forward;
+            obj.transform.localScale = Vector3.up * Mathf.Abs(PointA.y - PointB.y) + Vector3.right + Vector3.forward;
             obj.transform.localEulerAngles = Vector3.left * Mathf.Abs(obj.transform.parent.eulerAngles.x);
 
             var left = obj.AddComponent<BoxCollider>();
@@ -74,7 +76,7 @@ namespace PlatformGame.Contents.Puzzle
             right.center = Vector3.left;
         }
 
-        public void DisConnect()
+        public void Disconnect()
         {
             if (!IsConnected)
             {
