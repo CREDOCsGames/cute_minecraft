@@ -114,9 +114,9 @@ namespace PlatformGame.Manager
             if (UseViewAreaRange)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireCube(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, Vector3.one * AreaManager.AreaRange);
+                Gizmos.DrawWireCube(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, Vector3.one * AreaManager.AreaRange);
                 style.normal.textColor = Color.yellow;
-                Handles.Label(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, "Area", style);
+                Handles.Label(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, "Area", style);
             }
 
             if (UseViewBridgeRange)

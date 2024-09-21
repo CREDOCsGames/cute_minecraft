@@ -56,7 +56,7 @@ public class AreaManagerComponent : MonoBehaviour
 
         var pos = character.transform.position;
         pos.y -= 2.5f;
-        var currentSectorNum = AreaManager.GetSectorNum(pos);
+        var currentSectorNum = AreaManager.GetAreaNum(pos);
         if (!currentSectorNum.Equals(mSectorNum))
         {
             mSectorNum = currentSectorNum;
