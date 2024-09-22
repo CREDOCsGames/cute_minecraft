@@ -52,7 +52,6 @@ namespace PlatformGame.Manager
 
         public void OnEnter()
         {
-            mArea.Range = Range;
             mArea.OnEnterEvent += InvokeEnterEvent;
             mArea.OnExitEvent += InvokeExitEvnet;
             mArea.OnClearEvent += InvokeClearEvent;
@@ -65,7 +64,6 @@ namespace PlatformGame.Manager
             mArea.OnEnterEvent -= InvokeEnterEvent;
             mArea.OnExitEvent -= InvokeExitEvnet;
             mArea.OnClearEvent -= InvokeClearEvent;
-            mArea.Range = Area.zero;
         }
 
         public void OnClear()

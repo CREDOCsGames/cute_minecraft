@@ -141,7 +141,6 @@ namespace PlatformGame.Character.Collision
 
         protected virtual void Awake()
         {
-            mLastHitTime = Time.time - HitDelay + 0.1f;
             mHitPipeline = Pipelines.Instance.HitBoxColliderPipeline;
             mHitPipeline.InsertPipe(InvokeHitEvent);
         }
