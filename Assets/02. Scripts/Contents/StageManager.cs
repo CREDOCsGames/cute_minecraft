@@ -1,4 +1,5 @@
 using PlatformGame.Util;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,8 @@ namespace PlatformGame.Contents
         [SerializeField] MatrixString mStages;
         [SerializeField] Vector2Int mStageIndex;
         [SerializeField] string mTitleScene;
+
+        public event Action OnChangeEvent;
         public string TitleScene
         {
             get
@@ -35,10 +38,10 @@ namespace PlatformGame.Contents
                 value.y = Mathf.Clamp(value.y, 0, mStages.Matrix.Count - 1);
                 value.x = Mathf.Clamp(value.x, 0, mStages.Matrix[value.y].List.Count - 1);
 
-                var success = IsOpenStage(value);
-                if (success)
+                if (IsOpenStage(value) && !mStageIndex.Equals(value))
                 {
                     mStageIndex = value;
+                    OnChangeEvent?.Invoke();
                 }
             }
         }
