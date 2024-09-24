@@ -78,6 +78,11 @@ namespace PlatformGame.Character
             Movement.PlayMovement(action.Movement);
         }
 
+        public void ResetAction()
+        {
+            mAgent.Reset();
+        }
+
         void Awake()
         {
             Debug.Assert(Rigid, $"Rigidbody reference not found : {gameObject.name}");

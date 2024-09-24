@@ -27,5 +27,10 @@
             mActionTimer.SetTimeout(actionData.ActionDelay);
             mActionTimer.Start();
         }
+
+        public void Reset()
+        {
+            mActionTimer.Stop();    
+        }
     }
 }
