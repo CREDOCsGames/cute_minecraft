@@ -70,7 +70,7 @@ public class Plexus : MonoBehaviour
 
             defaultPositions[i] = positions[i];
         }
-        
+
         lineMesh = new Mesh();
 
         int[] trigs = new int[6];
@@ -164,7 +164,7 @@ public class Plexus : MonoBehaviour
             verts[1] = p1 + side * (lineWidth / -2);
             verts[2] = p2 + side * (lineWidth / 2);
             verts[3] = p2 + side * (lineWidth / -2);
-            
+
 
             trigs[0] = startingVerticesIndex;
             trigs[1] = trigs[5] = startingVerticesIndex + 1;
@@ -178,7 +178,7 @@ public class Plexus : MonoBehaviour
 
         lineMesh.vertices = lineVerts.ToArray();
         lineMesh.triangles = lineTrigs.ToArray();
-        
+
         // Drawing the mesh
         lineMesh.RecalculateBounds();
         Graphics.DrawMesh(lineMesh, transform.localToWorldMatrix, lineMaterial, 0);
@@ -219,11 +219,11 @@ public class Plexus : MonoBehaviour
                 {
                     if (i == indx)
                         continue;
-                    
+
                     if (DistanceSqr(currentPos, positions[i]) < maxConnDistanceSqr)
                     {
                         KeyValuePair<int, int> k = new KeyValuePair<int, int>(indx, i);
-                        if(connectedHashSet.Add(k))
+                        if (connectedHashSet.Add(k))
                             connected.Add(new KeyValuePair<int, int>(indx, i));
                     }
                 }

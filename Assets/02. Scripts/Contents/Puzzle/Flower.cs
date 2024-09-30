@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityTransform;
 using PlatformGame.Manager;
 using PlatformGame.Util;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using UnityEngine.Events;
 
 namespace PlatformGame.Contents.Puzzle
 {
-    public class Flower : PuzzlePiece, IColorPiece
+    public class Flower : PuzzlePieceComponent, IColorPiece
     {
         static List<Flower> mInstances = new();
         [SerializeField] Color mColor;
@@ -63,7 +62,7 @@ namespace PlatformGame.Contents.Puzzle
             {
                 mInstances.ForEach(x => x.IsClear = true);
                 mInstances.ToList().ForEach(x => x.enabled = false);
-                GameManager.Lantern.Count++;
+                GameManager.Lantern.StoneCount++;
             }
         }
 

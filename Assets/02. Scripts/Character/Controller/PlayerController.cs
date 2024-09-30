@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddEventListener(string key, UnityAction action)
     {
-        if(TryGetKeyIndex(key, out var index))
+        if (TryGetKeyIndex(key, out var index))
         {
             ButtonEvents[index].Event.AddListener(action);
         }
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveEventListener(string key, UnityAction action)
     {
-        if(TryGetKeyIndex(key, out var index))
+        if (TryGetKeyIndex(key, out var index))
         {
             ButtonEvents[index].Event.RemoveListener(action);
         }
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeEvent(string key, UnityEvent e)
     {
-        if(TryGetKeyIndex(key, out int index))
+        if (TryGetKeyIndex(key, out int index))
         {
             ButtonEvents[index].Event = e;
         }

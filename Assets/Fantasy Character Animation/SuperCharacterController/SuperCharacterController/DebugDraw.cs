@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public static class DebugDraw {
+public static class DebugDraw
+{
 
     public static void DrawMarker(Vector3 position, float size, Color color, float duration, bool depthTest = true)
     {
@@ -20,18 +20,18 @@ public static class DebugDraw {
     }
 
     // Courtesy of robertbu
-    public static void DrawPlane(Vector3 position, Vector3 normal, float size, Color color, float duration, bool depthTest = true) 
+    public static void DrawPlane(Vector3 position, Vector3 normal, float size, Color color, float duration, bool depthTest = true)
     {
         Vector3 v3;
- 
+
         if (normal.normalized != Vector3.forward)
             v3 = Vector3.Cross(normal, Vector3.forward).normalized * normal.magnitude;
         else
-            v3 = Vector3.Cross(normal, Vector3.up).normalized * normal.magnitude;;
- 
+            v3 = Vector3.Cross(normal, Vector3.up).normalized * normal.magnitude; ;
+
         Vector3 corner0 = position + v3 * size;
         Vector3 corner2 = position - v3 * size;
- 
+
         Quaternion q = Quaternion.AngleAxis(90.0f, normal);
         v3 = q * v3;
         Vector3 corner1 = position + v3 * size;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BillboardScript : MonoBehaviour
 {
@@ -21,7 +19,8 @@ public class BillboardScript : MonoBehaviour
         {
             gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, camera.transform.eulerAngles.y + 180, gameObject.transform.eulerAngles.z);
         }
-        else {
+        else
+        {
             gameObject.transform.LookAt(camera.transform.position);
         }
     }

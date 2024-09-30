@@ -1,8 +1,5 @@
 using UnityEngine;
 
-using TMPro;
-using System;
-
 namespace MirzaBeig.DistortionShockwavesVFX
 {
     [ExecuteAlways]

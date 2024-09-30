@@ -10,16 +10,15 @@ namespace PlatformGame.Contents.Puzzle
         public List<MeshRenderer> Renderers { get; }
     }
 
-    public class PoisionBox : HitBoxCollider
+    public class PoisionBox : HitBoxColliderComponent
     {
         [SerializeField] Color mColorA;
         [SerializeField] Color mColorB;
         BoxCollider[] mColliders;
         Timer mTimer = new();
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
             AddHitEvent(OnHit);
             mColliders = GetComponents<BoxCollider>();
             for (int i = 3; i < mColliders.Length; i++)

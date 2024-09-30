@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Recursively paritions a mesh's vertices to allow to more quickly
@@ -8,7 +7,8 @@ using System.Collections.Generic;
 /// point
 /// </summary>
 [RequireComponent(typeof(MeshCollider))]
-public class BSPTree : MonoBehaviour {
+public class BSPTree : MonoBehaviour
+{
 
     [SerializeField]
     bool drawMeshTreeOnStart;
