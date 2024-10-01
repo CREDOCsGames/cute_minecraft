@@ -27,5 +27,13 @@
             mActionTimer.SetTimeout(actionData.ActionDelay);
             mActionTimer.Start();
         }
+<<<<<<< HEAD
+=======
+
+        public void Reset()
+        {
+            mActionTimer.Stop();    
+        }
+>>>>>>> parent of e29ba99d (Merge pull request #148 from 1506022022/main)
     }
 }

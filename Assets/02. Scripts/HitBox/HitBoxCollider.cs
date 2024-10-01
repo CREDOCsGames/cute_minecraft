@@ -141,7 +141,10 @@ namespace PlatformGame.Character.Collision
 
         protected virtual void Awake()
         {
+<<<<<<< HEAD
             mLastHitTime = Time.time - HitDelay + 0.1f;
+=======
+>>>>>>> parent of e29ba99d (Merge pull request #148 from 1506022022/main)
             mHitPipeline = Pipelines.Instance.HitBoxColliderPipeline;
             mHitPipeline.InsertPipe(InvokeHitEvent);
         }

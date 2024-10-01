@@ -78,6 +78,14 @@ namespace PlatformGame.Character
             Movement.PlayMovement(action.Movement);
         }
 
+<<<<<<< HEAD
+=======
+        public void ResetAction()
+        {
+            mAgent.Reset();
+        }
+
+>>>>>>> parent of e29ba99d (Merge pull request #148 from 1506022022/main)
         void Awake()
         {
             Debug.Assert(Rigid, $"Rigidbody reference not found : {gameObject.name}");
