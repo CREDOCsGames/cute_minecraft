@@ -6,7 +6,7 @@ public class DisableRange : MonoBehaviour
     [SerializeField] bool enable;
     private void OnTriggerEnter(Collider other)
     {
-        var f = other.GetComponent<Flower>();
+        var f = other.GetComponent<FlowerComponent>();
         if (f == null)
         {
             return;

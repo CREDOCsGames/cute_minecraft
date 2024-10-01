@@ -13,15 +13,15 @@ namespace PlatformGame
         {
             get => Character.CharacterComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
         }
-        public List<PlayerController> JoinCharactersController
+        public List<PlayerControllerComponent> JoinCharactersController
         {
             get
             {
-                var playerControllers = PlayerController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                var playerControllers = PlayerControllerComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 if (playerControllers.Count == 0)
                 {
 
-                    playerControllers = FindObjectsOfType<PlayerController>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                    playerControllers = FindObjectsOfType<PlayerControllerComponent>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 }
 
                 if (playerControllers.Count == 0)
@@ -39,8 +39,8 @@ namespace PlatformGame
                 return mCurrentController?.GetComponentInParent<Character.CharacterComponent>();
             }
         }
-        PlayerController mCurrentController;
-        PlayerController mDefaultController;
+        PlayerControllerComponent mCurrentController;
+        PlayerControllerComponent mDefaultController;
         public void ControlDefaultCharacter()
         {
             if (JoinCharactersController.Count == 0)
@@ -55,14 +55,14 @@ namespace PlatformGame
             ReplaceControlWith(mDefaultController);
         }
 
-        public void ReplaceControlWith(PlayerController controller)
+        public void ReplaceControlWith(PlayerControllerComponent controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
             mCurrentController.SetActive(true);
         }
 
-        public void SetDefaultCharacter(PlayerController controller)
+        public void SetDefaultCharacter(PlayerControllerComponent controller)
         {
             Debug.Assert(controller.tag == TAG_PLAYER);
             mDefaultController = controller;
