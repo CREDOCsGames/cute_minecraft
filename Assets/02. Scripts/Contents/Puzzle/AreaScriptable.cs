@@ -11,7 +11,7 @@ namespace PlatformGame.Contents.Puzzle
         public static void InvokeMonement(ActionData action)
         {
             var pos = GameManager.PuzzleArea.Range.center;
-            var sector = AreaManager.GetSectorNum(pos);
+            var sector = AreaManager.GetAreaNum(pos);
             if (!AreaManager.TryGetArea(sector, out var area))
             {
                 return;

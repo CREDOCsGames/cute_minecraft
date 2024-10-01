@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
                 m_instance = new GameObject().AddComponent<SoundManager>();
                 DontDestroyOnLoad(m_instance.gameObject);
                 m_MusicChannel = m_instance.AddComponent<AudioSource>();
+                m_MusicChannel.loop = true;
                 m_SoundList = Resources.Load<SoundList>("SoundList");
                 m_instance.Awake();
             }
