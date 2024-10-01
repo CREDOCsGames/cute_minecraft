@@ -28,8 +28,6 @@ namespace PlatformGame.Contents
                     return;
                 }
                 var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                var shader = Shader.Find("Universal Render Pipeline/Lit");
-                sphere.GetComponent<Renderer>().material = new Material(shader);
                 sphere.transform.SetParent(transform);
                 sphere.transform.SetLocalPositionAndRotation(Vector3.down * (2f + mCount), Quaternion.identity);
             }
