@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
  * Example implementation of the SuperStateMachine and SuperCharacterController
  */
 [RequireComponent(typeof(SuperCharacterController))]
 [RequireComponent(typeof(PlayerInputController))]
-public class PlayerMachine : SuperStateMachine {
+public class PlayerMachine : SuperStateMachine
+{
 
     public Transform AnimatedMesh;
 
@@ -28,24 +28,25 @@ public class PlayerMachine : SuperStateMachine {
 
     private PlayerInputController input;
 
-	void Start () {
-	    // Put any code here you want to run ONCE, when the object is initialized
+    void Start()
+    {
+        // Put any code here you want to run ONCE, when the object is initialized
 
         input = gameObject.GetComponent<PlayerInputController>();
 
         // Grab the controller object from our object
         controller = gameObject.GetComponent<SuperCharacterController>();
-		
-		// Our character's current facing direction, planar to the ground
+
+        // Our character's current facing direction, planar to the ground
         lookDirection = transform.forward;
 
         // Set our currentState to idle on startup
         currentState = PlayerStates.Idle;
-	}
+    }
 
     protected override void EarlyGlobalSuperUpdate()
     {
-		// Rotate out facing direction horizontally based on mouse input
+        // Rotate out facing direction horizontally based on mouse input
         // (Taking into account that this method may be called multiple times per frame)
         lookDirection = Quaternion.AngleAxis(input.Current.MouseInput.x * (controller.deltaTime / Time.deltaTime), controller.up) * lookDirection;
         // Put any code in here you want to run BEFORE the state's update function.
@@ -108,7 +109,7 @@ public class PlayerMachine : SuperStateMachine {
         return Mathf.Sqrt(2 * jumpHeight * gravity);
     }
 
-	/*void Update () {
+    /*void Update () {
 	 * Update is normally run once on every frame update. We won't be using it
      * in this case, since the SuperCharacterController component sends a callback Update 
      * called SuperUpdate. SuperUpdate is recieved by the SuperStateMachine, and then fires
@@ -197,7 +198,7 @@ public class PlayerMachine : SuperStateMachine {
         {
             moveDirection = planarMoveDirection;
             currentState = PlayerStates.Idle;
-            return;            
+            return;
         }
 
         planarMoveDirection = Vector3.MoveTowards(planarMoveDirection, LocalMovement() * WalkSpeed, JumpAcceleration * controller.deltaTime);

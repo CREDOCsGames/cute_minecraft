@@ -6,15 +6,15 @@ using UnityEngine;
 namespace PlatformGame.Contents.Puzzle
 {
 
-    [CustomEditor(typeof(Flower))]
+    [CustomEditor(typeof(FlowerComponent))]
     public class FlowerEditor : Editor
     {
-        Flower mFlower;
+        FlowerComponent mFlower;
         Color mPrevColor;
 
         private void OnEnable()
         {
-            mFlower = (Flower)target;
+            mFlower = (FlowerComponent)target;
             mPrevColor = mFlower.Color;
         }
 

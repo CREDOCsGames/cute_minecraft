@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TransformHandler : MonoBehaviour
@@ -71,10 +68,10 @@ public class TransformHandler : MonoBehaviour
     public void SetFirstPositionAtParent()
     {
         Transform parent = transform;
-        while(true)
+        while (true)
         {
             parent = parent.parent;
-            if(parent.parent == null)
+            if (parent.parent == null)
             {
                 break;
             }

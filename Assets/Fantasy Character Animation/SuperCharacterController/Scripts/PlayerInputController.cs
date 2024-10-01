@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class PlayerInputController : MonoBehaviour {
+public class PlayerInputController : MonoBehaviour
+{
 
     public PlayerInput Current;
     public Vector2 RightStickMultiplier = new Vector2(3, -1.5f);
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Current = new PlayerInput();
-	}
+    }
 
-	void Update () {
-        
+    void Update()
+    {
+
         // Retrieve our current WASD or Arrow Key input
         // Using GetAxisRaw removes any kind of gravity or filtering being applied to the input
         // Ensuring that we are getting either -1, 0 or 1
@@ -34,7 +36,7 @@ public class PlayerInputController : MonoBehaviour {
             MouseInput = mouseInput,
             JumpInput = jumpInput
         };
-	}
+    }
 }
 
 public struct PlayerInput
