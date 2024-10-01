@@ -1,7 +1,8 @@
 #if UNITY_EDITOR
-using PlatformGame.Util;
+using Puzzle;
 using UnityEditor;
 using UnityEngine;
+using Util;
 
 namespace PlatformGame.Contents.Puzzle
 {

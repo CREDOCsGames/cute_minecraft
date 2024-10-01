@@ -1,8 +1,9 @@
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     [CreateAssetMenu(menuName = "Custom/Data/MatrixString")]
-    public class MatrixString : ScriptableMatrix<string> { }
-
+    public class MatrixString : ScriptableMatrix<string>
+    {
+    }
 }

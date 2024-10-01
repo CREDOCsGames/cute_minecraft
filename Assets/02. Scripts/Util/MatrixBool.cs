@@ -1,8 +1,9 @@
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     [CreateAssetMenu(menuName = "Custom/Data/MatrixBool")]
-    public class MatrixBool : ScriptableMatrix<bool> { }
-
+    public class MatrixBool : ScriptableMatrix<bool>
+    {
+    }
 }

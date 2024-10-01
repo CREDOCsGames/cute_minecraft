@@ -1,6 +1,6 @@
-using PlatformGame.Character;
-using PlatformGame.Character.Collision;
+using Character;
 using UnityEngine;
+using Util;
 using Conditional = System.Diagnostics.ConditionalAttribute;
 
 

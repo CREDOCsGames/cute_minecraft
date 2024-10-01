@@ -2,42 +2,45 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingWindowComponent : MonoBehaviour
+namespace UI
 {
-    [SerializeField] Slider mProgressBar;
-
-    public Slider ProgressBar
+    public class LoadingWindowComponent : MonoBehaviour
     {
-        get
+        [SerializeField] Slider mProgressBar;
+
+        public Slider ProgressBar
         {
-            Debug.Assert(mProgressBar);
-            return mProgressBar;
+            get
+            {
+                Debug.Assert(mProgressBar);
+                return mProgressBar;
+            }
+            private set => mProgressBar = value;
         }
-        private set => mProgressBar = value;
-    }
 
-    [SerializeField] TextMeshProUGUI mLoadSceneNameText;
+        [SerializeField] TextMeshProUGUI mLoadSceneNameText;
 
-    public TextMeshProUGUI LoadSceneNameText
-    {
-        get
+        public TextMeshProUGUI LoadSceneNameText
         {
-            Debug.Assert(mLoadSceneNameText);
-            return mLoadSceneNameText;
+            get
+            {
+                Debug.Assert(mLoadSceneNameText);
+                return mLoadSceneNameText;
+            }
+            private set => mLoadSceneNameText = value;
         }
-        private set => mLoadSceneNameText = value;
-    }
 
-    public MonoBehaviour CoroutineRunner => this;
+        public MonoBehaviour CoroutineRunner => this;
 
-    public void ShowWindow(bool show)
-    {
-        Debug.Assert(FindObjectsOfType<LoadingWindowComponent>(true).Length == 1);
-        gameObject.SetActive(show);
-    }
+        public void ShowWindow(bool show)
+        {
+            Debug.Assert(FindObjectsOfType<LoadingWindowComponent>(true).Length == 1);
+            gameObject.SetActive(show);
+        }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }

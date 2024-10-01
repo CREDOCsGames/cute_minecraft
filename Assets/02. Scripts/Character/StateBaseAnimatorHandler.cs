@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace PlatformGame.Character
+namespace Character
 {
     public class StateBaseAnimatorHandler : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] CharacterComponent mCharacter;
+        [Header("References")] [SerializeField]
+        CharacterComponent mCharacter;
+
         [SerializeField] Animator mAnimator;
         string[] mTriggers;
 
@@ -23,6 +24,7 @@ namespace PlatformGame.Character
             {
                 mAnimator.ResetTrigger(trigger);
             }
+
             mAnimator.SetTrigger(state.ToString());
         }
 
@@ -31,6 +33,4 @@ namespace PlatformGame.Character
             mCharacter.OnChangedState.RemoveListener(SendTrigger);
         }
     }
-
 }
-

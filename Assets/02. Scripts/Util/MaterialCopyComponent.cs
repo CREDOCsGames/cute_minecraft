@@ -1,36 +1,38 @@
 using UnityEngine;
 
-public class MaterialCopyComponent : MonoBehaviour
+namespace Util
 {
-    void Awake()
+    public class MaterialCopyComponent : MonoBehaviour
     {
-        var renderer = GetComponent<Renderer>();
-        if (renderer == null)
+        void Awake()
         {
-            return;
+            if (!TryGetComponent<Renderer>(out var renderer))
+            {
+                return;
+            }
+
+            MaterialHelper.CopyMaterials(renderer);
         }
-        MaterialHelper.CopyMaterials(renderer);
     }
 
-}
 
-
-public static class MaterialHelper
-{
-    public static void CopyMaterials(Renderer renderer)
+    public static class MaterialHelper
     {
-        var originalMaterials = renderer.sharedMaterials;
-        var copiedMaterials = new Material[originalMaterials.Length];
-
-        for (int i = 0; i < originalMaterials.Length; i++)
+        public static void CopyMaterials(Renderer renderer)
         {
-            var originalMaterial = originalMaterials[i];
-            var copiedMaterial = GameObject.Instantiate(originalMaterial);
-            copiedMaterial.name = originalMaterial.name;
+            var originalMaterials = renderer.sharedMaterials;
+            var copiedMaterials = new Material[originalMaterials.Length];
 
-            copiedMaterials[i] = copiedMaterial;
+            for (var i = 0; i < originalMaterials.Length; i++)
+            {
+                var originalMaterial = originalMaterials[i];
+                var copiedMaterial = Object.Instantiate(originalMaterial);
+                copiedMaterial.name = originalMaterial.name;
+
+                copiedMaterials[i] = copiedMaterial;
+            }
+
+            renderer.materials = copiedMaterials;
         }
-
-        renderer.materials = copiedMaterials;
     }
 }

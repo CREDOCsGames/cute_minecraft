@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PlatformGame
+namespace UI
 {
     public class ChatBalloonComponent : MonoBehaviour
     {
@@ -23,9 +23,8 @@ namespace PlatformGame
 
         [SerializeField] float mHeightUnit = 1;
         float mWidthUnit = 3;
-        [Range(1f, 500f)]
-        [SerializeField] float interval = 23;
-        public bool IsShow { get; private set; }
+        [Range(1f, 500f)] [SerializeField] float interval = 23;
+        bool IsShow { get; set; }
 
         public void Show(bool bShow)
         {
@@ -58,7 +57,7 @@ namespace PlatformGame
             UI.text = text;
         }
 
-        public void Clear()
+        void Clear()
         {
             mWidthUnit = 3;
             PlaceParts();
@@ -67,26 +66,35 @@ namespace PlatformGame
 
         void PlaceParts()
         {
-            N.transform.localScale = Vector3.up + Vector3.forward + Vector3.right * mWidthUnit;
-            N.transform.localPosition = Vector3.up * C.sprite.bounds.extents.y * mHeightUnit;
+            var transform1 = N.transform;
+            transform1.localScale = Vector3.up + Vector3.forward + Vector3.right * mWidthUnit;
+            var sprite = C.sprite;
+            var localPosition = mHeightUnit * sprite.bounds.extents.y * Vector3.up;
+            transform1.localPosition = localPosition;
 
-            S.transform.localScale = N.transform.localScale;
-            S.transform.localPosition = -N.transform.localPosition;
+            var transform2 = S.transform;
+            transform2.localScale = transform1.localScale;
+            var localPosition1 = -localPosition;
+            transform2.localPosition = localPosition1;
 
 
-            E.transform.localScale = Vector3.right + Vector3.forward + Vector3.up * mHeightUnit;
-            E.transform.localPosition = Vector3.right * C.sprite.bounds.extents.x * mWidthUnit;
+            var transform3 = E.transform;
+            transform3.localScale = Vector3.right + Vector3.forward + Vector3.up * mHeightUnit;
+            var position = mWidthUnit * sprite.bounds.extents.x * Vector3.right;
+            transform3.localPosition = position;
 
-            W.transform.localScale = E.transform.localScale;
-            W.transform.localPosition = -E.transform.localPosition;
+            var transform4 = W.transform;
+            transform4.localScale = transform3.localScale;
+            var position1 = -position;
+            transform4.localPosition = position1;
 
             C.transform.localScale = Vector3.right * mWidthUnit + Vector3.up * mHeightUnit + Vector3.forward;
-            Arrow.transform.localPosition = S.transform.localPosition;
+            Arrow.transform.localPosition = localPosition1;
 
-            NE.transform.localPosition = N.transform.localPosition + E.transform.localPosition;
-            NW.transform.localPosition = N.transform.localPosition + W.transform.localPosition;
-            SE.transform.localPosition = S.transform.localPosition + E.transform.localPosition;
-            SW.transform.localPosition = S.transform.localPosition + W.transform.localPosition;
+            NE.transform.localPosition = localPosition + position;
+            NW.transform.localPosition = localPosition + position1;
+            SE.transform.localPosition = localPosition1 + position;
+            SW.transform.localPosition = localPosition1 + position1;
         }
 
         void Awake()
@@ -102,6 +110,5 @@ namespace PlatformGame
                 PlaceParts();
             }
         }
-
     }
 }

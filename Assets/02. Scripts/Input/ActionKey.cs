@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PlatformGame.Input
+namespace Input1
 {
     public static class ActionKey
     {
         public enum Button
         {
-            Up, Down, Right, Left, Jump, Tab, Attack, Guard, DebugLoad, Cancel
+            Up,
+            Down,
+            Right,
+            Left,
+            Jump,
+            Tab,
+            Attack,
+            Guard,
+            DebugLoad,
+            Cancel
         }
 
         public const string KEY_UP = "Up";
@@ -67,6 +76,5 @@ namespace PlatformGame.Input
 
             return mKeyDownMap;
         }
-
     }
 }

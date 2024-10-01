@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     public class InstancesMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        static List<T> mInstances = new();
+        static readonly List<T> mInstances = new();
         public static List<T> Instances => mInstances.ToList();
 
         protected virtual void OnEnable()
@@ -23,6 +23,5 @@ namespace PlatformGame.Util
         {
             mInstances.Remove(this as T);
         }
-
     }
 }

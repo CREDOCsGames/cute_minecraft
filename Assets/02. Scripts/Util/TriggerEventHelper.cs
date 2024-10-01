@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     public class TriggerEventHelper : MonoBehaviour
     {
@@ -26,5 +26,4 @@ namespace PlatformGame.Util
             collider.gameObject.SetActive(false);
         }
     }
-
 }
