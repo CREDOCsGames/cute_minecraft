@@ -2,7 +2,7 @@ using UnityEngine.Events;
 
 namespace Util
 {
-    public class BranchComponent : IF
+    public class BranchComponent : IFComponent
     {
         public UnityEvent FalseEvent;
 

@@ -1,5 +1,6 @@
 using Flow;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 
@@ -11,32 +12,45 @@ namespace Puzzle
         public List<MeshRenderer> Renderers { get; }
     }
 
-    public class PoisionBoxComponent : HitBoxComponent
+    public class PoisionBoxComponent : MonoBehaviour, IHitBox
     {
         [SerializeField] Color mColorA;
         [SerializeField] Color mColorB;
         BoxCollider[] mColliders;
+        [SerializeField] HitBox mHitBox;
+        public HitBox HitBox
+        {
+            get
+            {
+                if (mHitBox == null)
+                {
+                    Debug.Assert(GetComponents<Collider>().Any(x => x.isTrigger), $"Trigger not found : {gameObject.name}");
+                    mHitBox = new HitBox();
+                }
+                return mHitBox;
+            }
+        }
         readonly Timer mTimer = new();
 
         void Awake()
         {
-            AddHitEvent(OnHit);
+            HitBox.AddHitEvent(OnHit);
             mColliders = GetComponents<BoxCollider>();
             for (var i = 3; i < mColliders.Length; i++)
             {
                 Destroy(mColliders[i]);
             }
 
-            mTimer.SetTimeout(HitDelay);
+            mTimer.SetTimeout(HitBox.HitDelay);
             mTimer.OnTimeoutEvent += (t) => gameObject.SetActive(false);
         }
 
         void Update()
         {
             mTimer.Tick();
-            if (IsDelay)
+            if (HitBox.IsDelay)
             {
-                IsAttacker = false;
+                HitBox.IsAttacker = false;
             }
         }
 
@@ -45,15 +59,22 @@ namespace Puzzle
             mColliders[0].enabled = true;
             mColliders[1].enabled = false;
             mColliders[2].enabled = false;
-            IsAttacker = false;
+            HitBox.IsAttacker = false;
             transform.GetChild(0).gameObject.SetActive(true);
         }
 
+        void OnTriggerStay(Collider other)
+        {
+            HitBox.CheckHit(other);
+        }
+
+
+
         void OnHit(HitBoxCollision collision)
         {
-            if (!IsAttacker)
+            if (!HitBox.IsAttacker)
             {
-                IsAttacker = true;
+                HitBox.IsAttacker = true;
                 mColliders[0].enabled = false;
                 mColliders[1].enabled = true;
                 mColliders[2].enabled = true;
@@ -74,7 +95,7 @@ namespace Puzzle
             }
 
             var attacker = collision.Attacker;
-            if (attacker == null || !attacker.Equals(Actor))
+            if (attacker == null || !attacker.Equals(HitBox.Actor))
             {
                 return;
             }

@@ -36,5 +36,6 @@ namespace Flow
         {
             OnClearEvent?.Invoke(Range);
         }
+
     }
 }

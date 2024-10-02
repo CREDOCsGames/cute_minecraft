@@ -50,26 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422de5f1b2d9c814983a2cb8af7343e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitDelay: 5
-  mbAttacker: 0
-  mActor: {fileID: 8174590444168793926}
-  mHitEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8886204894356882917}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   mColorA: {r: 0.047058824, g: 1, b: 1, a: 1}
   mColorB: {r: 0.4627451, g: 0.20784314, b: 0.90588236, a: 1}
+  mHitBox:
+    mHitDelay: 0.5
+    mbAttacker: 0
+    mActor: {fileID: 8174590444168793926}
+    mHitEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!65 &186430831058823985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -135,7 +124,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
@@ -156,7 +145,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 6, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

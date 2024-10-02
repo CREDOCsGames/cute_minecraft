@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Util
 {
-    public class AndComponent : Condition
+    public class ANDComponent : Condition
     {
         [SerializeField] List<Condition> mConditions;
 
