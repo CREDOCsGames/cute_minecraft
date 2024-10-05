@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// Primarily used for debugging purposes, this runs the same nearest point on mesh algorith
@@ -6,8 +7,7 @@
 /// to find the nearest
 /// </summary>
 [RequireComponent(typeof(MeshCollider))]
-public class BruteForceMesh : MonoBehaviour
-{
+public class BruteForceMesh : MonoBehaviour {
 
     private int triangleCount;
     private Vector3[] vertices;
@@ -16,9 +16,8 @@ public class BruteForceMesh : MonoBehaviour
 
     private Mesh mesh;
 
-    // Use this for initialization
-    void Awake()
-    {
+	// Use this for initialization
+	void Awake () {
         mesh = GetComponent<MeshCollider>().sharedMesh;
 
         tris = mesh.triangles;
@@ -34,7 +33,7 @@ public class BruteForceMesh : MonoBehaviour
 
             triangleNormals[i / 3] = normal;
         }
-    }
+	}
 
     public Vector3 ClosestPointOn(Vector3 to)
     {
@@ -61,7 +60,7 @@ public class BruteForceMesh : MonoBehaviour
             Vector3 p3 = vertices[tris[triangle + 2]];
 
             Vector3 nearest;
-
+                
             ClosestPointOnTriangleToPoint(ref p1, ref p2, ref p3, ref to, out nearest);
 
             float distance = (to - nearest).sqrMagnitude;

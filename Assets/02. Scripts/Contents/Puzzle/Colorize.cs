@@ -23,7 +23,7 @@ namespace PlatformGame.Util
         {
             if (!Application.isPlaying)
             {
-                materials.ForEach(x => MaterialHelper.CopyMaterials(x));
+                materials.ForEach(x => MaterialUtil.CopyMaterials(x));
             }
 
             for (int i = 0; i < materials.Count; i++)

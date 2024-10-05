@@ -10,18 +10,18 @@ namespace PlatformGame.Util
 
         public override bool IsTrue()
         {
-            if (mConditions.Count == 0)
+            if(mConditions.Count == 0)
             {
                 Debug.Log("Condition count : 0");
                 return true;
             }
 
-            return mConditions.Any(x => x.IsTrue());
+            return mConditions.Any(x=>x.IsTrue());
         }
 
         public override void SetFalse()
         {
-            foreach (var condition in mConditions)
+            foreach(var condition in mConditions)
             {
                 condition.SetFalse();
             }

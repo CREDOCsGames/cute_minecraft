@@ -15,12 +15,12 @@ namespace PlatformGame.Character.Movement
             var e = end.position;
             start.SetParent(null);
             start.LookAt(e);
-            while (true)
+            while(true)
             {
                 duration += Time.fixedDeltaTime;
                 var t = Mathf.Clamp(duration / mTime, 0, 1);
                 start.transform.position = Vector3.Lerp(s, e, t);
-                if (t == 1)
+                if(t == 1)
                 {
                     break;
                 }
@@ -29,7 +29,7 @@ namespace PlatformGame.Character.Movement
             }
         }
 
-
+        
     }
 
 }

@@ -1,22 +1,43 @@
-using PlatformGame.Event;
 using PlatformGame.Manager;
+using PlatformGame.Util;
+using System.Collections;
 using UnityEngine;
 
 namespace PlatformGame.Contents
 {
     public class LanternComponent : MonoBehaviour
     {
-        public int StoneCount
+        [SerializeField] float mRange;
+        [SerializeField, Range(1, 100)] float mDistributionAmount;
+        [SerializeField, Range(0.1f, 100f)] float mDistributionInterval;
+        Bettery mBettery;
+        int mCount;
+        public int Count
         {
-            get => mStone.Count;
+            get => mCount;
             set
             {
-                mStone.Count = value;
+                mCount = value;
+                SoundManager.Instance.PlaySound("Success");
+                if (ClearCount == mCount)
+                {
+                    GameManager.PuzzleArea.OnClear();
+                }
+                if (ClearCount < 2)
+                {
+                    return;
+                }
+                var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+<<<<<<< HEAD
+=======
+                var shader = Shader.Find("Universal Render Pipeline/Lit");
+                sphere.GetComponent<Renderer>().material = new Material(shader);
+>>>>>>> parent of e29ba99d (Merge pull request #148 from 1506022022/main)
+                sphere.transform.SetParent(transform);
+                sphere.transform.SetLocalPositionAndRotation(Vector3.down * (2f + mCount), Quaternion.identity);
             }
         }
-        [Range(0, 100)]
         [SerializeField] int ClearCount;
-        CountEvent mStone;
 
         public void SetGameManger()
         {
@@ -28,24 +49,62 @@ namespace PlatformGame.Contents
             GameManager.Lantern = null;
         }
 
-        void CreateStone()
+        void DistributeElectricity(Bettery bettery)
         {
-            var stone = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            var shader = Shader.Find("Universal Render Pipeline/Lit");
-            stone.GetComponent<Renderer>().material = new Material(shader);
-            stone.transform.SetParent(transform);
-            stone.transform.SetLocalPositionAndRotation(Vector3.down * (2f + mStone.Count), Quaternion.identity);
+            if (bettery.Type.HasFlag(BetteryType.MinusPole))
+            {
+                return;
+            }
+
+            var before = mBettery.Amount;
+            mBettery.Amount -= mDistributionAmount;
+            bettery.Amount += before - mBettery.Amount;
+        }
+
+        void DistributeElectricityInRange()
+        {
+            foreach (var bettery in InstancesMonobehaviour<Bettery>.Instances)
+            {
+                if (mRange < Vector3.Distance(bettery.transform.position, transform.position))
+                {
+                    continue;
+                }
+
+                DistributeElectricity(bettery);
+            }
+        }
+
+        IEnumerator Tick()
+        {
+            var delay = new WaitForSeconds(mDistributionInterval);
+            while (true)
+            {
+                mBettery.FullChargeBettery();
+                DistributeElectricityInRange();
+                yield return delay;
+            }
         }
 
         void Awake()
         {
-            mStone = new();
-            mStone.CountReachedEvent += GameManager.PuzzleArea.OnClear;
-            mStone.CountAddEvent += CreateStone;
-            mStone.CountAddEvent += () => SoundManagerComponent.Instance.PlaySound("Success");
-            mStone.UseOneTime();
-            mStone.NumberOfGoals = ClearCount;
+            mBettery = GetComponent<Bettery>();
         }
+
+        void OnEnable()
+        {
+            StartCoroutine(Tick());
+        }
+
+        void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+#if UNITY_EDITOR
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, mRange);
+        }
+#endif
 
     }
 }

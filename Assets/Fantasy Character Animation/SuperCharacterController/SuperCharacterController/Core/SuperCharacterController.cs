@@ -1,8 +1,9 @@
 ﻿// External release version 2.0.0
 
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 /// <summary>
 /// Custom character controller, to be used by attaching the component to an object
@@ -343,15 +344,15 @@ public class SuperCharacterController : MonoBehaviour
                 Vector3 position = SpherePosition(sphere);
                 Vector3 contactPoint;
                 bool contactPointSuccess = SuperCollider.ClosestPointOnSurface(col, position, radius, out contactPoint);
-
+                
                 if (!contactPointSuccess)
                 {
                     return;
                 }
-
+                                            
                 if (debugPushbackMesssages)
                     DebugDraw.DrawMarker(contactPoint, 2.0f, Color.cyan, 0.0f, false);
-
+                    
                 Vector3 v = contactPoint - position;
                 if (v != Vector3.zero)
                 {
@@ -413,7 +414,7 @@ public class SuperCharacterController : MonoBehaviour
 
                     collisionData.Add(collision);
                 }
-            }
+            }            
         }
 
         PopIgnoredColliders();
@@ -648,12 +649,12 @@ public class SuperCharacterController : MonoBehaviour
                 if (Vector3.Angle(nearHit.normal, up) > superColType.StandAngle || nearHit.distance > Tolerance)
                 {
                     SuperCollisionType col = null;
-
+                
                     if (nearHit.collider != null)
                     {
                         col = nearHit.collider.gameObject.GetComponent<SuperCollisionType>();
                     }
-
+                    
                     if (col == null)
                     {
                         col = defaultCollisionType;
@@ -866,7 +867,7 @@ public class SuperCharacterController : MonoBehaviour
 
                 secondaryOrigin += Math3d.ProjectVectorOnPlane(controller.up, v2).normalized * horizontal + controller.up * vertical;
             }
-
+            
             if (Physics.Raycast(secondaryOrigin, controller.down, out hit, Mathf.Infinity, walkable, triggerInteraction))
             {
                 // Remove the tolerance from the distance travelled

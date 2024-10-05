@@ -17,7 +17,7 @@ namespace RootMotion
                 pos.y = transform.localPosition.y;
             }
 
-            if (pos.x == 0 && pos.z == 0)
+            if(pos.x == 0 && pos.z == 0)
             {
                 return;
             }

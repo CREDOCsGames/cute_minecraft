@@ -1,6 +1,7 @@
 using PlatformGame.Contents;
 using PlatformGame.Contents.Puzzle;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlatformGame.Manager
 {
@@ -19,9 +20,9 @@ namespace PlatformGame.Manager
 
         static GameManager()
         {
-            PuzzleArea.OnEnterEvent += PuzzlePieceComponent.EnablePieceInArea;
-            PuzzleArea.OnClearEvent += PuzzlePieceComponent.DisablePieceInArea;
-            PuzzleArea.OnExitEvent += PuzzlePieceComponent.DisablePieceInArea;
+            PuzzleArea.OnEnterEvent += PuzzlePiece.EnablePieceInArea;
+            PuzzleArea.OnClearEvent += PuzzlePiece.DisablePieceInArea;
+            PuzzleArea.OnExitEvent += PuzzlePiece.DisablePieceInArea;
 
             Title.OnEnterEvent += () =>
             {
@@ -30,7 +31,7 @@ namespace PlatformGame.Manager
             };
 
             StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
-            StageArea.OnEnterEvent += (area) => { SoundManagerComponent.Instance.PlayMusic($"Stage_{StageManager.Instance.StageIndex.x}"); };
+            StageArea.OnEnterEvent += (area) => { SoundManager.Instance.PlayMusic($"Stage_{StageManager.Instance.StageIndex.x}"); };
 
 
             ContentsLoader.OnStartLoad += GameTimer.Stop;

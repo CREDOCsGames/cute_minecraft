@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour
@@ -9,15 +10,13 @@ public class CameraShake : MonoBehaviour
 
     void Start()
     {
-        point = new GameObject("Camera - PointInterested").transform;
+         point = new GameObject("Camera - PointInterested").transform;
     }
 
-    public void Shake(float duartion, float magnitude)
-    {
+    public void Shake(float duartion, float magnitude){
         StartCoroutine(Shaker(duartion, magnitude));
     }
-    IEnumerator Shaker(float duartion, float magnitude)
-    {
+    IEnumerator Shaker(float duartion, float magnitude) {
 
         point.position = transform.position + transform.forward;
 
@@ -25,11 +24,10 @@ public class CameraShake : MonoBehaviour
 
         float elapsed = 0.0f;
 
-        while (elapsed < duartion)
-        {
-            float x = Random.Range(-1f, 1) * (magnitude / 40);
-            float y = Random.Range(-1f, 1) * (magnitude / 40);
-            float z = Random.Range(-1f, 1) * (magnitude / 40);
+        while (elapsed < duartion) {
+            float x = Random.Range(-1f, 1) * (magnitude/40);
+            float y = Random.Range(-1f, 1) * (magnitude/40);
+            float z = Random.Range(-1f, 1) * (magnitude/40);
 
             Vector3 shaked = new Vector3(x, y, z);
             float sm = smooth.Evaluate(elapsed / duartion);

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using static PlatformGame.Character.Status.MovementInfo;
 
@@ -19,7 +20,7 @@ namespace PlatformGame.Character.Movement
             var moveForce = right * mDir.x;
             moveForce += forward * mDir.z;
             moveForce = moveForce.normalized * (Time.deltaTime * MOVE_SPEED);
-            if (ZeroVelocity)
+            if(ZeroVelocity)
             {
                 rigid.velocity = Vector3.zero;
             }

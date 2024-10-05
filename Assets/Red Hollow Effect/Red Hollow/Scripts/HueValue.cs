@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class HueValue : MonoBehaviour
+public class HueValue: MonoBehaviour
 {
     public enum ColorType
     {
@@ -21,8 +23,8 @@ public class HueValue : MonoBehaviour
         {
             for (int i = 0; i < colorNumber; i++)
             {
-                Color color = transform.GetComponent<Renderer>().material.GetColor("_Color" + (i + 1));
-                transform.GetComponent<Renderer>().material.SetColor("_Color" + (i + 1), Hue(color, hue));
+                Color color = transform.GetComponent<Renderer>().material.GetColor("_Color"+(i+1));
+                transform.GetComponent<Renderer>().material.SetColor("_Color"+(i+1), Hue(color, hue));
             }
         }
 
@@ -40,7 +42,7 @@ public class HueValue : MonoBehaviour
             Color color = transform.GetComponent<Light>().color;
             transform.GetComponent<Light>().color = Hue(color, hue);
         }
-
+        
         if (type == ColorType.ParticleColor)
         {
             Color color = transform.GetComponent<ParticleSystem>().main.startColor.color;

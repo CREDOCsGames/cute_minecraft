@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlatformGame.Character.Movement
 {
@@ -10,7 +11,7 @@ namespace PlatformGame.Character.Movement
         {
             get
             {
-                if (mRigid == null)
+                if(mRigid == null)
                 {
                     mRigid = GetComponent<Rigidbody>();
                 }

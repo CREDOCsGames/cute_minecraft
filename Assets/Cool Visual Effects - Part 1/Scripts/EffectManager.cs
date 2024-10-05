@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.VFX;
 
 public class EffectManager : MonoBehaviour
@@ -23,7 +25,7 @@ public class EffectManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (currentEffect - 1 >= 0)
+            if(currentEffect - 1 >= 0)
             {
                 vfxs[currentEffect].Stop();
                 effects[currentEffect].SetActive(false);

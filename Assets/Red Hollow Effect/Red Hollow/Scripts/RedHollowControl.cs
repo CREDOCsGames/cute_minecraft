@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class RedHollowControl : MonoBehaviour
 {
@@ -19,23 +21,19 @@ public class RedHollowControl : MonoBehaviour
         transform.GetChild(0).GetComponent<HueControl>().hue = hue;
     }
 
-    public void Play_Charging()
-    {
+    public void Play_Charging() {
         animator.Play("Red Hollow - Charging");
     }
 
-    public void Finish_Charging()
-    {
+    public void Finish_Charging() {
         animator.Play("Red Hollow - Charged");
     }
 
-    public void Burst_Beam()
-    {
+    public void Burst_Beam() {
         animator.Play("Red Hollow - Burst");
-        if (Camera.main.transform.GetComponent<CameraShake>() != null)
-        {
-            Camera.main.transform.GetComponent<CameraShake>().Shake(0.5f, 1f);
-        }
+	if(Camera.main.transform.GetComponent<CameraShake>() != null){
+		Camera.main.transform.GetComponent<CameraShake>().Shake(0.5f, 1f);
+	}
     }
 
     public void Dead()

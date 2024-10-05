@@ -1,0 +1,63 @@
+using PlatformGame.Character;
+using System.Linq;
+using UnityEngine;
+
+namespace PlatformGame
+{
+    public class FormationRadar : MonoBehaviour
+    {
+        public string PetName;
+
+        public void SetPetTransform(Transform transform)
+        {
+            var pet = FindPet(PetName);
+            pet.SetTransform(transform);
+        }
+
+        public void CombackPet()
+        {
+            var formation = FindFormation();
+            var pet = FindPet(PetName);
+            formation.Comback(pet);
+        }
+
+        public void ChatText(string text)
+        {
+            var pet = FindPet(PetName);
+            pet.Chat.SetText(text);
+            pet.Chat.Show(true);
+        }
+
+        public void HideChatBalloon()
+        {
+            var pet = FindPet(PetName);
+            pet.Chat.Show(false);
+        }
+
+        public void AddRole(Role role)
+        {
+            FindFormation()?.AddRole(role);
+        }
+
+        static FormationManager FindFormation()
+        {
+            var pc = PlayerCharacterManager.Instance.ControlledCharacter;
+            var formation = pc.transform.GetComponentInChildren<FormationManager>();
+            Debug.Assert(formation != null, $"Not found FormationManager : {pc.name}");
+            return formation;
+        }
+
+        
+
+        static Role FindPet(string petName)
+        {
+            var formation = FindFormation();
+            var roles = formation.Roles;
+            Debug.Assert(roles.Any(x => x.ID.Name.Equals(petName)), $"Not found in Player's FormationManager : {petName}");
+            var pet = roles.Where(x => x.ID.Name.Equals(petName)).First();
+            return pet;
+
+        }
+
+    }
+}
