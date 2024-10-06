@@ -1,11 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Custom/Util/GameObjectUtil")]
-public class GameObjectHandler : ScriptableObject
+namespace Util
 {
-    public void ToggleEnable(GameObject go)
+    [CreateAssetMenu(menuName = "Custom/Util/GameObjectUtil")]
+    public class GameObjectHandler : ScriptableObject
     {
-        go.SetActive(!go.activeSelf);
+        public void ToggleEnable(GameObject go)
+        {
+            go.SetActive(!go.activeSelf);
+        }
     }
-
 }

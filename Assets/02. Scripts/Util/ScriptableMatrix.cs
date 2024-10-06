@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     [Serializable]
     public class CustomList<T>
@@ -12,8 +12,8 @@ namespace PlatformGame.Util
 
     public class ScriptableDictionary<K, V> : ScriptableObject
     {
-        List<K> Keys = new();
-        List<V> Values = new();
+        readonly List<K> Keys = new();
+        readonly List<V> Values = new();
 
         public bool TryGetValue(K key, out V value)
         {
@@ -29,5 +29,4 @@ namespace PlatformGame.Util
         [SerializeField] List<CustomList<T>> mMatrix = new();
         public List<CustomList<T>> Matrix => mMatrix;
     }
-
 }

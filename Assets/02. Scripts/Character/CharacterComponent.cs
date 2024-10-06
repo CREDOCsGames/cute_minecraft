@@ -1,24 +1,21 @@
-﻿using PlatformGame.Character.Combat;
-using PlatformGame.Character.Movement;
+﻿using Movement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PlatformGame.Character
+namespace Character
 {
     public class CharacterComponent : MonoBehaviour
     {
         public const string TAG_PLAYER = "Player";
         static readonly List<CharacterComponent> mInstances = new();
-        public static List<CharacterComponent> Instances => mInstances.ToList();
+        public static IEnumerable<CharacterComponent> Instances => mInstances.ToList();
         public bool IsAction => mCooltime.IsAction;
-        public Func<bool> IsGrounded
-        {
-            get; set;
-        } = () => true;
+        public Func<bool> IsGrounded { get; set; } = () => true;
         CharacterState mState;
+
         public CharacterState State
         {
             get => mState;
@@ -28,6 +25,7 @@ namespace PlatformGame.Character
                 {
                     OnChangedState.Invoke(value);
                 }
+
                 mState = value;
             }
         }
@@ -38,11 +36,10 @@ namespace PlatformGame.Character
         public Animator Animator => mAnimator;
 
         [SerializeField] MovementComponent mMovement;
-        public MovementComponent Movement => mMovement;
+        MovementComponent Movement => mMovement;
         readonly Cooltime mCooltime = new();
 
-        [Header("Options")]
-        [SerializeField] ActionDataList mHasAbilities;
+        [Header("Options")] [SerializeField] ActionDataList mHasAbilities;
         public ActionDataList HasAbilities => mHasAbilities;
         [SerializeField] UnityEvent<CharacterState> mOnChangedState;
         public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
@@ -61,6 +58,7 @@ namespace PlatformGame.Character
             {
                 return;
             }
+
             State = action.BeState;
 
             mCooltime.UseAbility(action);
@@ -69,6 +67,7 @@ namespace PlatformGame.Character
             {
                 return;
             }
+
             Movement.PlayMovement(action.Movement);
         }
 
@@ -93,6 +92,5 @@ namespace PlatformGame.Character
         {
             mInstances.Remove(this);
         }
-
     }
 }

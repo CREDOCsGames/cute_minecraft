@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     public static class RaycastHelper
     {
@@ -11,7 +11,4 @@ namespace PlatformGame.Util
             return Physics.OverlapBox(area.center, area.extents).Select(x => x.transform).ToList();
         }
     }
-
 }
-
-

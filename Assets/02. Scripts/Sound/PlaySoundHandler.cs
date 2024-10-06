@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 
-public class PlaySoundHandler : MonoBehaviour
+namespace Sound
 {
-    public void PlaySound(string soundName)
+    public class PlaySoundHandler : MonoBehaviour
     {
-        SoundManagerComponent.Instance.PlaySound(soundName);
-    }
-    public void PlayMusic(string soundName)
-    {
-        SoundManagerComponent.Instance.PlayMusic(soundName);
+        public void PlaySound(string soundName)
+        {
+            SoundManagerComponent.Instance.PlaySound(soundName);
+        }
+
+        public void PlayMusic(string soundName)
+        {
+            SoundManagerComponent.Instance.PlayMusic(soundName);
+        }
     }
 }

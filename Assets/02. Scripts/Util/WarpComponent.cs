@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class WarpComponent : MonoBehaviour
+namespace Util
 {
-    [SerializeField]
-    Transform Target;
-    public void WarpTarget()
+    public class WarpComponent : MonoBehaviour
     {
-        Target.position = transform.position;
+        [SerializeField] Transform Target;
+
+        public void WarpTarget()
+        {
+            Target.position = transform.position;
+        }
     }
 }

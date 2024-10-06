@@ -1,10 +1,11 @@
 using UnityEngine;
 
-namespace PlatformGame
+namespace Util
 {
-    public class SingletonComponent<T> : MonoBehaviour where T : MonoBehaviour
+    public sealed class SingletonComponent<T> : MonoBehaviour where T : MonoBehaviour
     {
         static T mInstance;
+
         public static T Instance
         {
             get
@@ -14,7 +15,8 @@ namespace PlatformGame
             }
             private set => mInstance = value;
         }
-        protected virtual void Awake()
+
+        private void Awake()
         {
             if (mInstance == null)
             {
@@ -27,14 +29,12 @@ namespace PlatformGame
             }
         }
 
-        protected virtual void OnDestroy()
+        private void OnDestroy()
         {
             if (mInstance == this)
             {
                 mInstance = null;
             }
         }
-
     }
-
 }

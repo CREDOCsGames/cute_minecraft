@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlatformGame.Util
+namespace Util
 {
     public static class ListHelper
     {
@@ -16,8 +16,4 @@ namespace PlatformGame.Util
             return index < 0 || list.Count <= index;
         }
     }
-
 }
-
-
-

@@ -30,10 +30,18 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
+<<<<<<< Updated upstream:Assets/08. Materials/Material/Asset/M_StructureProps.mat
     RenderType: Opaque
   disabledShaderPasses: []
+=======
+    RenderType: Transparent
+  disabledShaderPasses:
+  - GRABPASS
+  - DepthOnly
+  - SHADOWCASTER
+>>>>>>> Stashed changes:Assets/Travis Game Assets/Hit Impact Effects/Materials/Hits/HIE_Hit_03_Shockwave_2x2_01.mat
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -107,9 +115,21 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+<<<<<<< Updated upstream:Assets/08. Materials/Material/Asset/M_StructureProps.mat
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+=======
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0
+    - _DstBlend: 1
+    - _DstBlendAlpha: 1
+    - _EmissionEnabled: 1
+    - _FlipbookBlending: 0
+    - _FlipbookMode: 0
+>>>>>>> Stashed changes:Assets/Travis Game Assets/Hit Impact Effects/Materials/Hits/HIE_Hit_03_Shockwave_2x2_01.mat
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -122,12 +142,16 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _UVSec: 0
+<<<<<<< Updated upstream:Assets/08. Materials/Material/Asset/M_StructureProps.mat
     - _WorkflowMode: 1
     - _ZWrite: 1
+=======
+    - _ZWrite: 0
+>>>>>>> Stashed changes:Assets/Travis Game Assets/Hit Impact Effects/Materials/Hits/HIE_Hit_03_Shockwave_2x2_01.mat
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

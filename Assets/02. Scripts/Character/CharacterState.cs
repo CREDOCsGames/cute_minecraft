@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PlatformGame.Character
+namespace Character
 {
     [Flags, Serializable]
     public enum CharacterStateFlags
@@ -43,11 +43,12 @@ namespace PlatformGame.Character
                 case CharacterState.Action1: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Action2: return (flags & CharacterStateFlags.Action) == CharacterStateFlags.Action;
                 case CharacterState.Land: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
-                case CharacterState.Die: return (flags & CharacterStateFlags.None) == CharacterStateFlags.None;
+                case CharacterState.Die: return (flags & CharacterStateFlags.Die) == CharacterStateFlags.Die;
 
-                default: Debug.Assert(false, $"Undefined values : {state}"); return false;
+                default:
+                    Debug.Assert(false, $"Undefined values : {state}");
+                    return false;
             }
         }
     }
-
 }

@@ -3,21 +3,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PlatformGame
+namespace UI
 {
     enum EffectType
     {
-        Duration, Interval
+        Duration,
+        Interval
     }
 
     public class TypingEffectsComponent : MonoBehaviour
     {
         public UnityEvent OnTypingStartEvent;
         public UnityEvent OnTypingEndEvent;
-        [Header("References")]
-        [SerializeField] TextMeshProUGUI UI;
-        [Header("Options")]
-        [SerializeField] EffectType Type;
+
+        [Header("References")] [SerializeField]
+        TextMeshProUGUI UI;
+
+        [Header("Options")] [SerializeField] EffectType Type;
         [SerializeField] float Duration;
         [SerializeField] float FixedInterval;
 
@@ -28,6 +30,7 @@ namespace PlatformGame
             {
                 return;
             }
+
             StopAllCoroutines();
             StartCoroutine(TypringText(text));
         }
@@ -41,9 +44,8 @@ namespace PlatformGame
                 UI.text = text.Substring(0, i);
                 yield return new WaitForSeconds(delay);
             }
+
             OnTypingEndEvent.Invoke();
         }
-
     }
 }
-
