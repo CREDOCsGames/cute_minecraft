@@ -1,9 +1,8 @@
 ﻿// With a little help from UnityGems
 
-using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// God damn this thing is useful srsly live. laugh. love. it.

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class AreaManager
 {
-    static Dictionary<Vector3Int, AreaComponent> mSector { get; set; } = new();
+    static Dictionary<Vector3Int, AreaComponent> mAreas { get; set; } = new();
 
     static public int AreaRange = 40;
     static public float BridgeLimitDistance = 10f;
@@ -21,8 +21,8 @@ public static class AreaManager
             return;
         }
 
-        var sectorNum = GetSectorNum(basis.Range.center);
-        var nearByAreas = GetNearByAreas(sectorNum);
+        var areaNum = GetAreaNum(basis.Range.center);
+        var nearByAreas = GetNearByAreas(areaNum);
 
         foreach (var area in nearByAreas)
         {
@@ -45,7 +45,7 @@ public static class AreaManager
 
     public static void NumberingAreas()
     {
-        mSector.Clear();
+        mAreas.Clear();
         var areas = InstancesMonobehaviour<AreaComponent>.Instances;
         if (!areas.Any())
         {
@@ -54,13 +54,13 @@ public static class AreaManager
 
         foreach (var area in areas)
         {
-            var sectorNum = GetSectorNum(area.Range.center);
-            if (mSector.ContainsKey(sectorNum))
+            var areaNum = GetAreaNum(area.Range.center);
+            if (mAreas.ContainsKey(areaNum))
             {
-                Debug.Assert(false, $"The two areas overlapped :  {mSector[sectorNum].name},{area.name}");
+                Debug.Assert(false, $"The two areas overlapped :  {mAreas[areaNum].name},{area.name}");
                 continue;
             }
-            mSector.Add(sectorNum, area);
+            mAreas.Add(areaNum, area);
             area.enabled = false;
         }
     }
@@ -71,7 +71,7 @@ public static class AreaManager
 
         foreach (var dir in AreaComponent.Dirs)
         {
-            if (mSector.TryGetValue(sectorNum + dir, out var area))
+            if (mAreas.TryGetValue(sectorNum + dir, out var area))
             {
                 nearbyAreas.Add(area);
             }
@@ -82,17 +82,16 @@ public static class AreaManager
 
     public static bool TryGetArea(Vector3Int sectorNum, out AreaComponent area)
     {
-        return mSector.TryGetValue(sectorNum, out area);
+        return mAreas.TryGetValue(sectorNum, out area);
     }
 
-    // class Sector
-    public static Vector3Int GetSectorNum(Vector3 position)
+    public static Vector3Int GetAreaNum(Vector3 position)
     {
-        Vector3Int sectorNum = Vector3Int.zero;
-        sectorNum.x = GetSectorAxis(position.x);
-        sectorNum.y = GetSectorAxis(position.y);
-        sectorNum.z = GetSectorAxis(position.z);
-        return sectorNum;
+        Vector3Int areaNum = Vector3Int.zero;
+        areaNum.x = GetSectorAxis(position.x);
+        areaNum.y = GetSectorAxis(position.y);
+        areaNum.z = GetSectorAxis(position.z);
+        return areaNum;
     }
 
     static int GetSectorAxis(float value)

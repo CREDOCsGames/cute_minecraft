@@ -40,7 +40,7 @@ namespace PlatformGame.Contents
 
         public static void SetLoaderType(LoaderType type)
         {
-            Debug.Assert(Enum.IsDefined(typeof(LoaderType), type),$"Out of range : {(int)type}");
+            Debug.Assert(Enum.IsDefined(typeof(LoaderType), type), $"Out of range : {(int)type}");
             mLoader = mLoaders[(int)type];
             Debug.Assert(mLoader != null);
         }

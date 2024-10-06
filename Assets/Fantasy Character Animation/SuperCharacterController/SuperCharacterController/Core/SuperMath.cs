@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public static class SuperMath {
+public static class SuperMath
+{
 
     public static Vector3 ClampAngleOnPlane(Vector3 origin, Vector3 direction, float angle, Vector3 planeNormal)
     {

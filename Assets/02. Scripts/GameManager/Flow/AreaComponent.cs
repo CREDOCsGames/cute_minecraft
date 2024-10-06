@@ -52,7 +52,6 @@ namespace PlatformGame.Manager
 
         public void OnEnter()
         {
-            mArea.Range = Range;
             mArea.OnEnterEvent += InvokeEnterEvent;
             mArea.OnExitEvent += InvokeExitEvnet;
             mArea.OnClearEvent += InvokeClearEvent;
@@ -65,7 +64,6 @@ namespace PlatformGame.Manager
             mArea.OnEnterEvent -= InvokeEnterEvent;
             mArea.OnExitEvent -= InvokeExitEvnet;
             mArea.OnClearEvent -= InvokeClearEvent;
-            mArea.Range = Area.zero;
         }
 
         public void OnClear()
@@ -114,9 +112,9 @@ namespace PlatformGame.Manager
             if (UseViewAreaRange)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireCube(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, Vector3.one * AreaManager.AreaRange);
+                Gizmos.DrawWireCube(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, Vector3.one * AreaManager.AreaRange);
                 style.normal.textColor = Color.yellow;
-                Handles.Label(AreaManager.GetSectorNum(Range.center) * AreaManager.AreaRange, "Area", style);
+                Handles.Label(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, "Area", style);
             }
 
             if (UseViewBridgeRange)

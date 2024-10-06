@@ -2,26 +2,26 @@ using PlatformGame.Character.Combat;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static PlatformGame.Character.Character;
+using static PlatformGame.Character.CharacterComponent;
 
 namespace PlatformGame
 {
     [CreateAssetMenu(menuName = "Custom/PlayerCharacterManager")]
     public class PlayerCharacterManager : UniqueScriptableObject<PlayerCharacterManager>
     {
-        public List<Character.Character> JoinCharacters
+        public List<Character.CharacterComponent> JoinCharacters
         {
-            get => Character.Character.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+            get => Character.CharacterComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
         }
-        public List<PlayerController> JoinCharactersController
+        public List<PlayerControllerComponent> JoinCharactersController
         {
             get
             {
-                var playerControllers = PlayerController.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                var playerControllers = PlayerControllerComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 if (playerControllers.Count == 0)
                 {
 
-                    playerControllers = FindObjectsOfType<PlayerController>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+                    playerControllers = FindObjectsOfType<PlayerControllerComponent>().Where(x => x.CompareTag(TAG_PLAYER)).ToList();
                 }
 
                 if (playerControllers.Count == 0)
@@ -31,16 +31,16 @@ namespace PlatformGame
                 return playerControllers;
             }
         }
-        public Character.Character ControlledCharacter
+        public Character.CharacterComponent ControlledCharacter
         {
 
             get
             {
-                return mCurrentController?.GetComponentInParent<Character.Character>();
+                return mCurrentController?.GetComponentInParent<Character.CharacterComponent>();
             }
         }
-        PlayerController mCurrentController;
-        PlayerController mDefaultController;
+        PlayerControllerComponent mCurrentController;
+        PlayerControllerComponent mDefaultController;
         public void ControlDefaultCharacter()
         {
             if (JoinCharactersController.Count == 0)
@@ -55,14 +55,14 @@ namespace PlatformGame
             ReplaceControlWith(mDefaultController);
         }
 
-        public void ReplaceControlWith(PlayerController controller)
+        public void ReplaceControlWith(PlayerControllerComponent controller)
         {
             mCurrentController?.SetActive(false);
             mCurrentController = controller;
             mCurrentController.SetActive(true);
         }
 
-        public void SetDefaultCharacter(PlayerController controller)
+        public void SetDefaultCharacter(PlayerControllerComponent controller)
         {
             Debug.Assert(controller.tag == TAG_PLAYER);
             mDefaultController = controller;
@@ -74,34 +74,9 @@ namespace PlatformGame
             mCurrentController = null;
         }
 
-        public void Warp(Transform transform)
+        public void DoAction(ActionData action)
         {
-            if (mDefaultController == null)
-            {
-                return;
-            }
-            ControlledCharacter.transform.position = transform.position;
-        }
-
-
-        public void SetAnimator(RuntimeAnimatorController controller)
-        {
-            ControlledCharacter.Animator.runtimeAnimatorController = controller;
-        }
-
-        public void SetChild(Transform child)
-        {
-            child.SetParent(ControlledCharacter.Model.transform);
-        }
-
-        public void SetKinematic(bool kinematic)
-        {
-            ControlledCharacter.Rigid.isKinematic = kinematic;
-        }
-
-        public void DoAction(ActionData data)
-        {
-            ControlledCharacter.DoAction(data);
+            ControlledCharacter?.DoAction(action);
         }
     }
 }
