@@ -50,7 +50,7 @@ namespace PlatformGame.Contents.Puzzle
             mInstance.GetComponent<MeshRenderer>().material = M_LED;
             mInstance.layer = LayerMask.NameToLayer("Bridge");
 
-            Vector3 size = new Vector3(1, 1, Vector3.Distance(PointA, PointB) + 1);
+            Vector3 size = new Vector3(1.5f, 0.5f, Vector3.Distance(PointA, PointB) + 1);
             mInstance.transform.localScale = size;
 
             Vector3 center = (PointA + PointB) / 2 - Vector3.up * size.y / 2;
@@ -70,10 +70,14 @@ namespace PlatformGame.Contents.Puzzle
             obj.transform.localScale = Vector3.up * Mathf.Abs(PointA.y - PointB.y) + Vector3.right + Vector3.forward;
             obj.transform.localEulerAngles = Vector3.left * Mathf.Abs(obj.transform.parent.eulerAngles.x);
 
+            var scale = new Vector3(1 / 1.5f * 0.1f, (2 / mInstance.transform.lossyScale.y) * Mathf.Abs(PointA.y - PointB.y), 1);
+
             var left = obj.AddComponent<BoxCollider>();
-            left.center = Vector3.right;
+            left.size = scale;
+            left.center = Vector3.left * 0.5f;
             var right = obj.AddComponent<BoxCollider>();
-            right.center = Vector3.left;
+            right.center = Vector3.right * 0.5f;
+            right.size = scale;
         }
 
         public void Disconnect()

@@ -24,8 +24,8 @@ namespace PlatformGame.Contents
         }
         Slider mProgressBar => LoadingWindow.ProgressBar;
         TextMeshProUGUI mTitle => LoadingWindow.LoadSceneNameText;
-        LoadingWindow mLoadingWindow;
-        LoadingWindow LoadingWindow
+        LoadingWindowComponent mLoadingWindow;
+        LoadingWindowComponent LoadingWindow
         {
             get
             {

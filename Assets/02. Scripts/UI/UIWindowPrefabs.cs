@@ -3,16 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UIWindows", menuName = "Custom/UIWindows")]
 public class UIWindowPrefabs : ScriptableObject
 {
-    [SerializeField] LoadingWindow mLoadingWindowPrefab;
-    public LoadingWindow LoadingWindowPrefab => mLoadingWindowPrefab;
+    [SerializeField] LoadingWindowComponent mLoadingWindowPrefab;
+    public LoadingWindowComponent LoadingWindowPrefab => mLoadingWindowPrefab;
 }
 
 public static class UIWindowContainer
 {
     static readonly UIWindowPrefabs mPrefabs = Resources.Load<UIWindowPrefabs>("UIWindows");
-    static LoadingWindow mLoadingWindowInstance;
+    static LoadingWindowComponent mLoadingWindowInstance;
 
-    public static LoadingWindow GetLoadingWindow()
+    public static LoadingWindowComponent GetLoadingWindow()
     {
         Debug.Assert(mPrefabs, "Resource not found: Resources/UIWindows");
         if (mLoadingWindowInstance == null)

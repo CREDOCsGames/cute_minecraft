@@ -16,7 +16,7 @@ public class RigidBodyHandler : MonoBehaviour
 
     public void Explosion(float force)
     {
-        Character.Instances.Where(x => Vector3.Distance(x.transform.position, mRigid.transform.position) < force * 0.1f)
+        CharacterComponent.Instances.Where(x => Vector3.Distance(x.transform.position, mRigid.transform.position) < force * 0.1f)
                             .ToList()
                             .ForEach(x => x.Rigid.AddExplosionForce(force, transform.position, force * 0.1f, force * 0.5f));
     }
@@ -28,7 +28,7 @@ public class RigidBodyHandler : MonoBehaviour
 
     public void ResetVelocity()
     {
-        Rigid.velocity = Vector3.zero;  
+        Rigid.velocity = Vector3.zero;
     }
 
     public void SetKinematic(bool kinematic)

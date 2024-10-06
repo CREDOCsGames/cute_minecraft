@@ -1,29 +1,28 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace EffectSceneManager
 {
-public class EffectManager : MonoBehaviour
-{
-    public List<GameObject> effects;
-    public List<KeyCode> keys;
-    // Start is called before the first frame update
-    void Start()
+    public class EffectManager : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        for (int i = 0; i < keys.Count; i++)
+        public List<GameObject> effects;
+        public List<KeyCode> keys;
+        // Start is called before the first frame update
+        void Start()
         {
-            if (Input.GetKeyDown(keys[i]))
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            for (int i = 0; i < keys.Count; i++)
             {
-                Instantiate<GameObject>(effects[i]);
+                if (Input.GetKeyDown(keys[i]))
+                {
+                    Instantiate<GameObject>(effects[i]);
+                }
             }
         }
     }
-}
 }

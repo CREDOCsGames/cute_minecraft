@@ -9,13 +9,13 @@ public class MaterialCopyComponent : MonoBehaviour
         {
             return;
         }
-        MaterialUtil.CopyMaterials(renderer);
+        MaterialHelper.CopyMaterials(renderer);
     }
 
 }
 
 
-public static class MaterialUtil
+public static class MaterialHelper
 {
     public static void CopyMaterials(Renderer renderer)
     {
