@@ -10,6 +10,7 @@ namespace Puzzle
     public class FlowerComponent : PuzzlePieceComponent, IColorPiece
     {
         static readonly List<FlowerComponent> mInstances = new();
+        public static List<FlowerComponent> Instances => mInstances;
         [SerializeField] Color mColor;
 
         [Header("[Refer to the part you want the color to change]")] [SerializeField]
