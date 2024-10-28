@@ -10,15 +10,13 @@ namespace Puzzle
     public class FlowerComponent : PuzzlePieceComponent, IColorPiece
     {
         static readonly List<FlowerComponent> mInstances = new();
-        public static List<FlowerComponent> Instances => mInstances;
         [SerializeField] Color mColor;
 
-        [Header("[Refer to the part you want the color to change]")]
-        [SerializeField]
+        [Header("[Refer to the part you want the color to change]")] [SerializeField]
         List<MeshRenderer> mRenderers;
 
         public List<MeshRenderer> Renderers => mRenderers;
-        [Header("[Options]")][SerializeField] UnityEvent mChangeColorEvent;
+        [Header("[Options]")] [SerializeField] UnityEvent mChangeColorEvent;
 
         readonly Timer mFloweringTimer = new();
         [SerializeField] GameObject Seed;
@@ -46,9 +44,9 @@ namespace Puzzle
         static void CheckClear()
         {
             bool bClear;
-            if (mInstances.Count < 2)
+            if (!mInstances.Any())
             {
-                bClear = false;
+                bClear = true;
             }
             else
             {
@@ -61,18 +59,18 @@ namespace Puzzle
                 return;
             }
 
-            //mInstances.ForEach(x => x.IsClear = true);
-            //mInstances.ToList().ForEach(x => x.enabled = false);
-            if (GameManager.Lantern == null)
-            {
-                return;
-            }
+            mInstances.ForEach(x => x.IsClear = true);
+            mInstances.ToList().ForEach(x => x.enabled = false);
             GameManager.Lantern.StoneCount++;
         }
 
         void OnEnable()
         {
             mInstances.Add(this);
+            if (mInstances.First() != this)
+            {
+                return;
+            }
         }
 
         void Awake()

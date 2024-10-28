@@ -5,9 +5,9 @@ using UnityEngine.Events;
 public class AttackBoxComponent : MonoBehaviour
 {
     [Header("[Refer]")]
-    [SerializeField] protected Transform Actor;
-    [Header("[Options]")]
     [SerializeField] UnityEvent<HitBoxCollision> OnAttack;
+    [Header("[Options]")]
+    [SerializeField] protected Transform Actor;
     [Range(0, 10000)][SerializeField] float AttackWindow;
     AttackBox mAttackBox;
     public AttackBox AttackBox
