@@ -9,7 +9,8 @@ namespace Flow
     public enum LoaderType
     {
         StageLoader,
-        LevelLoader
+        LevelLoader,
+        ReLoader
     }
 
     public static class ContentsLoader
@@ -22,6 +23,7 @@ namespace Flow
         {
             new StageLoader(),
             new LevelLoader(),
+            new ReLoader()
         };
 
         public static event Action OnStartLoad;

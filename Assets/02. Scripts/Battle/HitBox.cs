@@ -15,7 +15,7 @@ namespace Battle
     }
 
     [Serializable]
-    public class HitBox : AttackBox
+    public class HitBox : CollisionBox
     {
         public HitBox(Transform actor) : base(actor)
         {
