@@ -1,15 +1,20 @@
 #if UNITY_EDITOR
-using Puzzle;
 using UnityEditor;
 #endif
+using Puzzle;
 using UnityEngine;
 using UnityEngine.Events;
 using Util;
+using System;
 
 namespace Flow
 {
     public class AreaComponent : InstancesMonobehaviour<AreaComponent>
     {
+        public static event Action<Area> OnAreaEnter;
+        public static event Action<Area> OnAreaExit;
+        public static event Action<Area> OnAreaClaer;
+
         public static readonly Vector3Int[] Dirs =
         {
             new(1, 0, 0), new(-1, 0, 0),
@@ -23,7 +28,8 @@ namespace Flow
             new(1, -1, -1), new(-1, -1, 1), new(-1, -1, -1)
         };
 
-        [Header("[Extents of at least 5]")] [SerializeField]
+        [Header("[Extents of at least 5]")]
+        [SerializeField]
         Bounds mRange;
 
         public Bounds Range
@@ -89,7 +95,7 @@ namespace Flow
         }
 
 #if UNITY_EDITOR
-        [Header("[Debug]")] [SerializeField] bool UseViewAreaRange;
+        [Header("[Debug]")][SerializeField] bool UseViewAreaRange;
         [SerializeField] bool UseViewBridgeRange;
         void OnDrawGizmosSelected()
         {
