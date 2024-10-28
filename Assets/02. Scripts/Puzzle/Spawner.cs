@@ -1,71 +1,65 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
-    public float radius = 5.0f; // 원의 반지름
-    public float radius2 = 5.0f;
-    public int segments = 100; // 원을 구성하는 선분의 수
-    public float power = 100f;
-    public Transform Target;
-    public GameObject mMonster;
+    public float Radius = 5.0f;
+    public float Radius2 = 5.0f;
+    public int Segments = 100;
     public AnimationCurve Curve;
-    public Transform obj;
-    [Range(0f, 1f)]
-    public float i;
+    public Transform Monster;
     public float interval;
-    public bool start;
+    public float Angle;
+    public bool Start;
+    public UnityEvent SpawnAction;
+    public UnityEvent ReachActoin;
     float time;
-    public UnityEvent Action;
     bool before;
-    public float Angle1;
-    float Angle => (Angle1 / 360f) * (2 * Mathf.PI);
-    private void Update()
+    float Radian => (Angle / 360f) * (2 * Mathf.PI);
+
+    public void SetStart()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        Start = true;
+    }
+
+    void Update()
+    {
+        Vector3 pointA = transform.position + new Vector3(Mathf.Cos(Radian) * Radius, 0, Mathf.Sin(Radian) * Radius);
+        Vector3 pointB = transform.position + Vector3.up * Curve.Evaluate(1f) + new Vector3(Mathf.Cos(Radian) * Radius2, 0, Mathf.Sin(Radian) * Radius2);
+
+        if (Start && before != Start)
         {
-            Spawn();
+            SpawnAction.Invoke();
+            Monster.transform.LookAt(pointB - pointA);
         }
 
-
-        Vector3 pointA = transform.position + new Vector3(Mathf.Cos(Angle) * radius, 0, Mathf.Sin(Angle) * radius);
-        Vector3 pointB = transform.position + Vector3.up * Curve.Evaluate(1f) + new Vector3(Mathf.Cos(Angle) * radius2, 0, Mathf.Sin(Angle) * radius2);
-
-        if (start && before != start)
-        {
-            Action.Invoke();
-        }
-
-        if (!start)
+        if (!Start)
         {
             return;
         }
 
         time += Time.deltaTime;
-        i = Mathf.Min(time / interval, 1f);
-        // 커브를 따라 점들을 계산하여 선을 그립니다.
-
+        var i = Mathf.Min(time / interval, 1f);
         float y = Curve.Evaluate(i);
         Vector3 point = Vector3.Lerp(pointA, pointB, i);
         point.y = y;
 
-        obj.position = point;
+        Monster.position = point;
         if (i == 1)
         {
             time = 0;
-            start = false;
+            Start = false;
+            ReachActoin.Invoke();
         }
-        before = start;
+        before = Start;
     }
 
     void OnDrawGizmos()
     {
         var originColor = Gizmos.color;
-        Gizmos.color = Color.red; // 원의 색상 설정
-        DrawCircleGizmo(transform.position, radius, segments);
-        DrawCircleGizmo(transform.position + Vector3.up * Curve.Evaluate(1f), radius2, segments);
+        Gizmos.color = Color.red;
+        DrawCircleGizmo(transform.position, Radius, Segments);
+        DrawCircleGizmo(transform.position + Vector3.up * Curve.Evaluate(1f), Radius2, Segments);
         DrawCurve();
         Gizmos.color = originColor;
     }
@@ -76,36 +70,21 @@ public class Spawner : MonoBehaviour
 
         for (int i = 1; i <= segments; i++)
         {
-            float angle = i * 2 * Mathf.PI / segments; // 각도 계산
+            float angle = i * 2 * Mathf.PI / segments;
             Vector3 nextPoint = position + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-            Gizmos.DrawLine(previousPoint, nextPoint); // 선분 그리기
-            previousPoint = nextPoint; // 이전 점 업데이트
+            Gizmos.DrawLine(previousPoint, nextPoint);
+            previousPoint = nextPoint;
         }
 
-    }
-
-    void Spawn()
-    {
-        var cube = Instantiate(mMonster);
-        cube.SetActive(true);
-        var rigid = cube.GetComponent<Rigidbody>();
-        var angle = UnityEngine.Random.Range(0, 359f);
-        Vector3 nextPoint = transform.position + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-        Vector3 lookAt = Target.position;
-        lookAt.y = nextPoint.y;
-        cube.transform.position = nextPoint;
-        cube.transform.LookAt(lookAt);
-        rigid.AddForce((Target.position - nextPoint) * power);
     }
 
     void DrawCurve()
     {
         var angle = 0;
-        Vector3 pointA = transform.position + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-        Vector3 pointB = transform.position + Vector3.up * Curve.Evaluate(1f) + new Vector3(Mathf.Cos(angle) * radius2, 0, Mathf.Sin(angle) * radius2);
+        Vector3 pointA = transform.position + new Vector3(Mathf.Cos(angle) * Radius, 0, Mathf.Sin(angle) * Radius);
+        Vector3 pointB = transform.position + Vector3.up * Curve.Evaluate(1f) + new Vector3(Mathf.Cos(angle) * Radius2, 0, Mathf.Sin(angle) * Radius2);
 
 
-        // 커브를 따라 점들을 계산하여 선을 그립니다.
         for (float t = 0; t <= 1; t += 0.1f)
         {
             float y = Curve.Evaluate(t);

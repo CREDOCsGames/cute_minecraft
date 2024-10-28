@@ -8,6 +8,24 @@ namespace Util
     public class CustomList<T>
     {
         public List<T> List = new();
+        public CustomList()
+        {
+
+        }
+
+        public CustomList(int capacity, T value)
+        {
+            List = new();
+            for (int i = 0; i < capacity; i++)
+            {
+                List.Add(value);
+            }
+        }
+
+        public CustomList(List<T> collection)
+        {
+            List = collection;
+        }
     }
 
     public class ScriptableDictionary<K, V> : ScriptableObject
