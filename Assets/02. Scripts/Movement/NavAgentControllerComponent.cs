@@ -26,9 +26,16 @@ public class NavAgentControllerComponent : MonoBehaviour
     Action Action;
     [SerializeField]
     GameObject FLower;
+    public BoxCollider Box;
 
-    void Awake()
+    void OnEnable()
     {
+        if (!FlowerComponent.Instances.Any())
+        {
+            CreateElements();
+            return;
+        }
+
         var i = UnityEngine.Random.Range(0, 2);
         if (i == 0)
         {
@@ -38,15 +45,6 @@ public class NavAgentControllerComponent : MonoBehaviour
         {
             CreateElements();
         }
-        GetComponent<NavMeshAgent>().enabled = false;
-        Invoke(nameof(Rev), 1.5f);
-    }
-
-    void Rev()
-    {
-        var rigid = GetComponent<Rigidbody>();
-        GetComponent<NavMeshAgent>().enabled = true;
-        Destroy(rigid);
     }
 
     void Update()
@@ -90,12 +88,6 @@ public class NavAgentControllerComponent : MonoBehaviour
 
     void ChangeColor()
     {
-        if (!FlowerComponent.Instances.Any())
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         var flower = FlowerComponent.Instances.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).First();
         Goal = flower.transform.position;
         Action = () =>
@@ -104,19 +96,18 @@ public class NavAgentControllerComponent : MonoBehaviour
             flower1.Color = flower1.Color == new Color(12f / 255f, 255f / 255f, 255f / 255f) ?
             new Color(118f / 255f, 53f / 255f, 231f / 255f) :
             new Color(12f / 255f, 255f / 255f, 255f / 255f);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         };
     }
 
     void CreateElements()
     {
-        var box = GameObject.Find("Plane").GetComponent<BoxCollider>();
-        Goal = GetRandomPositionInBox(box);
+        Goal = GetRandomPositionInBox(Box);
         Action = () =>
         {
             var flower = Instantiate(FLower);
             flower.transform.position = Goal;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         };
 
     }
