@@ -42,6 +42,16 @@
 
   |제목|내용|설명|
 |------|---|---|
+|241022|<a href="https://clovanote.naver.com/s/cNXpB8ejhr4ZQJ2766xqbnS">링크</a>|몬스터 등장, 스테이지 형식 압축, 프로그래밍적 레벨 구성, 결산 연출 제시|
+|241015|<a href="">링크</a>|안개 활용, 육면체 메커니즘 적용|
+|241008|<a href="https://clovanote.naver.com/s/uFAEdFxqNV5ryN9dZnAq4FS">링크</a>|초기 디자인 복원, 기획 방향 점검, 히트 박스 개선|
+|241001|<a href="https://clovanote.naver.com/s/9FvySnw2orrJBEvuK6S4GcS?t=3953">링크</a>|콘텐츠 확장에 대한 공유, 동선 단방향 제한|
+|240827|<a href="https://clovanote.naver.com/s/H7tbgzDxfUix5ZEEbtmQ2ZS">링크</a>|퀄리티 업 일정 및 2차 사이클 일정 수립|
+|240820|<a href="https://clovanote.naver.com/s/TxxQFuATijZQfsNcbZaFHdS">링크</a>|퀄리티 업 아이디어 회의|
+|240819|<a href="https://clovanote.naver.com/s/s85VoeBeckL5kr5jdZ2F2ES">링크</a>|메인 플레이 메커니즘과 크래프팅 논의|
+|240805|<a href="https://clovanote.naver.com/s/gLNNbYRLgy8EoPwf75LQCcS?t=105">링크</a>|게임의 핵심에 대한 토론, 모드 중간점검, 인트로 결산 이이디어 회의|
+|240729|<a href="https://clovanote.naver.com/s/m8GgH88MNSCyGAyFH2msEGS?t=430">링크</a>|모드 제작에 대한 찬반토론, 육면체 회전 연출의 문제점, 일정표 마감시간 조율|
+|240721|<a href="https://clovanote.naver.com/s/pdJWsdsGBKgqzzpaGRTJKkS">링크</a>|TPO에 따른 육면체 변화 아이디어 제시, 모드 아이디어 제시|
 |240715|<a href="https://clovanote.naver.com/s/USh8aDtjFEVaJi9EBgobjYS?t=1177">링크</a>|새로운 인원 투입, 게임의 재미 발표, 일정표 작성|
 |240708|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/f5f2bee2-b126-4d8c-ba9f-889f84dac052n">링크</a>|퍼즐의 유형과 고민의 유형, 조작의 재미 유지|
 |240704|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/dbae2cd0-0eea-4306-9e2b-544635a112e7n">링크</a>|레벨 제작 건의|
