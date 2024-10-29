@@ -2,17 +2,39 @@
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 ```
-→ 9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입
+11월 : Boss 스테이지 
+→ 10월 : 플라워 퍼즐의 테스트 환경 구축
+ν 9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입
 ν 8월 : 3분이 좀 더 재미있는 알파타입
 ν 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
 ν 6월 : 방해요인이 없는 프로토타입 
 ```
 
 # 목표 달성
+>10월 : 플라워 퍼즐의 테스트 환경 구축 #<a href="">플레이 영상</a>   
 >9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입 #<a href="https://youtu.be/FDuE9BE1mF4">발표회 영상</a>   
 >8월 : 3분이 좀 더 재미있는 알파타입 #<a href="https://youtu.be/z8W7RxiKq7U">플레이 영상</a>   
 >7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/xMm53i5QQvU">플레이 영상</a>   
->6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>   
+>6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>
+
+
+### ※ 참여 인원
+|이름|파트|참여기간|
+|------|---|---|
+|김제원|프로그래밍|24.06 ~ 진행중|
+|최서윤|기획|24.06 ~ 진행중|
+|전지성|기획|24.06 ~ 24.09|
+|황지섭|레벨|24.08 ~ 진행중|
+|이창현|PM|24.09 ~ 진행중|
+|김성현|레벨|24.10 ~ 진행중|
+|김진환|레벨|24.10 ~ 진행중|
+|전혜경|원화|24.10 ~ 진행중|
+
+### ※ 회의 일정
+|일|월|화|수|목|금|토|
+|---|---|---|---|---|---|---|
+|||20시|||||
+|||전체 회의|||||
 
 ### ※ 회의록
 <details>
@@ -20,14 +42,22 @@
 
   |제목|내용|설명|
 |------|---|---|
+|241022|<a href="https://clovanote.naver.com/s/cNXpB8ejhr4ZQJ2766xqbnS">링크</a>|몬스터 등장, 스테이지 형식 압축, 프로그래밍적 레벨 구성, 결산 연출 제시|
+|241015|<a href="">링크</a>|안개 활용, 육면체 메커니즘 적용|
+|241008|<a href="https://clovanote.naver.com/s/uFAEdFxqNV5ryN9dZnAq4FS">링크</a>|초기 디자인 복원, 기획 방향 점검, 히트 박스 개선|
+|241001|<a href="https://clovanote.naver.com/s/9FvySnw2orrJBEvuK6S4GcS?t=3953">링크</a>|콘텐츠 확장에 대한 공유, 동선 단방향 제한|
+|240827|<a href="https://clovanote.naver.com/s/H7tbgzDxfUix5ZEEbtmQ2ZS">링크</a>|퀄리티 업 일정 및 2차 사이클 일정 수립|
+|240820|<a href="https://clovanote.naver.com/s/TxxQFuATijZQfsNcbZaFHdS">링크</a>|퀄리티 업 아이디어 회의|
+|240819|<a href="https://clovanote.naver.com/s/s85VoeBeckL5kr5jdZ2F2ES">링크</a>|메인 플레이 메커니즘과 크래프팅 논의|
+|240805|<a href="https://clovanote.naver.com/s/gLNNbYRLgy8EoPwf75LQCcS?t=105">링크</a>|게임의 핵심에 대한 토론, 모드 중간점검, 인트로 결산 이이디어 회의|
+|240729|<a href="https://clovanote.naver.com/s/m8GgH88MNSCyGAyFH2msEGS?t=430">링크</a>|모드 제작에 대한 찬반토론, 육면체 회전 연출의 문제점, 일정표 마감시간 조율|
+|240721|<a href="https://clovanote.naver.com/s/pdJWsdsGBKgqzzpaGRTJKkS">링크</a>|TPO에 따른 육면체 변화 아이디어 제시, 모드 아이디어 제시|
 |240715|<a href="https://clovanote.naver.com/s/USh8aDtjFEVaJi9EBgobjYS?t=1177">링크</a>|새로운 인원 투입, 게임의 재미 발표, 일정표 작성|
 |240708|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/f5f2bee2-b126-4d8c-ba9f-889f84dac052n">링크</a>|퍼즐의 유형과 고민의 유형, 조작의 재미 유지|
 |240704|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/dbae2cd0-0eea-4306-9e2b-544635a112e7n">링크</a>|레벨 제작 건의|
 |240630|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/dbae2cd0-0eea-4306-9e2b-544635a112e7n">링크</a>|월간 방향성 회의|
 |240624|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/2440c436-a6a9-40f3-9c9c-6b3e1386699bn">링크</a>|협업 환경 구성|
 |240617|<a href="https://clovanote.naver.com/s/XygYU6JxKTYFpDEuma5JYeS">링크</a>|첫 회의. 큐브맵 메커니즘 제안.|
-
-
 </details>
 
 ### ※ 프로젝트 이슈
