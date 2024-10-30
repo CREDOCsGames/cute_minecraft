@@ -42,6 +42,7 @@
 
   |제목|내용|설명|
 |------|---|---|
+|241029|<a href="https://github.com/CREDOCsGames/cute_minecraft/blob/main/README.md">링크</a>|인트로 퀄리티업 방향과 원화 제안, 팀 세분화로 회의 관리|
 |241029|<a href="https://clovanote.naver.com/s/cDHhiBsSVYdNAdGoxpJBtTS">링크</a>|인트로 퀄리티업 방향과 원화 제안, 팀 세분화로 회의 관리|
 |241022|<a href="https://clovanote.naver.com/s/cNXpB8ejhr4ZQJ2766xqbnS">링크</a>|몬스터 등장, 스테이지 형식 압축, 프로그래밍적 레벨 구성, 결산 연출 제시|
 |241015|<a href="">링크</a>|안개 활용, 육면체 메커니즘 적용|
