@@ -42,7 +42,7 @@
 
   |제목|내용|설명|
 |------|---|---|
-|241030|<a href="https://clovanote.naver.com/s/whm3twSYbtaU8MHz27JyR5S">링크</a>|인트로 퀄리티업 방향과 원화 제안, 팀 세분화로 회의 관리|
+|241030|<a href="https://clovanote.naver.com/s/whm3twSYbtaU8MHz27JyR5S">링크</a>|인트로 후반부의 퀄리티 낮은 부분을 원화로 대체, 부유섬 추락 구도에 대한 논의|
 |241029|<a href="https://clovanote.naver.com/s/cDHhiBsSVYdNAdGoxpJBtTS">링크</a>|인트로 퀄리티업 방향과 원화 제안, 팀 세분화로 회의 관리|
 |241022|<a href="https://clovanote.naver.com/s/cNXpB8ejhr4ZQJ2766xqbnS">링크</a>|몬스터 등장, 스테이지 형식 압축, 프로그래밍적 레벨 구성, 결산 연출 제시|
 |241015|<a href="">링크</a>|안개 활용, 육면체 메커니즘 적용|
