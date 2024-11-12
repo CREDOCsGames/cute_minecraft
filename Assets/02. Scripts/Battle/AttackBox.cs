@@ -6,8 +6,8 @@ namespace Battle
 {
     public class AttackBox : CollisionBox
     {
-        Delay mDelay;
-        List<Collider> mAttacked = new List<Collider>();
+        readonly Delay mDelay;
+        readonly List<Collider> mAttacked = new List<Collider>();
         bool mbNotWithinAttackWindow => !mDelay.IsDelay();
         public AttackBox(Transform actor, float attackWindow = 0f) : base(actor)
         {

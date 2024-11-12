@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2472615789004964900}
   - component: {fileID: 15022120420765144}
   - component: {fileID: 8807966091348961804}
+  - component: {fileID: 5045634343583488980}
   m_Layer: 2
   m_Name: AttackBox
   m_TagString: Untagged
@@ -47,22 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea2b24cdd519b74d82c83655493c397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Actor: {fileID: 0}
   OnAttack:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  Actor: {fileID: 0}
+      m_Calls: []
   AttackWindow: 1
 --- !u!65 &15022120420765144
 BoxCollider:
@@ -112,6 +101,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5045634343583488980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821352901189550333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb1c6ec1c6272c449ada6ab18bfcf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2472615789004964900}
+        m_TargetAssemblyTypeName: AttackBoxComponent, Assembly-CSharp
+        m_MethodName: OpenAttackWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisableEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2888544557634251217
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class AttackBoxComponent : MonoBehaviour
 
     public void OpenAttackWindow()
     {
-        mAttackBox?.OpenAttackWindow();
+        AttackBox.OpenAttackWindow();
     }
 
     AttackBox CreateAttackBox()
