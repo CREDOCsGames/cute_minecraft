@@ -11,7 +11,7 @@ namespace Puzzle
         public MatrixBool PuzzleMap { get; }
     }
 
-    public abstract class PuzzleInstance<T> : ScriptableObject, IPuzzleInstance
+    public abstract class PuzzleInstance<T> : ScriptableObject, IPuzzleInstance where T : MonoBehaviour
     {
         public Madiator Madiator { get; set; }
 
@@ -47,15 +47,12 @@ namespace Puzzle
 
         void LinkCubeElements()
         {
-            for (byte face = 0; face < 6; face++)
+            foreach (var index in mCubeMap.GetIndex())
             {
-                for (byte y = 0; y < mCubeMap.Width; y++)
-                {
-                    for (byte x = 0; x < mCubeMap.Width; x++)
-                    {
-                        mDataLink.Link(mCubeMap.GetElements(x, y, face), new[] { x, y, face, (byte)0 });
-                    }
-                }
+                mDataLink.Link(
+                    mCubeMap.GetElements(index[0], index[1], index[2]),
+                    new[] { index[0], index[1], index[2], (byte)0 }
+                    );
             }
         }
 
@@ -66,6 +63,12 @@ namespace Puzzle
             LinkCubeElements();
             mDataLink.OnInteraction += OutStreamData;
             SetPresentation(out mPresentation);
+
+            var parent = new GameObject("ÆÛÁñ").transform;
+            foreach (var piece in mCubeMap.Elements)
+            {
+                piece.transform.parent = parent;
+            }
         }
 
     }
