@@ -2,8 +2,8 @@
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 ```
-11월 : Boss 스테이지 
-→ 10월 : 플라워 퍼즐의 테스트 환경 구축
+→ 11월 : Boss 스테이지 
+ν 10월 : 플라워 퍼즐의 테스트 환경 구축
 ν 9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입
 ν 8월 : 3분이 좀 더 재미있는 알파타입
 ν 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
@@ -29,6 +29,7 @@
 |김성현|레벨, 기획|24.10 ~ 진행중|
 |김진환|레벨, 기획|24.10 ~ 진행중|
 |전혜경|원화|24.10 ~ 진행중|
+|박동한|모델러|24.11 ~ 진행중|
 
 ### ※ 회의 일정
 |일|월|화|수|목|금|토|
@@ -87,18 +88,8 @@
 ```
 # 기획서 링크
 
-#### 내용 정리 문서
-><a href="https://youtu.be/x5VN_79cT2o">컨셉 기획서</a>   #<a href="https://docs.google.com/presentation/d/18YLGbGPhiVtZJOxFJA6JN1Xp3DbaprYy">PPT</a>   
-
-#### 내러티브
-><a href="https://youtu.be/FN4TJvomxKw">게임의 가치 내러티브</a>   #<a href="https://docs.google.com/presentation/d/1CYdaOysDGfpSvCSI1lMWzl4KTKEG-K44/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>
-
-#### 콘텐츠
-><a href="https://youtu.be/akHYBZMRwM0">구획 기획서</a>   #<a href="https://docs.google.com/presentation/d/1nfAR3PX-h2FJDeH4njCSLbltR7_sBVey/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
-><a href="https://www.youtube.com/watch?v=W4UsW0bN_BQ">블록퍼즐 기획서</a>   # <a href="https://1drv.ms/p/c/875d85bddfcdb560/EellX9WRkWpHi124jf4If_cBmZWwYAZP3IISC3soB-i73Q ">PPT</a>   
-
-### 레벨
-><a>라이어게임 모드 레벨 기획서</a>   #<a href="https://docs.google.com/presentation/d/111KrGqQYLcF8r0YrXrpP6VpJC7vcwSam/edit?usp=drive_link&ouid=103363998133289087028&rtpof=true&sd=true">PPT</a>   
+#### 통합 기획서
+><a href="">통합 기획서</a>   #<a href="">PPT</a>   
 
 
 # 빌드 파일 링크
