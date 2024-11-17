@@ -7,49 +7,49 @@ namespace Puzzle
     [RequireComponent(typeof(AreaComponent))]
     public class AreaWallComponent : MonoBehaviour
     {
-        enum Type
+        private enum Type
         {
             Wall,
             JumpWall
         }
 
-        [SerializeField] Side Side;
-        AreaWall mWall;
-        AreaComponent mArea;
-        [SerializeField] Type WallType;
+        [SerializeField] private Side _side;
+        private AreaWall _wall;
+        private AreaComponent _area;
+        [SerializeField] private Type _wallType;
 
-        void Start()
+        private void Start()
         {
-            mArea = GetComponent<AreaComponent>();
+            _area = GetComponent<AreaComponent>();
 
-            var bounds = mArea.HalfRange;
+            var bounds = _area.HalfRange;
             bounds.center += Vector3.up * 5f;
-            mWall = new AreaWall(Side, bounds, $"Objects/{WallType}");
+            _wall = new AreaWall(_side, bounds, $"Objects/{_wallType}");
 
-            mArea.OnEnterEvent.AddListener(b => MakeWall($"Objects/{WallType}"));
-            mArea.OnExitEvent.AddListener(b => mWall.Destroy());
-            mArea.OnClearEvent.AddListener(b =>
+            _area.OnEnterEvent.AddListener(b => MakeWall($"Objects/{_wallType}"));
+            _area.OnExitEvent.AddListener(b => _wall.Destroy());
+            _area.OnClearEvent.AddListener(b =>
             {
                 MakeWall($"Objects/{Type.Wall}");
                 Invoke(nameof(MakeWay), 0.1f);
             });
         }
 
-        void MakeWall(string wall)
+        private void MakeWall(string wall)
         {
-            mWall.Destroy();
-            mWall.SetWall(wall);
-            mWall.Create();
+            _wall.Destroy();
+            _wall.SetWall(wall);
+            _wall.Create();
         }
 
-        void MakeWay()
+        private void MakeWay()
         {
-            if (!mWall.Objects.Any())
+            if (!_wall.Objects.Any())
             {
                 return;
             }
 
-            foreach (var obj in mWall.Objects)
+            foreach (var obj in _wall.Objects)
             {
                 if (!Physics.CheckBox(obj.transform.position, obj.transform.lossyScale / 2f, Quaternion.identity,
                         LayerMask.GetMask("Bridge")))

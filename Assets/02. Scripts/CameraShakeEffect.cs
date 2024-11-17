@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShakeEffect : MonoBehaviour
@@ -22,7 +20,7 @@ public class CameraShakeEffect : MonoBehaviour
 
     private void Update()
     {
-        if(shakeTime>0)
+        if (shakeTime > 0)
         {
             transform.position = Random.insideUnitSphere * ShakeAmount + initPos;
             shakeTime -= Time.deltaTime;

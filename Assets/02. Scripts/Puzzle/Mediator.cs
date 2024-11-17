@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace Puzzle
 {
-    public class Madiator
+    public class Mediator
     {
         public IPuzzleCore Core { get; set; }
-        readonly List<IPuzzleInstance> mInstances = new();
+        private readonly List<IPuzzleInstance> _instances = new();
 
         public void AddInstance(IPuzzleInstance instance)
         {
-            mInstances.Add(instance);
+            _instances.Add(instance);
         }
 
         public void DownstramData(byte[] data)
@@ -18,7 +18,7 @@ namespace Puzzle
         }
         public void UpstramData(byte[] data)
         {
-            foreach (var instance in mInstances)
+            foreach (var instance in _instances)
             {
                 instance.InstreamData(data);
             }

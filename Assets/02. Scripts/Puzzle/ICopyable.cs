@@ -9,15 +9,15 @@ namespace Puzzle
 
     public class Instantiator<T> : ICopyable<T> where T : MonoBehaviour
     {
-        readonly T mOrigin;
+        private readonly T _origin;
         public Instantiator(T origin)
         {
-            this.mOrigin = origin;
+            this._origin = origin;
         }
 
         public T Copy()
         {
-            return GameObject.Instantiate(mOrigin);
+            return GameObject.Instantiate(_origin);
         }
     }
 

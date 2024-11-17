@@ -6,9 +6,9 @@ namespace Puzzle
     [CreateAssetMenu(menuName = "Custom/Puzzle/FlowerPuzzle")]
     public class FlowerPuzzleInstance : PuzzleInstance<Flower>
     {
-        [SerializeField] Flower _flowerPrefab;
+        [SerializeField] private Flower _flowerPrefab;
         public override byte Width => (byte)PuzzleMap.Column;
-        [SerializeField] MatrixBool _puzzleMap;
+        [SerializeField] private MatrixBool _puzzleMap;
 
         public override MatrixBool PuzzleMap => _puzzleMap;
 

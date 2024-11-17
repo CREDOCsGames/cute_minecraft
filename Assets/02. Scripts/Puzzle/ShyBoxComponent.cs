@@ -6,58 +6,58 @@ namespace Puzzle
 {
     public class ShyBoxComponent : MonoBehaviour
     {
-        readonly Timer mTenseTimer = new();
-        readonly Timer mCalmDownTimer = new();
-        [SerializeField, Range(1, 100)] int ThresholdsTime;
-        [SerializeField, Range(1, 100)] int CalmDownTime;
-        [SerializeField] UnityEvent ThresholdsEvent;
-        [SerializeField] UnityEvent<Timer> ThresholdsTickEvent;
-        [SerializeField] UnityEvent<Timer> CalmDownTickEvent;
+        private readonly Timer _tenseTimer = new();
+        private readonly Timer _calmDownTimer = new();
+        [SerializeField, Range(1, 100)] private int _thresholdsTime;
+        [SerializeField, Range(1, 100)] private int _calmDownTime;
+        [SerializeField] private UnityEvent _thresholdsEvent;
+        [SerializeField] private UnityEvent<Timer> _thresholdsTickEvent;
+        [SerializeField] private UnityEvent<Timer> _calmDownTickEvent;
 
         public void StartShowing()
         {
-            if (!mTenseTimer.IsStart)
+            if (!_tenseTimer.IsStart)
             {
-                mTenseTimer.Start();
+                _tenseTimer.Start();
                 return;
             }
 
-            if (CalmDownTime <= mCalmDownTimer.ElapsedTime)
+            if (_calmDownTime <= _calmDownTimer.ElapsedTime)
             {
-                mTenseTimer.Stop();
-                mTenseTimer.Start();
+                _tenseTimer.Stop();
+                _tenseTimer.Start();
             }
             else
             {
-                mTenseTimer.Resume();
+                _tenseTimer.Resume();
             }
         }
 
         public void HideBegin()
         {
-            mTenseTimer.Pause();
-            mCalmDownTimer.Start();
+            _tenseTimer.Pause();
+            _calmDownTimer.Start();
         }
 
         public void HideEnd()
         {
-            mCalmDownTimer.Stop();
+            _calmDownTimer.Stop();
         }
 
-        void Awake()
+        private void Awake()
         {
-            mTenseTimer.SetTimeout(ThresholdsTime);
-            mTenseTimer.OnTimeoutEvent += (t) => { ThresholdsEvent.Invoke(); };
-            mTenseTimer.OnTickEvent += (t) => ThresholdsTickEvent.Invoke(t);
+            _tenseTimer.SetTimeout(_thresholdsTime);
+            _tenseTimer.OnTimeoutEvent += (t) => { _thresholdsEvent.Invoke(); };
+            _tenseTimer.OnTickEvent += (t) => _thresholdsTickEvent.Invoke(t);
 
-            mCalmDownTimer.SetTimeout(CalmDownTime);
-            mCalmDownTimer.OnTickEvent += (t) => CalmDownTickEvent.Invoke(t);
+            _calmDownTimer.SetTimeout(_calmDownTime);
+            _calmDownTimer.OnTickEvent += (t) => _calmDownTickEvent.Invoke(t);
         }
 
-        void Update()
+        private void Update()
         {
-            mTenseTimer.Tick();
-            mCalmDownTimer.Tick();
+            _tenseTimer.Tick();
+            _calmDownTimer.Tick();
         }
     }
 }

@@ -5,73 +5,73 @@ namespace Flow
 {
     public class SelectionComponent : MonoBehaviour
     {
-        enum Type
+        private enum Type
         {
             Title,
             StageSelect
         }
 
-        [SerializeField] Type AreaType;
-        [SerializeField] UnityEvent OnEnterEvent;
-        [SerializeField] UnityEvent OnSelectEvent;
-        [SerializeField] UnityEvent OnChangeEvent;
-        Selection mSelection;
+        [SerializeField] private Type _areaType;
+        [SerializeField] private UnityEvent _onEnterEvent;
+        [SerializeField] private UnityEvent _onSelectEvent;
+        [SerializeField] private UnityEvent _onChangeEvent;
+        private Selection _selection;
 
         public void OnEnable()
         {
-            mSelection.OnEnter();
+            _selection.OnEnter();
         }
 
         public void OnDisable()
         {
-            mSelection.OnSelect();
+            _selection.OnSelect();
         }
 
         public void OnChange()
         {
-            mSelection.OnChange();
+            _selection.OnChange();
         }
 
-        void InvokeOnEnterEvent()
+        private void InvokeOnEnterEvent()
         {
-            OnEnterEvent.Invoke();
+            _onEnterEvent.Invoke();
         }
 
-        void InvokeOnSelectEvent()
+        private void InvokeOnSelectEvent()
         {
-            OnSelectEvent.Invoke();
+            _onSelectEvent.Invoke();
         }
 
-        void InvokeOnChangeEvent()
+        private void InvokeOnChangeEvent()
         {
-            OnChangeEvent.Invoke();
+            _onChangeEvent.Invoke();
         }
 
-        void Awake()
+        private void Awake()
         {
-            switch (AreaType)
+            switch (_areaType)
             {
                 case Type.Title:
-                    mSelection = GameManager.Title;
+                    _selection = GameManager.Title;
                     break;
                 case Type.StageSelect:
-                    mSelection = GameManager.StageSelect;
+                    _selection = GameManager.StageSelect;
                     break;
                 default:
-                    Debug.Assert(false, $"{AreaType}");
+                    Debug.Assert(false, $"{_areaType}");
                     break;
             }
 
-            mSelection.OnEnterEvent += InvokeOnEnterEvent;
-            mSelection.OnSelectEvent += InvokeOnSelectEvent;
-            mSelection.OnChangeEvent += InvokeOnChangeEvent;
+            _selection.OnEnterEvent += InvokeOnEnterEvent;
+            _selection.OnSelectEvent += InvokeOnSelectEvent;
+            _selection.OnChangeEvent += InvokeOnChangeEvent;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            mSelection.OnEnterEvent -= InvokeOnEnterEvent;
-            mSelection.OnSelectEvent -= InvokeOnSelectEvent;
-            mSelection.OnChangeEvent -= InvokeOnChangeEvent;
+            _selection.OnEnterEvent -= InvokeOnEnterEvent;
+            _selection.OnSelectEvent -= InvokeOnSelectEvent;
+            _selection.OnChangeEvent -= InvokeOnChangeEvent;
         }
     }
 }

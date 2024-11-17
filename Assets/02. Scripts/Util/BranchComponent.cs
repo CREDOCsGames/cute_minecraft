@@ -27,7 +27,7 @@ namespace Util
             FalseEvent.RemoveListener(listener);
         }
 
-        void OnFalseEvent()
+        private void OnFalseEvent()
         {
             FalseEvent.Invoke();
         }

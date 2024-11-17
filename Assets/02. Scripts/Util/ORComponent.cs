@@ -6,13 +6,13 @@ namespace Util
 {
     public class ORComponent : Condition
     {
-        [SerializeField] List<Condition> mConditions;
+        [SerializeField] private List<Condition> _conditions;
 
         public override bool IsTrue()
         {
-            if (mConditions.Count != 0)
+            if (_conditions.Count != 0)
             {
-                return mConditions.Any(x => x.IsTrue());
+                return _conditions.Any(x => x.IsTrue());
             }
 
             Debug.Log("Condition count : 0");
@@ -21,7 +21,7 @@ namespace Util
 
         public override void SetFalse()
         {
-            foreach (var condition in mConditions)
+            foreach (var condition in _conditions)
             {
                 condition.SetFalse();
             }

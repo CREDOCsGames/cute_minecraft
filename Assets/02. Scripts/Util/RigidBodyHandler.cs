@@ -6,21 +6,21 @@ namespace Util
 {
     public class RigidBodyHandler : MonoBehaviour
     {
-        [SerializeField] Rigidbody mRigid;
+        [SerializeField] private Rigidbody _rigid;
 
-        Rigidbody Rigid
+        public Rigidbody Rigid
         {
             get
             {
-                Debug.Assert(mRigid != null);
-                return mRigid;
+                Debug.Assert(_rigid != null);
+                return _rigid;
             }
         }
 
         public void Explosion(float force)
         {
             CharacterComponent.Instances.Where(x =>
-                    Vector3.Distance(x.transform.position, mRigid.transform.position) < force * 0.1f)
+                    Vector3.Distance(x.transform.position, _rigid.transform.position) < force * 0.1f)
                 .ToList()
                 .ForEach(x => x.Rigid.AddExplosionForce(force, transform.position, force * 0.1f, force * 0.5f));
         }

@@ -5,25 +5,25 @@ using UnityEngine.Events;
 public class AttackBoxComponent : MonoBehaviour
 {
     [Header("[Refer]")]
-    [SerializeField] protected Transform Actor;
+    [SerializeField] protected Transform _actor;
     [Header("[Options]")]
-    [SerializeField] UnityEvent<HitBoxCollision> OnAttack;
-    [Range(0, 10000)][SerializeField] float AttackWindow;
-    AttackBox mAttackBox;
+    [SerializeField] private UnityEvent<HitBoxCollision> _onAttack;
+    [Range(0, 10000)][SerializeField] private float _attackWindow;
+    private AttackBox _attackBox;
     public AttackBox AttackBox
     {
         get
         {
-            Debug.Assert(Actor != null, $"Specify an Actor : {name}");
-            mAttackBox ??= CreateAttackBox();
-            return mAttackBox;
+            Debug.Assert(_actor != null, $"Specify an Actor : {name}");
+            _attackBox ??= CreateAttackBox();
+            return _attackBox;
         }
     }
     public static AttackBoxComponent AddComponent(GameObject obj, AttackBox attackBox)
     {
         var component = obj.AddComponent<AttackBoxComponent>();
-        component.Actor = attackBox.Actor;
-        component.mAttackBox = attackBox;
+        component._actor = attackBox.Actor;
+        component._attackBox = attackBox;
         return component;
     }
 
@@ -32,14 +32,14 @@ public class AttackBoxComponent : MonoBehaviour
         AttackBox.OpenAttackWindow();
     }
 
-    AttackBox CreateAttackBox()
+    private AttackBox CreateAttackBox()
     {
-        var hitBox = new AttackBox(Actor, AttackWindow);
-        hitBox.OnCollision += OnAttack.Invoke;
+        var hitBox = new AttackBox(_actor, _attackWindow);
+        hitBox.OnCollision += _onAttack.Invoke;
         return hitBox;
     }
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         AttackBox.CheckCollision(other);
     }

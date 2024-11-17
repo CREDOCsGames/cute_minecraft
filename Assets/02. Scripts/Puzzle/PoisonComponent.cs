@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine;
 using Battle;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Puzzle
 {
@@ -14,8 +14,8 @@ namespace Puzzle
     public class PoisonComponent : SwitchBoxComponent
     {
         [Header("[Options]")]
-        [SerializeField] Color ColorA;
-        [SerializeField] Color ColorB;
+        [SerializeField] Color _colorA;
+        [SerializeField] Color _colorB;
 
         public void InvertColor(HitBoxCollision collision)
         {
@@ -27,7 +27,7 @@ namespace Puzzle
 
             foreach (var piece in attacked)
             {
-                var color = FlowerComponent.CompareColor(piece.Color, ColorA) ? ColorB : ColorA;
+                var color = FlowerComponent.CompareColor(piece.Color, _colorA) ? _colorB : _colorA;
                 piece.Color = color;
             }
         }
@@ -35,7 +35,7 @@ namespace Puzzle
         protected override void Awake()
         {
             base.Awake();
-            OnAttack.AddListener(InvertColor);
+            _onAttack.AddListener(InvertColor);
         }
 
     }

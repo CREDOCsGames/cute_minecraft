@@ -6,67 +6,67 @@ namespace Movement
     [CreateAssetMenu(menuName = "Custom/MovementAction/Rotate")]
     public class Rotate : MovementAction
     {
-        readonly Vector3 FixedRightAxis = Vector3.right;
-        readonly Vector3 FixedUpAxis = Vector3.up;
-        readonly Vector3 FixedForwardAxis = Vector3.forward;
-        Transform mTransform;
-        MonoBehaviour mCoroutine;
-        float mRotationAmount = 90f;
-        [SerializeField] float mRotationSpeed = 1f;
-        [SerializeField, Range(-1f, 1f)] int AxisX;
-        [SerializeField, Range(-1f, 1f)] int AxisY;
-        [SerializeField, Range(-1f, 1f)] int AxisZ;
+        private static readonly Vector3 FIXED_RIGHT_AXIS = Vector3.right;
+        private static readonly Vector3 FIXED_UP_AXIS = Vector3.up;
+        private static readonly Vector3 FIXED_FORWARD_AXIS = Vector3.forward;
+        private Transform _transform;
+        private MonoBehaviour _coroutine;
+        private float _rotationAmount = 90f;
+        [SerializeField] private float _rotationSpeed = 1f;
+        [SerializeField, Range(-1f, 1f)] private int _axisX;
+        [SerializeField, Range(-1f, 1f)] private int _axisY;
+        [SerializeField, Range(-1f, 1f)] private int _axisZ;
 
         public override void PlayAction(Rigidbody rigid, MonoBehaviour coroutine)
         {
-            mTransform = rigid.transform;
-            mCoroutine = coroutine;
+            _transform = rigid.transform;
+            _coroutine = coroutine;
 
-            if (AxisY != 0)
+            if (_axisY != 0)
             {
-                RotateHorizontal(AxisY);
+                RotateHorizontal(_axisY);
             }
 
-            if (AxisX != 0)
+            if (_axisX != 0)
             {
-                RotateVertical(AxisX);
+                RotateVertical(_axisX);
             }
 
-            if (AxisZ != 0)
+            if (_axisZ != 0)
             {
-                RotateForward(AxisZ);
+                RotateForward(_axisZ);
             }
         }
 
-        void RotateHorizontal(float dir)
+        private void RotateHorizontal(float dir)
         {
-            mRotationAmount = Mathf.Abs(mRotationAmount) * dir;
-            mCoroutine.StartCoroutine(RotateObject(FixedUpAxis));
+            _rotationAmount = Mathf.Abs(_rotationAmount) * dir;
+            _coroutine.StartCoroutine(RotateObject(FIXED_UP_AXIS));
         }
 
-        void RotateVertical(float dir)
+        private void RotateVertical(float dir)
         {
-            mRotationAmount = Mathf.Abs(mRotationAmount) * dir;
-            mCoroutine.StartCoroutine(RotateObject(FixedRightAxis));
+            _rotationAmount = Mathf.Abs(_rotationAmount) * dir;
+            _coroutine.StartCoroutine(RotateObject(FIXED_RIGHT_AXIS));
         }
 
-        void RotateForward(float dir)
+        private void RotateForward(float dir)
         {
-            mRotationAmount = Mathf.Abs(mRotationAmount) * dir;
-            mCoroutine.StartCoroutine(RotateObject(FixedForwardAxis));
+            _rotationAmount = Mathf.Abs(_rotationAmount) * dir;
+            _coroutine.StartCoroutine(RotateObject(FIXED_FORWARD_AXIS));
         }
 
-        IEnumerator RotateObject(Vector3 axis)
+        private IEnumerator RotateObject(Vector3 axis)
         {
             var time = 0f;
-            var transform = mTransform;
+            var transform = _transform;
             var startRotation = transform.rotation;
-            var endRotation = Quaternion.AngleAxis(mRotationAmount, axis) * startRotation;
+            var endRotation = Quaternion.AngleAxis(_rotationAmount, axis) * startRotation;
 
             while (time < 1f)
             {
                 transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
-                time += Time.deltaTime * mRotationSpeed;
+                time += Time.deltaTime * _rotationSpeed;
                 yield return null;
             }
 

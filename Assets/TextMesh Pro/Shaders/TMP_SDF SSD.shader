@@ -196,8 +196,8 @@ SubShader {
 
             // Support for texture tiling and offset
             float2 textureUV = UnpackUV(input.texcoord1.x);
-            float2 faceUV = TRANSFORM_TEX(textureUV, _FaceTex);
-            float2 outlineUV = TRANSFORM_TEX(textureUV, _OutlineTex);
+            float2 faceUV = TRANSFOR_TEX(textureUV, _FaceTex);
+            float2 outlineUV = TRANSFOR_TEX(textureUV, _OutlineTex);
 
             float4 color = input.color;
         #if (FORCE_LINEAR && !UNITY_COLORSPACE_GAMMA)

@@ -4,21 +4,21 @@ namespace Util
 {
     public class UniqueScriptableObject<T> : ScriptableObject where T : ScriptableObject
     {
-        static T mInstance;
+        private static T _instance;
 
         public static T Instance
         {
             get
             {
-                if (mInstance != null)
+                if (_instance != null)
                 {
-                    return mInstance;
+                    return _instance;
                 }
 
-                mInstance = Resources.Load<T>(typeof(T).Name);
-                Debug.Assert(mInstance != null, $"Not found {typeof(T)}");
+                _instance = Resources.Load<T>(typeof(T).Name);
+                Debug.Assert(_instance != null, $"Not found {typeof(T)}");
 
-                return mInstance;
+                return _instance;
             }
         }
     }

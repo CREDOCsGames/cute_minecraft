@@ -1,37 +1,42 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-namespace RootMotion.Demos {
+namespace RootMotion.Demos
+{
 
-	public class SoccerDemo : MonoBehaviour {
+    public class SoccerDemo : MonoBehaviour
+    {
 
-		private Animator animator;
-		private Vector3 defaultPosition;
-		private Quaternion defaultRotation;
+        private Animator animator;
+        private Vector3 defaultPosition;
+        private Quaternion defaultRotation;
 
-		void Start () {
-			animator = GetComponent<Animator>();
+        void Start()
+        {
+            animator = GetComponent<Animator>();
 
-			// Remember the default position and rotation of the character
-			defaultPosition = transform.position;
-			defaultRotation = transform.rotation;
+            // Remember the default position and rotation of the character
+            defaultPosition = transform.position;
+            defaultRotation = transform.rotation;
 
-			StartCoroutine(ResetDelayed());
-		}
+            StartCoroutine(ResetDelayed());
+        }
 
-		// Reset the character after some time and restart the animation
-		private IEnumerator ResetDelayed() {
-			while (true) {
-				yield return new WaitForSeconds(3f);
+        // Reset the character after some time and restart the animation
+        private IEnumerator ResetDelayed()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(3f);
 
-				transform.position = defaultPosition;
-				transform.rotation = defaultRotation;
+                transform.position = defaultPosition;
+                transform.rotation = defaultRotation;
 
-				animator.CrossFade("SoccerKick", 0f, 0, 0f);
+                animator.CrossFade("SoccerKick", 0f, 0, 0f);
 
-				yield return null;
-			}
+                yield return null;
+            }
 
-		}
-	}
+        }
+    }
 }

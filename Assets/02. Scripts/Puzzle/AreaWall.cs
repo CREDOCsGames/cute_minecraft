@@ -19,9 +19,9 @@ namespace Puzzle
 
     public class AreaWall
     {
-        readonly Side mSide;
-        Bounds mBounds;
-        string mPath;
+        readonly Side _side;
+        Bounds _bounds;
+        string _path;
 
         static readonly Vector3[] dirs =
         {
@@ -47,26 +47,26 @@ namespace Puzzle
 
         public AreaWall(Side side, Bounds bounds, string wall)
         {
-            mSide = side;
-            mBounds = bounds;
-            mPath = wall;
+            _side = side;
+            _bounds = bounds;
+            _path = wall;
         }
 
         public void Create()
         {
-            var center = mBounds.center;
-            var size = mBounds.size;
+            var center = _bounds.center;
+            var size = _bounds.size;
             var wallThickness = Vector3.one * 0.1f;
 
             for (var i = 0; i < 6; i++)
             {
-                if (!mSide.HasFlag((Side)(1 << i)))
+                if (!_side.HasFlag((Side)(1 << i)))
                 {
                     continue;
                 }
 
                 var position = center + Vector3.Scale(dirs[i], wallThickness + size);
-                var wall = Object.Instantiate(Resources.Load<GameObject>(mPath + '_' + (Side)(1 << i)));
+                var wall = Object.Instantiate(Resources.Load<GameObject>(_path + '_' + (Side)(1 << i)));
                 wall.name = $"Wall_{(Side)(1 << i)}";
                 wall.transform.position = position;
                 wall.transform.localScale = Vector3.Scale(scales[i], size) + Vector3.one * 0.1f;
@@ -76,7 +76,7 @@ namespace Puzzle
 
         public void SetWall(string wall)
         {
-            mPath = wall;
+            _path = wall;
         }
 
         public void Destroy()

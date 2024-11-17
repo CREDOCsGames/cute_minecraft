@@ -6,22 +6,22 @@ namespace Util
 {
     public class CoroutineRunner : MonoBehaviour
     {
-        static MonoBehaviour mInstance;
+        private static MonoBehaviour _instance;
 
         public static MonoBehaviour Instance
         {
             get
             {
-                if (mInstance != null)
+                if (_instance != null)
                 {
-                    return mInstance;
+                    return _instance;
                 }
 
                 var obj = new GameObject();
                 GameObject.DontDestroyOnLoad(obj);
-                mInstance = obj.AddComponent<CoroutineRunner>();
+                _instance = obj.AddComponent<CoroutineRunner>();
 
-                return mInstance;
+                return _instance;
             }
         }
 
@@ -30,7 +30,7 @@ namespace Util
             Instance.StartCoroutine(DelayAction(action, delay));
         }
 
-        static IEnumerator DelayAction(Action action, float delay)
+        private static IEnumerator DelayAction(Action action, float delay)
         {
             yield return new WaitForSeconds(delay);
             action.Invoke();

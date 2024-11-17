@@ -86,8 +86,8 @@ Category {
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.color = v.color;
 
-				o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
-				o.texcoord2 = TRANSFORM_TEX(v.texcoordBlendFrame.xy,_MainTex);
+				o.texcoord = TRANSFOR_TEX(v.texcoord,_MainTex);
+				o.texcoord2 = TRANSFOR_TEX(v.texcoordBlendFrame.xy,_MainTex);
 				o.blend = v.texcoordBlendFrame.z;
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				

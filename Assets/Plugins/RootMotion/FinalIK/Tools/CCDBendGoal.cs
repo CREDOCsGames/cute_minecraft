@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RootMotion.FinalIK
 {
@@ -30,7 +28,7 @@ namespace RootMotion.FinalIK
 
             // Rotating the CCD chain towards this gameobject before it solves so it rolls in from that direction
             Quaternion f = Quaternion.FromToRotation(lastBonePos - firstBonePos, transform.position - firstBonePos);
-            
+
             if (w < 1f) f = Quaternion.Slerp(Quaternion.identity, f, w);
 
             ik.solver.bones[0].transform.rotation = f * ik.solver.bones[0].transform.rotation;

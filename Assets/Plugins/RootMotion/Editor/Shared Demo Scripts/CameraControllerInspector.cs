@@ -1,22 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace RootMotion {
+namespace RootMotion
+{
 
-	// Just making sure the camera controller updates last
-	[CustomEditor(typeof(CameraController))]
-	public class CameraControllerInspector : Editor {
+    // Just making sure the camera controller updates last
+    [CustomEditor(typeof(CameraController))]
+    public class CameraControllerInspector : Editor
+    {
 
-		private CameraController script { get { return target as CameraController; }}
-		private MonoScript monoScript;
+        private CameraController script { get { return target as CameraController; } }
+        private MonoScript monoScript;
 
-		void OnEnable() {
-			if (!Application.isPlaying) {
-				monoScript = MonoScript.FromMonoBehaviour(script);
-				int currentExecutionOrder = MonoImporter.GetExecutionOrder(monoScript);
-				if (currentExecutionOrder != 10200) MonoImporter.SetExecutionOrder(monoScript, 10200);
-			}
-		}
-	}
+        void OnEnable()
+        {
+            if (!Application.isPlaying)
+            {
+                monoScript = MonoScript.FromMonoBehaviour(script);
+                int currentExecutionOrder = MonoImporter.GetExecutionOrder(monoScript);
+                if (currentExecutionOrder != 10200) MonoImporter.SetExecutionOrder(monoScript, 10200);
+            }
+        }
+    }
 }

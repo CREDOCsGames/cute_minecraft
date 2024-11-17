@@ -6,18 +6,18 @@ namespace Sound
     [CreateAssetMenu(fileName = "SoundList", menuName = "ScriptableObject/SoundList", order = int.MaxValue)]
     public class SoundList : ScriptableObject
     {
-        public List<AudioClip> m_AudioClipList;
+        public List<AudioClip> _AudioClipList;
 
-        private Dictionary<string, AudioClip> m_AudioClipDictionary;
+        private Dictionary<string, AudioClip> _audioClipDictionary;
 
         public Dictionary<string, AudioClip> AudioClips
         {
             get
             {
-                if (m_AudioClipDictionary == null || m_AudioClipList.Count != m_AudioClipDictionary.Count)
-                    m_AudioClipDictionary = GetSoundList();
+                if (_audioClipDictionary == null || _AudioClipList.Count != _audioClipDictionary.Count)
+                    _audioClipDictionary = GetSoundList();
 
-                return m_AudioClipDictionary;
+                return _audioClipDictionary;
             }
         }
 
@@ -25,7 +25,7 @@ namespace Sound
         {
             var audioDictionary = new Dictionary<string, AudioClip>();
 
-            foreach (var item in m_AudioClipList)
+            foreach (var item in _AudioClipList)
             {
                 if (!audioDictionary.TryAdd(item.name, item))
                     continue;

@@ -21,9 +21,9 @@ namespace Flow
 
         public float LastPauseTime { get; private set; }
 
-        private float LastTickTime { get; set; }
+        private float _lastTickTime { get; set; }
 
-        static float ServerTime => Flow.ServerTime.Time;
+        private static float _serverTime => ServerTime.Time;
 
         public Timer()
         {
@@ -45,7 +45,7 @@ namespace Flow
             IsStart = true;
             IsPause = false;
             ElapsedTime = 0f;
-            LastTickTime = ServerTime;
+            _lastTickTime = _serverTime;
             OnStartEvent?.Invoke(this);
         }
 
@@ -68,7 +68,7 @@ namespace Flow
             }
 
             IsPause = true;
-            LastPauseTime = ServerTime;
+            LastPauseTime = _serverTime;
             OnPauseEvent?.Invoke(this);
         }
 
@@ -81,7 +81,7 @@ namespace Flow
 
             IsPause = false;
             OnResumeEvent?.Invoke(this);
-            LastTickTime = ServerTime;
+            _lastTickTime = _serverTime;
         }
 
         public void SetTimeout(float timeout)
@@ -101,8 +101,8 @@ namespace Flow
                 return;
             }
 
-            ElapsedTime += ServerTime - LastTickTime;
-            LastTickTime = ServerTime;
+            ElapsedTime += _serverTime - _lastTickTime;
+            _lastTickTime = _serverTime;
             OnTickEvent?.Invoke(this);
 
             if (Timeout == 0)
@@ -116,7 +116,7 @@ namespace Flow
             }
         }
 
-        void DoTimeout()
+        private void DoTimeout()
         {
             IsStart = false;
             OnTimeoutEvent?.Invoke(this);

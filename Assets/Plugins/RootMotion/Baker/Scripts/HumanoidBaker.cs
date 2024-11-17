@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Playables;
 
 namespace RootMotion
@@ -112,7 +111,7 @@ namespace RootMotion
             for (int i = 0; i < bakerMuscles.Length; i++) bakerMuscles[i].SetLoopFrame(time);
 
             rootQT.MoveLastKeyframes(time);
-            
+
             leftFootQT.SetLoopFrame(time);
             rightFootQT.SetLoopFrame(time);
             leftHandQT.SetLoopFrame(time);

@@ -5,7 +5,7 @@ namespace Puzzle
 {
     public class PuzzlePieceComponent : MonoBehaviour
     {
-        protected bool IsClear { get; set; }
+        public bool IsClear { get; protected set; }
 
         public static void EnablePieceInArea(Bounds area)
         {

@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-namespace RootMotion.FinalIK {
+namespace RootMotion.FinalIK
+{
 
-	/// <summary>
-	/// Hybrid %IK solver designed for mapping a character to a VR headset and 2 hand controllers 
-	/// </summary>
-	public partial class IKSolverVR: IKSolver {
+    /// <summary>
+    /// Hybrid %IK solver designed for mapping a character to a VR headset and 2 hand controllers 
+    /// </summary>
+    public partial class IKSolverVR : IKSolver
+    {
 
-		[System.Serializable]
-		public partial class Locomotion {
+        [System.Serializable]
+        public partial class Locomotion
+        {
 
             [System.Serializable]
             public enum Mode
@@ -31,13 +33,15 @@ namespace RootMotion.FinalIK {
             [Range(0f, 1f)]
             public float weight = 1f;
 
-            public void Initiate(Animator animator, Vector3[] positions, Quaternion[] rotations, bool hasToes, float scale) {
-				
+            public void Initiate(Animator animator, Vector3[] positions, Quaternion[] rotations, bool hasToes, float scale)
+            {
+
                 Initiate_Procedural(positions, rotations, hasToes, scale);
                 Initiate_Animated(animator, positions);
-			}
+            }
 
-			public void Reset(Vector3[] positions, Quaternion[] rotations) {
+            public void Reset(Vector3[] positions, Quaternion[] rotations)
+            {
                 Reset_Procedural(positions, rotations);
                 Reset_Animated(positions);
             }
@@ -47,15 +51,17 @@ namespace RootMotion.FinalIK {
                 Relax_Procedural();
             }
 
-			public void AddDeltaRotation(Quaternion delta, Vector3 pivot) {
+            public void AddDeltaRotation(Quaternion delta, Vector3 pivot)
+            {
                 AddDeltaRotation_Procedural(delta, pivot);
                 AddDeltaRotation_Animated(delta, pivot);
             }
-			
-			public void AddDeltaPosition(Vector3 delta) {
+
+            public void AddDeltaPosition(Vector3 delta)
+            {
                 AddDeltaPosition_Procedural(delta);
                 AddDeltaPosition_Animated(delta);
             }
-		}
-	}
+        }
+    }
 }

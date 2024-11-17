@@ -2,36 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Battle
 {
     public class SwitchBoxComponent : MonoBehaviour
     {
-        HitBox mHitBox;
-        AttackBox mAttackBox;
-        GameObject HitBoxInstance;
-        GameObject AttackBoxInstance;
+        private HitBox _hitBox;
+        private AttackBox _attackBox;
+        private GameObject _hitBoxInstance;
+        private GameObject _attackBoxInstance;
         [Header("[Refer]")]
-        [SerializeField] Transform Actor;
-        [SerializeField] List<Bounds> HitColliders;
-        [SerializeField] List<Bounds> AttackColliders;
-        [Range(0, 10000)][SerializeField] float AttackWindow;
+        [SerializeField] private Transform _actor;
+        [SerializeField] private List<Bounds> _hitColliders;
+        [SerializeField] private List<Bounds> _attackColliders;
+        [Range(0, 10000), SerializeField] private float _attackWindow;
         [Header("[Options]")]
-        [SerializeField] protected UnityEvent<HitBoxCollision> OnHit;
-        [SerializeField] protected UnityEvent<HitBoxCollision> OnAttack;
+        [SerializeField] protected UnityEvent<HitBoxCollision> _onHit;
+        [SerializeField] protected UnityEvent<HitBoxCollision> _onAttack;
 
-        void SwitchToAttackBox()
+        private void SwitchToAttackBox()
         {
-            HitBoxInstance.SetActive(false);
-            AttackBoxInstance.SetActive(true);
-            mAttackBox.OpenAttackWindow();
+            _hitBoxInstance.SetActive(false);
+            _attackBoxInstance.SetActive(true);
+            _attackBox.OpenAttackWindow();
         }
 
-        void SwitchToHitBox()
+        private void SwitchToHitBox()
         {
-            HitBoxInstance.SetActive(true);
-            AttackBoxInstance.SetActive(false);
+            _hitBoxInstance.SetActive(true);
+            _attackBoxInstance.SetActive(false);
         }
 
         protected virtual void OnEnable()
@@ -41,30 +40,30 @@ namespace Battle
 
         protected virtual void Awake()
         {
-            mHitBox = new HitBox(Actor);
-            mHitBox.OnCollision += OnHit.Invoke;
-            mHitBox.OnCollision += (c) => SwitchToAttackBox();
-            mHitBox.OnCollision += (c) => StartCoroutine(Disable());
-            HitBoxInstance = CreateColliderBoxes(HitColliders);
-            HitBoxComponent.AddComponent(HitBoxInstance, mHitBox);
-            HitColliders.Clear();
-            HitBoxInstance.SetActive(true);
+            _hitBox = new HitBox(_actor);
+            _hitBox.OnCollision += _onHit.Invoke;
+            _hitBox.OnCollision += (c) => SwitchToAttackBox();
+            _hitBox.OnCollision += (c) => StartCoroutine(Disable());
+            _hitBoxInstance = CreateColliderBoxes(_hitColliders);
+            HitBoxComponent.AddComponent(_hitBoxInstance, _hitBox);
+            _hitColliders.Clear();
+            _hitBoxInstance.SetActive(true);
 
-            mAttackBox = new AttackBox(Actor, AttackWindow);
-            mAttackBox.OnCollision += OnAttack.Invoke;
-            AttackBoxInstance = CreateColliderBoxes(AttackColliders);
-            AttackBoxComponent.AddComponent(AttackBoxInstance, mAttackBox);
-            AttackColliders.Clear();
-            AttackBoxInstance.SetActive(false);
+            _attackBox = new AttackBox(_actor, _attackWindow);
+            _attackBox.OnCollision += _onAttack.Invoke;
+            _attackBoxInstance = CreateColliderBoxes(_attackColliders);
+            AttackBoxComponent.AddComponent(_attackBoxInstance, _attackBox);
+            _attackColliders.Clear();
+            _attackBoxInstance.SetActive(false);
         }
 
-        IEnumerator Disable()
+        private IEnumerator Disable()
         {
-            yield return new WaitForSeconds(AttackWindow);
+            yield return new WaitForSeconds(_attackWindow);
             gameObject.SetActive(false);
         }
 
-        GameObject CreateColliderBoxes(List<Bounds> boxes)
+        private GameObject CreateColliderBoxes(List<Bounds> boxes)
         {
             var obj = new GameObject();
             obj.transform.SetParent(transform);
@@ -86,12 +85,12 @@ namespace Battle
         {
             var originGizmosColor = Gizmos.color;
             Gizmos.color = new Color(145, 244, 139, 210) / 255f;
-            foreach (var hitBox in HitColliders)
+            foreach (var hitBox in _hitColliders)
             {
                 Gizmos.DrawWireCube(transform.position + hitBox.center, Vector3.Scale(transform.lossyScale, hitBox.extents));
             }
 
-            foreach (var attackBox in AttackColliders)
+            foreach (var attackBox in _attackColliders)
             {
                 Gizmos.DrawWireCube(transform.position + attackBox.center, Vector3.Scale(transform.lossyScale, attackBox.extents));
             }

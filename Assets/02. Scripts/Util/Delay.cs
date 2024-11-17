@@ -17,7 +17,7 @@ namespace Util
         }
         public void SetStartTime()
         {
-            StartTime= Time.time;   
+            StartTime = Time.time;
         }
         public bool IsDelay()
         {

@@ -5,37 +5,37 @@ namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
-        [SerializeField] ScriptableObject[] Puzzles;
-        CubePuzzleMadiator madiator;
+        [SerializeField] private ScriptableObject[] _puzzles;
+        private CubePuzzleMediator _mediator;
 
 
-        void OnEnable()
+        private void OnEnable()
         {
-            if(!Puzzles.Where(x => x as IPuzzleInstance != null).Any())
+            if (!_puzzles.Where(x => x as IPuzzleInstance != null).Any())
             {
                 return;
             }
 
-            var width = Puzzles.Where(x => x as IPuzzleInstance != null).Max(x => (x as IPuzzleInstance).Width);
-            madiator = new CubePuzzleMadiator(width);
-            foreach (var puzzle in Puzzles)
+            var width = _puzzles.Where(x => x as IPuzzleInstance != null).Max(x => (x as IPuzzleInstance).Width);
+            _mediator = new CubePuzzleMediator(width);
+            foreach (var puzzle in _puzzles)
             {
                 if (puzzle is IPuzzleInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IPuzzleInstance;
-                    madiator.AddPuzzle(instance);
+                    _mediator.AddPuzzle(instance);
                 }
                 else
                 {
                     Debug.Assert(false, $"{puzzle.name} is not IPuzzleInstance. type {puzzle.GetType()}");
                 }
             }
-            madiator.Init();
+            _mediator.Init();
         }
 
         private void OnDisable()
         {
-            madiator = null;
+            _mediator = null;
         }
     }
 

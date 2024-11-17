@@ -27,23 +27,23 @@ namespace Input1
 
     public class PlayerController
     {
-        bool mbActive;
-        List<ButtonEvent> mButtonEvents = new();
+        private bool _active;
+        private List<ButtonEvent> buttonEvents = new();
 
         public bool IsActive
         {
-            get => mbActive;
-            set => mbActive = value;
+            get => _active;
+            set => _active = value;
         }
 
         public void AddButtonEvent(ButtonEvent data)
         {
-            mButtonEvents.Add(data);
+            buttonEvents.Add(data);
         }
 
         public void RemoveButtonEvent(ButtonEvent data)
         {
-            mButtonEvents.Remove(data);
+            buttonEvents.Remove(data);
         }
 
         public void Update()
@@ -53,7 +53,7 @@ namespace Input1
                 return;
             }
 
-            foreach (var input in mButtonEvents)
+            foreach (var input in buttonEvents)
             {
                 Func<string, bool> inputButton;
                 switch (input.InputType)

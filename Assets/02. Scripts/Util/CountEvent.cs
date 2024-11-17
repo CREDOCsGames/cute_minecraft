@@ -17,37 +17,37 @@ namespace Util
         public int NumberOfGoals = 1;
         public event Action CountReachedEvent;
         public event Action CountAddEvent;
-        int mMaxValue = int.MaxValue;
-        int mMinValue = int.MinValue;
-        int mCount;
-        bool mbOneTime;
-        CountEventFlag mOptions;
+        private int _maxValue = int.MaxValue;
+        private int _minValue = int.MinValue;
+        private int _count;
+        private bool _oneTime;
+        private CountEventFlag _options;
 
         public int Count
         {
-            get => mCount;
+            get => _count;
 
             set
             {
-                mCount = value;
-                if (mOptions.HasFlag(CountEventFlag.Clamp))
+                _count = value;
+                if (_options.HasFlag(CountEventFlag.Clamp))
                 {
-                    mCount = Mathf.Clamp(mCount, mMinValue, mMaxValue);
+                    _count = Mathf.Clamp(_count, _minValue, _maxValue);
                 }
 
-                if (mOptions.HasFlag(CountEventFlag.Unsigned))
+                if (_options.HasFlag(CountEventFlag.Unsigned))
                 {
-                    mCount = Mathf.Clamp(mCount, 0, mCount);
+                    _count = Mathf.Clamp(_count, 0, _count);
                 }
 
                 CountAddEvent?.Invoke();
 
-                if (mCount != NumberOfGoals)
+                if (_count != NumberOfGoals)
                 {
                     return;
                 }
 
-                if (mOptions.HasFlag(CountEventFlag.OneTime) && mbOneTime)
+                if (_options.HasFlag(CountEventFlag.OneTime) && _oneTime)
                 {
                     return;
                 }
@@ -58,34 +58,34 @@ namespace Util
 
         public void UseClamp(Vector2Int range)
         {
-            mOptions |= CountEventFlag.Clamp;
-            mMinValue = Mathf.Min(range.x, range.y);
-            mMaxValue = Mathf.Max(range.x, range.y);
+            _options |= CountEventFlag.Clamp;
+            _minValue = Mathf.Min(range.x, range.y);
+            _maxValue = Mathf.Max(range.x, range.y);
         }
 
         public void DisuseClamp()
         {
-            mOptions &= ~CountEventFlag.Clamp;
+            _options &= ~CountEventFlag.Clamp;
         }
 
         public void UseUnsigned()
         {
-            mOptions |= CountEventFlag.Unsigned;
+            _options |= CountEventFlag.Unsigned;
         }
 
         public void DisuseUnsigned()
         {
-            mOptions &= ~CountEventFlag.Unsigned;
+            _options &= ~CountEventFlag.Unsigned;
         }
 
         public void UseOneTime()
         {
-            mOptions |= CountEventFlag.OneTime;
+            _options |= CountEventFlag.OneTime;
         }
 
         public void DisuseOneTime()
         {
-            mOptions &= ~CountEventFlag.OneTime;
+            _options &= ~CountEventFlag.OneTime;
         }
     }
 }

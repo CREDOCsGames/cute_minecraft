@@ -6,24 +6,24 @@ namespace Puzzle
 {
     public class AreaManagerComponent : MonoBehaviour
     {
-        [SerializeField] int AreaRange = 40;
-        [SerializeField, Range(5, 1000)] float BridgeLimitDistance = 10f;
-        Vector3Int? mBeforeAreaNum;
+        [SerializeField] private int _areaRange = 40;
+        [SerializeField, Range(5, 1000)] private float _bridgeLimitDistance = 10f;
+        private Vector3Int? _beforeAreaNum;
 
-        void EnterArea(Vector3Int sectorNum)
+        private void EnterArea(Vector3Int sectorNum)
         {
             if (!AreaManager.TryGetArea(sectorNum, out var enterArea))
             {
                 return;
             }
 
-            mBeforeAreaNum = sectorNum;
+            _beforeAreaNum = sectorNum;
             GameManager.PuzzleArea.Range = enterArea.Range;
             enterArea.enabled = true;
             enterArea.OnEnter();
         }
 
-        void ExitArea(Vector3Int sectorNum)
+        private void ExitArea(Vector3Int sectorNum)
         {
             if (!AreaManager.TryGetArea(sectorNum, out var beforeArea))
             {
@@ -35,23 +35,23 @@ namespace Puzzle
             GameManager.PuzzleArea.Range = Area.zero;
         }
 
-        void Start()
+        private void Start()
         {
             GameManager.StageArea.OnEnter();
 
-            AreaManager.AreaRange = AreaRange;
-            AreaManager.BridgeLimitDistance = BridgeLimitDistance;
+            AreaManager.AreaRange = _areaRange;
+            AreaManager.BridgeLimitDistance = _bridgeLimitDistance;
             AreaManager.NumberingAreas();
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             GameManager.StageArea.OnExit();
             GameManager.PuzzleArea.Range = Area.zero;
         }
 
         // TODO: Separate puzzle area verification logic.
-        void Update()
+        private void Update()
         {
             var character = PlayerCharacterManager.Instance.ControlledCharacter;
             if (character == null)
@@ -66,10 +66,10 @@ namespace Puzzle
             CheckEnter(pos);
         }
 
-        void CheckExit(Vector3 pos)
+        private void CheckExit(Vector3 pos)
         {
-            if (mBeforeAreaNum == null ||
-                !AreaManager.TryGetArea(mBeforeAreaNum.Value, out var beforeArea))
+            if (_beforeAreaNum == null ||
+                !AreaManager.TryGetArea(_beforeAreaNum.Value, out var beforeArea))
             {
                 return;
             }
@@ -80,10 +80,10 @@ namespace Puzzle
                 return;
             }
 
-            ExitArea(mBeforeAreaNum.Value);
+            ExitArea(_beforeAreaNum.Value);
         }
 
-        void CheckEnter(Vector3 pos)
+        private void CheckEnter(Vector3 pos)
         {
             if (GameManager.PuzzleArea.Range != Area.zero)
             {

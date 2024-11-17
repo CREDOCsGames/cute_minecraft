@@ -6,16 +6,16 @@ namespace Input1
 {
     public class PlayerControllerComponent : MonoBehaviour
     {
-        static readonly List<PlayerControllerComponent> mInstances = new();
+        private static readonly List<PlayerControllerComponent> mInstances = new();
         public static IEnumerable<PlayerControllerComponent> Instances => mInstances.ToList();
-        PlayerController mController = new();
-        [Header("[Options]")][SerializeField] bool ActiveOnAwake;
-        [SerializeField] List<ButtonEvent> ButtonEvents;
+        private PlayerController _controller = new();
+        [Header("[Options]")][SerializeField] private bool _activeOnAwake;
+        [SerializeField] private List<ButtonEvent> _buttonEvents;
 
         public bool IsActive
         {
-            get => mController.IsActive;
-            private set => mController.IsActive = value;
+            get => _controller.IsActive;
+            private set => _controller.IsActive = value;
         }
 
         public void SetActive(bool able)
@@ -23,23 +23,23 @@ namespace Input1
             IsActive = able;
         }
 
-        void Update()
+        private void Update()
         {
-            mController.Update();
+            _controller.Update();
         }
 
-        void Awake()
+        private void Awake()
         {
-            foreach (var buttonEvent in ButtonEvents)
+            foreach (var buttonEvent in _buttonEvents)
             {
-                mController.AddButtonEvent(buttonEvent);
+                _controller.AddButtonEvent(buttonEvent);
             }
 
             mInstances.Add(this);
-            mController.IsActive = ActiveOnAwake;
+            _controller.IsActive = _activeOnAwake;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             mInstances.Remove(this);
         }

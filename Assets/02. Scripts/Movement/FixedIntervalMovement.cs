@@ -6,7 +6,7 @@ namespace Movement
     [CreateAssetMenu(menuName = "Custom/MovementAction/FixedIntervalMovement")]
     public class FixedIntervalMovement : TransformBaseMovement
     {
-        [SerializeField] float mTime = 1f;
+        [SerializeField] private float _time = 1f;
 
         public override IEnumerator Move(Transform start, Transform end, bool repeat = false)
         {
@@ -18,7 +18,7 @@ namespace Movement
             while (true)
             {
                 duration += Time.fixedDeltaTime;
-                var t = Mathf.Clamp(duration / mTime, 0, 1);
+                var t = Mathf.Clamp(duration / _time, 0, 1);
                 start.transform.position = Vector3.Lerp(s, e, t);
                 if (t == 1)
                 {

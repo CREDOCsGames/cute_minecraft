@@ -4,11 +4,11 @@ namespace Puzzle
 {
     public static class PuzzleFactory
     {
-        public static IPuzzleCore CreateCoreAs(IPuzzleInstance instance, Madiator madiator, CubeMap<byte> cubeMap)
+        public static IPuzzleCore CreateCoreAs(IPuzzleInstance instance, Mediator mediator, CubeMap<byte> cubeMap)
         {
             if (instance is FlowerPuzzleInstance)
             {
-                return new FlowerPuzzleCore(madiator,cubeMap);
+                return new FlowerPuzzleCore(mediator, cubeMap);
             }
             Debug.Assert(false, "");
             return null;

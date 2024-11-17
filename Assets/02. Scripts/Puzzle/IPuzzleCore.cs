@@ -4,7 +4,7 @@ namespace Puzzle
     {
         public void InstramData(byte[] data);
         public CubeMap<byte> CubeMap { get; set; }
-        public Madiator Madiator { get;}
+        public Mediator Mediator { get; }
         public void Init();
     }
 

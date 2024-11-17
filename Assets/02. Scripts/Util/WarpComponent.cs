@@ -4,11 +4,11 @@ namespace Util
 {
     public class WarpComponent : MonoBehaviour
     {
-        [SerializeField] Transform Target;
+        [SerializeField] private Transform _target;
 
         public void WarpTarget()
         {
-            Target.position = transform.position;
+            _target.position = transform.position;
         }
     }
 }

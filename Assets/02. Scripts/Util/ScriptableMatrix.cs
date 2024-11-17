@@ -30,8 +30,8 @@ namespace Util
 
     public class ScriptableDictionary<K, V> : ScriptableObject
     {
-        readonly List<K> Keys = new();
-        readonly List<V> Values = new();
+        private readonly List<K> Keys = new();
+        private readonly List<V> Values = new();
 
         public bool TryGetValue(K key, out V value)
         {
