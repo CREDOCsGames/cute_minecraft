@@ -1,5 +1,6 @@
 using Battle;
 using System;
+using UnityEngine;
 
 namespace Puzzle
 {
@@ -18,6 +19,7 @@ namespace Puzzle
             {
                 data[3] = box.Type;
             }
+            Debug.Log("D");
             OnInteraction.Invoke(data);
         }
     }
