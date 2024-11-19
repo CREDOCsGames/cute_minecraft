@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
@@ -47,12 +48,22 @@ namespace Puzzle
 
         void LinkCubeElements()
         {
-            foreach (var index in mCubeMap.GetIndex())
+            //foreach (var index in mCubeMap.GetIndex())
+            //{
+
+            //}
+            for (byte face = 0; face < 6; face++)
             {
-                mDataLink.Link(
-                    mCubeMap.GetElements(index[0], index[1], index[2]),
-                    new[] { index[0], index[1], index[2], (byte)0 }
-                    );
+                for (byte y = 0; y < Width; y++)
+                {
+                    for (byte x = 0; x < Width; x++)
+                    {
+                        mDataLink.Link(
+                            mCubeMap.GetElements(x, y, face),
+                            new[] { x, y, face, (byte)0 }
+                            );
+                    }
+                }
             }
         }
 
