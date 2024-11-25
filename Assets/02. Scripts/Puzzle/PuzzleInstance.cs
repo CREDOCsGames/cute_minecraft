@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
@@ -5,23 +6,16 @@ namespace Puzzle
 {
     public interface IPuzzleInstance
     {
-        public Mediator Madiator { get; set; }
+        public Mediator Mediator { get; set; }
         public void InstreamData(byte[] data);
-        public byte Width { get; }
-        public MatrixBool PuzzleMap { get; }
     }
 
     public abstract class PuzzleInstance<T> : ScriptableObject, IPuzzleInstance where T : MonoBehaviour
     {
-        public Mediator Madiator { get; set; }
-
-        public abstract byte Width { get; }
-
-        public abstract MatrixBool PuzzleMap { get; }
-
-        private CubeMap<T> _cubeMap;
-        private IDataLink<T> _dataLink;
-        private IPresentation<T> _presentation;
+        public Mediator Mediator { get; set; }
+        CubeMap<T> mCubeMap;
+        IDataLink<T> mDataLink;
+        IPresentation<T> mPresentation;
 
         protected abstract void Instantiate(out CubeMap<T> cubeMap);
         protected abstract void SetDataLink(out IDataLink<T> dataLink);
@@ -35,37 +29,38 @@ namespace Puzzle
             }
             else
             {
-                var elements = _cubeMap.GetElements(data[0], data[1], data[2]);
-                _presentation.UpstreamData(elements, data[3]);
+                var elements = mCubeMap.GetElements(data[0], data[1], data[2]);
+                mPresentation.InstreamData(elements, data[3]);
             }
         }
 
-        private void OutStreamData(byte[] data)
+        void OutStreamData(byte[] data)
         {
-            Madiator.DownstramData(data);
+            Mediator.DownstramData(data);
         }
 
-        private void LinkCubeElements()
+        void LinkCubeElements()
         {
-            foreach (var index in _cubeMap.GetIndex())
+            foreach (var index in mCubeMap.GetIndex())
             {
-                _dataLink.Link(
-                _cubeMap.GetElements(index[0], index[1], index[2]),
+                mDataLink.Link(
+                mCubeMap.GetElements(index[0], index[1], index[2]),
                 new[] { index[0], index[1], index[2], (byte)0 }
                 );
             }
+
         }
 
         private void Awake()
         {
-            Instantiate(out _cubeMap);
-            SetDataLink(out _dataLink);
+            Instantiate(out mCubeMap);
+            SetDataLink(out mDataLink);
             LinkCubeElements();
-            _dataLink.OnInteraction += OutStreamData;
-            SetPresentation(out _presentation);
+            mDataLink.OnInteraction += OutStreamData;
+            SetPresentation(out mPresentation);
 
             var parent = new GameObject("∆€¡Ò").transform;
-            foreach (var piece in _cubeMap.Elements)
+            foreach (var piece in mCubeMap.Elements)
             {
                 piece.transform.parent = parent;
             }

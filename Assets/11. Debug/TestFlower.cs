@@ -1,195 +1,124 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+using Battle;
 using UnityEngine;
 using UnityEngine.UI;
-using Util;
-using Random = UnityEngine.Random;
 
-public class TestFlower : MonoBehaviour
+namespace Puzzle
 {
-    static readonly List<TestFlower> mInstances = new(6);
-    public MatrixBool Puzzle;
-    public Button Button;
-    public GridLayoutGroup Grid;
-    public TextMeshProUGUI UI;
-    public int index = 0;
-    Action<Button> ButtonEvent;
 
-    void Cross(Button button)
+    public class ButtonLink : IDataLink<Button>
     {
-        if (!IsActive(button))
+        public event Action<byte[]> OnInteraction;
+
+        public void Link(Button flower, byte[] data)
         {
-            return;
+            flower.onClick.AddListener(() => Convert2Vector4Byte(flower, data));
         }
-        var data = Resources.Load<FlowerPuzzleData>("Flower Puzzle Data");
-        mInstances.ForEach(x =>
+
+        void Convert2Vector4Byte(Button button, byte[] data)
         {
-            if (data.Links[index].Contains(x.index))
+            OnInteraction.Invoke(data);
+        }
+    }
+
+    public class TestFlower : PuzzleInstance<Button>
+    {
+        public GridLayoutGroup Grid;
+        public Button Button;
+        public byte Width;
+        private Transform _parent;
+
+
+        protected override void Instantiate(out CubeMap<Button> cubeMap)
+        {
+            CreateParent();
+
+            var instantiator = new Instantiator<Button>(Button);
+            cubeMap = new CubeMap<Button>(Width, instantiator);
+
+            foreach (var index in cubeMap.GetIndex())
             {
-                x.Flower(int.Parse(button.name));
+                var x = index[0];
+                var y = index[1];
+                var face = index[2];
+                var flower = cubeMap.GetElements(x, y, face);
+
+                flower.transform.SetParent(_parent.GetChild(face));
             }
-        });
-
-        CheckClear();
-    }
-    void Dot(Button button)
-    {
-        if (!IsActive(button))
-        {
-            return;
-        }
-        if (!mInstances.Any(x => x.index == index))
-        {
-            return;
-        }
-        ReverseColor(int.Parse(button.name));
-        CheckClear();
-    }
-    void Create(Button button)
-    {
-        if (IsActive(button))
-        {
-            return;
         }
 
-        button.GetComponent<Image>().color = Random.Range(0, 2) % 2 == 0 ? Color.red : Color.green;
-    }
-    void Flower(int i)
-    {
-        if (!IsActive(transform.GetChild(i).GetComponent<Button>())) return;
-
-        ReverseColor(i);
-
-        if (i % Puzzle.Column != 0)
+        protected override void SetDataLink(out IDataLink<Button> dataLink)
         {
-            ReverseColor(i - 1);
+            throw new NotImplementedException();
         }
 
-        if (i % Puzzle.Column != Puzzle.Column - 1)
+        protected override void SetPresentation(out IPresentation<Button> presentation)
         {
-            ReverseColor(i + 1);
+            presentation = new ButtonPresentation();
         }
 
-        if (i / Puzzle.Column != 0)
+        private void CreateParent()
         {
-            ReverseColor(i - Puzzle.Column);
-        }
-
-        if (i / Puzzle.Column < Puzzle.Row - 1)
-        {
-            ReverseColor(i + Puzzle.Column);
-        }
-    }
-    void ReverseColor(int i)
-    {
-        var child = transform.GetChild(i);
-        if (IsActive(child.GetComponent<Button>()))
-        {
-            var image = child.GetComponent<Image>();
-            image.color = image.color == Color.red ? Color.green : Color.red;
-        }
-    }
-    bool IsActive(Button button)
-    {
-        var color = button.GetComponent<Image>().color;
-        return color == Color.red || Color.green == color;
-    }
-    void CheckClear()
-    {
-        if (!IsEnd())
-        {
-            return;
-        }
-
-        var data = Resources.Load<FlowerPuzzleData>("Flower Puzzle Data");
-        if (data.UseClearThanLock.Equals("True"))
-        {
-            LockIfClear();
-        }
-
-        if (data.UseClearConditionThanBaseFace.Equals("True"))
-        {
-            ClearIfBaseFaceEnd();
-        }
-
-        if (data.UseLinkedClear.Equals("True"))
-        {
-            ClearIfLinkedFaceEnd();
-        }
-
-        if (mInstances.All(x => x.IsEnd()))
-        {
-            LockAll();
-        }
-    }
-    void LockIfClear()
-    {
-        if (IsEnd())
-        {
-            foreach (var flower in GetComponentsInChildren<Button>())
+            if (_parent = null)
             {
-                flower.interactable = false;
+                _parent = new GameObject().transform;
+            }
+
+            for (int i = 0; i < _parent.childCount; i++)
+            {
+                GameObject.Destroy(_parent.GetChild(i));
+            }
+
+            for (byte i = 0; i < 6; i++)
+            {
+                var obj = new GameObject();
+                obj.transform.SetParent(_parent);
+                var grid = obj.AddComponent<GridLayoutGroup>();
+                grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = Width;
+                var dir = i switch
+                {
+                    (byte)Face.front =>
+                        Vector3.zero,
+                    (byte)Face.back =>
+                        Vector3.right * 2,
+                    (byte)Face.right =>
+                        Vector3.right,
+                    (byte)Face.left =>
+                        Vector3.left,
+                    (byte)Face.top =>
+                        Vector3.up,
+                    (byte)Face.bottom =>
+                        Vector3.down,
+                    _ => throw new NotImplementedException($"Out of range : {i}")
+                };
+
+                obj.transform.position = dir * Width;
             }
         }
     }
-    void ClearIfBaseFaceEnd()
-    {
-        var baseFace = mInstances.Where(x => x.index == 0).First();
 
-        if (baseFace.IsEnd())
-        {
-            LockAll();
-        }
-    }
-    void ClearIfLinkedFaceEnd()
+    public class ButtonPresentation : IPresentation<Button>
     {
-        var data = Resources.Load<FlowerPuzzleData>("Flower Puzzle Data");
-        var linked = mInstances.Where(x => data.Links[index].Any(y => y == x.index));
-        if (linked.All(x => x.IsEnd()))
+        public void InstreamData(Button elements, byte data)
         {
-            LockIfClear();
+            elements.interactable = true;
+            switch (data)
+            {
+                case (byte)Flower.FlowerType.Red:
+                    elements.image.color = Color.red;
+                    break;
+                case (byte)Flower.FlowerType.Green:
+                    elements.image.color = Color.green;
+                    break;
+                default:
+                    elements.interactable = false;
+                    break;
+            }
         }
 
     }
-    void LockAll()
-    {
-        mInstances.ForEach(puzzle => puzzle.GetComponentsInChildren<Button>().ToList().ForEach(button => button.interactable = false));
-    }
-    bool IsEnd()
-    {
-        var flowers = GetComponentsInChildren<Image>().Where(x => x.color == Color.red || x.color == Color.green);
-        return flowers.All(x => x.color == flowers.First().color);
-    }
-    void Awake()
-    {
-        Grid.constraintCount = Puzzle.Column;
-        for (int i = 0; i < Puzzle.Column * Puzzle.Row; i++)
-        {
-            var button = Instantiate(Button, transform);
-            button.name = i.ToString();
-            button.onClick.AddListener(() => ButtonEvent.Invoke(button));
-            if (!Puzzle.Matrix[i / Puzzle.Column].List[i % Puzzle.Column] || Random.Range(0, 4) == 0) continue;
-            button.GetComponent<Image>().color = Random.Range(0, 2) % 2 == 0 ? Color.red : Color.green;
-        }
-        ButtonEvent = Cross;
-        UI.text = ButtonEvent.Method.Name;
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            ButtonEvent = ButtonEvent == Cross ? Dot : ButtonEvent == Dot ? Create : Cross;
-            UI.text = ButtonEvent.Method.Name;
-        }
-    }
-    void OnEnable()
-    {
-        mInstances.Add(this);
-    }
-    void OnDisable()
-    {
-        mInstances.Remove(this);
-    }
+
+
+
 }

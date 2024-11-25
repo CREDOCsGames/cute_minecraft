@@ -5,14 +5,14 @@ using Util;
 namespace Puzzle
 {
 
-    public class CubePuzzleMediator
+    public class CubePuzzleMadiator
     {
         readonly CubeMap<byte> mCubeMap;
         readonly List<IPuzzleInstance> mPuzzleInstances = new();
         readonly Dictionary<Type, Mediator> mMadiatorMap = new();
         readonly Dictionary<Type, IPuzzleCore> mCoreMap = new();
 
-        public CubePuzzleMediator(MatrixBool mapData)
+        public CubePuzzleMadiator(MatrixBool mapData)
         {
             mCubeMap = new CubeMap<byte>((byte)mapData.Column, (byte)0);
             for (byte face = 0; face < 6; face++)
@@ -44,7 +44,7 @@ namespace Puzzle
 
         public void Init()
         {
-            foreach (var core in mCoreMap.Values)
+            foreach(var core in mCoreMap.Values)
             {
                 core.Init();
             }

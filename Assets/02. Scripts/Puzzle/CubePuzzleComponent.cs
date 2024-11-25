@@ -1,41 +1,42 @@
 using System.Linq;
 using UnityEngine;
+using Util;
 
 namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
-        [SerializeField] private ScriptableObject[] _puzzles;
-        private CubePuzzleMediator _mediator;
+        [SerializeField] ScriptableObject[] Puzzles;
+        private CubePuzzleMadiator madiator;
+        private MatrixBool _mapData;
 
 
-        private void OnEnable()
+        void OnEnable()
         {
-            if (!_puzzles.Where(x => x as IPuzzleInstance != null).Any())
+            if(!Puzzles.Where(x => x as IPuzzleInstance != null).Any())
             {
                 return;
             }
 
-            var width = _puzzles.Where(x => x as IPuzzleInstance != null).Max(x => (x as IPuzzleInstance).Width);
-            _mediator = new CubePuzzleMediator(width);
-            foreach (var puzzle in _puzzles)
+            madiator = new CubePuzzleMadiator(_mapData);
+            foreach (var puzzle in Puzzles)
             {
                 if (puzzle is IPuzzleInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IPuzzleInstance;
-                    _mediator.AddPuzzle(instance);
+                    madiator.AddPuzzle(instance);
                 }
                 else
                 {
                     Debug.Assert(false, $"{puzzle.name} is not IPuzzleInstance. type {puzzle.GetType()}");
                 }
             }
-            _mediator.Init();
+            madiator.Init();
         }
 
         private void OnDisable()
         {
-            _mediator = null;
+            madiator = null;
         }
     }
 
