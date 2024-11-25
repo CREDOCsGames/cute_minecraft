@@ -5,6 +5,11 @@ namespace Puzzle
 {
     public class Flower : MonoBehaviour
     {
+        public enum FlowerType : byte
+        {
+            None, Red, Green
+        }
+
         public HitBoxComponent HitBoxComponent;
         Color mColor;
         public Color Color

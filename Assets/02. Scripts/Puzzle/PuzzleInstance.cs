@@ -8,18 +8,11 @@ namespace Puzzle
     {
         public Madiator Madiator { get; set; }
         public void InstreamData(byte[] data);
-        public byte Width { get; }
-        public MatrixBool PuzzleMap { get; }
     }
 
     public abstract class PuzzleInstance<T> : ScriptableObject, IPuzzleInstance where T : MonoBehaviour
     {
         public Madiator Madiator { get; set; }
-
-        public abstract byte Width { get; }
-
-        public abstract MatrixBool PuzzleMap { get; }
-
         CubeMap<T> mCubeMap;
         IDataLink<T> mDataLink;
         IPresentation<T> mPresentation;
@@ -37,7 +30,7 @@ namespace Puzzle
             else
             {
                 var elements = mCubeMap.GetElements(data[0], data[1], data[2]);
-                mPresentation.UpstreamData(elements, data[3]);
+                mPresentation.InstreamData(elements, data[3]);
             }
         }
 
@@ -48,26 +41,17 @@ namespace Puzzle
 
         void LinkCubeElements()
         {
-            //foreach (var index in mCubeMap.GetIndex())
-            //{
-
-            //}
-            for (byte face = 0; face < 6; face++)
+            foreach (var index in mCubeMap.GetIndex())
             {
-                for (byte y = 0; y < Width; y++)
-                {
-                    for (byte x = 0; x < Width; x++)
-                    {
-                        mDataLink.Link(
-                            mCubeMap.GetElements(x, y, face),
-                            new[] { x, y, face, (byte)0 }
-                            );
-                    }
-                }
+                mDataLink.Link(
+                mCubeMap.GetElements(index[0], index[1], index[2]),
+                new[] { index[0], index[1], index[2], (byte)0 }
+                );
             }
+
         }
 
-        void Awake()
+        private void Awake()
         {
             Instantiate(out mCubeMap);
             SetDataLink(out mDataLink);

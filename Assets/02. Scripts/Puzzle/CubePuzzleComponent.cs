@@ -1,12 +1,14 @@
 using System.Linq;
 using UnityEngine;
+using Util;
 
 namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
         [SerializeField] ScriptableObject[] Puzzles;
-        CubePuzzleMadiator madiator;
+        private CubePuzzleMadiator madiator;
+        private MatrixBool _mapData;
 
 
         void OnEnable()
@@ -16,8 +18,7 @@ namespace Puzzle
                 return;
             }
 
-            var width = Puzzles.Where(x => x as IPuzzleInstance != null).Max(x => (x as IPuzzleInstance).Width);
-            madiator = new CubePuzzleMadiator(width);
+            madiator = new CubePuzzleMadiator(_mapData);
             foreach (var puzzle in Puzzles)
             {
                 if (puzzle is IPuzzleInstance && puzzle is ScriptableObject obj)

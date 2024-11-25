@@ -6,7 +6,7 @@ namespace Puzzle
     {
         public static IPuzzleCore CreateCoreAs(IPuzzleInstance instance, Madiator madiator, CubeMap<byte> cubeMap)
         {
-            if (instance is FlowerPuzzleInstance)
+            if (instance is PuzzleInstance<Flower>)
             {
                 return new FlowerPuzzleCore(madiator,cubeMap);
             }

@@ -19,7 +19,7 @@ namespace Puzzle
             {
                 data[3] = box.Type;
             }
-            Debug.Log("D");
+
             OnInteraction.Invoke(data);
         }
     }
