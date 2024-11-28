@@ -94,8 +94,8 @@ namespace Flow
         }
 
 #if UNITY_EDITOR
-        [Header("[Debug]")][SerializeField] private bool UseViewAreaRange;
-        [SerializeField] private bool UseViewBridgeRange;
+        [Header("[Debug]")][SerializeField] private bool _useViewAreaRange;
+        [SerializeField] private bool _useViewBridgeRange;
         private void OnDrawGizmosSelected()
         {
             if (Application.isPlaying)
@@ -115,7 +115,7 @@ namespace Flow
             var originColor = Gizmos.color;
             var style = new GUIStyle();
 
-            if (UseViewAreaRange)
+            if (_useViewAreaRange)
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireCube(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange,
@@ -124,7 +124,7 @@ namespace Flow
                 Handles.Label(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, "Area", style);
             }
 
-            if (!UseViewBridgeRange)
+            if (!_useViewBridgeRange)
             {
                 return;
             }

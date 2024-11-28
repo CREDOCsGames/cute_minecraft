@@ -17,8 +17,8 @@ namespace Movement
 
         private void FixedUpdate()
         {
-            if (_character == null || _character.State is CharacterState.Walk
-                    or CharacterState.Run)
+            if (_character == null || _character.State is //CharacterState.Walk
+                    CharacterState.Run)
             {
                 LimitMoveSpeed();
             }

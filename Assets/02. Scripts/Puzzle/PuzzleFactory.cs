@@ -4,7 +4,7 @@ namespace Puzzle
 {
     public static class PuzzleFactory
     {
-        public static IPuzzleCore CreateCoreAs(IPuzzleInstance instance, Mediator mediator, CubeMap<byte> cubeMap)
+        public static ICore CreateCoreAs(IInstance instance, Mediator mediator, CubeMap<byte> cubeMap)
         {
             if (instance is PuzzleInstance<Flower>)
             {

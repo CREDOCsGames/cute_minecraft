@@ -33,7 +33,8 @@ namespace Util
                 return;
             }
 
-            if (_character.State is not (CharacterState.Walk or CharacterState.Run))
+            if (_character.State is not (//CharacterState.Walk or
+                                         CharacterState.Run))
             {
                 return;
             }

@@ -1,3 +1,5 @@
+using CuzzleEditor;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Util;
@@ -7,36 +9,51 @@ namespace Puzzle
     public class CubePuzzleComponent : MonoBehaviour
     {
         [SerializeField] ScriptableObject[] Puzzles;
-        private CubePuzzleMadiator madiator;
-        private MatrixBool _mapData;
-
-
+        private MediatorCenter _mediator;
+        public Matrix<byte> MapData = new(0);
         void OnEnable()
         {
-            if(!Puzzles.Where(x => x as IPuzzleInstance != null).Any())
+            if (!Puzzles.Where(x => x as IInstance != null).Any())
             {
                 return;
             }
 
-            madiator = new CubePuzzleMadiator(_mapData);
+            _mediator = new MediatorCenter();
             foreach (var puzzle in Puzzles)
             {
-                if (puzzle is IPuzzleInstance && puzzle is ScriptableObject obj)
+                if (puzzle is IInstance && puzzle is ScriptableObject obj)
                 {
-                    var instance = GameObject.Instantiate(obj) as IPuzzleInstance;
-                    madiator.AddPuzzle(instance);
+                    var instance = GameObject.Instantiate(obj) as IInstance;
+                    _mediator.AddInstance(instance, MediatorCenter.TunnelFlag.Flower);
                 }
                 else
                 {
                     Debug.Assert(false, $"{puzzle.name} is not IPuzzleInstance. type {puzzle.GetType()}");
                 }
             }
-            madiator.Init();
         }
 
         private void OnDisable()
         {
-            madiator = null;
+            _mediator = null;
+        }
+
+        public CubeMap<byte> CreateMap(MatrixBool[] map)
+        {
+            var cubeMap = new CubeMap<byte>((byte)map[0].Column, (byte)0);
+
+            for (byte face = 0; face < 6; face++)
+            {
+                for (byte x = 0; x < map[0].Column; x++)
+                {
+                    for (byte y = 0; y < map[0].Column; y++)
+                    {
+                        cubeMap.SetElements(x, y, face, map[face].Matrix[y].List[x] == false ? (byte)0 : (byte)1);
+                    }
+                }
+            }
+
+            return cubeMap;
         }
     }
 
