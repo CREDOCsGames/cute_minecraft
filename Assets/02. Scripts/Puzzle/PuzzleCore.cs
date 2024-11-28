@@ -1,7 +1,39 @@
+using System;
+using UnityEngine;
+
 namespace Puzzle
 {
-    public abstract class PuzzleCore : IPuzzleCore
+    public abstract class PuzzleCoreContainer : ICore
     {
+        private readonly PuzzleCore _core;
+        public event Action<byte[]> InstreamEvent;
+
+        public PuzzleCoreContainer(PuzzleCore core)
+        {
+            _core = core;
+        }
+
+        public PuzzleCoreContainer(PuzzleCoreContainer container)
+        {
+            Debug.Assert(container._core != null);
+            _core = container._core;
+        }
+
+        public void InstreamData(byte[] data)
+        {
+            _core.InstreamData(data);
+            EditData(data, out var outputs, _core.CubeMap);
+            foreach (var output in outputs)
+            {
+                InstreamEvent.Invoke(Vector4Byte.Convert2ByteArr(output));
+            }
+        }
+        protected abstract void EditData(byte[] data, out Vector4Byte[] output, in CubeMap<byte> cubeMap);
+    }
+
+    public abstract class PuzzleCore : ICore
+    {
+        public event Action<byte[]> InstreamEvent;
         private CubeMap<byte> _cubeMap;
         public CubeMap<byte> CubeMap { get => _cubeMap; set => _cubeMap = value; }
         public Mediator Mediator { get; private set; }
@@ -12,14 +44,14 @@ namespace Puzzle
             CubeMap = map;
         }
 
-        public void InstramData(byte[] data)
+        public void InstreamData(byte[] data)
         {
             var input = Vector4Byte.Convert2Vector4Byte(data);
 
             EditData(in input, out var outputs, in _cubeMap);
             foreach (var output in outputs)
             {
-                Mediator.UpstramData(Vector4Byte.Convert2ByteArr(output));
+                InstreamEvent.Invoke(Vector4Byte.Convert2ByteArr(output));
             }
 
         }
@@ -28,17 +60,17 @@ namespace Puzzle
 
         public void Init()
         {
-            for (byte face = 0; face < 6; face++)
+            foreach (var index in _cubeMap.GetIndex())
             {
-                for (byte y = 0; y < _cubeMap.Width; y++)
+                InstreamEvent.Invoke(new[]
                 {
-                    for (byte x = 0; x < _cubeMap.Width; x++)
-                    {
-                        Mediator.UpstramData(new[] { x, y, face, _cubeMap.GetElements(x, y, face) });
-                    }
-                }
+                    index[0],
+                    index[1],
+                    index[2],
+                    _cubeMap.GetElements(index[0], index[1], index[2])
+                });
             }
         }
-    }
 
+    }
 }

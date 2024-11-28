@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f903b1a1235b104982a4f682cd00e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _puzzles: []
+  Puzzles: []
 --- !u!4 &543987778
 Transform:
   m_ObjectHideFlags: 0
@@ -1186,71 +1186,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4143777722191656, guid: 9f3baa31c42f8d64e925bff2584e37ff, type: 3}
   m_PrefabInstance: {fileID: 1451735246}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1521646304
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417080142881504564, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_Name
-      value: RedKnight (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5346089067123592079, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.8199999
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644429370659163032, guid: 72a321835470ef142a353df856c16156, type: 3}
-      propertyPath: ActiveOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 72a321835470ef142a353df856c16156, type: 3}
 --- !u!1 &1588629248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4489732173481820312, guid: 72a321835470ef142a353df856c16156, type: 3}
@@ -1532,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecbedeb51f2b3544b4cd4caecb12c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actor: {fileID: 0}
+  _actor: {fileID: 1817632964}
   _onAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -1831,5 +1766,4 @@ SceneRoots:
   - {fileID: 1246607036}
   - {fileID: 1827697857}
   - {fileID: 620485143}
-  - {fileID: 1521646304}
   - {fileID: 1721060997}

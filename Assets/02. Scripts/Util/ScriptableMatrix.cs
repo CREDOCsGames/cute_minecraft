@@ -42,6 +42,87 @@ namespace Util
         }
     }
 
+    public class Matrix<T>
+    {
+        [SerializeField] List<CustomList<T>> _matrix = new();
+        private readonly T _default;
+        public int RowsCount => _matrix.Count;
+        public int ColumnsCount { get; private set; }
+
+        public Matrix(int capacity, T @default)
+        {
+            _default = @default;
+            _matrix = new(capacity);
+            for (int i = 0; i < capacity; i++)
+            {
+                _matrix.Add(new CustomList<T>());
+            }
+        }
+
+        public void AddRank()
+        {
+            AddRows();
+            AddColumns();
+        }
+
+        public void SubtractRank()
+        {
+            RemoveRows();
+            RemoveColumns();
+        }
+
+        private void AddRows()
+        {
+            _matrix.Add(new CustomList<T>());
+
+            if (ColumnsCount == 0)
+            {
+                ColumnsCount++;
+            }
+
+            for (int i = 0; i < ColumnsCount; i++)
+            {
+                _matrix[^0].List.Add(_default);
+            }
+        }
+        private void RemoveRows()
+        {
+            if (RowsCount == 0)
+            {
+                return;
+            }
+            _matrix.RemoveAt(RowsCount - 1);
+        }
+        private void AddColumns()
+        {
+            if (RowsCount == 0)
+            {
+                AddRows();
+                return;
+            }
+
+            foreach (var item in _matrix)
+            {
+                item.List.Add(_default);
+            }
+
+            ColumnsCount++;
+        }
+        private void RemoveColumns()
+        {
+            if (ColumnsCount == 0)
+            {
+                return;
+            }
+
+            foreach (var item in _matrix)
+            {
+                item.List.RemoveAt(ColumnsCount - 1);
+            }
+        }
+    }
+
+
     public class ScriptableMatrix<T> : ScriptableObject
     {
         [SerializeField] List<CustomList<T>> mMatrix = new();

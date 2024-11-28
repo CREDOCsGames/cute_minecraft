@@ -638,7 +638,7 @@ Transform:
   m_GameObject: {fileID: 757985484300168402}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06442907, y: -2.2458525e-10, z: 1.4499945e-11, w: 0.9979223}
-  m_LocalPosition: {x: 0, y: 1.8199997, z: -5.09}
+  m_LocalPosition: {x: 0, y: 1.8200002, z: -5.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3804,11 +3804,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb6477ae42884a429db142e6880e981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mRigid: {fileID: 6699808156589760655}
-  mAnimator: {fileID: 1606364163981125920}
-  mMovement: {fileID: 7467286223345342485}
-  mHasAbilities: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
-  mOnChangedState:
+  _rigid: {fileID: 6699808156589760655}
+  _animator: {fileID: 1606364163981125920}
+  _movement: {fileID: 7467286223345342485}
+  _hasAbilities: {fileID: 11400000, guid: 2729017a6fe7ae34b8bea93198cda749, type: 2}
+  _onChangedState:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &8148254814741867283
@@ -3823,8 +3823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7fb616409f6e546bf350df58614dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCharacter: {fileID: 3991491635379843131}
-  mAnimator: {fileID: 1606364163981125920}
+  _character: {fileID: 3991491635379843131}
+  _animator: {fileID: 1606364163981125920}
 --- !u!114 &4502220550779942304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3849,7 +3849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce71f03ed46626e4fa6a30117008473f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDefaultActionOrNull: {fileID: 0}
+  _defaultActionOrNull: {fileID: 0}
 --- !u!54 &6699808156589760655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4655,8 +4655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1469948f27260204e88d4f48b7348045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveOnAwake: 0
-  ButtonEvents:
+  _activeOnAwake: 0
+  _buttonEvents:
   - Key: 0
     InputType: 2
     Event:
@@ -7974,8 +7974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf506610ecebd748bf733e12e08d41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mType: 1
-  mTarget: {fileID: 332672648729753660}
+  _type: 0
+  _target: {fileID: 0}
 --- !u!1 &8693590337130700012
 GameObject:
   m_ObjectHideFlags: 0
@@ -8243,6 +8243,14 @@ PrefabInstance:
       propertyPath: Actor
       value: 
       objectReference: {fileID: 332672648729753660}
+    - target: {fileID: 2472615789004964900, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: _actor
+      value: 
+      objectReference: {fileID: 332672648729753660}
+    - target: {fileID: 2472615789004964900, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: _attackWindow
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2472615789004964900, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
       propertyPath: OnAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1

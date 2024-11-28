@@ -1,5 +1,4 @@
 using System;
-using Battle;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +48,7 @@ namespace Puzzle
 
         protected override void SetDataLink(out IDataLink<Button> dataLink)
         {
-            throw new NotImplementedException();
+            dataLink = new ButtonLink();
         }
 
         protected override void SetPresentation(out IPresentation<Button> presentation)
@@ -118,7 +117,5 @@ namespace Puzzle
         }
 
     }
-
-
 
 }
