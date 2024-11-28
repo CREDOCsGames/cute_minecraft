@@ -12,10 +12,8 @@ namespace Flow
         public static Area StageArea { get; private set; } = new();
         public static Selection Title { get; private set; } = new();
         public static Selection StageSelect { get; private set; } = new();
-        private static Timer _gameTimer { get; set; } = new();
-
         public static LanternComponent Lantern;
-
+        private static Timer _gameTimer { get; set; } = new();
         private static bool _visitTitle;
 
         static GameManager()

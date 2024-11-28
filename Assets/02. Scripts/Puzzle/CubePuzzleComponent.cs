@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Util;
@@ -7,9 +6,9 @@ namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
-        [SerializeField] ScriptableObject[] Puzzles;
+        public ScriptableObject[] Puzzles;
+        public Scriptable_MatrixByte MapData;
         private MediatorCenter _mediator;
-        [SerializeField] private List<MatrixBool> _mapData;
         void OnEnable()
         {
             if (!Puzzles.Where(x => x as IInstance != null).Any())

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Util
 {
@@ -42,26 +44,73 @@ namespace Util
         }
     }
 
+    [Serializable]
     public class Matrix<T>
     {
-        [SerializeField] List<CustomList<T>> _matrix = new();
+        public int Test;
+        private readonly List<List<T>> _matrix = new();
         private readonly T _default;
         public int RowsCount => _matrix.Count;
         public int ColumnsCount { get; private set; }
+        public bool IsEmpty => RowsCount == 0;
+        public int ElementsCount => RowsCount * ColumnsCount;
 
-        public Matrix(int capacity, T @default)
+        public Matrix(T @default)
         {
             _default = @default;
-            _matrix = new(capacity);
-            for (int i = 0; i < capacity; i++)
+            _matrix = new();
+        }
+
+        public void SetMatrix(List<T> data, int columnCount)
+        {
+            ColumnsCount = columnCount;
+            _matrix.Clear();
+            for (int i = 0; i < data.Count; i++)
             {
-                _matrix.Add(new CustomList<T>());
+                if (i % columnCount == 0)
+                {
+                    _matrix.Add(new List<T>());
+                }
+                _matrix.Last().Add(data[i]);
             }
         }
 
+        public List<T> GetElements()
+        {
+            var list = new List<T>();
+            foreach (var item in _matrix)
+            {
+                list.AddRange(item);
+            }
+
+            return list;
+        }
+
+        public bool TryGetElement(int row, int column, out T value)
+        {
+            value = _matrix[row][column];
+            return !IsOutOfRange(row, column);
+        }
+
+
+        public void SetElement(int row, int column, T value)
+        {
+            if (IsOutOfRange(row, column))
+            {
+                return;
+            }
+            _matrix[row][column] = value;
+        }
+
+
         public void AddRank()
         {
+
             AddRows();
+            if (RowsCount == 1)
+            {
+                return;
+            }
             AddColumns();
         }
 
@@ -73,7 +122,7 @@ namespace Util
 
         private void AddRows()
         {
-            _matrix.Add(new CustomList<T>());
+            _matrix.Add(new());
 
             if (ColumnsCount == 0)
             {
@@ -82,7 +131,7 @@ namespace Util
 
             for (int i = 0; i < ColumnsCount; i++)
             {
-                _matrix[^0].List.Add(_default);
+                _matrix.Last().Add(_default);
             }
         }
         private void RemoveRows()
@@ -103,7 +152,7 @@ namespace Util
 
             foreach (var item in _matrix)
             {
-                item.List.Add(_default);
+                item.Add(_default);
             }
 
             ColumnsCount++;
@@ -117,9 +166,20 @@ namespace Util
 
             foreach (var item in _matrix)
             {
-                item.List.RemoveAt(ColumnsCount - 1);
+                item.RemoveAt(ColumnsCount - 1);
             }
+            ColumnsCount--;
         }
+
+        private bool IsOutOfRange(int row, int column)
+        {
+            Debug.Assert(-1 < row && -1 < column, $"out of range row : {row} or column : {column}");
+            Debug.Assert(row < RowsCount && column < ColumnsCount, $"out of range row : {row} or column : {column}");
+
+            return row < 0 || RowsCount <= row ||
+                column < 0 || ColumnsCount <= column;
+        }
+
     }
 
 
