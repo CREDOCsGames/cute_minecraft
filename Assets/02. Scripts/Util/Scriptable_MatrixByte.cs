@@ -25,6 +25,6 @@ namespace Util
             }
         }
         public List<byte> data;
-        [NonSerialized] public int ColumnCount;
+        public int ColumnCount;
     }
 }

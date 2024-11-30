@@ -24,12 +24,12 @@ namespace CuzzleEditor
         }
         public void DrawBrushButton()
         {
-            GUILayout.BeginScrollView(_scrollPosition, GUILayout.Width(_columnCount * (_buttonSize + 4)), GUILayout.Height(_columnCount * (_buttonSize + 4)));
+            GUILayout.BeginScrollView(_scrollPosition);
+            GUILayout.BeginHorizontal();
             for (byte i = 0; i < _icons.Count; i++)
             {
                 if (i % _columnCount == 0)
                 {
-                    GUILayout.BeginHorizontal();
                 }
                 if (GUILayout.Button(_icons[i], GUILayout.Width(_buttonSize), GUILayout.Height(_buttonSize)))
                 {
@@ -38,9 +38,9 @@ namespace CuzzleEditor
                 }
                 if (i % _columnCount == _columnCount - 1)
                 {
-                    GUILayout.EndHorizontal();
                 }
             }
+            GUILayout.EndHorizontal();
             GUILayout.EndScrollView();
         }
         public void DrawRankButton(out bool changed)
@@ -171,32 +171,40 @@ namespace CuzzleEditor
     {
         private CubeButton _cubeButton;
         private PuzzleMap _puzzleMap;
+        private PuzzleMap _puzzleMapTop;
+        private PuzzleMap _puzzleMapFront;
+        private PuzzleMap _puzzleMapBack;
+        private PuzzleMap _puzzleMapRight;
+        private PuzzleMap _puzzleMapLeft;
+        private PuzzleMap _puzzleMapBottom;
         private Face _selectedFace;
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            bool changed = false;
+            // base.OnInspectorGUI();
             _cubeButton.DrawButtons();
             GUILayout.TextArea(_selectedFace.ToString());
-            _puzzleMap?.DrawBrushButton();
-            bool changed = false;
             _puzzleMap?.DrawRankButton(out changed);
+            _puzzleMap?.DrawBrushButton();
             _puzzleMap?.DrawToggleButton();
             if (changed)
             {
                 (target as CubePuzzleComponent).MapData.ColumnCount = (target as CubePuzzleComponent).MapData.Matrix.ColumnsCount;
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
         }
 
         private void Awake()
         {
-            if (target is CubePuzzleComponent cubePuzzle && cubePuzzle.MapData == null)
-            {
-                Scriptable_MatrixByte obj = ScriptableObject.CreateInstance<Scriptable_MatrixByte>();
-                cubePuzzle.MapData = obj;
-                AssetDatabase.CreateAsset(obj, $"Assets/10. Editor/Cookie/{obj.GetHashCode()}.asset");
-                AssetDatabase.SaveAssets();
-            }
+            //if (target is CubePuzzleComponent cubePuzzle && cubePuzzle.MapData == null)
+            //{
+            //    Scriptable_MatrixByte obj = ScriptableObject.CreateInstance<Scriptable_MatrixByte>();
+            //    cubePuzzle.MapData = obj;
+            //    AssetDatabase.CreateAsset(obj, $"Assets/10. Editor/Cookie/{obj.GetHashCode()}.asset");
+            //    AssetDatabase.SaveAssets();
+            //}
         }
 
         private void OnEnable()
@@ -218,8 +226,20 @@ namespace CuzzleEditor
             _cubeButton.OnBackButtonClick += () => _selectedFace = Face.back;
             _cubeButton.OnBottomButtonClick += () => _selectedFace = Face.bottom;
 
-            _puzzleMap = new((target as CubePuzzleComponent).MapData.Matrix, 25);
+            _puzzleMapTop = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMapBottom = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMapRight = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMapLeft = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMapFront = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMapBack = new PuzzleMap(new Matrix<byte>(0), 25);
+            _puzzleMap = _puzzleMapTop;
 
+            _cubeButton.OnTopButtonClick += () => _puzzleMap = _puzzleMapTop;
+            _cubeButton.OnLeftButtonClick += () => _puzzleMap = _puzzleMapLeft;
+            _cubeButton.OnFrontButtonClick += () => _puzzleMap = _puzzleMapFront;
+            _cubeButton.OnRightButtonClick += () => _puzzleMap = _puzzleMapRight;
+            _cubeButton.OnBackButtonClick += () => _puzzleMap = _puzzleMapBack;
+            _cubeButton.OnBottomButtonClick += () => _puzzleMap = _puzzleMapBottom;
         }
 
         private void OnDisable()
@@ -227,7 +247,6 @@ namespace CuzzleEditor
             _cubeButton = null;
         }
     }
-
 
 }
 #endif
