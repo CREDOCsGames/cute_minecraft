@@ -1,37 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShakeEffect : MonoBehaviour
 {
-    public float ShakeAmount;
-    float shakeTime;
+    [SerializeField] private float Shakeamount = 0.02f;
+    private Vector3 Pos;
 
-    Vector3 initPos;
-
-    public void VibeTime(float time)
+    void Awake()
     {
-        shakeTime = time;
+        Pos = transform.position;
     }
 
-
-    private void Start()
+    void Update()
     {
-        initPos = new Vector3(0f, 0f, -5f);
-    }
-
-    private void Update()
-    {
-        if(shakeTime>0)
-        {
-            transform.position = Random.insideUnitSphere * ShakeAmount + initPos;
-            shakeTime -= Time.deltaTime;
-        }
-
-        else
-        {
-            shakeTime = 0.0f;
-            transform.position = initPos;
-        }
+        transform.position = Pos + Random.insideUnitSphere * Shakeamount;
     }
 }
