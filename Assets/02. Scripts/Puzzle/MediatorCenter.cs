@@ -15,12 +15,12 @@ namespace Puzzle
         }
 
         private readonly Dictionary<TunnelFlag, Mediator> _tunnelMap = new();
-
+        public List<ICore> Cores = new();
         public void AddInstance(IInstance puzzle, TunnelFlag flag)
         {
             foreach (TunnelFlag value in Enum.GetValues(typeof(TunnelFlag)))
             {
-                if ((flag & value) != value)
+                if (!flag.HasFlag(value) || value == TunnelFlag.None)
                 {
                     continue;
                 }
@@ -28,17 +28,21 @@ namespace Puzzle
                 _tunnelMap[value].AddInstance(puzzle);
             }
         }
-        public void AddCore(ICore core, TunnelFlag flag)
+        public void AddCore(CubeMap<byte> map, TunnelFlag flag)
         {
             foreach (TunnelFlag bit in Enum.GetValues(typeof(TunnelFlag)))
             {
-                if ((flag & bit) != bit)
+                if (!flag.HasFlag(bit) || bit == TunnelFlag.None)
                 {
                     continue;
                 }
                 _tunnelMap.TryAdd(bit, new Mediator());
+                var core = PuzzleFactory.CreateCoreAs(bit, _tunnelMap[bit], map);
+                Cores.Add(core);
                 _tunnelMap[bit].AddCore(core);
             }
+
+
         }
 
     }

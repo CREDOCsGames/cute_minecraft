@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Util
@@ -21,10 +22,27 @@ namespace Util
                         _matrix.SetMatrix(data, ColumnCount);
                     }
                 }
+
+                if (_matrix.Matrixt == null)
+                {
+                    _matrix.SetMatrix(data, ColumnCount);
+                }
                 return _matrix;
             }
         }
-        public List<byte> data;
+        public List<byte> data = new();
         public int ColumnCount;
+
+        public void Save()
+        {
+            data.Clear();
+            foreach (var item in Matrix.GetElements())
+            {
+                data.Add(item);
+            }
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+        }
     }
 }

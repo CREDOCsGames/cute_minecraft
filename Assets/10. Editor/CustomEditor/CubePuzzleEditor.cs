@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections.Generic;
 using Puzzle;
 using UnityEditor;
 using UnityEngine;
@@ -8,207 +7,46 @@ using Util;
 
 namespace CuzzleEditor
 {
-    public class PuzzleMap
-    {
-        public readonly Matrix<byte> _map;
-        private readonly int _buttonSize;
-        private readonly List<Texture> _icons = AssetDatabase.LoadAssetAtPath<ImageList>("Assets/10. Editor/Puzzle Brush.asset").Images;
-        private Vector2 _scrollPosition;
-        private byte _columnCount = 3;
-        private byte _brushIndex = 0;
-
-        public PuzzleMap(Matrix<byte> map, int buttonSize)
-        {
-            _map = map;
-            _buttonSize = buttonSize;
-        }
-        public void DrawBrushButton()
-        {
-            GUILayout.BeginScrollView(_scrollPosition);
-            GUILayout.BeginHorizontal();
-            for (byte i = 0; i < _icons.Count; i++)
-            {
-                if (i % _columnCount == 0)
-                {
-                }
-                if (GUILayout.Button(_icons[i], GUILayout.Width(_buttonSize), GUILayout.Height(_buttonSize)))
-                {
-                    _brushIndex = i;
-                    break;
-                }
-                if (i % _columnCount == _columnCount - 1)
-                {
-                }
-            }
-            GUILayout.EndHorizontal();
-            GUILayout.EndScrollView();
-        }
-        public void DrawRankButton(out bool changed)
-        {
-            changed = false;
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Add Rank"))
-            {
-                _map.AddRank();
-                changed = true;
-            }
-            else if (GUILayout.Button("Subtract Rank"))
-            {
-                _map.SubtractRank();
-                changed = true;
-            }
-            GUILayout.EndHorizontal();
-
-        }
-        public void DrawToggleButton()
-        {
-
-            for (int i = 0; i < _map.ElementsCount; i++)
-            {
-                if (i % _map.ColumnsCount == 0)
-                {
-                    GUILayout.BeginHorizontal();
-                }
-                DrawToggle(i);
-
-                if (i % _map.ColumnsCount == _map.ColumnsCount - 1)
-                {
-                    GUILayout.EndHorizontal();
-                }
-            }
-        }
-        private void DrawToggle(int i)
-        {
-            var click = false;
-
-            if (_map.TryGetElement(i / _map.ColumnsCount, i % _map.ColumnsCount, out var toggle))
-            {
-                click |= GUILayout.Button(GetIcon(toggle), GUILayout.Width(_buttonSize), GUILayout.Height(_buttonSize));
-            }
-            else
-            {
-                click |= GUILayout.Button("-1", GUILayout.Width(_buttonSize), GUILayout.Height(_buttonSize));
-            }
-
-
-            if (click && _map.TryGetElement(i / _map.ColumnsCount, i % _map.ColumnsCount, out var value))
-            {
-                _map.SetElement(i / _map.ColumnsCount, i % _map.ColumnsCount, _brushIndex);
-            }
-        }
-        private Texture GetIcon(int i)
-        {
-            Texture icon;
-            if (_icons != null && i < _icons.Count)
-            {
-                icon = _icons[i];
-            }
-            else
-            {
-                icon = new Texture2D(0, 0);
-            }
-            return icon;
-        }
-    }
-
-
-    internal class CubeButton
-    {
-        internal event Action OnTopButtonClick;
-        internal event Action OnLeftButtonClick;
-        internal event Action OnFrontButtonClick;
-        internal event Action OnRightButtonClick;
-        internal event Action OnBackButtonClick;
-        internal event Action OnBottomButtonClick;
-        private readonly float _length = 75;
-        private readonly Texture[] _buttonImages;
-
-        internal CubeButton(float length, Texture[] buttonImages)
-        {
-            _length = length;
-            _buttonImages = buttonImages;
-        }
-
-        public void DrawButtons()
-        {
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(_length + 3);
-            if (GUILayout.Button(_buttonImages[(int)Face.top], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnTopButtonClick?.Invoke();
-            }
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button(_buttonImages[(int)Face.left], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnLeftButtonClick?.Invoke();
-            }
-            else if (GUILayout.Button(_buttonImages[(int)Face.front], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnFrontButtonClick?.Invoke();
-            }
-            else if (GUILayout.Button(_buttonImages[(int)Face.right], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnRightButtonClick?.Invoke();
-            }
-            else if (GUILayout.Button(_buttonImages[(int)Face.back], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnBackButtonClick?.Invoke();
-            }
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(_length + 3);
-            if (GUILayout.Button(_buttonImages[(int)Face.bottom], GUILayout.Width(_length), GUILayout.Height(_length)))
-            {
-                OnBottomButtonClick?.Invoke();
-            }
-            GUILayout.EndHorizontal();
-        }
-    }
 
     [CustomEditor(typeof(CubePuzzleComponent))]
     public class CubePuzzleEditor : Editor
     {
         private CubeButton _cubeButton;
-        private PuzzleMap _puzzleMap;
-        private PuzzleMap _puzzleMapTop;
-        private PuzzleMap _puzzleMapFront;
-        private PuzzleMap _puzzleMapBack;
-        private PuzzleMap _puzzleMapRight;
-        private PuzzleMap _puzzleMapLeft;
-        private PuzzleMap _puzzleMapBottom;
+        private PuzzleMapDrawer _puzzleMap;
         private Face _selectedFace;
+        private int _selectedFaceIndex => (int)_selectedFace;
 
         public override void OnInspectorGUI()
         {
-            bool changed = false;
-            // base.OnInspectorGUI();
+
+            base.OnInspectorGUI();
+            if (target is not CubePuzzleComponent cubePuzzle)
+            {
+                return;
+            }
+
             _cubeButton.DrawButtons();
             GUILayout.TextArea(_selectedFace.ToString());
-            _puzzleMap?.DrawRankButton(out changed);
             _puzzleMap?.DrawBrushButton();
-            _puzzleMap?.DrawToggleButton();
-            if (changed)
+            bool changed = false;
+            _puzzleMap?.DrawRankButton(out changed);
+            bool changed2 = false;
+            _puzzleMap?.DrawToggleButton(out changed2);
+            if (changed || changed2)
             {
-                (target as CubePuzzleComponent).MapData.ColumnCount = (target as CubePuzzleComponent).MapData.Matrix.ColumnsCount;
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+                (target as CubePuzzleComponent).MapData[_selectedFaceIndex].ColumnCount = (target as CubePuzzleComponent).MapData[_selectedFaceIndex].Matrix.ColumnsCount;
+                _puzzleMap.Map.Save();
             }
         }
 
-        private void Awake()
-        {
-            //if (target is CubePuzzleComponent cubePuzzle && cubePuzzle.MapData == null)
-            //{
-            //    Scriptable_MatrixByte obj = ScriptableObject.CreateInstance<Scriptable_MatrixByte>();
-            //    cubePuzzle.MapData = obj;
-            //    AssetDatabase.CreateAsset(obj, $"Assets/10. Editor/Cookie/{obj.GetHashCode()}.asset");
-            //    AssetDatabase.SaveAssets();
-            //}
-        }
 
         private void OnEnable()
         {
+            if (target is not CubePuzzleComponent cubePuzzle)
+            {
+                return;
+            }
+
             _cubeButton = new CubeButton(75f, new[]
             {
                 AssetDatabase.LoadAssetAtPath<Texture>("Assets/10. Editor/Image/1.png"),
@@ -226,20 +64,15 @@ namespace CuzzleEditor
             _cubeButton.OnBackButtonClick += () => _selectedFace = Face.back;
             _cubeButton.OnBottomButtonClick += () => _selectedFace = Face.bottom;
 
-            _puzzleMapTop = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMapBottom = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMapRight = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMapLeft = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMapFront = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMapBack = new PuzzleMap(new Matrix<byte>(0), 25);
-            _puzzleMap = _puzzleMapTop;
+            _cubeButton.OnTopButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnLeftButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnFrontButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnRightButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnBackButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnBottomButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
 
-            _cubeButton.OnTopButtonClick += () => _puzzleMap = _puzzleMapTop;
-            _cubeButton.OnLeftButtonClick += () => _puzzleMap = _puzzleMapLeft;
-            _cubeButton.OnFrontButtonClick += () => _puzzleMap = _puzzleMapFront;
-            _cubeButton.OnRightButtonClick += () => _puzzleMap = _puzzleMapRight;
-            _cubeButton.OnBackButtonClick += () => _puzzleMap = _puzzleMapBack;
-            _cubeButton.OnBottomButtonClick += () => _puzzleMap = _puzzleMapBottom;
+            _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+
         }
 
         private void OnDisable()
@@ -247,6 +80,7 @@ namespace CuzzleEditor
             _cubeButton = null;
         }
     }
+
 
 }
 #endif

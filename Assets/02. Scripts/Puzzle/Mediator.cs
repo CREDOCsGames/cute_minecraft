@@ -29,7 +29,6 @@ namespace Puzzle
 
         public void AddCore(ICore core)
         {
-            Debug.Assert(0 < _cores.Count, "At least one core is required.");
             if (_cores.Contains(core))
             {
                 return;
