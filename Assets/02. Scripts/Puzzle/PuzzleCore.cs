@@ -51,7 +51,7 @@ namespace Puzzle
             EditData(in input, out var outputs, in _cubeMap);
             foreach (var output in outputs)
             {
-                InstreamEvent.Invoke(Vector4Byte.Convert2ByteArr(output));
+                InstreamEvent?.Invoke(Vector4Byte.Convert2ByteArr(output));
             }
 
         }
@@ -62,7 +62,7 @@ namespace Puzzle
         {
             foreach (var index in _cubeMap.GetIndex())
             {
-                InstreamEvent.Invoke(new[]
+                InstreamEvent?.Invoke(new[]
                 {
                     index[0],
                     index[1],

@@ -46,7 +46,8 @@ namespace Util
     [Serializable]
     public class Matrix<T>
     {
-        private readonly List<List<T>> _matrix = new();
+        private List<List<T>> _matrix = new();
+        public List<List<T>> Matrixt => _matrix;
         private readonly T _default;
         public int RowsCount => _matrix.Count;
         public int ColumnsCount { get; private set; }
@@ -62,7 +63,7 @@ namespace Util
         public void SetMatrix(List<T> data, int columnCount)
         {
             ColumnsCount = columnCount;
-            _matrix.Clear();
+            _matrix = new List<List<T>>();
             for (int i = 0; i < data.Count; i++)
             {
                 if (i % columnCount == 0)

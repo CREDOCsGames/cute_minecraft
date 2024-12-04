@@ -8,7 +8,6 @@ namespace Puzzle
     {
         [SerializeField] Flower _flowerPrefab;
         public byte Width => (byte)_puzzleMap.Column;
-        [SerializeField] MatrixBool _puzzleMap;
 
 
         protected override void Instantiate(out CubeMap<Flower> cubeMap)

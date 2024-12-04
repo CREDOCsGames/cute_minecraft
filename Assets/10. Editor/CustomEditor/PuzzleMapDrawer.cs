@@ -6,17 +6,17 @@ using Util;
 
 namespace CuzzleEditor
 {
-    public class PuzzleMap
+    public class PuzzleMapDrawer
     {
         public Matrix<byte> _map => Map.Matrix;
-        [SerializeField] public Scriptable_MatrixByte Map;
+        public Scriptable_MatrixByte Map;
         private readonly int _buttonSize;
         private readonly List<Texture> _icons = AssetDatabase.LoadAssetAtPath<ImageList>("Assets/10. Editor/Puzzle Brush.asset").Images;
         private Vector2 _scrollPosition;
         private byte _columnCount = 3;
         private byte _brushIndex = 0;
 
-        public PuzzleMap(Scriptable_MatrixByte map, int buttonSize)
+        public PuzzleMapDrawer(Scriptable_MatrixByte map, int buttonSize)
         {
             Map = map;
             _buttonSize = buttonSize;

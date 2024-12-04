@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CuzzleEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,6 +21,11 @@ namespace Util
                     {
                         _matrix.SetMatrix(data, ColumnCount);
                     }
+                }
+
+                if (_matrix.Matrixt == null)
+                {
+                    _matrix.SetMatrix(data, ColumnCount);
                 }
                 return _matrix;
             }

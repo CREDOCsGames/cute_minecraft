@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using Puzzle;
 using UnityEditor;
 using UnityEngine;
@@ -11,12 +12,19 @@ namespace CuzzleEditor
     public class CubePuzzleEditor : Editor
     {
         private CubeButton _cubeButton;
-        private PuzzleMap _puzzleMap;
+        private PuzzleMapDrawer _puzzleMap;
         private Face _selectedFace;
+        private int _selectedFaceIndex => (int)_selectedFace;
 
         public override void OnInspectorGUI()
         {
+
             base.OnInspectorGUI();
+            if (target is not CubePuzzleComponent cubePuzzle)
+            {
+                return;
+            }
+
             _cubeButton.DrawButtons();
             GUILayout.TextArea(_selectedFace.ToString());
             _puzzleMap?.DrawBrushButton();
@@ -26,24 +34,19 @@ namespace CuzzleEditor
             _puzzleMap?.DrawToggleButton(out changed2);
             if (changed || changed2)
             {
-                (target as CubePuzzleComponent).MapData.ColumnCount = (target as CubePuzzleComponent).MapData.Matrix.ColumnsCount;
+                (target as CubePuzzleComponent).MapData[_selectedFaceIndex].ColumnCount = (target as CubePuzzleComponent).MapData[_selectedFaceIndex].Matrix.ColumnsCount;
                 _puzzleMap.Map.Save();
             }
         }
 
-        private void Awake()
-        {
-            if (target is CubePuzzleComponent cubePuzzle && cubePuzzle.MapData == null)
-            {
-                Scriptable_MatrixByte obj = ScriptableObject.CreateInstance<Scriptable_MatrixByte>();
-                cubePuzzle.MapData = obj;
-                AssetDatabase.CreateAsset(obj, $"Assets/10. Editor/Cookie/{obj.GetHashCode()}.asset");
-                AssetDatabase.SaveAssets();
-            }
-        }
 
         private void OnEnable()
         {
+            if (target is not CubePuzzleComponent cubePuzzle)
+            {
+                return;
+            }
+
             _cubeButton = new CubeButton(75f, new[]
             {
                 AssetDatabase.LoadAssetAtPath<Texture>("Assets/10. Editor/Image/1.png"),
@@ -61,7 +64,14 @@ namespace CuzzleEditor
             _cubeButton.OnBackButtonClick += () => _selectedFace = Face.back;
             _cubeButton.OnBottomButtonClick += () => _selectedFace = Face.bottom;
 
-            _puzzleMap = new((target as CubePuzzleComponent).MapData, 25);
+            _cubeButton.OnTopButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnLeftButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnFrontButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnRightButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnBackButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+            _cubeButton.OnBottomButtonClick += () => _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
+
+            _puzzleMap = new(cubePuzzle.MapData[_selectedFaceIndex], 25);
 
         }
 
