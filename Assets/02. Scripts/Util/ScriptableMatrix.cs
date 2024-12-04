@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Util
 {
@@ -47,7 +46,6 @@ namespace Util
     [Serializable]
     public class Matrix<T>
     {
-        public int Test;
         private readonly List<List<T>> _matrix = new();
         private readonly T _default;
         public int RowsCount => _matrix.Count;

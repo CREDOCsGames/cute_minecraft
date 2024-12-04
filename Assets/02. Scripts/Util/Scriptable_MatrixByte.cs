@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using CuzzleEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace Util
@@ -24,7 +26,19 @@ namespace Util
                 return _matrix;
             }
         }
-        public List<byte> data;
-        [NonSerialized] public int ColumnCount;
+        public List<byte> data = new();
+        public int ColumnCount;
+
+        public void Save()
+        {
+            data.Clear();
+            foreach (var item in Matrix.GetElements())
+            {
+                data.Add(item);
+            }
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+        }
     }
 }
