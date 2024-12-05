@@ -46,7 +46,7 @@ namespace Puzzle
 
         }
 
-        private void Awake()
+        public void Init()
         {
             Instantiate(out _cubeMap);
             SetDataLink(out _dataLink);

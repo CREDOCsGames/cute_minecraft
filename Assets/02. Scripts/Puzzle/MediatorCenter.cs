@@ -16,6 +16,7 @@ namespace Puzzle
 
         private readonly Dictionary<TunnelFlag, Mediator> _tunnelMap = new();
         public List<ICore> Cores = new();
+        public List<IInstance> Instances = new();
         public void AddInstance(IInstance puzzle, TunnelFlag flag)
         {
             foreach (TunnelFlag value in Enum.GetValues(typeof(TunnelFlag)))
@@ -27,6 +28,7 @@ namespace Puzzle
                 _tunnelMap.TryAdd(value, new Mediator());
                 _tunnelMap[value].AddInstance(puzzle);
             }
+            Instances.Add(puzzle);
         }
         public void AddCore(CubeMap<byte> map, TunnelFlag flag)
         {

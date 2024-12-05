@@ -10,7 +10,7 @@ namespace Input1
     {
         public ActionKey.Button Key;
         public InputType InputType;
-        public UnityEvent Event;
+        public UnityEvent Event = new();
 
         public override int GetHashCode()
         {
@@ -28,6 +28,7 @@ namespace Input1
     public class PlayerController
     {
         private bool _active;
+        public float CoolingDuration { get; private set; }
         private List<ButtonEvent> buttonEvents = new();
 
         public bool IsActive
@@ -53,6 +54,8 @@ namespace Input1
                 return;
             }
 
+            CoolingDuration += Time.deltaTime;
+
             foreach (var input in buttonEvents)
             {
                 Func<string, bool> inputButton;
@@ -76,7 +79,7 @@ namespace Input1
                 {
                     continue;
                 }
-
+                CoolingDuration = 0f;
                 input.Event.Invoke();
             }
         }
