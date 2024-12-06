@@ -1,16 +1,16 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
-using System;
 
 namespace RootMotion
 {
-    
+
     [CustomPropertyDrawer(typeof(ShowIfAttribute))]
     public class ShowIfPropertyDrawer : PropertyDrawer
     {
         protected ShowIfAttribute showIfAttribute;
         protected SerializedProperty prop;
-        
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             if (!Show(property) && showIfAttribute.mode == ShowIfMode.Hidden) return -EditorGUIUtility.standardVerticalSpacing;
@@ -26,8 +26,8 @@ namespace RootMotion
 
             prop = property.serializedObject.FindProperty(path);
             if (prop == null) return true;
-            
-            switch(prop.propertyType)
+
+            switch (prop.propertyType)
             {
                 case SerializedPropertyType.Enum:
                     return prop.enumValueIndex.Equals((int)showIfAttribute.propValue);
@@ -82,8 +82,8 @@ namespace RootMotion
 
         protected virtual void Draw(Rect position, SerializedProperty property, PropertyAttribute attribute, GUIContent label)
         {
-            
-            EditorGUI.PropertyField(position, property, label, true);   
+
+            EditorGUI.PropertyField(position, property, label, true);
         }
     }
 
@@ -156,7 +156,7 @@ namespace RootMotion
 
             c *= 0.7f;
 
-           var style = new GUIStyle(GUI.skin.label);
+            var style = new GUIStyle(GUI.skin.label);
             style.fontSize = 16;
             style.fontStyle = FontStyle.Normal;
             style.alignment = TextAnchor.LowerLeft;

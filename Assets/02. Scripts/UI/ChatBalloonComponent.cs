@@ -6,105 +6,105 @@ namespace UI
 {
     public class ChatBalloonComponent : MonoBehaviour
     {
-        [SerializeField] UnityEvent OnShowEvent;
-        [SerializeField] UnityEvent OnHideEvent;
+        [SerializeField] private UnityEvent _onShowEvent;
+        [SerializeField] private UnityEvent _onHideEvent;
 
-        [SerializeField] TextMeshProUGUI UI;
-        [SerializeField] SpriteRenderer E;
-        [SerializeField] SpriteRenderer W;
-        [SerializeField] SpriteRenderer S;
-        [SerializeField] SpriteRenderer N;
-        [SerializeField] SpriteRenderer C;
-        [SerializeField] SpriteRenderer NE;
-        [SerializeField] SpriteRenderer NW;
-        [SerializeField] SpriteRenderer SE;
-        [SerializeField] SpriteRenderer SW;
-        [SerializeField] SpriteRenderer Arrow;
+        [SerializeField] private TextMeshProUGUI _ui;
+        [SerializeField] private SpriteRenderer _e;
+        [SerializeField] private SpriteRenderer _w;
+        [SerializeField] private SpriteRenderer _s;
+        [SerializeField] private SpriteRenderer _n;
+        [SerializeField] private SpriteRenderer _c;
+        [SerializeField] private SpriteRenderer _ne;
+        [SerializeField] private SpriteRenderer _nw;
+        [SerializeField] private SpriteRenderer _se;
+        [SerializeField] private SpriteRenderer _sw;
+        [SerializeField] private SpriteRenderer _arrow;
 
-        [SerializeField] float mHeightUnit = 1;
-        float mWidthUnit = 3;
-        [Range(1f, 500f)] [SerializeField] float interval = 23;
-        bool IsShow { get; set; }
+        [SerializeField] private float _heightUnit = 1;
+        private float _widthUnit = 3;
+        [Range(1f, 500f)][SerializeField] private float _interval = 23;
+        public bool IsShow { get; private set; }
 
         public void Show(bool bShow)
         {
             IsShow = bShow;
-            UI.gameObject.SetActive(IsShow);
-            E.gameObject.SetActive(IsShow);
-            W.gameObject.SetActive(IsShow);
-            S.gameObject.SetActive(IsShow);
-            N.gameObject.SetActive(IsShow);
-            C.gameObject.SetActive(IsShow);
-            NE.gameObject.SetActive(IsShow);
-            NW.gameObject.SetActive(IsShow);
-            SE.gameObject.SetActive(IsShow);
-            SW.gameObject.SetActive(IsShow);
-            Arrow.gameObject.SetActive(IsShow);
+            _ui.gameObject.SetActive(IsShow);
+            _e.gameObject.SetActive(IsShow);
+            _w.gameObject.SetActive(IsShow);
+            _s.gameObject.SetActive(IsShow);
+            _n.gameObject.SetActive(IsShow);
+            _c.gameObject.SetActive(IsShow);
+            _ne.gameObject.SetActive(IsShow);
+            _nw.gameObject.SetActive(IsShow);
+            _se.gameObject.SetActive(IsShow);
+            _sw.gameObject.SetActive(IsShow);
+            _arrow.gameObject.SetActive(IsShow);
 
             if (!bShow)
             {
                 Clear();
-                OnHideEvent.Invoke();
+                _onHideEvent.Invoke();
             }
             else
             {
-                OnShowEvent.Invoke();
+                _onShowEvent.Invoke();
             }
         }
 
         public void SetText(string text)
         {
-            UI.text = text;
+            _ui.text = text;
         }
 
-        void Clear()
+        private void Clear()
         {
-            mWidthUnit = 3;
+            _widthUnit = 3;
             PlaceParts();
-            UI.text = "";
+            _ui.text = "";
         }
 
-        void PlaceParts()
+        private void PlaceParts()
         {
-            var transform1 = N.transform;
-            transform1.localScale = Vector3.up + Vector3.forward + Vector3.right * mWidthUnit;
-            var sprite = C.sprite;
-            var localPosition = mHeightUnit * sprite.bounds.extents.y * Vector3.up;
+            var transform1 = _n.transform;
+            transform1.localScale = Vector3.up + Vector3.forward + Vector3.right * _widthUnit;
+            var sprite = _c.sprite;
+            var localPosition = _heightUnit * sprite.bounds.extents.y * Vector3.up;
             transform1.localPosition = localPosition;
 
-            var transform2 = S.transform;
+            var transform2 = _s.transform;
             transform2.localScale = transform1.localScale;
             var localPosition1 = -localPosition;
             transform2.localPosition = localPosition1;
 
 
-            var transform3 = E.transform;
-            transform3.localScale = Vector3.right + Vector3.forward + Vector3.up * mHeightUnit;
-            var position = mWidthUnit * sprite.bounds.extents.x * Vector3.right;
+            var transform3 = _e.transform;
+            transform3.localScale = Vector3.right + Vector3.forward + Vector3.up * _heightUnit;
+            var position = _widthUnit * sprite.bounds.extents.x * Vector3.right;
             transform3.localPosition = position;
 
-            var transform4 = W.transform;
+            var transform4 = _w.transform;
             transform4.localScale = transform3.localScale;
             var position1 = -position;
             transform4.localPosition = position1;
 
-            C.transform.localScale = Vector3.right * mWidthUnit + Vector3.up * mHeightUnit + Vector3.forward;
-            Arrow.transform.localPosition = localPosition1;
+            _c.transform.localScale = Vector3.right * _widthUnit + Vector3.up * _heightUnit + Vector3.forward;
+            _arrow.transform.localPosition = localPosition1;
 
-            NE.transform.localPosition = localPosition + position;
-            NW.transform.localPosition = localPosition + position1;
-            SE.transform.localPosition = localPosition1 + position;
-            SW.transform.localPosition = localPosition1 + position1;
+            _ne.transform.localPosition = localPosition + position;
+            _nw.transform.localPosition = localPosition + position1;
+            _se.transform.localPosition = localPosition1 + position;
+            _sw.transform.localPosition = localPosition1 + position1;
         }
 
-        void Awake()
+        private void Awake()
         {
             Show(false);
         }
 
-        void Update()
+        private void Update()
         {
-            mWidthUnit = 1 + UI.rectTransform.sizeDelta.x / interval;
+            _widthUnit = 1 + _ui.rectTransform.sizeDelta.x / _interval;
             if (IsShow)
             {
                 PlaceParts();

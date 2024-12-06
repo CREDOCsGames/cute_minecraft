@@ -6,28 +6,28 @@ namespace UI
 {
     public class LoadingWindowComponent : MonoBehaviour
     {
-        [SerializeField] Slider mProgressBar;
+        [SerializeField] private Slider _progressBar;
 
         public Slider ProgressBar
         {
             get
             {
-                Debug.Assert(mProgressBar);
-                return mProgressBar;
+                Debug.Assert(_progressBar);
+                return _progressBar;
             }
-            private set => mProgressBar = value;
+            private set => _progressBar = value;
         }
 
-        [SerializeField] TextMeshProUGUI mLoadSceneNameText;
+        [SerializeField] private TextMeshProUGUI _loadSceneNameText;
 
         public TextMeshProUGUI LoadSceneNameText
         {
             get
             {
-                Debug.Assert(mLoadSceneNameText);
-                return mLoadSceneNameText;
+                Debug.Assert(_loadSceneNameText);
+                return _loadSceneNameText;
             }
-            private set => mLoadSceneNameText = value;
+            private set => _loadSceneNameText = value;
         }
 
         public MonoBehaviour CoroutineRunner => this;
@@ -38,7 +38,7 @@ namespace UI
             gameObject.SetActive(show);
         }
 
-        void Awake()
+        private void Awake()
         {
             DontDestroyOnLoad(gameObject);
         }

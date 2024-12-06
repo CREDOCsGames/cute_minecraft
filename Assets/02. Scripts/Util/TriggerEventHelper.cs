@@ -4,11 +4,11 @@ namespace Util
 {
     public class TriggerEventHelper : MonoBehaviour
     {
-        [SerializeField] string Tag;
+        [SerializeField] private string _tag;
 
         public void SetParent(Collider collider)
         {
-            if (!string.IsNullOrEmpty(Tag) && !collider.CompareTag(Tag))
+            if (!string.IsNullOrEmpty(_tag) && !collider.CompareTag(_tag))
             {
                 return;
             }

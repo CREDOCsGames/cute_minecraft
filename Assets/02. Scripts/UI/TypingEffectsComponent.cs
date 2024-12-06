@@ -16,16 +16,17 @@ namespace UI
         public UnityEvent OnTypingStartEvent;
         public UnityEvent OnTypingEndEvent;
 
-        [Header("References")] [SerializeField]
-        TextMeshProUGUI UI;
+        [Header("References")]
+        [SerializeField] private TextMeshProUGUI _ui;
 
-        [Header("Options")] [SerializeField] EffectType Type;
-        [SerializeField] float Duration;
-        [SerializeField] float FixedInterval;
+        [Header("Options")]
+        [SerializeField] private EffectType _type;
+        [SerializeField] private float _duration;
+        [SerializeField] private float _fixedInterval;
 
         public void StartEffects()
         {
-            var text = UI.text;
+            var text = _ui.text;
             if (string.IsNullOrEmpty(text))
             {
                 return;
@@ -35,13 +36,13 @@ namespace UI
             StartCoroutine(TypringText(text));
         }
 
-        IEnumerator TypringText(string text)
+        private IEnumerator TypringText(string text)
         {
             OnTypingStartEvent.Invoke();
-            var delay = Type is EffectType.Duration ? Duration / text.Length : FixedInterval;
+            var delay = _type is EffectType.Duration ? _duration / text.Length : _fixedInterval;
             for (var i = 1; i <= text.Length; i++)
             {
-                UI.text = text.Substring(0, i);
+                _ui.text = text.Substring(0, i);
                 yield return new WaitForSeconds(delay);
             }
 

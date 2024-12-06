@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using RootMotion.FinalIK;
+﻿using RootMotion.FinalIK;
+using UnityEngine;
 
 namespace RootMotion.Demos
 {

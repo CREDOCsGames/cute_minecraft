@@ -1,27 +1,30 @@
-﻿using UnityEngine;
-using System.Collections;
-using RootMotion.FinalIK;
+﻿using RootMotion.FinalIK;
+using UnityEngine;
 
-namespace RootMotion.Demos {
+namespace RootMotion.Demos
+{
 
-	public class VRIKPlatform : MonoBehaviour {
+    public class VRIKPlatform : MonoBehaviour
+    {
 
-		public VRIK ik;
+        public VRIK ik;
 
         private Vector3 lastPosition;
-		private Quaternion lastRotation = Quaternion.identity;
+        private Quaternion lastRotation = Quaternion.identity;
 
-		void OnEnable() {
+        void OnEnable()
+        {
             lastPosition = transform.position;
-			lastRotation = transform.rotation;
-		}
-		
-		void LateUpdate () {
-            // Adding the motion of this Transform to VRIK
-			ik.solver.AddPlatformMotion (transform.position - lastPosition, transform.rotation * Quaternion.Inverse(lastRotation), transform.position);
+            lastRotation = transform.rotation;
+        }
 
-			lastRotation = transform.rotation;
-			lastPosition = transform.position;
-		}
-	}
+        void LateUpdate()
+        {
+            // Adding the motion of this Transform to VRIK
+            ik.solver.AddPlatformMotion(transform.position - lastPosition, transform.rotation * Quaternion.Inverse(lastRotation), transform.position);
+
+            lastRotation = transform.rotation;
+            lastPosition = transform.position;
+        }
+    }
 }

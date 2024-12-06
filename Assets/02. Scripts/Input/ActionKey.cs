@@ -20,7 +20,7 @@ namespace Input1
             Cancel
         }
 
-        static readonly Dictionary<string, bool> mKeyDownMap = new Dictionary<string, bool>
+        private static readonly Dictionary<string, bool> _keyDownMap = new()
         {
             { Button.Up.ToString(), false },
             { Button.Down.ToString(), false },
@@ -33,33 +33,33 @@ namespace Input1
             { Button.Cancel.ToString(), false }
         };
 
-        static Dictionary<string, bool> KeyDownMap
+        private static Dictionary<string, bool> KeyDownMap
         {
             get
             {
-                Debug.Assert(mKeyDownMap != null);
-                return mKeyDownMap;
+                Debug.Assert(_keyDownMap != null);
+                return _keyDownMap;
             }
         }
 
         public static List<string> InputKeys => KeyDownMap.Keys.ToList();
-        static float mLastUpdate;
+        private static float _lastUpdate;
 
         public static Dictionary<string, bool> GetAxisRawMap()
         {
-            if (!(mLastUpdate < Time.time))
+            if (!(_lastUpdate < Time.time))
             {
-                return mKeyDownMap;
+                return _keyDownMap;
             }
 
             foreach (var button in KeyDownMap.ToList())
             {
-                mKeyDownMap[button.Key] = UnityEngine.Input.GetAxisRaw(button.Key) != 0;
+                _keyDownMap[button.Key] = UnityEngine.Input.GetAxisRaw(button.Key) != 0;
             }
 
-            mLastUpdate = Time.time;
+            _lastUpdate = Time.time;
 
-            return mKeyDownMap;
+            return _keyDownMap;
         }
     }
 }

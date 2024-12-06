@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace RootMotion.FinalIK
@@ -136,7 +134,7 @@ namespace RootMotion.FinalIK
             /// <summary>
             /// Called when the right foot has finished a step
             /// </summary>
-            [HideInInspector] [SerializeField] public UnityEvent onRightFootstep = new UnityEvent(); // Events hidden because of Unity custom property drawer problems with UnityEvents, can still access and add listeners via script.
+            [HideInInspector][SerializeField] public UnityEvent onRightFootstep = new UnityEvent(); // Events hidden because of Unity custom property drawer problems with UnityEvents, can still access and add listeners via script.
 
             /// <summary>
             /// Gets the approximated center of mass.

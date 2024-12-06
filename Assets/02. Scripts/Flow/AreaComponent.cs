@@ -29,15 +29,14 @@ namespace Flow
         };
 
         [Header("[Extents of at least 5]")]
-        [SerializeField]
-        Bounds mRange;
+        [SerializeField] private Bounds _range;
 
         public Bounds Range
         {
             get
             {
-                var runtimeRange = mRange;
-                runtimeRange.center = transform.position + mRange.center;
+                var runtimeRange = _range;
+                runtimeRange.center = transform.position + _range.center;
                 return runtimeRange;
             }
         }
@@ -56,56 +55,56 @@ namespace Flow
         public UnityEvent<Bounds> OnExitEvent;
         public UnityEvent<Bounds> OnClearEvent;
 
-        Area mArea => GameManager.PuzzleArea;
+        public Area Area => GameManager.PuzzleArea;
 
         public void OnEnter()
         {
-            mArea.OnEnterEvent += InvokeEnterEvent;
-            mArea.OnExitEvent += InvokeExitEvnet;
-            mArea.OnClearEvent += InvokeClearEvent;
-            mArea.OnEnter();
+            Area.OnEnterEvent += InvokeEnterEvent;
+            Area.OnExitEvent += InvokeExitEvnet;
+            Area.OnClearEvent += InvokeClearEvent;
+            Area.OnEnter();
         }
 
         public void OnExit()
         {
-            mArea.OnExit();
-            mArea.OnEnterEvent -= InvokeEnterEvent;
-            mArea.OnExitEvent -= InvokeExitEvnet;
-            mArea.OnClearEvent -= InvokeClearEvent;
+            Area.OnExit();
+            Area.OnEnterEvent -= InvokeEnterEvent;
+            Area.OnExitEvent -= InvokeExitEvnet;
+            Area.OnClearEvent -= InvokeClearEvent;
         }
 
         public void OnClear()
         {
-            mArea.OnClear();
+            Area.OnClear();
         }
 
-        void InvokeEnterEvent(Bounds bounds)
+        private void InvokeEnterEvent(Bounds bounds)
         {
             OnEnterEvent.Invoke(bounds);
         }
 
-        void InvokeExitEvnet(Bounds bounds)
+        private void InvokeExitEvnet(Bounds bounds)
         {
             OnExitEvent.Invoke(bounds);
         }
 
-        void InvokeClearEvent(Bounds bounds)
+        private void InvokeClearEvent(Bounds bounds)
         {
             OnClearEvent.Invoke(bounds);
         }
 
 #if UNITY_EDITOR
-        [Header("[Debug]")][SerializeField] bool UseViewAreaRange;
-        [SerializeField] bool UseViewBridgeRange;
-        void OnDrawGizmosSelected()
+        [Header("[Debug]")][SerializeField] private bool _useViewAreaRange;
+        [SerializeField] private bool _useViewBridgeRange;
+        private void OnDrawGizmosSelected()
         {
             if (Application.isPlaying)
             {
-                Gizmos.DrawWireCube(mRange.center, Range.extents);
+                Gizmos.DrawWireCube(_range.center, Range.extents);
             }
             else
             {
-                Gizmos.DrawWireCube(transform.position + mRange.center, mRange.extents);
+                Gizmos.DrawWireCube(transform.position + _range.center, _range.extents);
             }
 
             if (Application.isPlaying)
@@ -116,7 +115,7 @@ namespace Flow
             var originColor = Gizmos.color;
             var style = new GUIStyle();
 
-            if (UseViewAreaRange)
+            if (_useViewAreaRange)
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireCube(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange,
@@ -125,7 +124,7 @@ namespace Flow
                 Handles.Label(AreaManager.GetAreaNum(Range.center) * AreaManager.AreaRange, "Area", style);
             }
 
-            if (!UseViewBridgeRange)
+            if (!_useViewBridgeRange)
             {
                 return;
             }

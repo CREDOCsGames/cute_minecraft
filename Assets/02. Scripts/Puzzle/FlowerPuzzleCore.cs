@@ -6,11 +6,11 @@ namespace Puzzle
 {
     public class FlowerPuzzleCore : PuzzleCore
     {
-        public FlowerPuzzleCore(Madiator madiator, CubeMap<byte> map) : base(madiator, map)
+        public FlowerPuzzleCore(CubeMap<byte> map) : base(map)
         {
         }
 
-        bool _clear;
+        private bool _clear;
         protected override void EditData(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
         {
             if (_clear)
@@ -32,7 +32,7 @@ namespace Puzzle
                     break;
                 default:
                     output = new[] { Vector4Byte.FAIL };
-                    Debug.Assert(false, $"{input.w}");
+                    Debug.LogWarning($"{input.w}");
                     return;
             }
 
@@ -40,14 +40,14 @@ namespace Puzzle
         }
 
 
-        void CheckClear(in CubeMap<byte> cubeMap)
+        private void CheckClear(in CubeMap<byte> cubeMap)
         {
             var first = cubeMap.Elements.First();
             _clear = cubeMap.Elements.All(x => x == 1 || x == 0) || cubeMap.Elements.All(x => x == 2 || x == 0);
         }
 
-        static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
-        void Cross(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
+        private void Cross(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
         {
             var flower = cubeMap.GetElements(input.x, input.y, input.z);
             Vector4Byte result;
@@ -80,7 +80,7 @@ namespace Puzzle
 
         }
 
-        void Dot(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        private void Dot(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
         {
             var flower = cubeMap.GetElements(input.x, input.y, input.z);
             Vector4Byte result;
@@ -101,7 +101,7 @@ namespace Puzzle
             output = new[] { result };
         }
 
-        void Create(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        private void Create(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
         {
             var flower = cubeMap.GetElements(input.x, input.y, input.z);
             Vector4Byte result;

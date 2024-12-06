@@ -73,7 +73,7 @@ v2f vert( appdata_tan v )
 {
 	v2f o;
 	o.pos = UnityObjectToClipPos( v.vertex );
-	o.uv.xy = TRANSFORM_TEX( v.texcoord.xy, _MainTex );	
+	o.uv.xy = TRANSFOR_TEX( v.texcoord.xy, _MainTex );	
 	o.normal = normalize( mul( unity_ObjectToWorld, float4_t( v.normal, 0 ) ).xyz );
 	
 	// Eye direction vector

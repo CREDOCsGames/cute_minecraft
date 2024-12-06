@@ -6,8 +6,8 @@ namespace Movement
     [CreateAssetMenu(menuName = "Custom/MovementAction/BazierTrace")]
     public class BezierTrace : TransformBaseMovement
     {
-        [SerializeField] AnimationCurve curve;
-        [SerializeField] float duration;
+        [SerializeField] private AnimationCurve _curve;
+        [SerializeField] private float _duration;
 
         public override IEnumerator Move(Transform start, Transform end, bool repeat = false)
         {
@@ -21,11 +21,11 @@ namespace Movement
                 controlPoint.y = Random.Range(startPos.y, endPos.y);
                 controlPoint.z = Random.Range(startPos.z, endPos.z);
 
-                while (time < duration)
+                while (time < _duration)
                 {
                     time += Time.fixedDeltaTime;
                     var bezierPosition = CalculateBezierPoint(startPos, controlPoint, end.position,
-                        (time * curve.Evaluate(time / duration)) / duration);
+                        (time * _curve.Evaluate(time / _duration)) / _duration);
                     start.position = bezierPosition;
                     yield return new WaitForFixedUpdate();
                 }
@@ -34,7 +34,7 @@ namespace Movement
             } while (repeat);
         }
 
-        static Vector3 CalculateBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
+        private static Vector3 CalculateBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
         {
             var u = 1 - t;
             var tt = t * t;

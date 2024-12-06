@@ -4,15 +4,15 @@ namespace Puzzle
 {
     public class Bridge
     {
-        bool IsConnected => mInstance;
-        bool IsConnectable => Vector3.Distance(PointA, PointB) <= mLimit && Vector3.Distance(PointA, PointB) > 5;
-        Vector3 PointA { get; set; }
-        Vector3 PointB { get; set; }
-        GameObject mInstance;
-        readonly float mLimit;
-        static readonly Material M_LED = Resources.Load<Material>("Materials/M_LED_Bridge");
+        public bool IsConnected => _instance;
+        public bool IsConnectable => Vector3.Distance(_pointA, _pointB) <= _limit && Vector3.Distance(_pointA, _pointB) > 5;
+        private Vector3 _pointA { get; set; }
+        private Vector3 _pointB { get; set; }
+        private GameObject _instance;
+        private readonly float _limit;
+        private static readonly Material _LED = Resources.Load<Material>("Materials/_LED_Bridge");
 
-        static readonly Vector3[] mDirections =
+        private static readonly Vector3[] _directions =
         {
             new Vector3(1, 1, 0),
             new Vector3(0, 1, -1),
@@ -22,7 +22,7 @@ namespace Puzzle
 
         public Bridge(float limit)
         {
-            mLimit = limit;
+            _limit = limit;
         }
 
         public void SetConnectionPoints(Bounds basis, Bounds area)
@@ -35,8 +35,8 @@ namespace Puzzle
             var indexBasis = (int)Mathf.Repeat(angle, 360f) / 90;
             var indexArea = (int)Mathf.Repeat(indexBasis + 2, 4);
 
-            PointA = basis.center + Vector3.Scale(mDirections[indexBasis], basis.extents);
-            PointB = area.center + Vector3.Scale(mDirections[indexArea], area.extents);
+            _pointA = basis.center + Vector3.Scale(_directions[indexBasis], basis.extents);
+            _pointB = area.center + Vector3.Scale(_directions[indexArea], area.extents);
         }
 
         public void ConnectAtoB()
@@ -46,32 +46,32 @@ namespace Puzzle
                 return;
             }
 
-            mInstance = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            mInstance.GetComponent<MeshRenderer>().material = M_LED;
-            mInstance.layer = LayerMask.NameToLayer("Bridge");
+            _instance = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            _instance.GetComponent<MeshRenderer>().material = _LED;
+            _instance.layer = LayerMask.NameToLayer("Bridge");
 
-            var size = new Vector3(1.5f, 0.5f, Vector3.Distance(PointA, PointB) + 1);
-            mInstance.transform.localScale = size;
+            var size = new Vector3(1.5f, 0.5f, Vector3.Distance(_pointA, _pointB) + 1);
+            _instance.transform.localScale = size;
 
-            var center = (PointA + PointB) / 2 - Vector3.up * size.y / 2;
-            mInstance.transform.position = center;
+            var center = (_pointA + _pointB) / 2 - Vector3.up * size.y / 2;
+            _instance.transform.position = center;
 
-            mInstance.transform.LookAt(PointB);
+            _instance.transform.LookAt(_pointB);
 
             CerateColliderWall();
         }
 
-        void CerateColliderWall()
+        private void CerateColliderWall()
         {
             var obj = new GameObject();
-            obj.transform.SetParent(mInstance.transform);
+            obj.transform.SetParent(_instance.transform);
 
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.localScale = Vector3.up * Mathf.Abs(PointA.y - PointB.y) + Vector3.right + Vector3.forward;
+            obj.transform.localScale = Vector3.up * Mathf.Abs(_pointA.y - _pointB.y) + Vector3.right + Vector3.forward;
             obj.transform.localEulerAngles = Vector3.left * Mathf.Abs(obj.transform.parent.eulerAngles.x);
 
             var scale = new Vector3(1 / 1.5f * 0.1f,
-                (2 / mInstance.transform.lossyScale.y) * Mathf.Abs(PointA.y - PointB.y), 1);
+                (2 / _instance.transform.lossyScale.y) * Mathf.Abs(_pointA.y - _pointB.y), 1);
 
             var left = obj.AddComponent<BoxCollider>();
             left.size = scale;
@@ -88,8 +88,8 @@ namespace Puzzle
                 return;
             }
 
-            Object.Destroy(mInstance);
-            mInstance = null;
+            Object.Destroy(_instance);
+            _instance = null;
         }
     }
 }

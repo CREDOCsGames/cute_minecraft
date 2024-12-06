@@ -6,15 +6,15 @@ namespace Flow
     public class Area
     {
         public static Bounds zero = new();
-        Bounds mRange;
+        private Bounds _range;
 
         public Bounds Range
         {
-            get => mRange;
+            get => _range;
             set
             {
                 Debug.Assert(value.Equals(zero) || Range.Equals(zero), $"Area overlapped : {Range}, {value}");
-                mRange = value;
+                _range = value;
             }
         }
 

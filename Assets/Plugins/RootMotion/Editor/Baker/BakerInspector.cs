@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.Playables;
-using System;
 
 namespace RootMotion
 {
@@ -24,7 +22,7 @@ namespace RootMotion
 
             EditorGUILayout.Space();
 
-            switch(script.mode)
+            switch (script.mode)
             {
                 case Baker.Mode.AnimationClips:
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("inheritClipSettings"));
@@ -48,7 +46,7 @@ namespace RootMotion
                 case Baker.Mode.AnimationStates:
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("animationStates"), true);
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("appendName"));
-                    
+
                     break;
                 case Baker.Mode.PlayableDirector:
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("saveName"));

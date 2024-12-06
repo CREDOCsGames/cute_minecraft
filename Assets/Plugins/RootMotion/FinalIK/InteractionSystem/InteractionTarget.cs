@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
-using RootMotion;
 
-namespace RootMotion.FinalIK {
+namespace RootMotion.FinalIK
+{
 
-	/// <summary>
-	/// The target of an effector in the InteractionSystem.
-	/// </summary>
-	[HelpURL("https://www.youtube.com/watch?v=r5jiZnsDH3M")]
-	[AddComponentMenu("Scripts/RootMotion.FinalIK/Interaction System/Interaction Target")]
-	public class InteractionTarget : MonoBehaviour {
+    /// <summary>
+    /// The target of an effector in the InteractionSystem.
+    /// </summary>
+    [HelpURL("https://www.youtube.com/watch?v=r5jiZnsDH3M")]
+    [AddComponentMenu("Scripts/RootMotion.FinalIK/Interaction System/Interaction Target")]
+    public class InteractionTarget : MonoBehaviour
+    {
 
         [System.Serializable]
         public enum RotationMode
@@ -34,137 +34,148 @@ namespace RootMotion.FinalIK {
 
         // Open a video tutorial video
         [ContextMenu("TUTORIAL VIDEO (PART 1: BASICS)")]
-		void OpenTutorial1() {
-			Application.OpenURL("https://www.youtube.com/watch?v=r5jiZnsDH3M");
-		}
-		
-		// Open a video tutorial video
-		[ContextMenu("TUTORIAL VIDEO (PART 2: PICKING UP...)")]
-		void OpenTutorial2() {
-			Application.OpenURL("https://www.youtube.com/watch?v=eP9-zycoHLk");
-		}
-		
-		// Open a video tutorial video
-		[ContextMenu("TUTORIAL VIDEO (PART 3: ANIMATION)")]
-		void OpenTutorial3() {
-			Application.OpenURL("https://www.youtube.com/watch?v=sQfB2RcT1T4&index=14&list=PLVxSIA1OaTOu8Nos3CalXbJ2DrKnntMv6");
-		}
-		
-		// Open a video tutorial video
-		[ContextMenu("TUTORIAL VIDEO (PART 4: TRIGGERS)")]
-		void OpenTutorial4() {
-			Application.OpenURL("https://www.youtube.com/watch?v=-TDZpNjt2mk&index=15&list=PLVxSIA1OaTOu8Nos3CalXbJ2DrKnntMv6");
-		}
+        void OpenTutorial1()
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=r5jiZnsDH3M");
+        }
 
-		// Link to the Final IK Google Group
-		[ContextMenu("Support Group")]
-		void SupportGroup() {
-			Application.OpenURL("https://groups.google.com/forum/#!forum/final-ik");
-		}
-		
-		// Link to the Final IK Asset Store thread in the Unity Community
-		[ContextMenu("Asset Store Thread")]
-		void ASThread() {
-			Application.OpenURL("http://forum.unity3d.com/threads/final-ik-full-body-ik-aim-look-at-fabrik-ccd-ik-1-0-released.222685/");
-		}
+        // Open a video tutorial video
+        [ContextMenu("TUTORIAL VIDEO (PART 2: PICKING UP...)")]
+        void OpenTutorial2()
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=eP9-zycoHLk");
+        }
 
-		/// <summary>
-		/// Multiplies the value of a weight curve for this effector target.
-		/// </summary>
-		[System.Serializable]
-		public class Multiplier {
-			/// <summary>
-			/// The curve type (InteractionObject.WeightCurve.Type).
-			/// </summary>
-			[Tooltip("The curve type (InteractionObject.WeightCurve.Type).")]
-			public InteractionObject.WeightCurve.Type curve;
-			/// <summary>
-			/// Multiplier of the curve's value.
-			/// </summary>
-			[Tooltip("Multiplier of the curve's value.")]
-			public float multiplier;
-		}
+        // Open a video tutorial video
+        [ContextMenu("TUTORIAL VIDEO (PART 3: ANIMATION)")]
+        void OpenTutorial3()
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=sQfB2RcT1T4&index=14&list=PLVxSIA1OaTOu8Nos3CalXbJ2DrKnntMv6");
+        }
 
-		/// <summary>
-		/// The type of the FBBIK effector.
-		/// </summary>
-		[Tooltip("The type of the FBBIK effector.")]
-		public FullBodyBipedEffector effectorType;
-		/// <summary>
-		/// InteractionObject weight curve multipliers for this effector target.
-		/// </summary>
-		[Tooltip("InteractionObject weight curve multipliers for this effector target.")]
-		public Multiplier[] multipliers;
-		/// <summary>
-		/// The interaction speed multiplier for this effector. This can be used to make interactions faster/slower for specific effectors.
-		/// </summary>
-		[Tooltip("The interaction speed multiplier for this effector. This can be used to make interactions faster/slower for specific effectors.")]
-		public float interactionSpeedMlp = 1f;
-		/// <summary>
-		/// The pivot to twist/swing this interaction target about. For symmetric objects that can be interacted with from a certain angular range.
-		/// </summary>
-		[Tooltip("The pivot to twist/swing this interaction target about. For symmetric objects that can be interacted with from a certain angular range.")]
-		public Transform pivot;
+        // Open a video tutorial video
+        [ContextMenu("TUTORIAL VIDEO (PART 4: TRIGGERS)")]
+        void OpenTutorial4()
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=-TDZpNjt2mk&index=15&list=PLVxSIA1OaTOu8Nos3CalXbJ2DrKnntMv6");
+        }
+
+        // Link to the Final IK Google Group
+        [ContextMenu("Support Group")]
+        void SupportGroup()
+        {
+            Application.OpenURL("https://groups.google.com/forum/#!forum/final-ik");
+        }
+
+        // Link to the Final IK Asset Store thread in the Unity Community
+        [ContextMenu("Asset Store Thread")]
+        void ASThread()
+        {
+            Application.OpenURL("http://forum.unity3d.com/threads/final-ik-full-body-ik-aim-look-at-fabrik-ccd-ik-1-0-released.222685/");
+        }
+
+        /// <summary>
+        /// Multiplies the value of a weight curve for this effector target.
+        /// </summary>
+        [System.Serializable]
+        public class Multiplier
+        {
+            /// <summary>
+            /// The curve type (InteractionObject.WeightCurve.Type).
+            /// </summary>
+            [Tooltip("The curve type (InteractionObject.WeightCurve.Type).")]
+            public InteractionObject.WeightCurve.Type curve;
+            /// <summary>
+            /// Multiplier of the curve's value.
+            /// </summary>
+            [Tooltip("Multiplier of the curve's value.")]
+            public float multiplier;
+        }
+
+        /// <summary>
+        /// The type of the FBBIK effector.
+        /// </summary>
+        [Tooltip("The type of the FBBIK effector.")]
+        public FullBodyBipedEffector effectorType;
+        /// <summary>
+        /// InteractionObject weight curve multipliers for this effector target.
+        /// </summary>
+        [Tooltip("InteractionObject weight curve multipliers for this effector target.")]
+        public Multiplier[] multipliers;
+        /// <summary>
+        /// The interaction speed multiplier for this effector. This can be used to make interactions faster/slower for specific effectors.
+        /// </summary>
+        [Tooltip("The interaction speed multiplier for this effector. This can be used to make interactions faster/slower for specific effectors.")]
+        public float interactionSpeedMlp = 1f;
+        /// <summary>
+        /// The pivot to twist/swing this interaction target about. For symmetric objects that can be interacted with from a certain angular range.
+        /// </summary>
+        [Tooltip("The pivot to twist/swing this interaction target about. For symmetric objects that can be interacted with from a certain angular range.")]
+        public Transform pivot;
         /// <summary>
         /// 2 or 3 degrees of freedom to match this InteractionTarget's rotation to the effector bone rotation.
         /// </summary>
         [Tooltip("2 or 3 degrees of freedom to match this InteractionTarget's rotation to the effector bone rotation.")]
         public RotationMode rotationMode;
-		/// <summary>
-		/// The axis of twisting the interaction target.
-		/// </summary>
-		[Tooltip("The axis of twisting the interaction target (blue line).")]
-		public Vector3 twistAxis = Vector3.up;
-		/// <summary>
-		/// The weight of twisting the interaction target towards the effector bone in the start of the interaction.
-		/// </summary>
-		[Tooltip("The weight of twisting the interaction target towards the effector bone in the start of the interaction.")]
-		public float twistWeight = 1f;
-		/// <summary>
-		/// The weight of swinging the interaction target towards the effector bone in the start of the interaction. Swing is defined as a 3-DOF rotation around any axis, while twist is only around the twist axis.
-		/// </summary>
-		[Tooltip("The weight of swinging the interaction target towards the effector bone in the start of the interaction. Swing is defined as a 3-DOF rotation around any axis, while twist is only around the twist axis.")]
-		public float swingWeight;
+        /// <summary>
+        /// The axis of twisting the interaction target.
+        /// </summary>
+        [Tooltip("The axis of twisting the interaction target (blue line).")]
+        public Vector3 twistAxis = Vector3.up;
+        /// <summary>
+        /// The weight of twisting the interaction target towards the effector bone in the start of the interaction.
+        /// </summary>
+        [Tooltip("The weight of twisting the interaction target towards the effector bone in the start of the interaction.")]
+        public float twistWeight = 1f;
+        /// <summary>
+        /// The weight of swinging the interaction target towards the effector bone in the start of the interaction. Swing is defined as a 3-DOF rotation around any axis, while twist is only around the twist axis.
+        /// </summary>
+        [Tooltip("The weight of swinging the interaction target towards the effector bone in the start of the interaction. Swing is defined as a 3-DOF rotation around any axis, while twist is only around the twist axis.")]
+        public float swingWeight;
         /// <summary>
         /// The weight of rotating this InteractionTarget to the effector bone in the start of the interaction (and during if 'Rotate Once' is disabled
         /// </summary>
         [Tooltip("The weight of rotating this InteractionTarget to the effector bone in the start of the interaction (and during if 'Rotate Once' is disabled")]
         [Range(0f, 1f)] public float threeDOFWeight = 1f;
-		/// <summary>
-		/// If true, will twist/swing around the pivot only once at the start of the interaction. If false, will continue rotating throuout the whole interaction.
-		/// </summary>
-		[Tooltip("If true, will twist/swing around the pivot only once at the start of the interaction. If false, will continue rotating throuout the whole interaction.")]
-		public bool rotateOnce = true;
+        /// <summary>
+        /// If true, will twist/swing around the pivot only once at the start of the interaction. If false, will continue rotating throuout the whole interaction.
+        /// </summary>
+        [Tooltip("If true, will twist/swing around the pivot only once at the start of the interaction. If false, will continue rotating throuout the whole interaction.")]
+        public bool rotateOnce = true;
         /// <summary>
         /// Will not set HandPoser's pose target and allows you to use a pose target from a previous interaction if disabled.
         /// </summary>
         [Tooltip("Will not set HandPoser's pose target and allows you to use a pose target from a previous interaction if disabled.")]
         public bool usePoser = true;
-		/// <summary>
-		/// Used only together with UniversalPoser. List of bones must match UniversalPoser's list of bones in both array size and hierarchy.
-		/// </summary>
-		[Tooltip("Used only together with UniversalPoser. List of bones must match UniversalPoser's list of bones in both array size and hierarchy.")]
-		public Transform[] bones = new Transform[0];
+        /// <summary>
+        /// Used only together with UniversalPoser. List of bones must match UniversalPoser's list of bones in both array size and hierarchy.
+        /// </summary>
+        [Tooltip("Used only together with UniversalPoser. List of bones must match UniversalPoser's list of bones in both array size and hierarchy.")]
+        public Transform[] bones = new Transform[0];
 
-		private Quaternion defaultLocalRotation;
-		private Transform lastPivot;
+        private Quaternion defaultLocalRotation;
+        private Transform lastPivot;
 
-		// Should a curve of the Type be ignored for this effector?
-		public float GetValue(InteractionObject.WeightCurve.Type curveType) {
-			for (int i = 0; i < multipliers.Length; i++) if (multipliers[i].curve == curveType) return multipliers[i].multiplier;
-			return 1f;
-		}
+        // Should a curve of the Type be ignored for this effector?
+        public float GetValue(InteractionObject.WeightCurve.Type curveType)
+        {
+            for (int i = 0; i < multipliers.Length; i++) if (multipliers[i].curve == curveType) return multipliers[i].multiplier;
+            return 1f;
+        }
 
         // Reset the twist and swing rotation of the target
-        public void ResetRotation() {
-			if (pivot != null) pivot.localRotation = defaultLocalRotation;
-		}
+        public void ResetRotation()
+        {
+            if (pivot != null) pivot.localRotation = defaultLocalRotation;
+        }
 
         // Rotate this target towards a position
-        public void RotateTo(Transform bone) {
+        public void RotateTo(Transform bone)
+        {
             if (pivot == null) return;
 
-            if (pivot != lastPivot) {
+            if (pivot != lastPivot)
+            {
                 defaultLocalRotation = pivot.localRotation;
                 lastPivot = pivot;
             }
@@ -205,7 +216,8 @@ namespace RootMotion.FinalIK {
                     if (threeDOFWeight >= 1f)
                     {
                         pivot.rotation = fromTo * pivot.rotation;
-                    } else
+                    }
+                    else
                     {
                         pivot.rotation = Quaternion.Slerp(Quaternion.identity, fromTo, threeDOFWeight) * pivot.rotation;
                     }

@@ -1836,8 +1836,8 @@ MonoBehaviour:
   OnTimeout:
     m_PersistentCalls:
       m_Calls: []
-  mTimeout: 1
-  mbPlayOnAwake: 1
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!114 &565631996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Commands: []
-  bClamp: 1
+  _useClamp: 0
 --- !u!4 &592222055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4109714994798658, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
@@ -2138,8 +2138,8 @@ MonoBehaviour:
           m_StringArgument: IdleC
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 1
-  mbPlayOnAwake: 0
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!1001 &696595605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3030,8 +3030,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 3
-  mbPlayOnAwake: 0
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!114 &1051452480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,38 +3214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af1e1b4a5d0c7f4a85552287b7bff77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaType: 1
-  OnEnterEvent:
+  _areaType: 0
+  _onEnterEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1132379424}
-        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: DoStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnSelectEvent:
+      m_Calls: []
+  _onSelectEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1051452481}
-        m_TargetAssemblyTypeName: MovieEventHandler, Assembly-CSharp
-        m_MethodName: OnPlay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnChangeEvent:
+      m_Calls: []
+  _onChangeEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1132379422
@@ -3260,71 +3236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1469948f27260204e88d4f48b7348045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mIsActive: 0
-  ButtonEvents:
-  - Key: 6
-    InputType: 0
-    Event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1132379421}
-          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
-          m_MethodName: OnDisable
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1132379422}
-          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Key: 2
-    InputType: 0
-    Event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
-          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
-          m_MethodName: NextStage
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Key: 3
-    InputType: 0
-    Event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
-          m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
-          m_MethodName: PrevStage
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  _activeOnAwake: 0
+  _buttonEvents: []
 --- !u!4 &1132379423
 Transform:
   m_ObjectHideFlags: 0
@@ -3382,8 +3295,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  mTimeout: 1
-  mbPlayOnAwake: 0
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!114 &1132379425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3396,58 +3309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342180ee33f2fb54e9d0d2f20c1ef141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnChangeEvent:
+  _onChangeEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 07978975f2acc8a4fb92d23bbbd63472, type: 2}
-        m_TargetAssemblyTypeName: PlatformGame.Contents.StageManager, Assembly-CSharp
-        m_MethodName: SetText
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1457424416}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TransformHandler, Assembly-CSharp
-        m_MethodName: SetFirstPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 1da698678e690e74797e799e2c04ac4d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
-        m_MethodName: ResetAction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1457424416}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlatformGame.Character.Character, Assembly-CSharp
-        m_MethodName: DoAction
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 1da698678e690e74797e799e2c04ac4d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
-            Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1132848392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,8 +3383,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 1
-  mbPlayOnAwake: 1
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!224 &1132848394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3747,8 +3611,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 5
-  mbPlayOnAwake: 1
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!114 &1142829726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3882,7 +3746,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bClamp: 1
+  _useClamp: 0
 --- !u!114 &1142829727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3895,7 +3759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce71f03ed46626e4fa6a30117008473f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDefaultActionOrNull: {fileID: 0}
+  _defaultActionOrNull: {fileID: 0}
 --- !u!1 &1214281132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 301acb4c63ca54e47b7b1245fe2ab149, type: 3}
@@ -3924,7 +3788,7 @@ BoxCollider:
   m_Center: {x: 3.105882e-22, y: 0.000000059604645, z: 0.005000057}
 --- !u!4 &1234814365 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 332672648729753660, guid: 72a321835470ef142a353df856c16156, type: 3}
+  m_CorrespondingSourceObject: {fileID: 244182849949164586, guid: 72a321835470ef142a353df856c16156, type: 3}
   m_PrefabInstance: {fileID: 68267187}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1243622129
@@ -4034,62 +3898,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af1e1b4a5d0c7f4a85552287b7bff77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaType: 0
-  OnEnterEvent:
+  _areaType: 0
+  _onEnterEvent:
     m_PersistentCalls:
       m_Calls: []
-  OnSelectEvent:
+  _onSelectEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 191799582}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1007902099}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1301991581}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1132379420}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnChangeEvent:
+      m_Calls: []
+  _onChangeEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1301991580
@@ -4119,25 +3935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1469948f27260204e88d4f48b7348045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mIsActive: 1
-  ButtonEvents:
-  - Key: 6
-    InputType: 0
-    Event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1301991579}
-          m_TargetAssemblyTypeName: SelectionComponent, Assembly-CSharp
-          m_MethodName: OnDisable
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  _activeOnAwake: 0
+  _buttonEvents: []
 --- !u!1 &1314439591
 GameObject:
   m_ObjectHideFlags: 0
@@ -4744,7 +4543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108ebac05f9ceb9458951e93407c1188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTimeScale: 0.8
+  _timeScale: 0
 --- !u!4 &1794979800
 Transform:
   m_ObjectHideFlags: 0
@@ -5381,8 +5180,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 0.5
-  mbPlayOnAwake: 0
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!1 &2127434221
 GameObject:
   m_ObjectHideFlags: 0

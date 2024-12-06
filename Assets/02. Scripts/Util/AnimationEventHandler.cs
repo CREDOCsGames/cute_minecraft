@@ -5,7 +5,7 @@ namespace Util
 {
     public class AnimationEventHandler : MonoBehaviour
     {
-        [SerializeField] UnityEvent mOnFrameEvent;
+        [SerializeField] private UnityEvent mOnFrameEvent;
 
         public void OnFrameEvent()
         {

@@ -5,47 +5,47 @@ namespace Movement
     [RequireComponent(typeof(Rigidbody))]
     public class MovementComponent : MonoBehaviour
     {
-        Rigidbody mRigid;
+        private Rigidbody _rigid;
 
-        Rigidbody Rigid
+        public Rigidbody Rigid
         {
             get
             {
-                if (mRigid == null)
+                if (_rigid == null)
                 {
-                    mRigid = GetComponent<Rigidbody>();
+                    _rigid = GetComponent<Rigidbody>();
                 }
 
-                return mRigid;
+                return _rigid;
             }
         }
 
-        MovementAction mBeforeAction;
-        [SerializeField] MovementAction mDefaultActionOrNull;
+        private MovementAction _beforeAction;
+        [SerializeField] private MovementAction _defaultActionOrNull;
 
         public void PlayMovement(MovementAction movement)
         {
             RemoveMovement();
-            mBeforeAction = movement;
+            _beforeAction = movement;
             movement.PlayAction(Rigid, this);
         }
 
         public void RemoveMovement()
         {
             StopAllCoroutines();
-            if (!mBeforeAction)
+            if (!_beforeAction)
             {
                 return;
             }
 
-            mBeforeAction.StopAction(mRigid, this);
+            _beforeAction.StopAction(_rigid, this);
         }
 
-        void Awake()
+        private void Awake()
         {
-            if (mDefaultActionOrNull != null)
+            if (_defaultActionOrNull != null)
             {
-                PlayMovement(mDefaultActionOrNull);
+                PlayMovement(_defaultActionOrNull);
             }
         }
     }

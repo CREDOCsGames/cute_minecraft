@@ -10,42 +10,42 @@ namespace Flow
     public class StageLoader : ILevelLoader
     {
         public WorkState State { get; private set; }
-        StageManager mStages;
+        private StageManager _stages;
 
-        StageManager Stages
+        public StageManager Stages
         {
             get
             {
-                if (mStages == null)
+                if (_stages == null)
                 {
-                    mStages = Resources.Load<StageManager>("Stage/StageManager");
+                    _stages = Resources.Load<StageManager>("Stage/StageManager");
                 }
 
-                return mStages;
+                return _stages;
             }
         }
 
-        Slider mProgressBar => LoadingWindow.ProgressBar;
-        TextMeshProUGUI mTitle => LoadingWindow.LoadSceneNameText;
-        LoadingWindowComponent mLoadingWindow;
+        private Slider _progressBar => LoadingWindow.ProgressBar;
+        private TextMeshProUGUI _title => LoadingWindow.LoadSceneNameText;
+        private LoadingWindowComponent _loadingWindow;
 
-        LoadingWindowComponent LoadingWindow
+        private LoadingWindowComponent LoadingWindow
         {
             get
             {
-                if (mLoadingWindow != null)
+                if (_loadingWindow != null)
                 {
-                    return mLoadingWindow;
+                    return _loadingWindow;
                 }
 
-                mLoadingWindow = UIWindowContainer.GetLoadingWindow();
-                mLoadingWindow.ShowWindow(false);
+                _loadingWindow = UIWindowContainer.GetLoadingWindow();
+                _loadingWindow.ShowWindow(false);
 
-                return mLoadingWindow;
+                return _loadingWindow;
             }
         }
 
-        MonoBehaviour mCoroutineRunner => LoadingWindow.CoroutineRunner;
+        private MonoBehaviour _coroutineRunner => LoadingWindow.CoroutineRunner;
 
         public void LoadNext()
         {
@@ -53,25 +53,25 @@ namespace Flow
             var sceneName = Stages.Stage;
             Stages.NextStage();
             LoadingWindow.ShowWindow(true);
-            mCoroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
+            _coroutineRunner.StartCoroutine(LoadSceneProcess(sceneName));
         }
 
-        IEnumerator LoadSceneProcess(string sceneName)
+        private IEnumerator LoadSceneProcess(string sceneName)
         {
-            mTitle.text = sceneName;
+            _title.text = sceneName;
             var timer = 0f;
             var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
             while (!asyncOperation.isDone)
             {
                 if (asyncOperation.progress < 0.9f)
                 {
-                    mProgressBar.normalizedValue = asyncOperation.progress;
+                    _progressBar.normalizedValue = asyncOperation.progress;
                 }
                 else
                 {
                     timer += Time.unscaledDeltaTime;
-                    mProgressBar.normalizedValue = Mathf.Lerp(0.9f, 1f, timer);
-                    if (mProgressBar.normalizedValue >= 1f)
+                    _progressBar.normalizedValue = Mathf.Lerp(0.9f, 1f, timer);
+                    if (_progressBar.normalizedValue >= 1f)
                     {
                         asyncOperation.allowSceneActivation = true;
                         break;

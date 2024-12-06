@@ -8,9 +8,9 @@ namespace Util
         public UnityEvent<Collision> OnEnterEvent;
         public UnityEvent<Collision> OnExitEvent;
         public UnityEvent<Collision> OnStayEvent;
-        [SerializeField] string TagFillter;
+        public string TagFillter;
 
-        void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             if (!string.IsNullOrEmpty(TagFillter) && !collision.gameObject.CompareTag(TagFillter))
             {
@@ -20,7 +20,7 @@ namespace Util
             OnEnterEvent.Invoke(collision);
         }
 
-        void OnCollisionExit(Collision collision)
+        private void OnCollisionExit(Collision collision)
         {
             if (!string.IsNullOrEmpty(TagFillter) && !collision.gameObject.CompareTag(TagFillter))
             {
@@ -30,7 +30,7 @@ namespace Util
             OnExitEvent.Invoke(collision);
         }
 
-        void OnCollisionStay(Collision collision)
+        private void OnCollisionStay(Collision collision)
         {
             if (!string.IsNullOrEmpty(TagFillter) && !collision.gameObject.CompareTag(TagFillter))
             {

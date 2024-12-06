@@ -4,14 +4,15 @@ namespace Puzzle
 {
     public class FlowerPresentation : IPresentation<Flower>
     {
-        public void UpstreamData(Flower flower, byte data)
+        public void InstreamData(Flower flower, byte data)
         {
+            flower.gameObject.SetActive(true);
             switch (data)
             {
-                case 1:
+                case (byte)Flower.FlowerType.Red:
                     flower.Color = Color.red;
                     break;
-                case 2:
+                case (byte)Flower.FlowerType.Green:
                     flower.Color = Color.green;
                     break;
                 default:

@@ -7,8 +7,8 @@ namespace Util
 {
     public class IFComponent : MonoBehaviour
     {
-        [SerializeField] List<Condition> mConditions;
-        [SerializeField] UnityEvent TrueEvent;
+        [SerializeField] private List<Condition> _conditions;
+        [SerializeField] private UnityEvent _trueEvent;
 
         public void Invoke()
         {
@@ -28,52 +28,52 @@ namespace Util
 
         public void AddListenerTrueEvent(UnityAction listener)
         {
-            TrueEvent.AddListener(listener);
+            _trueEvent.AddListener(listener);
         }
 
         public void RemoveListenerTrueEvent(UnityAction listener)
         {
-            TrueEvent.RemoveListener(listener);
+            _trueEvent.RemoveListener(listener);
         }
 
         public void AddCondition(Condition condition)
         {
-            if (mConditions.Contains(condition))
+            if (_conditions.Contains(condition))
             {
                 Debug.Log($"already exist : {condition}");
                 return;
             }
 
-            mConditions.Add(condition);
+            _conditions.Add(condition);
         }
 
         public void RemoveCondition(Condition condition)
         {
-            if (!mConditions.Contains(condition))
+            if (!_conditions.Contains(condition))
             {
                 Debug.Log($"Not found : {condition}");
                 return;
             }
 
-            mConditions.Remove(condition);
+            _conditions.Remove(condition);
         }
 
         public void SetFalseAllCondition()
         {
-            foreach (var condition in mConditions)
+            foreach (var condition in _conditions)
             {
                 condition.SetFalse();
             }
         }
 
-        bool IsTrue()
+        private bool IsTrue()
         {
-            return mConditions.Count == 0 || mConditions.All(x => x.IsTrue());
+            return _conditions.Count == 0 || _conditions.All(x => x.IsTrue());
         }
 
-        void OnTrueEvent()
+        private void OnTrueEvent()
         {
-            TrueEvent.Invoke();
+            _trueEvent.Invoke();
         }
     }
 }

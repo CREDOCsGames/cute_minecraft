@@ -4,20 +4,20 @@ namespace Character
 {
     public class Cooltime
     {
-        readonly Timer mActionTimer = new();
+        private readonly Timer _actionTimer = new();
 
         public bool IsAction
         {
             get
             {
-                mActionTimer.Tick();
-                return mActionTimer.IsStart;
+                _actionTimer.Tick();
+                return _actionTimer.IsStart;
             }
         }
 
         public void UseAbility(ActionData actionData)
         {
-            if (mActionTimer.IsStart)
+            if (_actionTimer.IsStart)
             {
                 return;
             }
@@ -27,13 +27,13 @@ namespace Character
                 return;
             }
 
-            mActionTimer.SetTimeout(actionData.ActionDelay);
-            mActionTimer.Start();
+            _actionTimer.SetTimeout(actionData.ActionDelay);
+            _actionTimer.Start();
         }
 
         public void Reset()
         {
-            mActionTimer.Stop();
+            _actionTimer.Stop();
         }
     }
 }

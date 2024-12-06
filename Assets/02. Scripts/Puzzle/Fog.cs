@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Fog : MonoBehaviour
 {
-    void StartMove(Bounds bounds)
+    private void StartMove(Bounds bounds)
     {
-        StartCoroutine(FixedIntervalMovement.MoveTo(transform, bounds.center,1f));
+        StartCoroutine(FixedIntervalMovement.MoveTo(transform, bounds.center, 1f));
     }
 
     private void Awake()

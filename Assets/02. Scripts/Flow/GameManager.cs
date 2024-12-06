@@ -12,11 +12,9 @@ namespace Flow
         public static Area StageArea { get; private set; } = new();
         public static Selection Title { get; private set; } = new();
         public static Selection StageSelect { get; private set; } = new();
-        static Timer GameTimer { get; set; } = new();
-
         public static LanternComponent Lantern;
-
-        static bool VisitTitle;
+        private static Timer _gameTimer { get; set; } = new();
+        private static bool _visitTitle;
 
         static GameManager()
         {
@@ -26,8 +24,8 @@ namespace Flow
 
             Title.OnEnterEvent += () =>
             {
-                if (VisitTitle) Title.Skip();
-                VisitTitle = true;
+                if (_visitTitle) Title.Skip();
+                _visitTitle = true;
             };
 
             StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
@@ -37,8 +35,8 @@ namespace Flow
             };
 
 
-            ContentsLoader.OnStartLoad += GameTimer.Stop;
-            ContentsLoader.OnLoaded += GameTimer.Start;
+            ContentsLoader.OnStartLoad += _gameTimer.Stop;
+            ContentsLoader.OnLoaded += _gameTimer.Start;
 
             MovieCutscene.OnPlayEvent += PlayerCharacterManager.Instance.ReleaseController;
             MovieCutscene.OnEndEvent += PlayerCharacterManager.Instance.ControlDefaultCharacter;

@@ -14,75 +14,76 @@ namespace Util
 
     public class LookAtComponent : MonoBehaviour
     {
-        CharacterComponent mCharacter;
-        Vector3 m3DVelocity;
-        [SerializeField] LookAtType mType;
-        [SerializeField] Transform mTarget;
+        CharacterComponent _character;
+        Vector3 _3DVelocity;
+        [SerializeField] LookAtType _type;
+        [SerializeField] Transform _target;
 
         public void SetTarget(Transform target)
         {
-            mTarget = target;
-            mCharacter = target?.GetComponent<CharacterComponent>();
+            _target = target;
+            _character = target?.GetComponent<CharacterComponent>();
         }
 
-        void LookAtMoveDir()
+        private void LookAtMoveDir()
         {
-            if (mCharacter == null)
+            if (_character == null)
             {
-                mType = LookAtType.None;
+                _type = LookAtType.None;
                 return;
             }
 
-            if (mCharacter.State is not (CharacterState.Walk or CharacterState.Run))
+            if (_character.State is not (//CharacterState.Walk or
+                                         CharacterState.Run))
             {
                 return;
             }
 
-            var velocity = mCharacter.Rigid.velocity;
+            var velocity = _character.Rigid.velocity;
 
             if (Mathf.Abs(velocity.magnitude) < 1f)
             {
                 return;
             }
 
-            m3DVelocity = velocity;
-            m3DVelocity.y = 0f;
-            if (m3DVelocity == Vector3.zero)
+            _3DVelocity = velocity;
+            _3DVelocity.y = 0f;
+            if (_3DVelocity == Vector3.zero)
             {
                 return;
             }
 
-            transform.forward = m3DVelocity;
+            transform.forward = _3DVelocity;
         }
 
-        void LookAtTarget()
+        private void LookAtTarget()
         {
-            if (mTarget == null)
+            if (_target == null)
             {
-                mType = LookAtType.None;
+                _type = LookAtType.None;
                 return;
             }
 
-            var viewPos = mTarget.position;
+            var viewPos = _target.position;
             viewPos.y = transform.position.y;
             transform.LookAt(viewPos);
         }
 
-        void LookAtMainCamera()
+        private void LookAtMainCamera()
         {
-            mTarget = Camera.main.transform;
+            _target = Camera.main.transform;
             LookAtTarget();
         }
 
-        void Awake()
+        private void Awake()
         {
-            if (mTarget == null) mTarget = null;
-            SetTarget(mTarget);
+            if (_target == null) _target = null;
+            SetTarget(_target);
         }
 
-        void Update()
+        private void Update()
         {
-            switch (mType)
+            switch (_type)
             {
                 case LookAtType.None: break;
                 case LookAtType.MoveDir:

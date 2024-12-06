@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-namespace RootMotion.Demos {
-	
-	/// <summary>
-	/// User input for an AI controlled character controller.
-	/// </summary>
-	public class UserControlAI : UserControlThirdPerson {
+namespace RootMotion.Demos
+{
 
-		public Transform moveTarget;
-		public float stoppingDistance = 0.5f;
-		public float stoppingThreshold = 1.5f;
+    /// <summary>
+    /// User input for an AI controlled character controller.
+    /// </summary>
+    public class UserControlAI : UserControlThirdPerson
+    {
+
+        public Transform moveTarget;
+        public float stoppingDistance = 0.5f;
+        public float stoppingThreshold = 1.5f;
         public Navigator navigator;
 
         protected override void Start()
@@ -20,8 +21,9 @@ namespace RootMotion.Demos {
             navigator.Initiate(transform);
         }
 
-        protected override void Update () {
-			float moveSpeed = walkByDefault? 0.5f: 1f;
+        protected override void Update()
+        {
+            float moveSpeed = walkByDefault ? 0.5f : 1f;
 
             // If using Unity Navigation
             if (navigator.activeTargetSeeking)
@@ -43,13 +45,13 @@ namespace RootMotion.Demos {
                 state.move = distance > sD ? direction * moveSpeed : Vector3.zero;
                 state.lookPos = moveTarget.position;
             }
-		}
+        }
 
         // Visualize the navigator
         void OnDrawGizmos()
         {
             if (navigator.activeTargetSeeking) navigator.Visualize();
         }
-	}
+    }
 }
 

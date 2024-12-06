@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 
 namespace RootMotion.FinalIK
 {
@@ -51,7 +49,7 @@ namespace RootMotion.FinalIK
                 {
                     bool isValid = script.ik.GetIKSolver().IsValid();
                     EditorGUI.BeginDisabledGroup(!isValid);
-                    if (GUILayout.Button(isValid? "Start Solver": "'Start Solver' disabled for invalid solver setup"))
+                    if (GUILayout.Button(isValid ? "Start Solver" : "'Start Solver' disabled for invalid solver setup"))
                     {
                         bool initiated = script.Initiate();
                         serializedObject.ApplyModifiedProperties();

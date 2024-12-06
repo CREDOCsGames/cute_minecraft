@@ -5,24 +5,24 @@ namespace UI
     [CreateAssetMenu(fileName = "UIWindows", menuName = "Custom/UIWindows")]
     public class UIWindowPrefabs : ScriptableObject
     {
-        [SerializeField] LoadingWindowComponent mLoadingWindowPrefab;
-        public LoadingWindowComponent LoadingWindowPrefab => mLoadingWindowPrefab;
+        [SerializeField] private LoadingWindowComponent _loadingWindowPrefab;
+        public LoadingWindowComponent LoadingWindowPrefab => _loadingWindowPrefab;
     }
 
     public static class UIWindowContainer
     {
-        static readonly UIWindowPrefabs mPrefabs = Resources.Load<UIWindowPrefabs>("UIWindows");
-        static LoadingWindowComponent mLoadingWindowInstance;
+        private static readonly UIWindowPrefabs _prefabs = Resources.Load<UIWindowPrefabs>("UIWindows");
+        private static LoadingWindowComponent _loadingWindowInstance;
 
         public static LoadingWindowComponent GetLoadingWindow()
         {
-            Debug.Assert(mPrefabs, "Resource not found: Resources/UIWindows");
-            if (mLoadingWindowInstance == null)
+            Debug.Assert(_prefabs, "Resource not found: Resources/UIWindows");
+            if (_loadingWindowInstance == null)
             {
-                mLoadingWindowInstance = Object.Instantiate(mPrefabs.LoadingWindowPrefab);
+                _loadingWindowInstance = Object.Instantiate(_prefabs.LoadingWindowPrefab);
             }
 
-            return mLoadingWindowInstance;
+            return _loadingWindowInstance;
         }
     }
 }

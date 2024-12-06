@@ -4,7 +4,7 @@ namespace Puzzle
 {
     public class DisableRange : MonoBehaviour
     {
-        [SerializeField] bool enable;
+        [SerializeField] private bool _enable;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -13,7 +13,7 @@ namespace Puzzle
                 return;
             }
 
-            f.enabled = enable;
+            f.enabled = _enable;
         }
     }
 }

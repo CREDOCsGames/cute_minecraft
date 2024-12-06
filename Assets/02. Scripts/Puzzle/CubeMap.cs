@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace Puzzle
 {
-    public enum Face : byte
-    {
-        top, left, front, right, back, bottom
-    }
-
     public class CubeMap<T>
     {
         public readonly T[] Elements;
@@ -49,6 +44,21 @@ namespace Puzzle
             Debug.Assert(Width * Width * z + Width * y + x < Elements.Length,
     $"Out of range : x {x} y {y} z {z} max {Elements.Length - 1}");
             Elements[Width * Width * z + Width * y + x] = value;
+        }
+
+        public List<T> GetFace(Face face)
+        {
+            List<T> list = new();
+
+            for (byte y = 0; y < Width; y++)
+            {
+                for (byte x = 0; x < Width; x++)
+                {
+                    list.Add(GetElements(x, y, (byte)face));
+                }
+            }
+
+            return list;
         }
 
         public List<byte[]> GetIndex()

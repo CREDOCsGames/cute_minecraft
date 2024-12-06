@@ -13,39 +13,39 @@ namespace Flow
         public static StageManager Instance => Resources.Load<StageManager>("Stage/StageManager");
 
         public string Stage => SceneManager.GetActiveScene().name == TitleScene
-            ? mStages.Matrix[StageIndex.y].List[StageIndex.x]
+            ? _stages.Matrix[StageIndex.y].List[StageIndex.x]
             : TitleScene;
 
-        [SerializeField] MatrixBool mStageOpens;
-        [SerializeField] MatrixString mStages;
-        [SerializeField] Vector2Int mStageIndex;
-        [SerializeField] string mTitleScene;
+        [SerializeField] private MatrixBool _stageOpens;
+        [SerializeField] private MatrixString _stages;
+        [SerializeField] private Vector2Int _stageIndex;
+        [SerializeField] private string _titleScene;
 
         public event Action OnChangeEvent;
 
-        string TitleScene
+        public string TitleScene
         {
             get
             {
-                Debug.Assert(!string.IsNullOrEmpty(mTitleScene));
-                return mTitleScene;
+                Debug.Assert(!string.IsNullOrEmpty(_titleScene));
+                return _titleScene;
             }
         }
 
         public Vector2Int StageIndex
         {
-            get => mStageIndex;
+            get => _stageIndex;
             private set
             {
-                value.y = Mathf.Clamp(value.y, 0, mStages.Matrix.Count - 1);
-                value.x = Mathf.Clamp(value.x, 0, mStages.Matrix[value.y].List.Count - 1);
+                value.y = Mathf.Clamp(value.y, 0, _stages.Matrix.Count - 1);
+                value.x = Mathf.Clamp(value.x, 0, _stages.Matrix[value.y].List.Count - 1);
 
-                if (!IsOpenStage(value) || mStageIndex.Equals(value))
+                if (!IsOpenStage(value) || _stageIndex.Equals(value))
                 {
                     return;
                 }
 
-                mStageIndex = value;
+                _stageIndex = value;
                 OnChangeEvent?.Invoke();
             }
         }
@@ -72,9 +72,9 @@ namespace Flow
 
         public void ClearCurrentStage()
         {
-            var nextStage = mStageIndex;
+            var nextStage = _stageIndex;
             nextStage.x++;
-            if (IsOutOfRange(mStageOpens.Matrix, nextStage.x))
+            if (IsOutOfRange(_stageOpens.Matrix, nextStage.x))
             {
                 return;
             }
@@ -88,34 +88,34 @@ namespace Flow
             OpenStage(nextStage);
         }
 
-        void OpenStage(Vector2Int stageIndex)
+        private void OpenStage(Vector2Int stageIndex)
         {
-            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) ||
-                IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+            if (IsOutOfRange(_stageOpens.Matrix, stageIndex.y) ||
+                IsOutOfRange(_stageOpens.Matrix[stageIndex.y].List, stageIndex.x))
                 return;
 
-            mStageOpens.Matrix[stageIndex.y].List[stageIndex.x] = true;
+            _stageOpens.Matrix[stageIndex.y].List[stageIndex.x] = true;
         }
 
         public void CloseStage(Vector2Int stageIndex)
         {
-            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) ||
-                IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+            if (IsOutOfRange(_stageOpens.Matrix, stageIndex.y) ||
+                IsOutOfRange(_stageOpens.Matrix[stageIndex.y].List, stageIndex.x))
                 return;
 
-            mStageOpens.Matrix[stageIndex.y].List[stageIndex.x] = false;
+            _stageOpens.Matrix[stageIndex.y].List[stageIndex.x] = false;
         }
 
-        bool IsOpenStage(Vector2Int stageIndex)
+        private bool IsOpenStage(Vector2Int stageIndex)
         {
-            if (IsOutOfRange(mStageOpens.Matrix, stageIndex.y) ||
-                IsOutOfRange(mStageOpens.Matrix[stageIndex.y].List, stageIndex.x))
+            if (IsOutOfRange(_stageOpens.Matrix, stageIndex.y) ||
+                IsOutOfRange(_stageOpens.Matrix[stageIndex.y].List, stageIndex.x))
                 return false;
 
-            return mStageOpens.Matrix[stageIndex.y].List[stageIndex.x];
+            return _stageOpens.Matrix[stageIndex.y].List[stageIndex.x];
         }
 
-        bool MoveStageIndex(Vector2Int stageIndex)
+        private bool MoveStageIndex(Vector2Int stageIndex)
         {
             var nextStageIndex = StageIndex;
             nextStageIndex += stageIndex;

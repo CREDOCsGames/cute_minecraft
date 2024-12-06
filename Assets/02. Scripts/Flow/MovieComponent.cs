@@ -5,9 +5,9 @@ namespace Flow
 {
     public class MovieComponent : MonoBehaviour
     {
-        [SerializeField] UnityEvent OnPlayEvent;
-        [SerializeField] UnityEvent OnEndEvent;
-        [SerializeField] UnityEvent OnSkipEvent;
+        [SerializeField] private UnityEvent OnPlayEvent;
+        [SerializeField] private UnityEvent OnEndEvent;
+        [SerializeField] private UnityEvent OnSkipEvent;
 
         public void OnPlay()
         {
@@ -24,29 +24,29 @@ namespace Flow
             GameManager.MovieCutscene.OnSkip();
         }
 
-        void InvokeOnPlayEvent()
+        private void InvokeOnPlayEvent()
         {
             OnPlayEvent.Invoke();
         }
 
-        void InvokeOnEndEvent()
+        private void InvokeOnEndEvent()
         {
             OnEndEvent.Invoke();
         }
 
-        void InvokeOnSkipEvent()
+        private void InvokeOnSkipEvent()
         {
             OnSkipEvent.Invoke();
         }
 
-        void Awake()
+        private void Awake()
         {
             GameManager.MovieCutscene.OnPlayEvent += InvokeOnPlayEvent;
             GameManager.MovieCutscene.OnEndEvent += InvokeOnEndEvent;
             GameManager.MovieCutscene.OnSkipEvent += InvokeOnSkipEvent;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             GameManager.MovieCutscene.OnPlayEvent -= InvokeOnPlayEvent;
             GameManager.MovieCutscene.OnEndEvent -= InvokeOnEndEvent;

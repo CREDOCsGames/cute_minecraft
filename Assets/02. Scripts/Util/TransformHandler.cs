@@ -4,10 +4,10 @@ namespace Util
 {
     public class TransformHandler : MonoBehaviour
     {
-        Vector3 mFirstLocalPos;
-        Quaternion mFirstLocalRot;
-        Vector3 mFirstPos;
-        Quaternion mFirstRot;
+        private Vector3 _firstLocalPos;
+        private Quaternion _firstLocalRot;
+        private Vector3 _firstPos;
+        private Quaternion _firstRot;
 
         public void SetLocalPositionX(float x)
         {
@@ -68,12 +68,12 @@ namespace Util
 
         public void SetFirstLocalPosition()
         {
-            transform.localPosition = mFirstLocalPos;
+            transform.localPosition = _firstLocalPos;
         }
 
         public void SetFirstPosition()
         {
-            transform.position = mFirstLocalPos;
+            transform.position = _firstLocalPos;
         }
 
         public void SetFirstPositionAtParent()
@@ -88,17 +88,17 @@ namespace Util
                 }
             }
 
-            parent.position = mFirstPos;
+            parent.position = _firstPos;
         }
 
         public void SetFirstRotation()
         {
-            transform.rotation = mFirstRot;
+            transform.rotation = _firstRot;
         }
 
         public void SetFirstLoaclRotation()
         {
-            transform.localRotation = mFirstLocalRot;
+            transform.localRotation = _firstLocalRot;
         }
 
         public void SetPosition(Transform transform)
@@ -121,12 +121,12 @@ namespace Util
             transform.parent = null;
         }
 
-        void Awake()
+        private void Awake()
         {
-            mFirstLocalPos = transform.localPosition;
-            mFirstLocalRot = transform.localRotation;
-            mFirstPos = transform.position;
-            mFirstRot = transform.rotation;
+            _firstLocalPos = transform.localPosition;
+            _firstLocalRot = transform.localRotation;
+            _firstPos = transform.position;
+            _firstRot = transform.rotation;
         }
     }
 }

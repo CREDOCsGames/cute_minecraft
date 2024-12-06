@@ -789,13 +789,13 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 				{
 					float shadow = _TransmissionShadow;
 
-					#define SUM_LIGHT_TRANSMISSION(Light)\
+					#define SU_LIGHT_TRANSMISSION(Light)\
 						float3 atten = Light.color * Light.distanceAttenuation;\
 						atten = lerp( atten, atten * Light.shadowAttenuation, shadow );\
 						half3 transmission = max( 0, -dot( inputData.normalWS, Light.direction ) ) * atten * Transmission;\
 						color.rgb += BaseColor * transmission;
 
-					SUM_LIGHT_TRANSMISSION( GetMainLight( inputData.shadowCoord ) );
+					SU_LIGHT_TRANSMISSION( GetMainLight( inputData.shadowCoord ) );
 
 					#if defined(_ADDITIONAL_LIGHTS)
 						uint meshRenderingLayers = GetMeshRenderingLayer();
@@ -810,7 +810,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 								if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
 								#endif
 								{
-									SUM_LIGHT_TRANSMISSION( light );
+									SU_LIGHT_TRANSMISSION( light );
 								}
 							}
 						#endif
@@ -820,7 +820,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 							if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
 							#endif
 							{
-								SUM_LIGHT_TRANSMISSION( light );
+								SU_LIGHT_TRANSMISSION( light );
 							}
 						LIGHT_LOOP_END
 					#endif
@@ -836,7 +836,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 					float ambient = _TransAmbient;
 					float strength = _TransStrength;
 
-					#define SUM_LIGHT_TRANSLUCENCY(Light)\
+					#define SU_LIGHT_TRANSLUCENCY(Light)\
 						float3 atten = Light.color * Light.distanceAttenuation;\
 						atten = lerp( atten, atten * Light.shadowAttenuation, shadow );\
 						half3 lightDir = Light.direction + inputData.normalWS * normal;\
@@ -844,7 +844,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 						half3 translucency = atten * ( VdotL * direct + inputData.bakedGI * ambient ) * Translucency;\
 						color.rgb += BaseColor * translucency * strength;
 
-					SUM_LIGHT_TRANSLUCENCY( GetMainLight( inputData.shadowCoord ) );
+					SU_LIGHT_TRANSLUCENCY( GetMainLight( inputData.shadowCoord ) );
 
 					#if defined(_ADDITIONAL_LIGHTS)
 						uint meshRenderingLayers = GetMeshRenderingLayer();
@@ -859,7 +859,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 								if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
 								#endif
 								{
-									SUM_LIGHT_TRANSLUCENCY( light );
+									SU_LIGHT_TRANSLUCENCY( light );
 								}
 							}
 						#endif
@@ -869,7 +869,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader"
 							if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
 							#endif
 							{
-								SUM_LIGHT_TRANSLUCENCY( light );
+								SU_LIGHT_TRANSLUCENCY( light );
 							}
 						LIGHT_LOOP_END
 					#endif
