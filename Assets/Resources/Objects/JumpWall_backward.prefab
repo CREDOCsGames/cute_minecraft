@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 6057104379870754066}
   - component: {fileID: 1633907854034694481}
   - component: {fileID: 618215818298846345}
-  - component: {fileID: 4986792268461386972}
-  - component: {fileID: 948149994934312519}
+  - component: {fileID: 1925038534714821977}
   m_Layer: 0
   m_Name: JumpWall_backward
   m_TagString: Untagged
@@ -99,7 +98,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1, z: 1}
   m_Center: {x: 0.275, y: 0, z: 0}
---- !u!114 &4986792268461386972
+--- !u!114 &1925038534714821977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,65 +107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4995155654788029905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d16ef5a4629ae1345b4d7dd80774b247, type: 3}
+  m_Script: {fileID: 11500000, guid: 028fdd9812b3c1647944f9c113af8a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 8c438acfe3d146d4582d7178b7396082, type: 2}
-        m_TargetAssemblyTypeName: Character.PlayerCharacterManager, Assembly-CSharp
-        m_MethodName: DoAction
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 30ae6a14ab8f3de459788cfb09e76851, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Character.ActionData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: dda95db7e3dfe434d85b9004eeb05229, type: 2}
-        m_TargetAssemblyTypeName: PlatformGame.Contents.Puzzle.AreaScriptable, Assembly-CSharp
-        m_MethodName: InvokeMonement
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: df902ed5f2a4dcf4c98ea22b8843e842, type: 2}
-          m_ObjectArgumentAssemblyTypeName: PlatformGame.Character.Combat.ActionData,
-            Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 948149994934312519}
-        m_TargetAssemblyTypeName: PlaySoundHandler, Assembly-CSharp
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Move_Stone
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  TagFillter: Player
---- !u!114 &948149994934312519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4995155654788029905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e71e6e2937893849bb59a18bb481114, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Action: {fileID: 11400000, guid: 6aded92e9dd680f4092d7dfe4c07ca26, type: 2}

@@ -9,6 +9,7 @@ public class AttackBoxComponent : MonoBehaviour
     [Header("[Options]")]
     [SerializeField] private UnityEvent<HitBoxCollision> _onAttack;
     [Range(0, 10000)][SerializeField] private float _attackWindow;
+    [SerializeField] private AttackBox.Type _boxType;
     private AttackBox _attackBox;
     public AttackBox AttackBox
     {
@@ -36,6 +37,7 @@ public class AttackBoxComponent : MonoBehaviour
     {
         var hitBox = new AttackBox(_actor, _attackWindow);
         hitBox.OnCollision += _onAttack.Invoke;
+        hitBox.SetType(_boxType);
         return hitBox;
     }
 

@@ -43,9 +43,9 @@ namespace A
         public void Update()
         {
             _rigidbody.velocity = new Vector3(
-                Mathf.Min(_rigidbody.velocity.x, _maxVelocity.x),
-                Mathf.Min(_rigidbody.velocity.y, _maxVelocity.y),
-                Mathf.Min(_rigidbody.velocity.z, _maxVelocity.z));
+                Mathf.Clamp(_rigidbody.velocity.x, -_maxVelocity.x, _maxVelocity.x),
+                Mathf.Clamp(_rigidbody.velocity.y, -_maxVelocity.y, _maxVelocity.y),
+                Mathf.Clamp(_rigidbody.velocity.z, -_maxVelocity.z, _maxVelocity.z));
         }
     }
 
@@ -86,7 +86,6 @@ namespace A
 
                 _animator.SetTrigger(newState.ToString());
                 _animator.Update(Time.deltaTime);
-                Debug.Log(_animator.GetNextAnimatorStateInfo(0).length);
                 _postClip = _animator.GetNextAnimatorStateInfo(0).shortNameHash;
             }
 
@@ -111,7 +110,7 @@ namespace A
         public float MoveSpeed;
         private Animator _animator;
         private Rigidbody _rb;
-        private State _state;
+        public State CharacterState { get; private set; }
         private float _outAnimTime;
         private readonly Limit _jumpLimit = new(1);
         private readonly Limit _attackLimit = new(1);
@@ -174,66 +173,68 @@ namespace A
             _limitVelocity.Update();
             _animatorController.Update();
             _inputController.Update();
-            ui.text = _state.ToString();
+            ui.text = CharacterState.ToString();
             if (0.5f < _inputController.CoolingDuration)
             {
                 DoIdle();
             }
         }
 
-        private void DoJump()
+        public void DoJump(float jumpPower = -1)
         {
-            if (_state != State.Jump)
+            if (CharacterState != State.Jump)
             {
                 _jumpLimit.Reset();
             }
 
             if (_jumpLimit.Able && _outAnimTime < Time.time)
             {
-                _rb.AddForce(Vector3.up * JumpPower);
-                _state = State.Jump;
+                _rb.AddForce(Vector3.up * (jumpPower == -1 ? JumpPower : jumpPower));
+                CharacterState = State.Jump;
                 _jumpLimit.Once();
                 _outAnimTime = Time.time + _animator.GetNextAnimatorStateInfo(0).length;
-                StateChanged.Invoke(_state);
+                StateChanged.Invoke(CharacterState);
             }
         }
 
         private void DoIdle()
         {
-            if (_state is State.Jump)
+            if (CharacterState is State.Jump)
             {
                 return;
             }
 
-            if (_state is State.Attack && _outAnimTime < Time.time ||
-                _state is State.Walk or State.Run)
+            if (CharacterState is State.Attack && _outAnimTime < Time.time ||
+                CharacterState is State.Walk or State.Run)
             {
-                _state = State.Idle;
-                StateChanged.Invoke(_state);
+                CharacterState = State.Idle;
+                StateChanged.Invoke(CharacterState);
             }
         }
 
-        private void DoMove(Vector3 dir)
+        public void DoMove(Vector3 dir)
         {
-            if ((_state == State.Attack && Time.time < _outAnimTime) || _state == State.Jump)
+            if ((CharacterState == State.Attack && Time.time < _outAnimTime) || CharacterState == State.Jump)
             {
                 return;
             }
             _rb.AddForce(dir * MoveSpeed);
-            _state = State.Run;
-            transform.GetChild(0).LookAt(transform.position + dir);
-            StateChanged.Invoke(_state);
+            CharacterState = State.Run;
+            var lookat = _rb.velocity.normalized;
+            lookat.y = 0;
+            transform.GetChild(0).LookAt(transform.position + lookat);
+            StateChanged.Invoke(CharacterState);
         }
 
-        private void DoAttack()
+        public void DoAttack()
         {
             if (Time.time < _outAnimTime ||
-                _state is State.Jump)
+                CharacterState is State.Jump)
             {
                 return;
             }
 
-            if (_state is not State.Attack)
+            if (CharacterState is not State.Attack)
             {
                 _attackLimit.Reset();
             }
@@ -243,18 +244,18 @@ namespace A
                 return;
             }
 
-            _state = State.Attack;
+            CharacterState = State.Attack;
             _attackLimit.Once();
             _outAnimTime = Time.time + _animator.GetNextAnimatorStateInfo(0).length;
-            StateChanged.Invoke(_state);
+            StateChanged.Invoke(CharacterState);
         }
 
         public void EnterGround()
         {
-            if (_state is State.Jump)
+            if (CharacterState is State.Jump)
             {
-                _state = State.Idle;
-                StateChanged.Invoke(_state);
+                CharacterState = State.Idle;
+                StateChanged.Invoke(CharacterState);
             }
         }
     }

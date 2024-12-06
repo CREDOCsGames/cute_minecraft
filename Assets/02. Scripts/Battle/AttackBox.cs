@@ -6,9 +6,13 @@ namespace Battle
 {
     public class AttackBox : CollisionBox
     {
+        public enum Type { None, One };
         private readonly Delay _delay;
         private readonly List<Collider> _attacked = new();
-        private bool _NotWithinAttackWindow => !_delay.IsDelay();
+        private bool _NotWithinAttackWindow => !_delay.IsDelay() || (_type == Type.One && _bHit);
+        private bool _bHit;
+        private Type _type;
+
         public AttackBox(Transform actor, float attackWindow = 0f) : base(actor)
         {
             _delay = new Delay(attackWindow);
@@ -27,12 +31,19 @@ namespace Battle
 
             _attacked.Add(other);
             CollisionBox.InvokeCollision(this, victim.HitBox);
+            _bHit = true;
         }
 
         public void OpenAttackWindow()
         {
+            _bHit = false;
             _delay.SetStartTime();
             _attacked.Clear();
+        }
+
+        public void SetType(Type type)
+        {
+            _type = type;
         }
 
     }

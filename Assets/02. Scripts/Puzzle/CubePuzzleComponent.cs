@@ -59,7 +59,7 @@ namespace Puzzle
 
         private void A()
         {
-            _mediator.Instances.ForEach(x => (x as FlowerPuzzleInstance).Init());
+            _mediator.Instances.ForEach(x => (x as FlowerPuzzleInstance).Init(transform));
             _mediator.Cores.ForEach(x => (x as PuzzleCore).Init());
         }
 

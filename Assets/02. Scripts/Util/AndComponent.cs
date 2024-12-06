@@ -15,7 +15,6 @@ namespace Util
                 return _conditions.All(x => x.IsTrue());
             }
 
-            Debug.Log("Condition count : 0");
             return true;
         }
 

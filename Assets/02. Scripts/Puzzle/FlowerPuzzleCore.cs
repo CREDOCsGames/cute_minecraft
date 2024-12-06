@@ -32,7 +32,7 @@ namespace Puzzle
                     break;
                 default:
                     output = new[] { Vector4Byte.FAIL };
-                    Debug.Assert(false, $"{input.w}");
+                    Debug.LogWarning($"{input.w}");
                     return;
             }
 

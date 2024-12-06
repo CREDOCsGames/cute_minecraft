@@ -23,7 +23,7 @@ namespace Puzzle
             _area = GetComponent<AreaComponent>();
 
             var bounds = _area.HalfRange;
-            bounds.center += Vector3.up * 5f;
+            bounds.center += Vector3.up * bounds.size.y;
             _wall = new AreaWall(_side, bounds, $"Objects/{_wallType}");
 
             _area.OnEnterEvent.AddListener(b => MakeWall($"Objects/{_wallType}"));
@@ -33,6 +33,8 @@ namespace Puzzle
                 MakeWall($"Objects/{Type.Wall}");
                 Invoke(nameof(MakeWay), 0.1f);
             });
+
+            MakeWall($"Objects/{_wallType}");
         }
 
         private void MakeWall(string wall)

@@ -46,19 +46,24 @@ namespace Puzzle
 
         }
 
-        public void Init()
+        private void SetParent(Transform cubeMapObject)
+        {
+            foreach (var flower in _cubeMap.Elements)
+            {
+                var position = flower.transform.position;
+                flower.transform.SetParent(cubeMapObject);
+                flower.transform.localPosition = position;
+            }
+        }
+
+        public void Init(Transform cubeMapObject)
         {
             Instantiate(out _cubeMap);
+            SetParent(cubeMapObject);
             SetDataLink(out _dataLink);
             LinkCubeElements();
             _dataLink.OnInteraction += InstreamEvent.Invoke;
             SetPresentation(out _presentation);
-
-            var parent = new GameObject("puzzle").transform;
-            foreach (var piece in _cubeMap.Elements)
-            {
-                piece.transform.parent = parent;
-            }
         }
 
     }
