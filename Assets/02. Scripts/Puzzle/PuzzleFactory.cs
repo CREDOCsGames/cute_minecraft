@@ -5,14 +5,21 @@ namespace Puzzle
 {
     public static class PuzzleFactory
     {
-        public static ICore CreateCoreAs(TunnelFlag flag, Mediator mediator, CubeMap<byte> cubeMap)
+        public static ICore CreateCoreAs(TunnelFlag flag, CubeMap<byte> cubeMap)
         {
+            ICore core = null;
             if (flag.HasFlag(TunnelFlag.Flower))
             {
-                return new FlowerPuzzleCore(mediator, cubeMap);
+                core = new FlowerPuzzleCore(cubeMap);
             }
-            Debug.Assert(false, "");
-            return null;
+            if (flag.HasFlag(TunnelFlag.System) && core is PuzzleCore puzzleCore)
+            {
+                core = new SystemCore(puzzleCore);
+            }
+
+            
+            Debug.Assert(core != null, "");
+            return core;
         }
     }
 }

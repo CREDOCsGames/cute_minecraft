@@ -23,7 +23,7 @@ namespace Puzzle
 
         public void InstreamData(byte[] data)
         {
-            if (Vector4Byte.FAIL.Equals(data))
+            if (Vector4Byte.FAIL.Equals(data) || SystemMessage.CheckSystemMessage(data))
             {
                 Debug.Log($"fail : {data}");
             }

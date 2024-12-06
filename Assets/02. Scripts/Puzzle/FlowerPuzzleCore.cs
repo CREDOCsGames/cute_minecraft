@@ -6,7 +6,7 @@ namespace Puzzle
 {
     public class FlowerPuzzleCore : PuzzleCore
     {
-        public FlowerPuzzleCore(Mediator mediator, CubeMap<byte> map) : base(mediator, map)
+        public FlowerPuzzleCore(CubeMap<byte> map) : base(map)
         {
         }
 

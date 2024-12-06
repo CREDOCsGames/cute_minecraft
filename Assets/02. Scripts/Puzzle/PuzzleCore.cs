@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using static Puzzle.Flower;
 
 namespace Puzzle
 {
@@ -10,13 +12,14 @@ namespace Puzzle
 
         public PuzzleCoreContainer(PuzzleCore core)
         {
-            _core = core;
+            core.InstreamEvent += InstreamEvent.Invoke;
         }
 
         public PuzzleCoreContainer(PuzzleCoreContainer container)
         {
             Debug.Assert(container._core != null);
             _core = container._core;
+            _core.InstreamEvent += InstreamEvent.Invoke;
         }
 
         public void InstreamData(byte[] data)
@@ -29,6 +32,45 @@ namespace Puzzle
             }
         }
         protected abstract void EditData(byte[] data, out Vector4Byte[] output, in CubeMap<byte> cubeMap);
+
+        public void Init()
+        {
+            _core.Init();
+        }
+    }
+
+    public class SystemCore : ICore
+    {
+        private PuzzleCore _core;
+        public SystemCore(PuzzleCore core)
+        {
+            _core = core;
+            _core.InstreamEvent += OutstreamData;
+        }
+
+        public event Action<byte[]> InstreamEvent;
+        private Face _currentFace;
+
+        public void InstreamData(byte[] data)
+        {
+            _core.InstreamData(data);
+            var list = _core.CubeMap.GetFace(_currentFace).Where(x => x == (byte)FlowerType.Green || x == (byte)FlowerType.Red);
+            var common = list.First();
+            if (list.All(x => x.Equals(common)))
+            {
+                InstreamEvent?.Invoke(SystemMessage.CLEAR_FACE[(int)_currentFace++]);
+            }
+        }
+
+        private void OutstreamData(byte[] data)
+        {
+            InstreamEvent?.Invoke(data);
+        }
+
+        public void Init()
+        {
+            _core?.Init();
+        }
     }
 
     public abstract class PuzzleCore : ICore
@@ -36,11 +78,9 @@ namespace Puzzle
         public event Action<byte[]> InstreamEvent;
         private CubeMap<byte> _cubeMap;
         public CubeMap<byte> CubeMap { get => _cubeMap; set => _cubeMap = value; }
-        public Mediator Mediator { get; private set; }
 
-        public PuzzleCore(Mediator mediator, CubeMap<byte> map)
+        public PuzzleCore(CubeMap<byte> map)
         {
-            Mediator = mediator;
             CubeMap = map;
         }
 

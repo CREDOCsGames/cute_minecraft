@@ -9,6 +9,7 @@ namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
+        public MediatorCenter.TunnelFlag Flag;
         public ScriptableObject[] Puzzles;
         public Scriptable_MatrixByte[] MapData
         {
@@ -39,14 +40,14 @@ namespace Puzzle
             }
 
             _mediator = new MediatorCenter();
-            _mediator.AddCore(CreateMap(), MediatorCenter.TunnelFlag.Flower);
+            _mediator.AddCore(CreateMap(), Flag);
 
             foreach (var puzzle in Puzzles)
             {
                 if (puzzle is IInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IInstance;
-                    _mediator.AddInstance(instance, MediatorCenter.TunnelFlag.Flower);
+                    _mediator.AddInstance(instance, Flag);
                 }
                 else
                 {
@@ -60,7 +61,7 @@ namespace Puzzle
         private void A()
         {
             _mediator.Instances.ForEach(x => (x as FlowerPuzzleInstance).Init(transform));
-            _mediator.Cores.ForEach(x => (x as PuzzleCore).Init());
+            _mediator.Cores.ForEach(x => (x as ICore).Init());
         }
 
         private void OnDisable()

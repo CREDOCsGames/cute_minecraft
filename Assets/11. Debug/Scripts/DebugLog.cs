@@ -37,5 +37,15 @@ namespace PlatformGame.Debugger
         {
             Debug.Log(character.State);
         }
+
+        public static string GetStrings(byte[] bytes)
+        {
+            string s = "";
+            foreach(var data in bytes)
+            {
+                s += data.ToString() + " ";
+            }
+            return s;
+        }
     }
 }

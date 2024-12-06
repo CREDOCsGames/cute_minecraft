@@ -1,3 +1,4 @@
+using PlatformGame.Debugger;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -50,12 +51,15 @@ namespace Puzzle
         private void DownstramData(byte[] data)
         {
             _cores.ForEach(core => core.InstreamData(data));
+            Debug.Log($"Instance -> Core{DebugLog.GetStrings(data)}");
         }
 
         private void UpstramData(byte[] data)
         {
             _instances.ForEach(instance => instance.InstreamData(data));
+            Debug.Log($"Core -> Instance {DebugLog.GetStrings(data)}");
         }
+
     }
 
 }

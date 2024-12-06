@@ -19,32 +19,16 @@ namespace Puzzle
         public List<IInstance> Instances = new();
         public void AddInstance(IInstance puzzle, TunnelFlag flag)
         {
-            foreach (TunnelFlag value in Enum.GetValues(typeof(TunnelFlag)))
-            {
-                if (!flag.HasFlag(value) || value == TunnelFlag.None)
-                {
-                    continue;
-                }
-                _tunnelMap.TryAdd(value, new Mediator());
-                _tunnelMap[value].AddInstance(puzzle);
-            }
+            _tunnelMap.TryAdd(flag, new Mediator());
+            _tunnelMap[flag].AddInstance(puzzle);
             Instances.Add(puzzle);
         }
         public void AddCore(CubeMap<byte> map, TunnelFlag flag)
         {
-            foreach (TunnelFlag bit in Enum.GetValues(typeof(TunnelFlag)))
-            {
-                if (!flag.HasFlag(bit) || bit == TunnelFlag.None)
-                {
-                    continue;
-                }
-                _tunnelMap.TryAdd(bit, new Mediator());
-                var core = PuzzleFactory.CreateCoreAs(bit, _tunnelMap[bit], map);
-                Cores.Add(core);
-                _tunnelMap[bit].AddCore(core);
-            }
-
-
+            _tunnelMap.TryAdd(flag, new Mediator());
+            var core = PuzzleFactory.CreateCoreAs(flag, map);
+            Cores.Add(core);
+            _tunnelMap[flag].AddCore(core);
         }
 
     }

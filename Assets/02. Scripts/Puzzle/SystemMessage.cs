@@ -1,5 +1,12 @@
-﻿namespace Puzzle
+﻿using System.Collections.Generic;
+
+namespace Puzzle
 {
+    public enum Face : byte
+    {
+        top, left, front, right, back, bottom
+    }
+
     public static class SystemMessage
     {
         public static readonly byte[] CLEAR_TOP = { 0 };
@@ -8,8 +15,17 @@
         public static readonly byte[] CLEAR_RIGHT = { 3 };
         public static readonly byte[] CLEAR_FRONT = { 4 };
         public static readonly byte[] CLEAR_BACK = { 5 };
+        public static List<byte[]> CLEAR_FACE => new List<byte[]>
+        {
+            CLEAR_TOP,
+            CLEAR_LEFT,
+            CLEAR_FRONT,
+            CLEAR_RIGHT,
+            CLEAR_BACK,
+            CLEAR_BOTTOM
+        };
 
-        public static bool TryGetSystemMessage(byte[] message)
+        public static bool CheckSystemMessage(byte[] message)
         {
             return message.Equals(CLEAR_TOP)
                 || message.Equals(CLEAR_BOTTOM)
