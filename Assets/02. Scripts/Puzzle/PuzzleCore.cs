@@ -53,6 +53,10 @@ namespace Puzzle
 
         public void InstreamData(byte[] data)
         {
+            if (data[2] != (byte)_currentFace)
+            {
+                return;
+            }
             _core.InstreamData(data);
             var list = _core.CubeMap.GetFace(_currentFace).Where(x => x == (byte)FlowerType.Green || x == (byte)FlowerType.Red);
             var common = list.First();

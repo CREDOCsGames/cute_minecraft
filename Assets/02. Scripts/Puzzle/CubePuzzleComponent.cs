@@ -1,3 +1,5 @@
+using A;
+using Movement;
 using System;
 using System.IO;
 using System.Linq;
@@ -7,7 +9,7 @@ using Util;
 
 namespace Puzzle
 {
-    public class CubePuzzleComponent : MonoBehaviour
+    public class CubePuzzleComponent : MonoBehaviour, IInstance
     {
         public MediatorCenter.TunnelFlag Flag;
         public ScriptableObject[] Puzzles;
@@ -31,6 +33,8 @@ namespace Puzzle
             }
         }
         private MediatorCenter _mediator;
+
+        public event Action<byte[]> InstreamEvent;
 
         void Awake()
         {
@@ -56,6 +60,7 @@ namespace Puzzle
             }
 
             Invoke(nameof(A), 3);
+            _mediator.AddListenerSystemMessage(this);
         }
 
         private void A()
@@ -86,6 +91,49 @@ namespace Puzzle
             }
 
             return cubeMap;
+        }
+
+        private void Rotate(string path)
+        {
+            var action = Resources.Load<MovementAction>(path);
+            if (action != null)
+            {
+                GetComponent<MovementComponent>().PlayMovement(action);
+            }
+        }
+
+        public void InstreamData(byte[] data)
+        {
+            if (!SystemMessage.CheckSystemMessage(data))
+            {
+                return;
+            }
+
+            GameObject.FindAnyObjectByType<PCController>().DoJump();
+            if (SystemMessage.CLEAR_RIGHT.Equals(data))
+            {
+                Rotate("MovementAction/RotateLeft");
+            }
+            else if (SystemMessage.CLEAR_LEFT.Equals(data))
+            {
+                Rotate("MovementAction/RotateLeft");
+            }
+            else if (SystemMessage.CLEAR_FRONT.Equals(data))
+            {
+                Rotate("MovementAction/RotateLeft");
+            }
+            else if (SystemMessage.CLEAR_BACK.Equals(data))
+            {
+                Rotate("MovementAction/RotateBackward");
+            }
+            else if (SystemMessage.CLEAR_TOP.Equals(data))
+            {
+                Rotate("MovementAction/RotateBackward");
+            }
+            else if (SystemMessage.CLEAR_BOTTOM.Equals(data))
+            {
+                Rotate("MovementAction/RotateLeft");
+            }
         }
     }
 

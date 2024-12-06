@@ -31,5 +31,17 @@ namespace Puzzle
             _tunnelMap[flag].AddCore(core);
         }
 
+        // TODO REMOVE
+        public void AddListenerSystemMessage(IInstance instance)
+        {
+            foreach(var tunnel in _tunnelMap)
+            {
+                if (tunnel.Key.HasFlag(TunnelFlag.System))
+                {
+                    tunnel.Value.AddInstance(instance);
+                }
+            }
+        }
+
     }
 }

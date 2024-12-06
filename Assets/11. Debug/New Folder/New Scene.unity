@@ -956,7 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _side: 31
-  _wallType: 1
+  _wallType: 0
 --- !u!114 &543987783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1470,6 +1470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069310354}
     m_Modifications:
+    - target: {fileID: 15022120420765144, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2472615789004964900, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
       propertyPath: _attackWindow
       value: 0.5

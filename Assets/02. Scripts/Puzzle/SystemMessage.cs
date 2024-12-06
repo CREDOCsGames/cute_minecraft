@@ -10,11 +10,11 @@ namespace Puzzle
     public static class SystemMessage
     {
         public static readonly byte[] CLEAR_TOP = { 0 };
-        public static readonly byte[] CLEAR_BOTTOM = { 1 };
-        public static readonly byte[] CLEAR_LEFT = { 2 };
+        public static readonly byte[] CLEAR_BOTTOM = { 5 };
+        public static readonly byte[] CLEAR_LEFT = { 1 };
         public static readonly byte[] CLEAR_RIGHT = { 3 };
-        public static readonly byte[] CLEAR_FRONT = { 4 };
-        public static readonly byte[] CLEAR_BACK = { 5 };
+        public static readonly byte[] CLEAR_FRONT = { 2 };
+        public static readonly byte[] CLEAR_BACK = { 4 };
         public static List<byte[]> CLEAR_FACE => new List<byte[]>
         {
             CLEAR_TOP,
