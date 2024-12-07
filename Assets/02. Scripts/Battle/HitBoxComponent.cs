@@ -6,31 +6,31 @@ namespace Battle
     public class HitBoxComponent : MonoBehaviour, IHitBox
     {
         [Header("[Refer]")]
-        [SerializeField] UnityEvent<HitBoxCollision> OnHit;
+        [SerializeField] private UnityEvent<HitBoxCollision> _onHit;
         [Header("[Options]")]
-        [SerializeField] protected Transform Actor;
-        HitBox mHitBox;
+        [SerializeField] protected Transform _actor;
+        private HitBox _hitBox;
         public HitBox HitBox
         {
             get
             {
-                Debug.Assert(Actor != null, $"Specify an Actor : {name}");
-                mHitBox ??= CreateHitBox();
-                return mHitBox;
+                Debug.Assert(_actor != null, $"Specify an Actor : {name}");
+                _hitBox ??= CreateHitBox();
+                return _hitBox;
             }
         }
         public static HitBoxComponent AddComponent(GameObject obj, HitBox hitBox)
         {
             var component = obj.AddComponent<HitBoxComponent>();
-            component.Actor = hitBox.Actor;
-            component.mHitBox = hitBox;
+            component._actor = hitBox.Actor;
+            component._hitBox = hitBox;
             return component;
         }
 
-        HitBox CreateHitBox()
+        private HitBox CreateHitBox()
         {
-            var hitBox = new HitBox(Actor);
-            hitBox.OnCollision += OnHit.Invoke;
+            var hitBox = new HitBox(_actor);
+            hitBox.OnCollision += _onHit.Invoke;
             return hitBox;
         }
 

@@ -5,27 +5,27 @@ namespace Util
 {
     public class OrderConditionComponent : Condition
     {
-        [SerializeField] List<ConditionData> mConditions;
-        readonly List<ConditionData> mEnters = new();
+        [SerializeField] private List<ConditionData> _conditions;
+        private readonly List<ConditionData> _enters = new();
 
         public override bool IsTrue()
         {
-            if (mConditions.Count == 0)
+            if (_conditions.Count == 0)
             {
-                Debug.Log(mEnters.Count);
+                Debug.Log(_enters.Count);
                 return false;
             }
 
-            if (mConditions.Count != mEnters.Count)
+            if (_conditions.Count != _enters.Count)
             {
-                Debug.Log($"{mConditions.Count} : {mEnters.Count}");
+                Debug.Log($"{_conditions.Count} : {_enters.Count}");
                 return false;
             }
 
-            for (var i = 0; i < mConditions.Count; i++)
+            for (var i = 0; i < _conditions.Count; i++)
             {
-                Debug.Log($"{mConditions[i].name} : {mEnters[i].name}");
-                if (mConditions[i] == mEnters[i])
+                Debug.Log($"{_conditions[i].name} : {_enters[i].name}");
+                if (_conditions[i] == _enters[i])
                 {
                     continue;
                 }
@@ -43,12 +43,12 @@ namespace Util
 
         public void ClearEnter()
         {
-            mEnters.Clear();
+            _enters.Clear();
         }
 
         public void EnterBool(ConditionData condition)
         {
-            mEnters.Add(condition);
+            _enters.Add(condition);
         }
     }
 }

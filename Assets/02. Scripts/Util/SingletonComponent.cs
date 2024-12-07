@@ -4,23 +4,23 @@ namespace Util
 {
     public sealed class SingletonComponent<T> : MonoBehaviour where T : MonoBehaviour
     {
-        static T mInstance;
+        private static T _instance;
 
         public static T Instance
         {
             get
             {
-                Debug.Assert(mInstance != null, $"Not found : {typeof(T)}");
-                return mInstance;
+                Debug.Assert(_instance != null, $"Not found : {typeof(T)}");
+                return _instance;
             }
-            private set => mInstance = value;
+            private set => _instance = value;
         }
 
         private void Awake()
         {
-            if (mInstance == null)
+            if (_instance == null)
             {
-                mInstance = this as T;
+                _instance = this as T;
             }
             else
             {
@@ -31,9 +31,9 @@ namespace Util
 
         private void OnDestroy()
         {
-            if (mInstance == this)
+            if (_instance == this)
             {
-                mInstance = null;
+                _instance = null;
             }
         }
     }

@@ -7,14 +7,14 @@ namespace Flow
     {
         public LoaderType LoaderType;
         [Range(0, 1000)] public float LoadDelay = 0f;
-        [SerializeField] UnityEvent LoadEvent;
+        [SerializeField] private UnityEvent LoadEvent;
 
         public void Load()
         {
             Invoke(nameof(StartLoad), LoadDelay);
         }
 
-        void StartLoad()
+        private void StartLoad()
         {
             LoadEvent.Invoke();
             ContentsLoader.SetLoaderType(LoaderType);

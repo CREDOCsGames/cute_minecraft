@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RootMotion.FinalIK;
+﻿using UnityEngine;
 
 namespace RootMotion.FinalIK
 {
@@ -13,7 +10,7 @@ namespace RootMotion.FinalIK
 
         public FABRIK ik;
         [Range(0f, 1f)] public float weight = 1f;
-        
+
         private void Start()
         {
             ik.solver.OnPreIteration += OnPreIteration;

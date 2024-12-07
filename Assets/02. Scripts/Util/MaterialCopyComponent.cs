@@ -4,7 +4,7 @@ namespace Util
 {
     public class MaterialCopyComponent : MonoBehaviour
     {
-        void Awake()
+        private void Awake()
         {
             if (!TryGetComponent<Renderer>(out var renderer))
             {

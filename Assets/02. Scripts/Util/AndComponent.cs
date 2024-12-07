@@ -6,22 +6,21 @@ namespace Util
 {
     public class ANDComponent : Condition
     {
-        [SerializeField] List<Condition> mConditions;
+        [SerializeField] private List<Condition> _conditions;
 
         public override bool IsTrue()
         {
-            if (mConditions.Count != 0)
+            if (_conditions.Count != 0)
             {
-                return mConditions.All(x => x.IsTrue());
+                return _conditions.All(x => x.IsTrue());
             }
 
-            Debug.Log("Condition count : 0");
             return true;
         }
 
         public override void SetFalse()
         {
-            foreach (var condition in mConditions)
+            foreach (var condition in _conditions)
             {
                 condition.SetFalse();
             }

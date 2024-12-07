@@ -5,23 +5,28 @@ namespace Puzzle
 {
     public class Flower : MonoBehaviour
     {
+        public enum FlowerType : byte
+        {
+            None, Red, Green
+        }
+
         public HitBoxComponent HitBoxComponent;
-        Color mColor;
+        private Color _color;
         public Color Color
         {
-            get => mColor;
+            get => _color;
             set
             {
-                mColor = value;
-                mRenderer.material.color = value;
+                _color = value;
+                _renderer.material.color = value;
             }
         }
 
-        MeshRenderer mRenderer;
+        private MeshRenderer _renderer;
 
         private void Awake()
         {
-            mRenderer = GetComponent<MeshRenderer>();
+            _renderer = GetComponent<MeshRenderer>();
         }
     }
 

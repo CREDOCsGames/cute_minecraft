@@ -7,13 +7,13 @@ namespace Util
 {
     public class ConditionEventHandler : MonoBehaviour
     {
-        readonly Dictionary<ConditionData, bool> mConditionStatusMap = new();
+        private readonly Dictionary<ConditionData, bool> _conditionStatusMap = new();
         public UnityEvent CompletionEvent;
         public UnityEvent ResetAllEvetn;
 
         public void AddCondition(ConditionData condition)
         {
-            if (mConditionStatusMap.TryAdd(condition, false))
+            if (_conditionStatusMap.TryAdd(condition, false))
             {
                 return;
             }
@@ -24,26 +24,26 @@ namespace Util
 
         public void RemoveCondition(ConditionData condition)
         {
-            if (!mConditionStatusMap.ContainsKey(condition))
+            if (!_conditionStatusMap.ContainsKey(condition))
             {
                 Debug.Log($"Conditions that don't exist : {condition}");
                 return;
             }
 
-            mConditionStatusMap.Remove(condition);
+            _conditionStatusMap.Remove(condition);
         }
 
         public void MeetCondition(ConditionData condition)
         {
-            if (!mConditionStatusMap.ContainsKey(condition))
+            if (!_conditionStatusMap.ContainsKey(condition))
             {
                 Debug.Log($"Conditions that don't exist : {condition}");
                 return;
             }
 
-            mConditionStatusMap[condition] = true;
+            _conditionStatusMap[condition] = true;
 
-            if (mConditionStatusMap.All(x => x.Value))
+            if (_conditionStatusMap.All(x => x.Value))
             {
                 CompletionEvent.Invoke();
             }
@@ -51,15 +51,15 @@ namespace Util
 
         public void CancleCondition(ConditionData condition)
         {
-            if (!mConditionStatusMap.ContainsKey(condition))
+            if (!_conditionStatusMap.ContainsKey(condition))
             {
                 Debug.Log($"Conditions that don't exist : {condition}");
                 return;
             }
 
-            mConditionStatusMap[condition] = false;
+            _conditionStatusMap[condition] = false;
 
-            if (mConditionStatusMap.All(x => !x.Value))
+            if (_conditionStatusMap.All(x => !x.Value))
             {
                 ResetAllEvetn.Invoke();
             }
@@ -67,13 +67,13 @@ namespace Util
 
         public void ToggleCondition(ConditionData condition)
         {
-            if (!mConditionStatusMap.ContainsKey(condition))
+            if (!_conditionStatusMap.ContainsKey(condition))
             {
                 Debug.Log($"Conditions that don't exist : {condition}");
                 return;
             }
 
-            if (mConditionStatusMap[condition])
+            if (_conditionStatusMap[condition])
             {
                 CancleCondition(condition);
             }
@@ -85,10 +85,10 @@ namespace Util
 
         public void ResetAllConditions()
         {
-            var keys = mConditionStatusMap.Keys.ToList();
+            var keys = _conditionStatusMap.Keys.ToList();
             foreach (var key in keys)
             {
-                mConditionStatusMap[key] = false;
+                _conditionStatusMap[key] = false;
             }
 
             ResetAllEvetn.Invoke();

@@ -8,12 +8,12 @@ namespace Puzzle
 {
     public static class AreaManager
     {
-        static Dictionary<Vector3Int, AreaComponent> mAreas { get; set; } = new();
+        private static Dictionary<Vector3Int, AreaComponent> _areas { get; set; } = new();
 
         public static int AreaRange = 40;
         public static float BridgeLimitDistance = 10f;
 
-        static readonly List<Bridge> mActiveBridges = new();
+        private static readonly List<Bridge> _activeBridges = new();
 
         public static void Connect()
         {
@@ -36,18 +36,18 @@ namespace Puzzle
                 var bridge = new Bridge(BridgeLimitDistance);
                 bridge.SetConnectionPoints(basis.Range, area.Range);
                 bridge.ConnectAtoB();
-                mActiveBridges.Add(bridge);
+                _activeBridges.Add(bridge);
             }
         }
 
         public static void DisConnect()
         {
-            mActiveBridges.ForEach(x => x.Disconnect());
+            _activeBridges.ForEach(x => x.Disconnect());
         }
 
         public static void NumberingAreas()
         {
-            mAreas.Clear();
+            _areas.Clear();
             var areas = InstancesMonobehaviour<AreaComponent>.Instances;
             if (!areas.Any())
             {
@@ -57,9 +57,9 @@ namespace Puzzle
             foreach (var area in areas)
             {
                 var areaNum = GetAreaNum(area.Range.center);
-                if (!mAreas.TryAdd(areaNum, area))
+                if (!_areas.TryAdd(areaNum, area))
                 {
-                    Debug.Assert(false, $"The two areas overlapped :  {mAreas[areaNum].name},{area.name}");
+                    Debug.Assert(false, $"The two areas overlapped :  {_areas[areaNum].name},{area.name}");
                     continue;
                 }
 
@@ -73,7 +73,7 @@ namespace Puzzle
 
             foreach (var dir in AreaComponent.Dirs)
             {
-                if (mAreas.TryGetValue(sectorNum + dir, out var area))
+                if (_areas.TryGetValue(sectorNum + dir, out var area))
                 {
                     nearbyAreas.Add(area);
                 }
@@ -84,7 +84,7 @@ namespace Puzzle
 
         public static bool TryGetArea(Vector3Int sectorNum, out AreaComponent area)
         {
-            return mAreas.TryGetValue(sectorNum, out area);
+            return _areas.TryGetValue(sectorNum, out area);
         }
 
         public static Vector3Int GetAreaNum(Vector3 position)
@@ -96,7 +96,7 @@ namespace Puzzle
             return areaNum;
         }
 
-        static int GetSectorAxis(float value)
+        private static int GetSectorAxis(float value)
         {
             var offset = Mathf.Max((int)Mathf.Abs(value) - AreaRange / 2, 0);
             return (offset == 0 ? 0 : 1 + offset / AreaRange)

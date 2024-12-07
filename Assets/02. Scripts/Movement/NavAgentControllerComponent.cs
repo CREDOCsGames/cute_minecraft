@@ -6,29 +6,20 @@ using UnityEngine.AI;
 
 public class NavAgentControllerComponent : MonoBehaviour
 {
-    [SerializeField]
-    NavMeshAgent mAgent;
-    [SerializeField]
-    Animator mAnimator;
-    [SerializeField]
-    string WalkLeft;
-    [SerializeField]
-    string WalkRight;
-    [SerializeField]
-    string WalkFWD;
-    [SerializeField]
-    string WalkBWD;
-    [SerializeField]
-    string Idle;
+    private string _beforeAnim;
+    private Vector3 _goal;
+    private Action _action;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private string _walkLeft;
+    [SerializeField] private string _walkRight;
+    [SerializeField] private string _walkFWD;
+    [SerializeField] private string _walkBWD;
+    [SerializeField] private string _idle;
+    [SerializeField] private GameObject _flower;
+    [SerializeField] private BoxCollider _box;
 
-    string mBeforeAnim;
-    Vector3 Goal;
-    Action Action;
-    [SerializeField]
-    GameObject FLower;
-    public BoxCollider Box;
-
-    void OnEnable()
+    private void OnEnable()
     {
         if (!FlowerComponent.Instances.Any())
         {
@@ -47,50 +38,50 @@ public class NavAgentControllerComponent : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (!mAgent.enabled)
+        if (!_agent.enabled)
         {
             return;
         }
-        mAgent.SetDestination(Goal);
-        var normal = new Vector2(mAgent.velocity.x, mAgent.velocity.z).normalized;
+        _agent.SetDestination(_goal);
+        var normal = new Vector2(_agent.velocity.x, _agent.velocity.z).normalized;
         string anim = "";
         if (normal.x > 0.5f)
         {
-            anim = WalkRight;
+            anim = _walkRight;
         }
         else if (normal.x < 0.5f)
         {
-            anim = WalkLeft;
+            anim = _walkLeft;
         }
         if (normal.y > 0.5f)
         {
-            anim = WalkFWD;
+            anim = _walkFWD;
         }
         else if (normal.y < 0.5f)
         {
-            anim = WalkBWD;
+            anim = _walkBWD;
         }
-        if (Vector3.Distance(transform.position, Goal) <= 2f)
+        if (Vector3.Distance(transform.position, _goal) <= 2f)
         {
-            Action?.Invoke();
-            Action = null;
-            anim = Idle;
+            _action?.Invoke();
+            _action = null;
+            anim = _idle;
         }
-        if (anim.Equals(mBeforeAnim))
+        if (anim.Equals(_beforeAnim))
         {
             return;
         }
-        mAnimator.Play(anim);
-        mBeforeAnim = anim;
+        _animator.Play(anim);
+        _beforeAnim = anim;
     }
 
-    void ChangeColor()
+    private void ChangeColor()
     {
         var flower = FlowerComponent.Instances.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).First();
-        Goal = flower.transform.position;
-        Action = () =>
+        _goal = flower.transform.position;
+        _action = () =>
         {
             var flower1 = flower.GetComponent<FlowerComponent>();
             flower1.Color = flower1.Color == new Color(12f / 255f, 255f / 255f, 255f / 255f) ?
@@ -100,19 +91,19 @@ public class NavAgentControllerComponent : MonoBehaviour
         };
     }
 
-    void CreateElements()
+    private void CreateElements()
     {
-        Goal = GetRandomPositionInBox(Box);
-        Action = () =>
+        _goal = GetRandomPositionInBox(_box);
+        _action = () =>
         {
-            var flower = Instantiate(FLower);
-            flower.transform.position = Goal;
+            var flower = Instantiate(_flower);
+            flower.transform.position = _goal;
             gameObject.SetActive(false);
         };
 
     }
 
-    Vector3 GetRandomPositionInBox(BoxCollider box)
+    private Vector3 GetRandomPositionInBox(BoxCollider box)
     {
         // BoxCollider의 중심과 크기를 가져옵니다.
         Vector3 center = box.transform.position;

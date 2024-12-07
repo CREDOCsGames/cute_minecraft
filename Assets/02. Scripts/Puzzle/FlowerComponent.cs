@@ -9,28 +9,28 @@ namespace Puzzle
 {
     public class FlowerComponent : PuzzlePieceComponent, IColorPiece
     {
-        static readonly List<FlowerComponent> mInstances = new();
-        public static List<FlowerComponent> Instances => mInstances;
-        [SerializeField] Color mColor;
+        static readonly List<FlowerComponent> _instances = new();
+        public static List<FlowerComponent> Instances => _instances;
+        [SerializeField] Color _color;
 
         [Header("[Refer to the part you want the color to change]")]
         [SerializeField]
-        List<MeshRenderer> mRenderers;
+        List<MeshRenderer> _renderers;
 
-        public List<MeshRenderer> Renderers => mRenderers;
-        [Header("[Options]")][SerializeField] UnityEvent mChangeColorEvent;
+        public List<MeshRenderer> Renderers => _renderers;
+        [Header("[Options]")][SerializeField] UnityEvent _changeColorEvent;
 
-        readonly Timer mFloweringTimer = new();
-        [SerializeField] GameObject Seed;
+        readonly Timer _floweringTimer = new();
+        [SerializeField] GameObject _seed;
 
         public Color Color
         {
-            get => mColor;
+            get => _color;
             set
             {
-                mColor = value;
+                _color = value;
                 Colorize.Instance.Invoke(Renderers, Color);
-                mChangeColorEvent.Invoke();
+                _changeColorEvent.Invoke();
                 mTimer.Stop();
                 mTimer.Start();
             }
@@ -43,17 +43,17 @@ namespace Puzzle
                    Mathf.Abs(a.b - b.b) < 0.01;
         }
 
-        static void CheckClear()
+        private static void CheckClear()
         {
             bool bClear;
-            if (mInstances.Count < 2)
+            if (_instances.Count < 2)
             {
                 bClear = false;
             }
             else
             {
-                var color = mInstances.First().Color;
-                bClear = mInstances.All(x => CompareColor(x.Color, color));
+                var color = _instances.First().Color;
+                bClear = _instances.All(x => CompareColor(x.Color, color));
             }
 
             if (!bClear)
@@ -61,8 +61,6 @@ namespace Puzzle
                 return;
             }
 
-            //mInstances.ForEach(x => x.IsClear = true);
-            //mInstances.ToList().ForEach(x => x.enabled = false);
             if (GameManager.Lantern == null)
             {
                 return;
@@ -70,29 +68,29 @@ namespace Puzzle
             GameManager.Lantern.StoneCount++;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            mInstances.Add(this);
+            _instances.Add(this);
         }
 
-        void Awake()
+        private void Awake()
         {
-            Color = mColor;
-            mFloweringTimer.SetTimeout(2f);
-            mFloweringTimer.OnTimeoutEvent += (t) => Seed?.SetActive(true);
+            Color = _color;
+            _floweringTimer.SetTimeout(2f);
+            _floweringTimer.OnTimeoutEvent += (t) => _seed?.SetActive(true);
         }
 
-        static readonly Timer mTimer = new(1f, (t) => CheckClear());
+        private static readonly Timer mTimer = new(1f, (t) => CheckClear());
 
-        void Update()
+        private void Update()
         {
-            mFloweringTimer.Tick();
-            if (Seed != null && !mFloweringTimer.IsStart && !Seed.activeSelf)
+            _floweringTimer.Tick();
+            if (_seed != null && !_floweringTimer.IsStart && !_seed.activeSelf)
             {
-                mFloweringTimer.Start();
+                _floweringTimer.Start();
             }
 
-            if (mInstances.First() != this)
+            if (_instances.First() != this)
             {
                 return;
             }
@@ -100,9 +98,9 @@ namespace Puzzle
             mTimer.Tick();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            mInstances.Remove(this);
+            _instances.Remove(this);
         }
     }
 }

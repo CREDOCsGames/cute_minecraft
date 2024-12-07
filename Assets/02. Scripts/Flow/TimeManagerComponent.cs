@@ -4,20 +4,20 @@ namespace Flow
 {
     public class TimeManagerComponent : MonoBehaviour
     {
-        public float mTimeScale;
+        public float _timeScale;
 
-        void Update()
+        private void Update()
         {
-            Time.timeScale = mTimeScale;
+            Time.timeScale = _timeScale;
         }
 
         public void SetScale(float t)
         {
-            mTimeScale = t;
-            Time.timeScale = mTimeScale;
+            _timeScale = t;
+            Time.timeScale = _timeScale;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             SetScale(1f);
         }

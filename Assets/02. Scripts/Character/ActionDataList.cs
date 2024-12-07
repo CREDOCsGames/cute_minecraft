@@ -6,14 +6,14 @@ namespace Character
     [CreateAssetMenu(fileName = "ActionDataList", menuName = "Custom/ActionDataList")]
     public class ActionDataList : ScriptableObject
     {
-        [SerializeField] List<ActionData> mActions;
+        [SerializeField] private List<ActionData> _actions;
 
         public List<ActionData> Actions
         {
             get
             {
-                Debug.Assert(mActions is { Count: > 0 });
-                return mActions;
+                Debug.Assert(_actions is { Count: > 0 });
+                return _actions;
             }
         }
 
@@ -22,7 +22,7 @@ namespace Character
             get
             {
                 var library = new Dictionary<int, ActionData>();
-                foreach (var item in mActions)
+                foreach (var item in _actions)
                 {
                     Debug.Assert(!library.ContainsKey(item.ID), $"Duplicate values : {item.ID}");
                     library.Add(item.ID, item);

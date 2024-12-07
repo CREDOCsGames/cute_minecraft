@@ -19,8 +19,8 @@ namespace Character
     public enum CharacterState
     {
         Idle,
-        Walk,
-        Run,
+        //Walk,
+        Run = 2,
         Jump,
         Fall,
         Land,
@@ -36,7 +36,7 @@ namespace Character
             switch (state)
             {
                 case CharacterState.Idle: return (flags & CharacterStateFlags.Idle) == CharacterStateFlags.Idle;
-                case CharacterState.Walk: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
+                //case CharacterState.Walk: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
                 case CharacterState.Run: return (flags & CharacterStateFlags.Move) == CharacterStateFlags.Move;
                 case CharacterState.Jump: return (flags & CharacterStateFlags.Jump) == CharacterStateFlags.Jump;
                 case CharacterState.Fall: return (flags & CharacterStateFlags.Fall) == CharacterStateFlags.Fall;

@@ -10,39 +10,39 @@ namespace Character
     public class CharacterComponent : MonoBehaviour
     {
         public const string TAG_PLAYER = "Player";
-        static readonly List<CharacterComponent> mInstances = new();
-        public static IEnumerable<CharacterComponent> Instances => mInstances.ToList();
-        public bool IsAction => mCooltime.IsAction;
+        private static readonly List<CharacterComponent> _instances = new();
+        public static IEnumerable<CharacterComponent> Instances => _instances.ToList();
+        public bool IsAction => _cooltime.IsAction;
         public Func<bool> IsGrounded { get; set; } = () => true;
-        CharacterState mState;
+        private CharacterState _state;
 
         public CharacterState State
         {
-            get => mState;
+            get => _state;
             private set
             {
-                if (mState != value)
+                if (_state != value)
                 {
                     OnChangedState.Invoke(value);
                 }
 
-                mState = value;
+                _state = value;
             }
         }
 
-        [SerializeField] Rigidbody mRigid;
-        public Rigidbody Rigid => mRigid;
-        [SerializeField] Animator mAnimator;
-        public Animator Animator => mAnimator;
+        [SerializeField] private Rigidbody _rigid;
+        public Rigidbody Rigid => _rigid;
+        [SerializeField] private Animator _animator;
+        public Animator Animator => _animator;
 
-        [SerializeField] MovementComponent mMovement;
-        MovementComponent Movement => mMovement;
-        readonly Cooltime mCooltime = new();
+        [SerializeField] private MovementComponent _movement;
+        private MovementComponent Movement => _movement;
+        private readonly Cooltime _cooltime = new();
 
-        [Header("Options")] [SerializeField] ActionDataList mHasAbilities;
-        public ActionDataList HasAbilities => mHasAbilities;
-        [SerializeField] UnityEvent<CharacterState> mOnChangedState;
-        public UnityEvent<CharacterState> OnChangedState => mOnChangedState;
+        [Header("Options")][SerializeField] private ActionDataList _hasAbilities;
+        public ActionDataList HasAbilities => _hasAbilities;
+        [SerializeField] private UnityEvent<CharacterState> _onChangedState;
+        public UnityEvent<CharacterState> OnChangedState => _onChangedState;
 
         public void DoAction(ActionData data)
         {
@@ -51,7 +51,7 @@ namespace Character
 
         public void DoAction(int actionID)
         {
-            mHasAbilities.Library.TryGetValue(actionID, out var action);
+            _hasAbilities.Library.TryGetValue(actionID, out var action);
             Debug.Assert(action, $"The {actionID} is not registered as an ability for {gameObject.name}.");
 
             if (!StateCheck.Equals(State, action.AllowedState))
@@ -61,7 +61,7 @@ namespace Character
 
             State = action.BeState;
 
-            mCooltime.UseAbility(action);
+            _cooltime.UseAbility(action);
 
             if (!action.Movement)
             {
@@ -73,24 +73,24 @@ namespace Character
 
         public void ResetAction()
         {
-            mCooltime.Reset();
+            _cooltime.Reset();
         }
 
-        void Awake()
+        private void Awake()
         {
             Debug.Assert(Rigid, $"Rigidbody reference not found : {gameObject.name}");
-            Debug.Assert(mMovement, $"Movement reference not found : {gameObject.name}");
-            mInstances.Add(this);
+            Debug.Assert(_movement, $"Movement reference not found : {gameObject.name}");
+            _instances.Add(this);
         }
 
-        void Start()
+        private void Start()
         {
             OnChangedState.Invoke(State);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            mInstances.Remove(this);
+            _instances.Remove(this);
         }
     }
 }

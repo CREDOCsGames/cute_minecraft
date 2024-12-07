@@ -9,12 +9,12 @@ namespace Puzzle
     {
         public int StoneCount
         {
-            get => mStone.Count;
-            set => mStone.Count = value;
+            get => _stone.Count;
+            set => _stone.Count = value;
         }
 
-        [Range(0, 100)] [SerializeField] int ClearCount;
-        CountEvent mStone;
+        [Range(0, 100)][SerializeField] private int _clearCount;
+        private CountEvent _stone;
 
         public void SetGameManger()
         {
@@ -26,23 +26,23 @@ namespace Puzzle
             GameManager.Lantern = null;
         }
 
-        void CreateStone()
+        private void CreateStone()
         {
             var stone = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             var shader = Shader.Find("Universal Render Pipeline/Lit");
             stone.GetComponent<Renderer>().material = new Material(shader);
             stone.transform.SetParent(transform);
-            stone.transform.SetLocalPositionAndRotation(Vector3.down * (2f + mStone.Count), Quaternion.identity);
+            stone.transform.SetLocalPositionAndRotation(Vector3.down * (2f + _stone.Count), Quaternion.identity);
         }
 
-        void Awake()
+        private void Awake()
         {
-            mStone = new CountEvent();
-            mStone.CountReachedEvent += GameManager.PuzzleArea.OnClear;
-            mStone.CountAddEvent += CreateStone;
-            mStone.CountAddEvent += () => SoundManagerComponent.Instance.PlaySound("Success");
-            mStone.UseOneTime();
-            mStone.NumberOfGoals = ClearCount;
+            _stone = new CountEvent();
+            _stone.CountReachedEvent += GameManager.PuzzleArea.OnClear;
+            _stone.CountAddEvent += CreateStone;
+            _stone.CountAddEvent += () => SoundManagerComponent.Instance.PlaySound("Success");
+            _stone.UseOneTime();
+            _stone.NumberOfGoals = _clearCount;
         }
     }
 }

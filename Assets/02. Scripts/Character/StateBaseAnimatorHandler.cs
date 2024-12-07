@@ -5,32 +5,33 @@ namespace Character
 {
     public class StateBaseAnimatorHandler : MonoBehaviour
     {
-        [Header("References")] [SerializeField]
-        CharacterComponent mCharacter;
+        [Header("References")]
+        [SerializeField]
+        private CharacterComponent _character;
 
-        [SerializeField] Animator mAnimator;
-        string[] mTriggers;
+        [SerializeField] Animator _animator;
+        private string[] _triggers;
 
-        void Awake()
+        private void Awake()
         {
-            Debug.Assert(mCharacter != null, $"Not found Character : {name}");
-            mCharacter.OnChangedState.AddListener(SendTrigger);
-            mTriggers = Enum.GetNames(typeof(CharacterState));
+            Debug.Assert(_character != null, $"Not found Character : {name}");
+            _character.OnChangedState.AddListener(SendTrigger);
+            _triggers = Enum.GetNames(typeof(CharacterState));
         }
 
-        void SendTrigger(CharacterState state)
+        private void SendTrigger(CharacterState state)
         {
-            foreach (var trigger in mTriggers)
+            foreach (var trigger in _triggers)
             {
-                mAnimator.ResetTrigger(trigger);
+                _animator.ResetTrigger(trigger);
             }
 
-            mAnimator.SetTrigger(state.ToString());
+            _animator.SetTrigger(state.ToString());
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            mCharacter.OnChangedState.RemoveListener(SendTrigger);
+            _character.OnChangedState.RemoveListener(SendTrigger);
         }
     }
 }

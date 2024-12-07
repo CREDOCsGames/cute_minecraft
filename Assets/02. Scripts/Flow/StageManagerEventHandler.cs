@@ -5,11 +5,11 @@ namespace Flow
 {
     public class StageManagerEventHandler : MonoBehaviour
     {
-        [SerializeField] UnityEvent OnChangeEvent;
+        [SerializeField] private UnityEvent _onChangeEvent;
 
-        void Awake()
+        private void Awake()
         {
-            StageManager.Instance.OnChangeEvent += () => OnChangeEvent.Invoke();
+            StageManager.Instance.OnChangeEvent += () => _onChangeEvent.Invoke();
         }
     }
 }

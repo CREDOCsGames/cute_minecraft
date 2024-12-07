@@ -10,10 +10,10 @@ namespace Character
     [CreateAssetMenu(menuName = "Custom/PlayerCharacterManager")]
     public class PlayerCharacterManager : UniqueScriptableObject<PlayerCharacterManager>
     {
-        public static List<Character.CharacterComponent> JoinCharacters
-            => Character.CharacterComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
+        public static List<CharacterComponent> JoinCharacters
+            => CharacterComponent.Instances.Where(x => x.CompareTag(TAG_PLAYER)).ToList();
 
-        static List<PlayerControllerComponent> JoinCharactersController
+        private static List<PlayerControllerComponent> JoinCharactersController
         {
             get
             {
@@ -34,11 +34,11 @@ namespace Character
             }
         }
 
-        public Character.CharacterComponent ControlledCharacter
-            => mCurrentController?.GetComponentInParent<Character.CharacterComponent>();
+        public CharacterComponent ControlledCharacter
+            => _currentController?.GetComponentInParent<CharacterComponent>();
 
-        PlayerControllerComponent mCurrentController;
-        PlayerControllerComponent mDefaultController;
+        private PlayerControllerComponent _currentController;
+        private PlayerControllerComponent _defaultController;
 
         public void ControlDefaultCharacter()
         {
@@ -47,32 +47,32 @@ namespace Character
                 return;
             }
 
-            if (mDefaultController == null)
+            if (_defaultController == null)
             {
                 JoinCharactersController.ForEach(x => x.SetActive(false));
-                mDefaultController = JoinCharactersController.First();
+                _defaultController = JoinCharactersController.First();
             }
 
-            ReplaceControlWith(mDefaultController);
+            ReplaceControlWith(_defaultController);
         }
 
         public void ReplaceControlWith(PlayerControllerComponent controller)
         {
-            mCurrentController?.SetActive(false);
-            mCurrentController = controller;
-            mCurrentController.SetActive(true);
+            _currentController?.SetActive(false);
+            _currentController = controller;
+            _currentController.SetActive(true);
         }
 
         public void SetDefaultCharacter(PlayerControllerComponent controller)
         {
             Debug.Assert(controller.CompareTag(TAG_PLAYER));
-            mDefaultController = controller;
+            _defaultController = controller;
         }
 
         public void ReleaseController()
         {
-            mCurrentController?.SetActive(false);
-            mCurrentController = null;
+            _currentController?.SetActive(false);
+            _currentController = null;
         }
 
         public void DoAction(ActionData action)

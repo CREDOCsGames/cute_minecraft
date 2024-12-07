@@ -35,52 +35,52 @@ namespace Util
     public class IndexIntClamp : IIndexInt
     {
         public int Value { get; private set; }
-        readonly IndexInt mIndex;
+        private readonly IndexInt _index;
         public IndexIntClamp(int min = int.MinValue, int max = int.MaxValue)
         {
-            mIndex = new IndexInt(min, max);
+            _index = new IndexInt(min, max);
         }
         public void Next()
         {
-            if (mIndex.Value == mIndex.Max)
+            if (_index.Value == _index.Max)
             {
                 return;
             }
-            mIndex.Next();
+            _index.Next();
         }
         public void Prev()
         {
-            if (mIndex.Value == mIndex.Min)
+            if (_index.Value == _index.Min)
             {
                 return;
             }
-            mIndex.Prev();
+            _index.Prev();
         }
     }
 
     public class IndexIntEvent : IIndexInt
     {
-        readonly IIndexInt mIndex;
-        readonly Action<int> mEvent;
+        private readonly IIndexInt _index;
+        private readonly Action<int> _event;
 
-        public int Value => mIndex.Value;
+        public int Value => _index.Value;
 
         public IndexIntEvent(IIndexInt index, Action<int> @event)
         {
-            mIndex = index;
-            mEvent = @event;
+            _index = index;
+            _event = @event;
         }
 
         public void Next()
         {
-            mIndex.Next();
-            mEvent.Invoke(Value);
+            _index.Next();
+            _event.Invoke(Value);
         }
 
         public void Prev()
         {
-            mIndex.Prev();
-            mEvent.Invoke(Value);
+            _index.Prev();
+            _event.Invoke(Value);
         }
     }
 
@@ -113,7 +113,7 @@ namespace Util
     public class IndexByteClamp : IIndexByte
     {
         public byte Value { get; private set; }
-        readonly IndexByte mIndex;
+        private readonly IndexByte mIndex;
         public IndexByteClamp(byte min = byte.MinValue, byte max = byte.MaxValue)
         {
             mIndex = new IndexByte(min, max);
@@ -137,26 +137,26 @@ namespace Util
     }
     public class IndexByteEvent : IIndexByte
     {
-        public byte Value => mIndex.Value;
-        readonly IIndexByte mIndex;
-        readonly Action<byte> mEvent;
+        public byte Value => _index.Value;
+        private readonly IIndexByte _index;
+        private readonly Action<byte> _event;
 
         public IndexByteEvent(IIndexByte index, Action<byte> @event)
         {
-            mIndex = index;
-            mEvent = @event;
+            _index = index;
+            _event = @event;
         }
 
         public void Next()
         {
-            mIndex.Next();
-            mEvent.Invoke(Value);
+            _index.Next();
+            _event.Invoke(Value);
         }
 
         public void Prev()
         {
-            mIndex.Prev();
-            mEvent.Invoke(Value);
+            _index.Prev();
+            _event.Invoke(Value);
         }
     }
 }

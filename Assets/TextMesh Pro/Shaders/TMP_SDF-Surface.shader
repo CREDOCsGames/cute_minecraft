@@ -135,8 +135,8 @@ SubShader {
 		{
 			v2f o;
 			TRANSFER_SHADOW_CASTER(o)
-			o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
-			o.uv2 = TRANSFORM_TEX(v.texcoord, _OutlineTex);
+			o.uv = TRANSFOR_TEX(v.texcoord, _MainTex);
+			o.uv2 = TRANSFOR_TEX(v.texcoord, _OutlineTex);
 			o.alphaClip = (1.0 - _OutlineWidth * _ScaleRatioA - _FaceDilate * _ScaleRatioA) / 2;
 			return o;
 		}

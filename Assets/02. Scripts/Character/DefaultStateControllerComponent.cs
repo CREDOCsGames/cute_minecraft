@@ -8,20 +8,20 @@ namespace Character
     [RequireComponent(typeof(CharacterComponent))]
     public class DefaultStateControllerComponent : MonoBehaviour
     {
-        static readonly int STATE_IDLE = "State(Idle)".GetHashCode();
-        static readonly int STATE_WALK = "State(Walk)".GetHashCode();
-        static readonly int STATE_RUNNING = "State(Running)".GetHashCode();
-        static readonly int STATE_JUMPING = "State(Jumping)".GetHashCode();
-        static readonly int STATE_FALLING = "State(Falling)".GetHashCode();
-        static readonly int STATE_LAND = "State(Land)".GetHashCode();
-        CharacterComponent mCharacter;
+        private static readonly int STATE_IDLE = "State(Idle)".GetHashCode();
+        private static readonly int STATE_WALK = "State(Walk)".GetHashCode();
+        private static readonly int STATE_RUNNING = "State(Running)".GetHashCode();
+        private static readonly int STATE_JUMPING = "State(Jumping)".GetHashCode();
+        private static readonly int STATE_FALLING = "State(Falling)".GetHashCode();
+        private static readonly int STATE_LAND = "State(Land)".GetHashCode();
+        private CharacterComponent _character;
 
-        void ReturnBasicState()
+        private void ReturnBasicState()
         {
-            var velY = Math.Round(mCharacter.Rigid.velocity.y, 1);
+            var velY = Math.Round(_character.Rigid.velocity.y, 1);
             int actionID;
 
-            if (mCharacter.IsAction)
+            if (_character.IsAction)
             {
                 return;
             }
@@ -43,37 +43,37 @@ namespace Character
                     STATE_RUNNING;
             }
 
-            mCharacter.DoAction(actionID);
+            _character.DoAction(actionID);
         }
 
-        bool IsWalked()
+        private bool IsWalked()
         {
-            return (mCharacter.Rigid.velocity.magnitude < MAX_RUN_VELOCITY);
+            return (_character.Rigid.velocity.magnitude < MAX_RUN_VELOCITY);
         }
 
-        bool IsStopped()
+        private bool IsStopped()
         {
-            return (Mathf.Abs(mCharacter.Rigid.velocity.magnitude) < MIN_WALK_VELOCITY);
+            return (Mathf.Abs(_character.Rigid.velocity.magnitude) < MIN_WALK_VELOCITY);
         }
 
-        bool IsJumpState()
+        private bool IsJumpState()
         {
-            return !mCharacter.IsGrounded() && !IsStopped();
+            return !_character.IsGrounded() && !IsStopped();
         }
 
-        bool IsLandState()
+        private bool IsLandState()
         {
-            return mCharacter.IsGrounded()
-                   && mCharacter.State is CharacterState.Fall;
+            return _character.IsGrounded()
+                   && _character.State is CharacterState.Fall;
         }
 
-        void Awake()
+        private void Awake()
         {
-            mCharacter = GetComponent<CharacterComponent>();
-            mCharacter.IsGrounded = () => RigidbodyHelper.IsGrounded(mCharacter.Rigid);
+            _character = GetComponent<CharacterComponent>();
+            _character.IsGrounded = () => RigidbodyHelper.IsGrounded(_character.Rigid);
         }
 
-        void Update()
+        private void Update()
         {
             ReturnBasicState();
         }

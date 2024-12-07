@@ -4,14 +4,14 @@ namespace Util
 {
     public class LerpHDRComponent : MonoBehaviour
     {
-        MeshRenderer mRenderer;
+        private MeshRenderer _renderer;
         public Vector2 Range;
-        Color mColor;
+        private Color _color;
 
-        void Awake()
+        private void Awake()
         {
-            mRenderer = GetComponent<MeshRenderer>();
-            mColor = mRenderer.material.GetColor("_Color");
+            _renderer = GetComponent<MeshRenderer>();
+            _color = _renderer.material.GetColor("_Color");
         }
 
         public void ChangeHDR(float t, float max)
@@ -20,12 +20,12 @@ namespace Util
             SetAlpha(alpha);
         }
 
-        void SetAlpha(float alpha)
+        private void SetAlpha(float alpha)
         {
-            var color = mColor;
+            var color = _color;
             color.a = alpha;
 
-            mRenderer.material.SetColor("_Color", color);
+            _renderer.material.SetColor("_Color", color);
         }
     }
 }

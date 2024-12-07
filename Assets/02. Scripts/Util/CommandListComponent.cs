@@ -6,28 +6,27 @@ namespace Util
 {
     public class CommandListComponent : MonoBehaviour
     {
-        int mIndex;
-
-        [Header("References")] [SerializeField]
-        List<UnityEvent> Commands;
-
-        [Header("Options")] [SerializeField] bool bClamp;
+        private int _index;
+        [Header("References")]
+        [SerializeField] private List<UnityEvent> Commands;
+        [Header("Options")]
+        [SerializeField] private bool _useClamp;
 
         public void InvokeCommand()
         {
-            if (bClamp && Commands.Count <= mIndex)
+            if (_useClamp && Commands.Count <= _index)
             {
-                mIndex = 0;
+                _index = 0;
             }
 
-            if (Commands.Count <= mIndex)
+            if (Commands.Count <= _index)
             {
-                Debug.Log($"Index out of range : {mIndex}/{Commands.Count} {name}");
+                Debug.Log($"Index out of range : {_index}/{Commands.Count} {name}");
                 return;
             }
 
-            Commands[mIndex].Invoke();
-            mIndex++;
+            Commands[_index].Invoke();
+            _index++;
         }
 
         public void Clear()
@@ -37,7 +36,7 @@ namespace Util
 
         public void Init()
         {
-            mIndex = 0;
+            _index = 0;
         }
     }
 }

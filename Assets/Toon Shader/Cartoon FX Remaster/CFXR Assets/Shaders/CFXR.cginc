@@ -204,7 +204,7 @@
 			// Use dither mask for alpha blended shadows, based on pixel position xy
 			// and alpha level. Our dither texture is 4x4x16.
 			#if _CFXR_DITHERED_SHADOWS_CUSTOMTEXTURE
-			half texSize = _DitherCustom_TexelSize.z;
+			half texSize = _DitherCusto_TexelSize.z;
 			alpha = tex3D(_DitherCustom, float3(vpos.xy*(1 / texSize), alpha*(1 - (1 / (texSize*texSize))))).a;
 			#else
 			alpha = tex3D(_DitherMaskLOD, float3(vpos.xy*0.25, alpha*0.9375)).a;
@@ -313,7 +313,7 @@
 
 				float numTilesX = unity_ParticleUVShiftData.y;
 				float2 animScale = unity_ParticleUVShiftData.zw;
-				#ifdef UNITY_PARTICLE_INSTANCE_DATA_NO_ANIM_FRAME
+				#ifdef UNITY_PARTICLE_INSTANCE_DATA_NO_ANI_FRAME
 					float sheetIndex = 0.0;
 				#else
 					float sheetIndex = data.animFrame;

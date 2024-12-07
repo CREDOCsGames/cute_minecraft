@@ -12,63 +12,63 @@ namespace Flow
         public UnityEvent<TimerComponent> OnTick;
         public UnityEvent<TimerComponent> OnTimeout;
 
-        public bool IsStart => mTimer.IsStart;
-        public bool IsPause => mTimer.IsPause;
-        public float Timeout => mTimer.Timeout;
-        public float ElapsedTime => mTimer.ElapsedTime;
-        public float LastPauseTime => mTimer.LastPauseTime;
+        public bool IsStart => _timer.IsStart;
+        public bool IsPause => _timer.IsPause;
+        public float Timeout => _timer.Timeout;
+        public float ElapsedTime => _timer.ElapsedTime;
+        public float LastPauseTime => _timer.LastPauseTime;
 
-        readonly Timer mTimer = new();
+        private readonly Timer _timer = new();
 
-        [Header("Options")] [SerializeField] float mTimeout;
-        [SerializeField] bool mbPlayOnAwake = true;
+        [Header("Options")][SerializeField] private float _timeout;
+        [SerializeField] private bool _playOnAwake = true;
 
         public void Initialize(float maxTimerTim)
         {
-            mTimer.SetTimeout(maxTimerTim);
-            mTimer.Stop();
+            _timer.SetTimeout(maxTimerTim);
+            _timer.Stop();
         }
 
         public void DoStart()
         {
-            mTimer.Start();
+            _timer.Start();
         }
 
         public void DoPause()
         {
-            mTimer.Pause();
+            _timer.Pause();
         }
 
         public void DoResume()
         {
-            mTimer.Resume();
+            _timer.Resume();
         }
 
         public void DoStop()
         {
-            mTimer.Stop();
+            _timer.Stop();
         }
 
         void Update()
         {
-            mTimer.Tick();
+            _timer.Tick();
         }
 
         void Awake()
         {
-            mTimer.OnPauseEvent += (t) => OnPause.Invoke(this);
-            mTimer.OnResumeEvent += (t) => OnResume.Invoke(this);
-            mTimer.OnStartEvent += (t) => OnStart.Invoke(this);
-            mTimer.OnStopEvent += (t) => OnStop.Invoke(this);
-            mTimer.OnTickEvent += (t) => OnTick.Invoke(this);
-            mTimer.OnTimeoutEvent += (t) => OnTimeout.Invoke(this);
+            _timer.OnPauseEvent += (t) => OnPause.Invoke(this);
+            _timer.OnResumeEvent += (t) => OnResume.Invoke(this);
+            _timer.OnStartEvent += (t) => OnStart.Invoke(this);
+            _timer.OnStopEvent += (t) => OnStop.Invoke(this);
+            _timer.OnTickEvent += (t) => OnTick.Invoke(this);
+            _timer.OnTimeoutEvent += (t) => OnTimeout.Invoke(this);
 
-            mTimer.SetTimeout(mTimeout);
+            _timer.SetTimeout(_timeout);
         }
 
         void OnEnable()
         {
-            if (mbPlayOnAwake)
+            if (_playOnAwake)
             {
                 DoStart();
             }

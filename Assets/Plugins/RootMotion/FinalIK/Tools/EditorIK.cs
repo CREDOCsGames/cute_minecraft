@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace RootMotion.FinalIK
 {
@@ -13,7 +12,7 @@ namespace RootMotion.FinalIK
         [Tooltip("Create/Final IK/Editor IK Pose")] public EditorIKPose defaultPose;
 
         [HideInInspector] public Transform[] bones = new Transform[0];
-        
+
         public IK ik { get; private set; }
 
         private void OnEnable()
@@ -64,7 +63,7 @@ namespace RootMotion.FinalIK
             }
 
             defaultPose.Restore(bones);
-            
+
             ik.GetIKSolver().executedInEditor = false;
             ik.GetIKSolver().Initiate(ik.transform);
             ik.GetIKSolver().executedInEditor = true;

@@ -14,7 +14,7 @@ namespace RootMotion.FinalIK
             public float moveThreshold = 0.3f;
 
             // ANIMATION
-            [ShowLargeHeaderIf("Animation", "mode", Mode.Animated)] [SerializeField] byte animationHeader;
+            [ShowLargeHeaderIf("Animation", "mode", Mode.Animated)][SerializeField] byte animationHeader;
 
             [Tooltip("Minimum locomotion animation speed.")]
             /// <summary>
@@ -37,7 +37,7 @@ namespace RootMotion.FinalIK
             [ShowRangeIf(0.05f, 0.2f, "mode", Mode.Animated)]
             public float animationSmoothTime = 0.1f;
 
-            [ShowLargeHeaderIf("Root Position", "mode", Mode.Animated)] [SerializeField] byte rootPositionHeader;
+            [ShowLargeHeaderIf("Root Position", "mode", Mode.Animated)][SerializeField] byte rootPositionHeader;
 
             [Tooltip("X and Z standing offset from the horizontal position of the HMD.")]
             /// <summary>
@@ -74,7 +74,7 @@ namespace RootMotion.FinalIK
             [ShowIf("mode", Mode.Animated)]
             public float maxRootOffset = 0.5f;
 
-            [ShowLargeHeaderIf("Root Rotation", "mode", Mode.Animated)] [SerializeField] byte rootRotationHeader;
+            [ShowLargeHeaderIf("Root Rotation", "mode", Mode.Animated)][SerializeField] byte rootRotationHeader;
 
             [Tooltip("Max root angle from head forward while moving (ik.solver.spine.maxRootAngle).")]
             /// <summary>
@@ -200,7 +200,7 @@ namespace RootMotion.FinalIK
 
                 // Root up vector
                 Vector3 rootUp = solver.rootBone.solverRotation * Vector3.up;
-                
+
                 // Substract any motion from parent transforms
                 Vector3 externalDelta = solver.rootBone.solverPosition - lastEndRootPos;
                 externalDelta -= animator.deltaPosition;
@@ -227,7 +227,7 @@ namespace RootMotion.FinalIK
                 offset -= externalDelta;
                 offset -= lastCorrection;
                 offset = V3Tools.Flatten(offset, rootUp);
-                
+
                 // Turning
                 Vector3 headForward = (solver.spine.IKRotationHead * solver.spine.anchorRelativeToHead) * Vector3.forward;
                 headForward.y = 0f;
@@ -251,7 +251,7 @@ namespace RootMotion.FinalIK
 
                 float animationSmoothTimeTarget = isTurning && !isMoving ? 0.2f : animationSmoothTime;
                 currentAnimationSmoothTime = Mathf.Lerp(currentAnimationSmoothTime, animationSmoothTimeTarget, deltaTime * 20f);
-                
+
                 velocityLocal = Vector3.SmoothDamp(velocityLocal, velocityLocalTarget, ref velocityLocalV, currentAnimationSmoothTime, Mathf.Infinity, deltaTime);
                 float velLocalMag = velocityLocal.magnitude / stepLengthMlp;
 
@@ -296,7 +296,7 @@ namespace RootMotion.FinalIK
                 // Is Stopping
                 AnimatorTransitionInfo transInfo = animator.GetAnimatorTransitionInfo(0);
                 bool isStopping = transInfo.IsUserName("VRIK_Stop");
-                
+
                 // Root lerp speed
                 float rootLerpSpeedTarget = 0;
                 if (isMoving) rootLerpSpeedTarget = rootLerpSpeedWhileMoving;
@@ -313,7 +313,7 @@ namespace RootMotion.FinalIK
                 {
                     // Lerp towards head target position
                     Vector3 p = solver.rootBone.solverPosition;
-                    
+
                     if (rootLerpSpeed > 0f)
                     {
                         solver.rootBone.solverPosition = Vector3.Lerp(solver.rootBone.solverPosition, headTargetPos, rootLerpSpeed * deltaTime * weight);
@@ -331,7 +331,8 @@ namespace RootMotion.FinalIK
                         lastCorrection += (offset - (offset / offsetMag) * maxRootOffset) * weight;
                         solver.rootBone.solverPosition += lastCorrection;
                     }
-                } else
+                }
+                else
                 {
                     // Snap to head target position
                     lastCorrection = (headTargetPos - solver.rootBone.solverPosition) * weight;

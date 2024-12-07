@@ -5,29 +5,24 @@ namespace Util
 {
     public class RaycastTarget : MonoBehaviour
     {
-        [SerializeField] UnityEvent<GameObject> _event;
-        [SerializeField] float _maxDistance;
-        void Update()
+        [SerializeField] private UnityEvent<GameObject> _event;
+        [SerializeField] private float _maxDistance;
+        private void Update()
         {
-            // 마우스 클릭시 레이캐스트 발사
-            if (Input.GetMouseButtonDown(0)) // 0: 좌클릭
+            if (Input.GetMouseButtonDown(0))
             {
                 RaycastFromMouse();
             }
         }
 
-        void RaycastFromMouse()
+        private void RaycastFromMouse()
         {
-            // 카메라에서 마우스 위치로 레이 생성
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // RaycastHit 구조체는 레이캐스트 충돌 정보를 담고 있음
             RaycastHit hit;
 
-            // 레이캐스트 실행: 레이가 충돌한 오브젝트가 있는지 확인
             if (Physics.Raycast(ray, out hit, _maxDistance))
             {
-                // 충돌한 오브젝트의 정보 출력
                 GameObject hitObject = hit.collider.gameObject;
                 _event.Invoke(hitObject);
             }

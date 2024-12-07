@@ -19,7 +19,7 @@ namespace Util
             LateColor(materials, color);
         }
 
-        static void Fixed(List<MeshRenderer> materials, Color color)
+        private static void Fixed(List<MeshRenderer> materials, Color color)
         {
             if (!Application.isPlaying)
             {
@@ -36,12 +36,12 @@ namespace Util
             }
         }
 
-        void Lerp(List<MeshRenderer> materials, Color color)
+        private void Lerp(List<MeshRenderer> materials, Color color)
         {
             CoroutineRunner.Instance.StartCoroutine(Coroutine(materials, color));
         }
 
-        void LateColor(List<MeshRenderer> materials, Color color)
+        private void LateColor(List<MeshRenderer> materials, Color color)
         {
             var coroutineRunner = CoroutineRunner.Instance;
             if (coroutineRunner == null)
@@ -53,13 +53,13 @@ namespace Util
             CoroutineRunner.Instance.StartCoroutine(Late(materials, color));
         }
 
-        static IEnumerator Late(List<MeshRenderer> materials, Color color)
+        private static IEnumerator Late(List<MeshRenderer> materials, Color color)
         {
             yield return new WaitForSeconds(0.5f);
             Fixed(materials, color);
         }
 
-        static IEnumerator Coroutine(List<MeshRenderer> materials, Color color)
+        private static IEnumerator Coroutine(List<MeshRenderer> materials, Color color)
         {
             const float duration = 1f;
             var time = 0f;

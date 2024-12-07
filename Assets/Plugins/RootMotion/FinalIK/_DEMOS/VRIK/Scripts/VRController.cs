@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using RootMotion.FinalIK;
+﻿using RootMotion.FinalIK;
+using UnityEngine;
 
 namespace RootMotion.Demos
 {
@@ -37,12 +37,13 @@ namespace RootMotion.Demos
 
             // Locomotion speed
             float s = walkSpeed;
-            
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 s = runSpeed;
                 if (f) s *= runForwardSpeedMlp; // Walk faster/slower when moving forward
-            } else
+            }
+            else
             {
                 if (f) s *= walkForwardSpeedMlp; // Run faster/slower when moving forward
             }

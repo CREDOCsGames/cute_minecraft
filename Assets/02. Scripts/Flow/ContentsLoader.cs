@@ -15,11 +15,11 @@ namespace Flow
 
     public static class ContentsLoader
     {
-        static WorkState State => mLoader.State;
+        private static WorkState State => mLoader.State;
 
-        static ILevelLoader mLoader = new LevelLoader();
+        private static ILevelLoader mLoader = new LevelLoader();
 
-        static readonly List<ILevelLoader> mLoaders = new()
+        private static readonly List<ILevelLoader> mLoaders = new()
         {
             new StageLoader(),
             new LevelLoader(),
@@ -49,7 +49,7 @@ namespace Flow
             Debug.Assert(mLoader != null);
         }
 
-        static IEnumerator CheckLoad()
+        private static IEnumerator CheckLoad()
         {
             var mWait = new WaitForSeconds(0.5f);
             while (State != WorkState.Ready)

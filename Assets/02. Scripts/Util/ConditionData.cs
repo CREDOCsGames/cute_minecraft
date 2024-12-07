@@ -6,8 +6,8 @@ namespace Util
     public class ConditionData : ScriptableObject
     {
 #if DEVELOPMENT
-        [Header("Editor-Only Debug Text")] [SerializeField]
-        string mCondition;
+        [Header("Editor-Only Debug Text")]
+        [SerializeField] private string _condition;
 #endif
     }
 }

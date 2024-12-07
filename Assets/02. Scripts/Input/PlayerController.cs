@@ -10,7 +10,7 @@ namespace Input1
     {
         public ActionKey.Button Key;
         public InputType InputType;
-        public UnityEvent Event;
+        public UnityEvent Event = new();
 
         public override int GetHashCode()
         {
@@ -27,23 +27,24 @@ namespace Input1
 
     public class PlayerController
     {
-        bool mbActive;
-        List<ButtonEvent> mButtonEvents = new();
+        private bool _active;
+        public float CoolingDuration { get; private set; }
+        private List<ButtonEvent> buttonEvents = new();
 
         public bool IsActive
         {
-            get => mbActive;
-            set => mbActive = value;
+            get => _active;
+            set => _active = value;
         }
 
         public void AddButtonEvent(ButtonEvent data)
         {
-            mButtonEvents.Add(data);
+            buttonEvents.Add(data);
         }
 
         public void RemoveButtonEvent(ButtonEvent data)
         {
-            mButtonEvents.Remove(data);
+            buttonEvents.Remove(data);
         }
 
         public void Update()
@@ -53,7 +54,9 @@ namespace Input1
                 return;
             }
 
-            foreach (var input in mButtonEvents)
+            CoolingDuration += Time.deltaTime;
+
+            foreach (var input in buttonEvents)
             {
                 Func<string, bool> inputButton;
                 switch (input.InputType)
@@ -76,7 +79,7 @@ namespace Input1
                 {
                     continue;
                 }
-
+                CoolingDuration = 0f;
                 input.Event.Invoke();
             }
         }

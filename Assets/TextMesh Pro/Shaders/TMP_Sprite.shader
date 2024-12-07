@@ -90,7 +90,7 @@ Shader "TextMeshPro/Sprite"
                 OUT.worldPosition = v.vertex;
 				OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
 
-                OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+                OUT.texcoord = TRANSFOR_TEX(v.texcoord, _MainTex);
 				
                 OUT.color = v.color * _Color;
 				return OUT;

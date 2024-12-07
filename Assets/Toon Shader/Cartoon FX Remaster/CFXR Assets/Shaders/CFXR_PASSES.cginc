@@ -96,7 +96,7 @@
 
 	#if !defined(SHADER_API_GLES)
 		float _ShadowStrength;
-		float4 _DitherCustom_TexelSize;
+		float4 _DitherCusto_TexelSize;
 	#endif
 
 		CBUFFER_END
@@ -576,7 +576,7 @@
 
 		#if !defined(SHADER_API_GLES)
 			float _ShadowStrength;
-			float4 _DitherCustom_TexelSize;
+			float4 _DitherCusto_TexelSize;
 		#endif
 
 			CBUFFER_END
@@ -915,7 +915,7 @@
 
 		#if !defined(SHADER_API_GLES)
 			float _ShadowStrength;
-			float4 _DitherCustom_TexelSize;
+			float4 _DitherCusto_TexelSize;
 		#endif
 
 			CBUFFER_END
@@ -1025,7 +1025,7 @@
 
 				// regular ring UVs
 				float2 uv = v.texcoord.xy + float2(ringRotation, 0);
-				o.uvRing_uvCartesian.xy = 1 - TRANSFORM_TEX(uv, _MainTex);
+				o.uvRing_uvCartesian.xy = 1 - TRANSFOR_TEX(uv, _MainTex);
 
 
 			#if _CFXR_WORLD_SPACE_RING

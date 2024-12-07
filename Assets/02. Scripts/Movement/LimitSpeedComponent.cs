@@ -6,27 +6,27 @@ namespace Movement
 {
     public class LimitSpeedComponent : MonoBehaviour
     {
-        CharacterComponent mCharacter;
-        Rigidbody mRigid;
+        private CharacterComponent _character;
+        private Rigidbody _rigid;
 
-        void Awake()
+        private void Awake()
         {
-            mCharacter = GetComponent<CharacterComponent>();
-            mRigid = GetComponent<Rigidbody>();
+            _character = GetComponent<CharacterComponent>();
+            _rigid = GetComponent<Rigidbody>();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
-            if (mCharacter == null || mCharacter.State is CharacterState.Walk
-                    or CharacterState.Run)
+            if (_character == null || _character.State is //CharacterState.Walk
+                    CharacterState.Run)
             {
                 LimitMoveSpeed();
             }
         }
 
-        void LimitMoveSpeed()
+        private void LimitMoveSpeed()
         {
-            var currentVelocity = mRigid.velocity;
+            var currentVelocity = _rigid.velocity;
             var currentSpeed = currentVelocity.magnitude;
 
             if (currentSpeed <= MAX_RUN_VELOCITY)
@@ -35,8 +35,8 @@ namespace Movement
             }
 
             var limitedVelocity = currentVelocity.normalized * MAX_RUN_VELOCITY;
-            limitedVelocity.y = mRigid.velocity.y;
-            mRigid.velocity = limitedVelocity;
+            limitedVelocity.y = _rigid.velocity.y;
+            _rigid.velocity = limitedVelocity;
         }
     }
 }

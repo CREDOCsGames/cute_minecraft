@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using UnityEngine;
 
 namespace RootMotion
 {
@@ -9,7 +8,7 @@ namespace RootMotion
         Disabled = 0,
         Hidden = 1
     }
-    
+
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
     public class ShowIfAttribute : PropertyAttribute
     {
@@ -36,7 +35,7 @@ namespace RootMotion
         public float min { get; private set; }
         public float max { get; private set; }
 
-        public ShowRangeIfAttribute(float min, float max, string propertyName, object propertyValue = null, object otherPropertyValue = null, bool indent = false, ShowIfMode mode = ShowIfMode.Hidden) : base (propertyName, propertyValue, otherPropertyValue, indent, mode)
+        public ShowRangeIfAttribute(float min, float max, string propertyName, object propertyValue = null, object otherPropertyValue = null, bool indent = false, ShowIfMode mode = ShowIfMode.Hidden) : base(propertyName, propertyValue, otherPropertyValue, indent, mode)
         {
             this.min = min;
             this.max = max;

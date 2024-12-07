@@ -7,27 +7,27 @@ namespace Flow
     [CreateAssetMenu(menuName = "Custom/Data/StageOpensGenerator")]
     public class StageOpensGenerator : UniqueScriptableObject<StageOpensGenerator>
     {
-        [SerializeField] MatrixBool mStageOpens;
-        [SerializeField] MatrixString mStages;
+        [SerializeField] private MatrixBool _stageOpens;
+        [SerializeField] private MatrixString _stages;
 
         [ContextMenu("GenerateData")]
         public void GenerateData()
         {
-            Debug.Assert(mStageOpens != null);
-            Debug.Assert(mStages != null);
+            Debug.Assert(_stageOpens != null);
+            Debug.Assert(_stages != null);
 
-            mStageOpens.Matrix.Clear();
-            for (var i = 0; i < mStages.Matrix.Count; i++)
+            _stageOpens.Matrix.Clear();
+            for (var i = 0; i < _stages.Matrix.Count; i++)
             {
-                if (mStages.Matrix[i].List.Count == 0)
+                if (_stages.Matrix[i].List.Count == 0)
                 {
                     continue;
                 }
 
-                mStageOpens.Matrix.Add(new CustomList<bool>());
-                for (var j = 0; j < mStages.Matrix[j].List.Count; j++)
+                _stageOpens.Matrix.Add(new CustomList<bool>());
+                for (var j = 0; j < _stages.Matrix[j].List.Count; j++)
                 {
-                    mStageOpens.Matrix[i].List.Add(false);
+                    _stageOpens.Matrix[i].List.Add(false);
                 }
             }
         }
