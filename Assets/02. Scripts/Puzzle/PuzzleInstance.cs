@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Util;
 
 namespace Puzzle
 {
@@ -16,18 +17,16 @@ namespace Puzzle
         private CubeMap<T> _cubeMap;
         private IDataLink<T> _dataLink;
         private IPresentation<T> _presentation;
+        private DataReader _dataReader;
 
         protected abstract void Instantiate(out CubeMap<T> cubeMap);
         protected abstract void SetDataLink(out IDataLink<T> dataLink);
         protected abstract void SetPresentation(out IPresentation<T> presentation);
+        protected abstract void SetDataReader(out DataReader reader);
 
         public void InstreamData(byte[] data)
         {
-            if (Vector4Byte.FAIL.Equals(data) || SystemMessage.CheckSystemMessage(data))
-            {
-                Debug.Log($"fail : {data}");
-            }
-            else
+            if (_dataReader.IsReadable(data))
             {
                 var elements = _cubeMap.GetElements(data[0], data[1], data[2]);
                 _presentation.InstreamData(elements, data[3]);
@@ -43,9 +42,9 @@ namespace Puzzle
                 new[] { index[0], index[1], index[2], (byte)0 }
                 );
             }
-
         }
 
+        //TODO
         private void SetParent(Transform cubeMapObject)
         {
             foreach (var flower in _cubeMap.Elements)
@@ -53,6 +52,7 @@ namespace Puzzle
                 var position = flower.transform.position;
                 flower.transform.SetParent(cubeMapObject);
                 flower.transform.localPosition = position;
+                flower.gameObject.SetActive(false);
             }
         }
 
@@ -61,9 +61,10 @@ namespace Puzzle
             Instantiate(out _cubeMap);
             SetParent(cubeMapObject);
             SetDataLink(out _dataLink);
+            SetDataReader(out _dataReader);
             LinkCubeElements();
-            _dataLink.OnInteraction += InstreamEvent.Invoke;
             SetPresentation(out _presentation);
+            _dataLink.OnInteraction += InstreamEvent.Invoke;
         }
 
     }

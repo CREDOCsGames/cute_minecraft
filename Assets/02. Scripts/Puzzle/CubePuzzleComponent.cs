@@ -1,16 +1,21 @@
-using A;
+using Battle;
 using Movement;
 using System;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using Util;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Puzzle
 {
+    [ExecuteAlways]
     public class CubePuzzleComponent : MonoBehaviour, IInstance
     {
+        [HideInInspector][SerializeField] private string _uniqueID;
+        [SerializeField][Range(1, 255)] private byte _width;
         public MediatorCenter.TunnelFlag Flag;
         public ScriptableObject[] Puzzles;
         public Scriptable_MatrixByte[] MapData
@@ -18,7 +23,7 @@ namespace Puzzle
             get
             {
                 Scriptable_MatrixByte[] mapData = new Scriptable_MatrixByte[6];
-                var path = Path.Combine("Assets/10. Editor/Cookie", this.GetInstanceID().GetHashCode().ToString());
+                var path = Path.Combine("Assets/10. Editor/Cookie", GetUniqueID());
                 for (int i = 0; i < 6; i++)
                 {
                     if (!File.Exists(path + $"{i}.asset"))
@@ -36,6 +41,18 @@ namespace Puzzle
 
         public event Action<byte[]> InstreamEvent;
 
+        private string GetUniqueID()
+        {
+            if (string.IsNullOrEmpty(_uniqueID))
+            {
+                _uniqueID = GUID.Generate().ToString();
+#if UNITY_EDITOR
+                EditorUtility.SetDirty(this);
+#endif
+            }
+            return _uniqueID;
+        }
+
         void Awake()
         {
             if (!Puzzles.Where(x => x as IInstance != null).Any())
@@ -51,6 +68,7 @@ namespace Puzzle
                 if (puzzle is IInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IInstance;
+                    (instance as FlowerPuzzleInstance).Width = _width;
                     _mediator.AddInstance(instance, Flag);
                 }
                 else
@@ -93,13 +111,21 @@ namespace Puzzle
             return cubeMap;
         }
 
+        string p;
         private void Rotate(string path)
         {
-            var action = Resources.Load<MovementAction>(path);
+            p = path;   
+            Invoke(nameof(Go), 1f);
+        }
+
+        private void Go()
+        {
+            var action = Resources.Load<MovementAction>(p);
             if (action != null)
             {
                 GetComponent<MovementComponent>().PlayMovement(action);
             }
+            GameObject.FindAnyObjectByType<PCController>()?.DoJump(500);
         }
 
         public void InstreamData(byte[] data)
@@ -109,7 +135,7 @@ namespace Puzzle
                 return;
             }
 
-            GameObject.FindAnyObjectByType<PCController>().DoJump();
+
             if (SystemMessage.CLEAR_RIGHT.Equals(data))
             {
                 Rotate("MovementAction/RotateLeft");
@@ -134,6 +160,11 @@ namespace Puzzle
             {
                 Rotate("MovementAction/RotateLeft");
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireCube(transform.position, Vector3.one * _width);
         }
     }
 

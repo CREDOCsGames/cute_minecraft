@@ -87,8 +87,16 @@ namespace Util
 
         public bool TryGetElement(int row, int column, out T value)
         {
-            value = _matrix[row][column];
-            return !IsOutOfRange(row, column);
+            var succes = !IsOutOfRange(row, column);
+            if (succes)
+            {
+                value = _matrix[row][column];
+            }
+            else
+            {
+                value = default(T);
+            }
+            return succes;
         }
 
 
@@ -172,9 +180,6 @@ namespace Util
 
         private bool IsOutOfRange(int row, int column)
         {
-            Debug.Assert(-1 < row && -1 < column, $"out of range row : {row} or column : {column}");
-            Debug.Assert(row < RowsCount && column < ColumnsCount, $"out of range row : {row} or column : {column}");
-
             return row < 0 || RowsCount <= row ||
                 column < 0 || ColumnsCount <= column;
         }

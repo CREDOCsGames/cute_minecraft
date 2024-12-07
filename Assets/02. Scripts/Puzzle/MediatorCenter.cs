@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Puzzle
 {
-
     public class MediatorCenter
     {
         [Flags]
