@@ -111,13 +111,21 @@ namespace Puzzle
             return cubeMap;
         }
 
+        string p;
         private void Rotate(string path)
         {
-            var action = Resources.Load<MovementAction>(path);
+            p = path;   
+            Invoke(nameof(Go), 1f);
+        }
+
+        private void Go()
+        {
+            var action = Resources.Load<MovementAction>(p);
             if (action != null)
             {
                 GetComponent<MovementComponent>().PlayMovement(action);
             }
+            GameObject.FindAnyObjectByType<PCController>()?.DoJump(500);
         }
 
         public void InstreamData(byte[] data)
@@ -127,7 +135,7 @@ namespace Puzzle
                 return;
             }
 
-            GameObject.FindAnyObjectByType<PCController>().DoJump();
+
             if (SystemMessage.CLEAR_RIGHT.Equals(data))
             {
                 Rotate("MovementAction/RotateLeft");

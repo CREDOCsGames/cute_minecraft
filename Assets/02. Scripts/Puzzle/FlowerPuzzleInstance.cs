@@ -65,6 +65,11 @@ namespace Puzzle
         {
             presentation = new FlowerPresentation();
         }
+
+        protected override void SetDataReader(out DataReader reader)
+        {
+            reader = new FlowerReader();
+        }
     }
 }
 
