@@ -377,9 +377,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96190736}
-  - component: {fileID: 96190735}
-  - component: {fileID: 96190734}
   - component: {fileID: 96190733}
+  - component: {fileID: 96190735}
   - component: {fileID: 96190732}
   m_Layer: 0
   m_Name: Player
@@ -423,31 +422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67e3d63d859d564984a0277c46572ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  A: {fileID: 0}
-  JumpPower: 300
-  MoveSpeed: 3
+  JumpPower: 500
+  MoveSpeed: 1.5
   ui: {fileID: 1446444658}
---- !u!95 &96190734
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96190731}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &96190735
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -484,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 96190731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.28, z: 0}
+  m_LocalPosition: {x: 0, y: 4.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -728,6 +705,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1189874255011212, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2069310356}
+    - targetCorrespondingSourceObject: {fileID: 1189874255011212, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2069310358}
     - targetCorrespondingSourceObject: {fileID: 1131707492133358, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       insertIndex: -1
       addedObject: {fileID: 154114804}
@@ -900,6 +880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f903b1a1235b104982a4f682cd00e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uniqueID: 2e3ef76895ac3d24195a93fbe5c227b1
+  _width: 8
   Flag: -1
   Puzzles:
   - {fileID: 11400000, guid: f0ef95ce12384504591fa680d92d2784, type: 2}
@@ -971,7 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _range:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 5, y: 5, z: 5}
+    m_Extent: {x: 8, y: 8, z: 8}
   OnEnterEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1005,15 +987,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4546108687406078, guid: 0a2ed40df3ab29d4f86bc4f571fb4659, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4546108687406078, guid: 0a2ed40df3ab29d4f86bc4f571fb4659, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4546108687406078, guid: 0a2ed40df3ab29d4f86bc4f571fb4659, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4546108687406078, guid: 0a2ed40df3ab29d4f86bc4f571fb4659, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1168,8 +1150,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413780487}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32238108, y: -1.8130321e-22, z: 6.1745304e-23, w: 0.94661003}
-  m_LocalPosition: {x: 0, y: 6.5699997, z: -4.2700005}
+  m_LocalRotation: {x: 0.32238108, y: -1.813032e-22, z: 6.1745304e-23, w: 0.94661}
+  m_LocalPosition: {x: 0, y: 7.71, z: -4.2700005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1797,8 +1779,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827697855}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32238108, y: -1.8130321e-22, z: 6.1745304e-23, w: 0.94661003}
-  m_LocalPosition: {x: 0, y: 6.5699997, z: -4.2700005}
+  m_LocalRotation: {x: 0.32238108, y: -1.813032e-22, z: 6.1745304e-23, w: 0.94661}
+  m_LocalPosition: {x: 0, y: 7.71, z: -4.2700005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1825,6 +1807,33 @@ MonoBehaviour:
   mOnFrameEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 96190733}
+        m_TargetAssemblyTypeName: Battle.PCController, Assembly-CSharp
+        m_MethodName: EndAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2069310358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472976918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716c702ba6677644a991ffdd09247a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Commands:
+  - m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1635534369}
         m_TargetAssemblyTypeName: AttackBoxComponent, Assembly-CSharp
         m_MethodName: OpenAttackWindow
@@ -1837,6 +1846,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _useClamp: 1
 --- !u!1 &2098850858
 GameObject:
   m_ObjectHideFlags: 0

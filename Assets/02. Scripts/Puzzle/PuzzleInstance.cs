@@ -9,6 +9,38 @@ namespace Puzzle
         public event Action<byte[]> InstreamEvent;
     }
 
+    public static class ReaderFactory
+    {
+        public static DataReader GetReader<T>(T t) where T : MonoBehaviour
+        {
+            if (t is Flower)
+            {
+                return new FlowerReader();
+            }
+            return new FailReader();
+        }
+    }
+
+    public abstract class DataReader
+    {
+        public abstract bool IsReadable(byte[] data);
+    }
+
+    public class FailReader : DataReader
+    {
+        public override bool IsReadable(byte[] data)
+        {
+            return false;
+        }
+    }
+    public class FlowerReader : DataReader
+    {
+        public override bool IsReadable(byte[] data)
+        {
+            return data.Length == 4;
+        }
+    }
+
     public abstract class PuzzleInstance<T> : ScriptableObject, IInstance where T : MonoBehaviour
     {
         public Mediator Mediator { get; set; }
@@ -16,6 +48,7 @@ namespace Puzzle
         private CubeMap<T> _cubeMap;
         private IDataLink<T> _dataLink;
         private IPresentation<T> _presentation;
+        private DataReader _dataReader;
 
         protected abstract void Instantiate(out CubeMap<T> cubeMap);
         protected abstract void SetDataLink(out IDataLink<T> dataLink);
@@ -53,6 +86,8 @@ namespace Puzzle
                 var position = flower.transform.position;
                 flower.transform.SetParent(cubeMapObject);
                 flower.transform.localPosition = position;
+                //TODO
+                flower.gameObject.SetActive(false);
             }
         }
 

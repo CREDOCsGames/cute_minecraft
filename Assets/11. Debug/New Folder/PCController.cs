@@ -4,7 +4,7 @@ using Input1;
 using TMPro;
 using UnityEngine;
 
-namespace A
+namespace Battle
 {
     public class Limit
     {
@@ -51,80 +51,66 @@ namespace A
 
     public class AnimatorController
     {
-        private Animator _animator;
-        private int _postClip;
+        private readonly Animator _animator;
         private PCController.State _state;
+        private PCController _pcController;
+
         public AnimatorController(Animator animator)
         {
             _animator = animator;
         }
-
-        public void Update()
+        ~AnimatorController()
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash != _postClip)
-            {
-                _animator.SetTrigger(_state.ToString());
-                _animator.Update(Time.deltaTime);
-            }
-            else
-            {
-                _animator.parameters
-                        .Where(x => x.type == AnimatorControllerParameterType.Trigger)
-                        .ToList()
-                        .ForEach(t => _animator.ResetTrigger(t.name));
-            }
+            _pcController.StateChanged -= GetState;
         }
-
+        public void SetTarget(PCController pcController)
+        {
+            _pcController = pcController;
+            _pcController.StateChanged += GetState;
+        }
         private void GetState(PCController.State newState)
         {
             if (_state != newState)
             {
-                _animator.parameters
-                        .Where(x => x.type == AnimatorControllerParameterType.Trigger)
-                        .ToList()
-                        .ForEach(t => _animator.ResetTrigger(t.name));
-
+                ResetTriggers(_animator);
                 _animator.SetTrigger(newState.ToString());
-                _animator.Update(Time.deltaTime);
-                _postClip = _animator.GetNextAnimatorStateInfo(0).shortNameHash;
             }
 
             _state = newState;
         }
 
-        public void SetTarget(PCController pCController)
+        private void ResetTriggers(Animator animator)
         {
-            pCController.StateChanged += GetState;
+            animator.parameters
+                    .Where(x => x.type == AnimatorControllerParameterType.Trigger)
+                    .ToList()
+                    .ForEach(t => animator.ResetTrigger(t.name));
         }
     }
 
-
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Animator))]
     public class PCController : MonoBehaviour
     {
-        public AnimationClip A;
-
         public enum State { Idle, Walk, Run, Jump, Attack, Hit, Die }
+        public State CharacterState { get; private set; }
+        public event Action<State> StateChanged;
+        private float _outAnimTime;
         public float JumpPower;
         public float MoveSpeed;
-        private Animator _animator;
-        private Rigidbody _rb;
-        public State CharacterState { get; private set; }
-        private float _outAnimTime;
         private readonly Limit _jumpLimit = new(1);
         private readonly Limit _attackLimit = new(1);
+        private Animator _animator;
+        private Rigidbody _rigidbody;
         private LimitVelocity _limitVelocity;
-        public TextMeshProUGUI ui;
-        public event Action<State> StateChanged;
-        private AnimatorController _animatorController;
         private PlayerController _inputController;
+        private AnimatorController _animatorController;
+        public TextMeshProUGUI ui;
 
         private void Awake()
         {
             _animator = transform.GetChild(0).GetComponent<Animator>();
-            _rb = GetComponent<Rigidbody>();
-            _limitVelocity = new LimitVelocity(_rb, new Vector3(3, 10, 3));
+            _rigidbody = GetComponent<Rigidbody>();
+            _limitVelocity = new LimitVelocity(_rigidbody, new Vector3(3, 10, 3));
             _animatorController = new AnimatorController(_animator);
             _animatorController.SetTarget(this);
             _inputController = new PlayerController();
@@ -165,19 +151,22 @@ namespace A
             attack.Key = ActionKey.Button.Attack;
             attack.Event.AddListener(() => DoAttack());
             _inputController.AddButtonEvent(attack);
+
+            StateChanged += (s) => changed = true;
         }
 
+        private bool changed;
         void Update()
         {
-
+            changed = false;
             _limitVelocity.Update();
-            _animatorController.Update();
             _inputController.Update();
             ui.text = CharacterState.ToString();
-            if (0.5f < _inputController.CoolingDuration)
+            if (changed)
             {
-                DoIdle();
+                return;
             }
+            DoIdle();
         }
 
         public void DoJump(float jumpPower = -1)
@@ -187,45 +176,38 @@ namespace A
                 _jumpLimit.Reset();
             }
 
-            if (_jumpLimit.Able && _outAnimTime < Time.time)
+            if (_jumpLimit.Able && (CharacterState is State.Idle or State.Run or State.Jump))
             {
-                _rb.AddForce(Vector3.up * (jumpPower == -1 ? JumpPower : jumpPower));
+                _rigidbody.AddForce(Vector3.up * (jumpPower == -1 ? JumpPower : jumpPower));
                 CharacterState = State.Jump;
-                _jumpLimit.Once();
-                _outAnimTime = Time.time + _animator.GetNextAnimatorStateInfo(0).length;
                 StateChanged.Invoke(CharacterState);
+                _jumpLimit.Once();
             }
         }
 
-        private void DoIdle()
+        public void DoIdle()
         {
-            if (CharacterState is State.Jump)
+            if (CharacterState is State.Jump or State.Attack)
             {
                 return;
             }
 
-            if (CharacterState is State.Attack && _outAnimTime < Time.time ||
-                CharacterState is State.Walk or State.Run)
-            {
-                CharacterState = State.Idle;
-                StateChanged.Invoke(CharacterState);
-            }
+            CharacterState = State.Idle;
+            StateChanged.Invoke(CharacterState);
         }
-
         public void DoMove(Vector3 dir)
         {
-            if ((CharacterState == State.Attack && Time.time < _outAnimTime) || CharacterState == State.Jump)
+            if (CharacterState is State.Attack or State.Jump)
             {
                 return;
             }
-            _rb.AddForce(dir * MoveSpeed);
+            _rigidbody.AddForce(dir * MoveSpeed);
             CharacterState = State.Run;
-            var lookat = _rb.velocity.normalized;
+            var lookat = _rigidbody.velocity.normalized;
             lookat.y = 0;
             transform.GetChild(0).LookAt(transform.position + lookat);
             StateChanged.Invoke(CharacterState);
         }
-
         public void DoAttack()
         {
             if (Time.time < _outAnimTime ||
@@ -246,10 +228,8 @@ namespace A
 
             CharacterState = State.Attack;
             _attackLimit.Once();
-            _outAnimTime = Time.time + _animator.GetNextAnimatorStateInfo(0).length;
             StateChanged.Invoke(CharacterState);
         }
-
         public void EnterGround()
         {
             if (CharacterState is State.Jump)
@@ -258,6 +238,14 @@ namespace A
                 StateChanged.Invoke(CharacterState);
             }
         }
-    }
+        public void EndAttack()
+        {
+            if (CharacterState is State.Attack)
+            {
+                CharacterState = State.Idle;
+                StateChanged.Invoke(CharacterState);
+            }
+        }
 
+    }
 }

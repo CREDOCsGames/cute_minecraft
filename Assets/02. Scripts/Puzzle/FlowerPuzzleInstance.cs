@@ -7,7 +7,7 @@ namespace Puzzle
     public class FlowerPuzzleInstance : PuzzleInstance<Flower>
     {
         [SerializeField] Flower _flowerPrefab;
-        public byte Width => (byte)5;
+        public byte Width = (byte)5;
 
 
         protected override void Instantiate(out CubeMap<Flower> cubeMap)

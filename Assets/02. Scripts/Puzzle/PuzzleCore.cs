@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using static Puzzle.Flower;
+using Random = UnityEngine.Random;
 
 namespace Puzzle
 {
@@ -64,6 +65,24 @@ namespace Puzzle
             {
                 InstreamEvent?.Invoke(SystemMessage.CLEAR_FACE[(int)_currentFace++]);
             }
+
+            // TODO BOSS
+            if (data[2] == (byte)Face.bottom)
+            {
+                int i = Random.Range(0, 5);
+                if (i == 0)
+                {
+                    var indices = _core.CubeMap
+                        .GetIndex()
+                        .Where(x => x[2] == (byte)_currentFace)
+                        .Where(x => _core.CubeMap.GetElements(x[0], x[1], x[2]) == 0)
+                        .ToList();
+                    var pos = indices[Random.Range(0, indices.Count)];
+                    byte type = 0;
+                    InstreamEvent?.Invoke(new[] { pos[0], pos[1], type });
+                }
+            }
+            //
         }
 
         private void OutstreamData(byte[] data)
