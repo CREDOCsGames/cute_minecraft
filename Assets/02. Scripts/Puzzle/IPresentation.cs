@@ -1,8 +1,8 @@
 namespace Puzzle
 {
-    public interface IPresentation<T>
+    public interface IPresentation
     {
-        public void InstreamData(T elements, byte data);
+        public void InstreamData(byte[] data);
     }
 
 }

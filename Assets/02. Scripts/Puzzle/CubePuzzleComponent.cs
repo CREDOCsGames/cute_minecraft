@@ -68,7 +68,7 @@ namespace Puzzle
                 if (puzzle is IInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IInstance;
-                    (instance as FlowerPuzzleInstance).Width = _width;
+                    (instance as PuzzleInstance).Init(new PuzzleCubeData());
                     _mediator.AddInstance(instance, Flag);
                 }
                 else
@@ -83,7 +83,6 @@ namespace Puzzle
 
         private void A()
         {
-            _mediator.Instances.ForEach(x => (x as FlowerPuzzleInstance).Init(transform));
             _mediator.Cores.ForEach(x => (x as ICore).Init());
         }
 

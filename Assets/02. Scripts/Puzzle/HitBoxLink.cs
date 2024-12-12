@@ -3,7 +3,7 @@ using System;
 
 namespace Puzzle
 {
-    public class HitBoxLink : IDataLink<Flower>
+    public class HitBoxLink : IDataLink
     {
         public event Action<byte[]> OnInteraction;
 

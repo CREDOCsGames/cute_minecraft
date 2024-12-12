@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Util;
 
 namespace Puzzle
 {
@@ -33,11 +34,35 @@ namespace Puzzle
         // TODO REMOVE
         public void AddListenerSystemMessage(IInstance instance)
         {
-            foreach(var tunnel in _tunnelMap)
+            foreach (var tunnel in _tunnelMap)
             {
                 if (tunnel.Key.HasFlag(TunnelFlag.System))
                 {
                     tunnel.Value.AddInstance(instance);
+                }
+            }
+        }
+
+        readonly private List<IInstance> _Instances = new();
+        readonly private List<ICore> _Cores = new();
+
+        public void HubCoreToInstance<T>(byte[] data) where T : DataReader
+        {
+            foreach (var instance in _Instances)
+            {
+                if (typeof(T).Equals(PuzzleCubeData.GetReader(instance)))
+                {
+                    instance.InstreamData(data);
+                }
+            }
+        }
+        public void HubInstanceToCore<T>(byte[] data) where T :DataReader
+        {
+            foreach (var core in _Cores)
+            {
+                if (typeof(T).Equals(PuzzleCubeData.GetReader(core)))
+                {
+                    core.InstreamData(data);
                 }
             }
         }
