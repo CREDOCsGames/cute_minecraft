@@ -1,122 +1,118 @@
 using System.Collections.Generic;
 using System.Linq;
+using NW;
 using UnityEngine;
+using Util;
 
 namespace Puzzle
 {
     public class FlowerPuzzleCore : PuzzleCore
     {
+        private readonly NW.DataReader _reader = new FlowerReader();
+        public override NW.DataReader DataReader => _reader;
+
+        protected override IMediatorCore _mediator { get; set; }
+        protected override CubeMap<byte> CubeMap { get; set; }
+
+        private bool _clear;
         public FlowerPuzzleCore(CubeMap<byte> map) : base(map)
         {
         }
-
-        private bool _clear;
-        protected override void EditData(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        public override void InstreamData(byte[] data)
         {
             if (_clear)
             {
-                output = new[] { Vector4Byte.FAIL };
                 return;
             }
 
-            switch (input.w)
+            switch (data[3])
             {
                 case 1:
-                    Cross(in input, out output, in cubeMap);
+                    Cross(data);
                     break;
                 case 2:
-                    Dot(in input, out output, in cubeMap);
+                    Dot(data);
                     break;
                 case 3:
-                    Create(in input, out output, in cubeMap);
+                    Create(data);
                     break;
                 default:
-                    output = new[] { Vector4Byte.FAIL };
-                    Debug.LogWarning($"{input.w}");
                     return;
             }
 
-            CheckClear(in cubeMap);
+            CheckClear(CubeMap);
         }
 
 
-        private void CheckClear(in CubeMap<byte> cubeMap)
+        private void CheckClear(CubeMap<byte> cubeMap)
         {
             var first = cubeMap.Elements.First();
             _clear = cubeMap.Elements.All(x => x == 1 || x == 0) || cubeMap.Elements.All(x => x == 2 || x == 0);
         }
 
         private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
-        private void Cross(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+
+
+        private void Cross(byte[] input)
         {
-            var flower = cubeMap.GetElements(input.x, input.y, input.z);
-            Vector4Byte result;
+            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
             if (flower != 1 && flower != 2)
             {
-                result = Vector4Byte.FAIL;
-                output = new[] { result };
                 return;
             }
 
-            output = new Vector4Byte[0];
             foreach (var dxdy in indices)
             {
-                if (input.x + dxdy[0] < 0 || cubeMap.Width <= input.x + dxdy[0] ||
-                    input.y + dxdy[1] < 0 || cubeMap.Width <= input.y + dxdy[1])
+                if (input[0] + dxdy[0] < 0 || CubeMap.Width <= input[0] + dxdy[0] ||
+                    input[1] + dxdy[1] < 0 || CubeMap.Width <= input[1] + dxdy[1])
                 {
                     continue;
                 }
 
-                var index = new Vector4Byte((byte)(input.x + dxdy[0]), (byte)(input.y + dxdy[1]), input.z, input.w);
-                flower = cubeMap.GetElements(index.x, index.y, index.z);
+                var index = new byte[] { (byte)(input[0] + dxdy[0]), (byte)(input[1] + dxdy[1]), input[2], input[3] };
+                flower = CubeMap.GetElements(index[0], index[1], index[2]);
                 if (flower != 1 && flower != 2)
                 {
                     continue;
                 }
-                Vector4Byte[] temp;
-                Dot(in index, out temp, cubeMap);
-                output = output.Concat(temp).ToArray();
+                Dot(index);
             }
 
         }
 
-        private void Dot(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        private void Dot(byte[] input)
         {
-            var flower = cubeMap.GetElements(input.x, input.y, input.z);
-            Vector4Byte result;
+            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
+            byte[] result;
             switch (flower)
             {
                 case 1:
-                    result = new(input.x, input.y, input.z, 2);
+                    result = new[] { input[0], input[1], input[2], (byte)2 };
                     break;
                 case 2:
-                    result = new(input.x, input.y, input.z, 1);
+                    result = new[] { input[0], input[1], input[2], (byte)1 };
                     break;
                 default:
-                    result = Vector4Byte.FAIL;
-                    output = new[] { result };
                     return;
             }
-            cubeMap.SetElements(result.x, result.y, result.z, result.w);
-            output = new[] { result };
+            CubeMap.SetElements(result[0], result[1], result[2], result[3]);
+            _mediator.InstreamDataCore<FlowerReader>(result);
         }
 
-        private void Create(in Vector4Byte input, out Vector4Byte[] output, in CubeMap<byte> cubeMap)
+        private void Create(byte[] input)
         {
-            var flower = cubeMap.GetElements(input.x, input.y, input.z);
-            Vector4Byte result;
+            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
+            byte[] result;
             switch (flower)
             {
                 case 0:
-                    result = new(input.x, input.y, input.z, (byte)Random.Range(1, 2));
+                    result = new[] { input[0], input[1], input[2], (byte)Random.Range(1, 2) };
                     break;
                 default:
-                    result = Vector4Byte.FAIL;
-                    output = new[] { result };
                     return;
             }
-            cubeMap.SetElements(result.x, result.y, result.z, result.w);
-            output = new[] { result };
+            CubeMap.SetElements(result[0], result[1], result[2], result[3]);
+            _mediator.InstreamDataCore<FlowerReader>(result);
         }
 
     }

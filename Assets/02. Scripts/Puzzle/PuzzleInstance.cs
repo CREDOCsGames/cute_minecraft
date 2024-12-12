@@ -10,61 +10,40 @@ namespace Puzzle
         public event Action<byte[]> InstreamEvent;
     }
 
-    public abstract class PuzzleInstance<T> : ScriptableObject, IInstance where T : MonoBehaviour
+    public abstract class PuzzleInstance : ScriptableObject, NW.IInstance
     {
-        public Mediator Mediator { get; set; }
+        private NW.IMediatorInstance _mediator;
         public event Action<byte[]> InstreamEvent;
-        private CubeMap<T> _cubeMap;
-        private IDataLink<T> _dataLink;
-        private IPresentation<T> _presentation;
-        private DataReader _dataReader;
+        private IDataLink _dataLink;
+        private IPresentation _presentation;
+        private NW.DataReader _dataReader;
+        public NW.DataReader DataReader => _dataReader;
 
-        protected abstract void Instantiate(out CubeMap<T> cubeMap);
-        protected abstract void SetDataLink(out IDataLink<T> dataLink);
-        protected abstract void SetPresentation(out IPresentation<T> presentation);
-        protected abstract void SetDataReader(out DataReader reader);
+        protected abstract void Instantiate(PuzzleCubeData puzzleCubeData);
+        protected abstract void SetDataLink(out IDataLink dataLink);
+        protected abstract void SetPresentation(out IPresentation presentation);
+        protected abstract void SetDataReader(out NW.DataReader reader);
 
         public void InstreamData(byte[] data)
         {
-            if (_dataReader.IsReadable(data))
-            {
-                var elements = _cubeMap.GetElements(data[0], data[1], data[2]);
-                _presentation.InstreamData(elements, data[3]);
-            }
+            //if (DataReader.IsReadable(data))
+            //{
+                _presentation.InstreamData(data);
+            //}
         }
 
-        private void LinkCubeElements()
+        public void Init(PuzzleCubeData puzzleCubeData)
         {
-            foreach (var index in _cubeMap.GetIndex())
-            {
-                _dataLink.Link(
-                _cubeMap.GetElements(index[0], index[1], index[2]),
-                new[] { index[0], index[1], index[2], (byte)0 }
-                );
-            }
-        }
-
-        //TODO
-        private void SetParent(Transform cubeMapObject)
-        {
-            foreach (var flower in _cubeMap.Elements)
-            {
-                var position = flower.transform.position;
-                flower.transform.SetParent(cubeMapObject);
-                flower.transform.localPosition = position;
-                flower.gameObject.SetActive(false);
-            }
-        }
-
-        public void Init(Transform cubeMapObject)
-        {
-            Instantiate(out _cubeMap);
-            SetParent(cubeMapObject);
+            (this as IDestroyable)?.Destroy();
+            Instantiate(puzzleCubeData);
             SetDataLink(out _dataLink);
             SetDataReader(out _dataReader);
-            LinkCubeElements();
             SetPresentation(out _presentation);
-            _dataLink.OnInteraction += InstreamEvent.Invoke;
+        }
+
+        public void SetMediator(NW.IMediatorInstance mediator)
+        {
+            _dataLink.Mediator = mediator;
         }
 
     }

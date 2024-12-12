@@ -10,11 +10,11 @@ namespace Puzzle
             ICore core = null;
             if (flag.HasFlag(TunnelFlag.Flower))
             {
-                core = new FlowerPuzzleCore(cubeMap);
+               // core = new FlowerPuzzleCore(cubeMap);
             }
             if (flag.HasFlag(TunnelFlag.System) && core is PuzzleCore puzzleCore)
             {
-                core = new SystemCore(puzzleCore);
+                //core = new SystemCore(puzzleCore);
             }
 
             

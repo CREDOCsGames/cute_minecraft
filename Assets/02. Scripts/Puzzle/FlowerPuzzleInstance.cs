@@ -4,25 +4,24 @@ using Util;
 namespace Puzzle
 {
     [CreateAssetMenu(menuName = "Custom/Puzzle/FlowerPuzzle")]
-    public class FlowerPuzzleInstance : PuzzleInstance<Flower>
+    public class FlowerPuzzleInstance : PuzzleInstance, NW.IDestroyable
     {
-        [SerializeField] Flower _flowerPrefab;
-        public byte Width = (byte)5;
+        [SerializeField] private Flower _flowerPrefab;
+        private CubeMap<Flower> _cubeMap;
 
-
-        protected override void Instantiate(out CubeMap<Flower> cubeMap)
+        protected override void Instantiate(PuzzleCubeData puzzleCubeData)
         {
             var instantiator = new Instantiator<Flower>(_flowerPrefab);
-            cubeMap = new CubeMap<Flower>(Width, instantiator);
+            _cubeMap = new CubeMap<Flower>(puzzleCubeData.Width, instantiator);
 
-            float offset = ((Width) / 2f) - 0.5f;
+            float offset = ((_cubeMap.Width) / 2f) - 0.5f;
 
-            foreach (var index in cubeMap.GetIndex())
+            foreach (var index in _cubeMap.GetIndex())
             {
                 var x = index[0];
                 var y = index[1];
                 var face = index[2];
-                var flower = cubeMap.GetElements(x, y, face);
+                var flower = _cubeMap.GetElements(x, y, face);
 
                 switch (face)
                 {
@@ -56,19 +55,28 @@ namespace Puzzle
 
         }
 
-        protected override void SetDataLink(out IDataLink<Flower> dataLink)
+        protected override void SetDataLink(out IDataLink dataLink)
         {
             dataLink = new HitBoxLink();
         }
 
-        protected override void SetPresentation(out IPresentation<Flower> presentation)
+        protected override void SetPresentation(out IPresentation presentation)
         {
-            presentation = new FlowerPresentation();
+            presentation = new FlowerPresentation(_cubeMap);
         }
 
-        protected override void SetDataReader(out DataReader reader)
+        protected override void SetDataReader(out NW.DataReader reader)
         {
             reader = new FlowerReader();
+        }
+
+        public void Destroy()
+        {
+            foreach (var obj in _cubeMap.Elements)
+            {
+                Destroy(obj);
+            }
+            _cubeMap = null;
         }
     }
 }
