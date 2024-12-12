@@ -72,6 +72,12 @@ namespace Puzzle
             }
         }
 
+        public CubeMap(byte width, T[] elements)
+        {
+            Elements = elements;
+            Width = width;
+        }
+
         public T GetElements(byte x, byte y, byte z)
         {
             Debug.Assert(Width * Width * z + Width * y + x < Elements.Length,

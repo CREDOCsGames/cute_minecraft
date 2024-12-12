@@ -1,6 +1,6 @@
+using NW;
 using Puzzle;
 using UnityEngine;
-using Util;
 
 public class SlimeSpawnerInstance : PuzzleInstance
 {
@@ -8,9 +8,9 @@ public class SlimeSpawnerInstance : PuzzleInstance
     [SerializeField] private AnimationCurve _jumpCurve;
     private Transform _baseTransform;
 
-    protected override void Instantiate(PuzzleCubeData puzzleCubeData)
+    protected override void Instantiate(CubeMapReader puzzleData)
     {
-        _baseTransform = puzzleCubeData.Base;
+        _baseTransform = puzzleData.BaseTransform;
     }
     protected override void SetDataLink(out IDataLink dataLink)
     {

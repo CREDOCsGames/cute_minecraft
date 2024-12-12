@@ -6,6 +6,7 @@ using Util;
 
 namespace Puzzle
 {
+    [CreateAssetMenu(menuName = "Custom/FlowerPuzzleCore")]
     public class FlowerPuzzleCore : PuzzleCore
     {
         private readonly NW.DataReader _reader = new FlowerReader();
@@ -14,17 +15,8 @@ namespace Puzzle
         protected override IMediatorCore _mediator { get; set; }
         protected override CubeMap<byte> CubeMap { get; set; }
 
-        private bool _clear;
-        public FlowerPuzzleCore(CubeMap<byte> map) : base(map)
-        {
-        }
         public override void InstreamData(byte[] data)
         {
-            if (_clear)
-            {
-                return;
-            }
-
             switch (data[3])
             {
                 case 1:
@@ -39,15 +31,17 @@ namespace Puzzle
                 default:
                     return;
             }
-
-            CheckClear(CubeMap);
+            ClearMessage(data);
         }
 
-
-        private void CheckClear(CubeMap<byte> cubeMap)
+        private void ClearMessage(byte[] data)
         {
-            var first = cubeMap.Elements.First();
-            _clear = cubeMap.Elements.All(x => x == 1 || x == 0) || cubeMap.Elements.All(x => x == 2 || x == 0);
+            var face = data[2];
+            var @base = CubeMap.GetFace((Face)face).Where(x => x == 1 || x == 2);
+            if (@base.All(x => x == 1) || @base.All(x => x == 2))
+            {
+                _mediator.InstreamDataCore<SystemReader>(SystemReader.CLEAR_MESSAGES[face]);
+            }
         }
 
         private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };

@@ -99,7 +99,7 @@ namespace Puzzle
         public abstract NW.DataReader DataReader { get; }
         protected abstract IMediatorCore _mediator { get; set; }
 
-        public PuzzleCore(CubeMap<byte> map)
+        public void Init(CubeMap<byte> map)
         {
             CubeMap = map;
         }

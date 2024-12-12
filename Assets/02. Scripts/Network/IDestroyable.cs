@@ -1,6 +1,3 @@
-using UnityEngine;
-
-
 namespace Puzzle
 {
     public interface IDestroyable

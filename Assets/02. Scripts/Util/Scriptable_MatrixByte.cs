@@ -9,7 +9,7 @@ namespace Util
     [Serializable]
     public class Scriptable_MatrixByte : ScriptableObject
     {
-        private Matrix<byte> _matrix;
+        [SerializeField] private Matrix<byte> _matrix;
         public Matrix<byte> Matrix
         {
             get

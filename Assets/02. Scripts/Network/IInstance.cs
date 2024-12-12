@@ -1,7 +1,3 @@
-using System;
-using UnityEngine;
-
-
 namespace NW
 {
     public interface IInstance
