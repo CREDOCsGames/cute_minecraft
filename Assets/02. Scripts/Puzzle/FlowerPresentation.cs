@@ -2,12 +2,19 @@ using UnityEngine;
 
 namespace Puzzle
 {
-    public class FlowerPresentation : IPresentation<Flower>
+    public class FlowerPresentation : IPresentation
     {
-        public void InstreamData(Flower flower, byte data)
+        private readonly CubeMap<Flower> _cubeMap;
+        public FlowerPresentation(CubeMap<Flower> cubeMap)
         {
+            _cubeMap = cubeMap;
+        }
+
+        public void InstreamData(byte[] data)
+        {
+            var flower = _cubeMap.GetElements(data[0], data[1], data[2]);
             flower.gameObject.SetActive(true);
-            switch (data)
+            switch (data[3])
             {
                 case (byte)Flower.FlowerType.Red:
                     flower.Color = Color.red;

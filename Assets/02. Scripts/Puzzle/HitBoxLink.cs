@@ -1,10 +1,14 @@
 using Battle;
+using NW;
 using System;
+using Util;
 
 namespace Puzzle
 {
-    public class HitBoxLink : IDataLink<Flower>
+    public class HitBoxLink : IDataLink
     {
+        public IMediatorInstance Mediator { get; set; }
+
         public event Action<byte[]> OnInteraction;
 
         public void Link(Flower flower, byte[] data)
@@ -18,7 +22,7 @@ namespace Puzzle
             {
                 data[3] = box.Type;
             }
-            OnInteraction.Invoke(data);
+            Mediator.InstreamDataInstance<FlowerReader>(data);
         }
     }
 

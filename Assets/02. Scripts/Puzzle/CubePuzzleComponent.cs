@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using Util;
+using NW;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -53,7 +54,7 @@ namespace Puzzle
             return _uniqueID;
         }
 
-        void Awake()
+        void Start()
         {
             if (!Puzzles.Where(x => x as IInstance != null).Any())
             {
@@ -68,7 +69,6 @@ namespace Puzzle
                 if (puzzle is IInstance && puzzle is ScriptableObject obj)
                 {
                     var instance = GameObject.Instantiate(obj) as IInstance;
-                    (instance as FlowerPuzzleInstance).Width = _width;
                     _mediator.AddInstance(instance, Flag);
                 }
                 else
@@ -83,7 +83,6 @@ namespace Puzzle
 
         private void A()
         {
-            _mediator.Instances.ForEach(x => (x as FlowerPuzzleInstance).Init(transform));
             _mediator.Cores.ForEach(x => (x as ICore).Init());
         }
 

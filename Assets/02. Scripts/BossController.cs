@@ -16,6 +16,7 @@ public class BossController : MonoBehaviour
     {
         Vector3 spawnPosition = slimeSpawnPoint.position;
 
-        slimeSpawner.ReplaceSlime(spawnPosition);
+        // 슬라임 스포너의 슬라임을 생성 좌표로 대체한다.
+        slimeSpawner.SpawnAt(spawnPosition);
     }
 }
