@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    public class JumpState : IPlayerState
+    public class JumpState : IController
     {
         public string Name => "Jump";
 
@@ -12,15 +12,12 @@ namespace Controller
 
         public void UpdateState(Character player)
         {
-            if (!player.IsJumping)
-            {
-                player.Jump();
-            }
 
             if (player.IsGrounded)
             {
                 player.ResetJump();
-                player.ChangeState(new LandState());
+                player.Land();
+                player.ChangeController(new LandState());
             }
         }
     }

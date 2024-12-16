@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    public class IdleState : IPlayerState
+    public class IdleState : IController
     {
         public string Name => "Idle";
 
@@ -14,18 +14,20 @@ namespace Controller
 
             if (input.magnitude != 0)
             {
-                player.ChangeState(new MoveState());
+                player.ChangeController(new MoveState());
                 return;
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                player.ChangeState(new JumpState());
+                player.Jump();
+                player.ChangeController(new JumpState());
                 return;
             }
             if (Input.GetButtonDown("Attack"))
             {
-                player.ChangeState(new MeleeAttack());
+                player.Attack();
+                player.ChangeController(new MeleeAttack());
                 return;
             }
         }

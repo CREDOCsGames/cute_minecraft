@@ -32,6 +32,7 @@ namespace Controller
 
         public void EnterGound() => _character?.EnterGound();
         public void FinishiedAction() => _character?.FinisihedAction();
+        public void Hit() => _character?.Hit();
 
         private void Awake()
         {
@@ -41,7 +42,8 @@ namespace Controller
                 return;
             }
             _lookAt = new LookAt(_animator.transform, _rigidbody);
-            _character = new Character(new IdleState(), _rigidbody, _animator);
+            _character = new Character(_rigidbody, _animator);
+            _character.ChangeController(new IdleState());
             _character.MoveSpeed = _moveSpeed;
             _character.JumpForce = _jumpForce;
         }
@@ -57,7 +59,7 @@ namespace Controller
             _lookAt.Update();
             _character.MoveSpeed = _moveSpeed;
             _character.JumpForce = _jumpForce;
-            ui.text = _character.State;
+            ui.text = _character.State.ToString();
         }
 
     }

@@ -1,8 +1,8 @@
 ﻿namespace Controller
 {
-    public class MeleeAttack : IController
+    public class HitState : IController
     {
-        public string Name => "Attack";
+        public string Name => "Hit";
 
         public void HandleInput(Character player)
         {

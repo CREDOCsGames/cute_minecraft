@@ -13,7 +13,7 @@ namespace NW
         public Bounds BaseTransformSize;
         public byte Width;
         public byte[] Elements => Faces.SelectMany(x => x.MapData).ToArray();
-        public List<ScriptableObject> _globalCores = new();
+        public List<UnityEngine.Object> _globalCores = new();
         private readonly List<ICore> _globalCoresChace = new();
         public List<ICore> GlobalCores
         {
@@ -21,18 +21,25 @@ namespace NW
             {
                 if (_globalCores.Count != _globalCoresChace.Count)
                 {
-                    _globalCores = _globalCores.Where(x => x is PuzzleCore).ToList();
+                    _globalCores = _globalCores.Where(x => x is ICore).ToList();
                     _globalCoresChace.Clear();
                     foreach (var core in _globalCores)
                     {
-                        var instance = ScriptableObject.Instantiate(core);
-                        _globalCoresChace.Add(instance as ICore);
+                        if (core as ScriptableObject)
+                        {
+                            var instance = ScriptableObject.Instantiate(core);
+                            _globalCoresChace.Add(instance as ICore);
+                        }
+                        else
+                        {
+                            _globalCoresChace.Add(core as ICore);
+                        }
                     }
                 }
                 return _globalCoresChace;
             }
         }
-        public List<ScriptableObject> _globalInstances = new();
+        public List<UnityEngine.Object> _globalInstances = new();
         private readonly List<IInstance> _globalInstancesChace = new();
         public List<IInstance> GlobalInstances
         {
@@ -40,12 +47,19 @@ namespace NW
             {
                 if (_globalInstances.Count != _globalInstancesChace.Count)
                 {
-                    _globalInstances = _globalInstances.Where(x => x is PuzzleInstance).ToList();
+                    _globalInstances = _globalInstances.Where(x => x is IInstance).ToList();
                     _globalInstancesChace.Clear();
                     foreach (var item in _globalInstances)
                     {
-                        var instance = ScriptableObject.Instantiate(item);
-                        _globalInstancesChace.Add(instance as IInstance);
+                        if (item is IInstance)
+                        {
+                            var instance = ScriptableObject.Instantiate(item);
+                            _globalInstancesChace.Add(instance as IInstance);
+                        }
+                        else
+                        {
+                            _globalInstancesChace.Add(item as IInstance);
+                        }
                     }
                 }
                 return _globalInstancesChace;

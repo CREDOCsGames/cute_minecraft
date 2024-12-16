@@ -1,6 +1,11 @@
 namespace Controller
 {
+    using System;
     using UnityEngine;
+    public enum CharacterState
+    {
+        Idle, Jump, Run, Land, Attack, Hit, Die
+    }
 
     public class Character
     {
@@ -8,58 +13,83 @@ namespace Controller
         public float JumpForce = 7f;
         public bool IsGrounded { get; private set; }
         public bool IsJumping { get; private set; } = false;
-        public string State => _state?.Name;
         public bool IsFinishedAction => FinisihedAction();
-        public Vector3 Position => _rigidbody.position;
-        private IPlayerState _state;
+        public CharacterState State { get; private set; }
+        public Vector3 Position => Rigidbody.position;
+        private IController _controller;
         private readonly Animator _animator;
-        private readonly Rigidbody _rigidbody;
+        public readonly Rigidbody Rigidbody;
+        public Transform Transform => Rigidbody.transform;
+        public event Action<CharacterState> OnChagedState;
 
-        public Character(IPlayerState entryState, Rigidbody rigidbody, Animator animator)
+        public Character(Rigidbody rigidbody, Animator animator)
         {
             _animator = animator;
-            _rigidbody = rigidbody;
-            ChangeState(entryState);
+            Rigidbody = rigidbody;
+            OnChagedState += UpdateAnimation;
         }
-
         public void Update()
         {
-            _state.HandleInput(this);
-            _state.UpdateState(this);
+            _controller?.HandleInput(this);
+            _controller?.UpdateState(this);
         }
-
-        public void ChangeState(IPlayerState newState)
+        public void ChangeController(IController newController)
         {
-            _animator.ResetTrigger(_state?.Name ?? $"{_rigidbody.name}'s state is empty.");
-            _animator.SetTrigger(newState.Name);
-            _state = newState;
+            _controller = newController;
         }
-
+        private void ChangeState(CharacterState newState, bool duplicateCall = false)
+        {
+            if (duplicateCall || State != newState)
+            {
+                OnChagedState?.Invoke(newState);
+            }
+            State = newState;
+        }
+        public void UpdateAnimation(CharacterState newState)
+        {
+            _animator.ResetTrigger(State.ToString());
+            _animator.SetTrigger(newState.ToString());
+        }
         public void Move(Vector3 moveDirection)
         {
-            _rigidbody.velocity = moveDirection * MoveSpeed;
+            ChangeState(CharacterState.Run);
+            Rigidbody.velocity = moveDirection * MoveSpeed;
         }
-
         public void Jump()
         {
             if (!IsJumping)
             {
-                _rigidbody.AddForce(Vector2.up * JumpForce, ForceMode.Impulse);
+                ChangeState(CharacterState.Jump, true);
+                Rigidbody.AddForce(Vector2.up * JumpForce, ForceMode.Impulse);
                 IsJumping = true;
                 IsGrounded = false;
             }
         }
-
+        public void Idle()
+        {
+            ChangeState(CharacterState.Idle);
+        }
+        public void Hit()
+        {
+            ChangeState(CharacterState.Hit, true);
+            ChangeController(new HitState());
+        }
+        public void Attack()
+        {
+            ChangeState(CharacterState.Attack, true);
+        }
         public void ResetJump()
         {
             IsJumping = false;
         }
-
         public void EnterGound()
         {
             IsGrounded = true;
         }
-
+        public void Land()
+        {
+            ChangeState(CharacterState.Land);
+        }
         public bool FinisihedAction()
         {
             return 1f <= _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;

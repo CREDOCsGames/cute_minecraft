@@ -52,13 +52,35 @@ namespace NW
         private IEnumerator Action(string path)
         {
             var character = GameObject.FindAnyObjectByType<CharacterComponent>()._character;
-            while (character != null && character.State != "Idle")
+            while (character != null && character.State is not Controller.CharacterState.Idle)
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.1f);
+            character.ChangeController(new CanNotControl());
+            yield return new WaitForSeconds(1f);
             var action = Resources.Load<MovementAction>(path);
-            character?.ChangeState(new JumpState());
+            character.Jump();
+            character?.ChangeController(new JumpState());
+
+            //TODO
+            Vector3 dir;
+            switch (path)
+            {
+                case "MovementAction/RotateLeft":
+                    dir = Vector3.back + Vector3.up;
+                    break;
+                case "MovementAction/RotateBackward":
+                    dir = Vector3.right + Vector3.up;
+                    break;
+                default: dir = Vector3.right; break;
+            }
+
+            var monsters = GameObject.FindObjectsOfType<MonsterComponent>();
+            foreach (var monster in monsters)
+            {
+                monster.Exit(dir);
+            }
+
             if (action != null)
             {
                 _movement.PlayMovement(action);

@@ -2,15 +2,14 @@
 
 namespace Controller
 {
-    public class LandState : IPlayerState
+    public class LandState : IController
     {
-        public string Name => "Land";
-
         public void HandleInput(Character player)
         {
             if (player.IsFinishedAction)
             {
-                player.ChangeState(new IdleState());
+                player.Idle();
+                player.ChangeController(new IdleState());
             }
         }
 

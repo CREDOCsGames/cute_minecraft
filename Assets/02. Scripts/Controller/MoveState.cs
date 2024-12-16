@@ -2,10 +2,8 @@ using UnityEngine;
 
 namespace Controller
 {
-    public class MoveState : IPlayerState
+    public class MoveState : IController
     {
-        public string Name => "Run";
-
         public void HandleInput(Character player)
         {
             Vector3 input = new(Input.GetAxisRaw("Horizontal"),
@@ -14,18 +12,21 @@ namespace Controller
 
             if (input.magnitude == 0)
             {
-                player.ChangeState(new IdleState());
+                player.Idle();
+                player.ChangeController(new IdleState());
                 return;
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                player.ChangeState(new JumpState());
+                player.Jump();
+                player.ChangeController(new JumpState());
                 return;
             }
             if (Input.GetButtonDown("Attack"))
             {
-                player.ChangeState(new MeleeAttack());
+                player.Attack();
+                player.ChangeController(new MeleeAttack());
                 return;
             }
 
