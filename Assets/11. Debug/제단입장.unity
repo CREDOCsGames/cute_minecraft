@@ -186,7 +186,6 @@ Transform:
   m_Children:
   - {fileID: 1209397141}
   - {fileID: 1890050903}
-  - {fileID: 1655941787}
   - {fileID: 648318868}
   - {fileID: 1828121592}
   m_Father: {fileID: 1435733961}
@@ -11395,7 +11394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1435733961
 Transform:
   m_ObjectHideFlags: 0
@@ -11687,6 +11686,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3519320211619146661, guid: 08f45196fcf263648b535f9765b743c1, type: 3}
       insertIndex: 0
+      addedObject: {fileID: 1655941787}
+    - targetCorrespondingSourceObject: {fileID: 3519320211619146661, guid: 08f45196fcf263648b535f9765b743c1, type: 3}
+      insertIndex: 1
       addedObject: {fileID: 1435733961}
     - targetCorrespondingSourceObject: {fileID: 5044542340287379911, guid: 08f45196fcf263648b535f9765b743c1, type: 3}
       insertIndex: -1
@@ -12441,6 +12443,7 @@ GameObject:
   - component: {fileID: 1655941790}
   - component: {fileID: 1655941789}
   - component: {fileID: 1655941788}
+  - component: {fileID: 1655941791}
   m_Layer: 0
   m_Name: AltarEnterTrigger
   m_TagString: Untagged
@@ -12457,11 +12460,11 @@ Transform:
   m_GameObject: {fileID: 1655941786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.0370035, z: 2.0900009}
+  m_LocalPosition: {x: 0, y: 3.0370064, z: 2.0900009}
   m_LocalScale: {x: 3.3389, y: 1, z: 1.942153}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 14752483}
+  m_Father: {fileID: 1476615933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1655941788
 BoxCollider:
@@ -12534,6 +12537,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655941786}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1655941791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655941786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8befee30072608a49a98c19a04a46133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 1435733960}
 --- !u!1 &1677277529
 GameObject:
   m_ObjectHideFlags: 0
