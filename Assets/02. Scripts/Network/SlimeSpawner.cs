@@ -7,7 +7,7 @@ namespace NW
     {
         public static readonly byte[] BOSS_SPAWN = { 0 };
         public static readonly byte[] BOSS_EXIT = { 1 };
-        public static readonly byte[] BOSS_SPIT_OUT = { 1 };
+        public static readonly byte[] BOSS_SPIT_OUT = { 2 };
         public static readonly byte[] SLIME_SPAWN = { 3 };
         public static readonly byte[] SLIME_BOUNCE = { 4 };
         public static readonly byte[] SLIME_LAND = { 5 };
@@ -34,12 +34,18 @@ namespace NW
         }
 
         float t;
+        bool once = true;
         public void Update()
         {
             if (5f < Time.time - t)
             {
+                if (once)
+                {
+                    _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPAWN);
+                    once = false;
+                }
                 t = Time.time;
-                _mediator.InstreamDataCore<MonsterReader>(MonsterReader.SLIME_SPAWN);
+                _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPIT_OUT);
             }
         }
 
