@@ -1,9 +1,11 @@
 # 팀 목표
 <!-- 
+
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
-```
 -->
+
+```
 → 12월 : 알파 타입 완성
 ν 11월 : Boss 스테이지 
 ν 10월 : 플라워 퍼즐의 테스트 환경 구축
@@ -12,6 +14,7 @@
 ν 7월 : 방해요인이 있는 3분이 재밌는 프로토타입
 ν 6월 : 방해요인이 없는 프로토타입 
 ```
+
 
 # 목표 달성
 <!-- 
