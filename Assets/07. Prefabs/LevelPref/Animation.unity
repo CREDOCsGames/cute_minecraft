@@ -214,6 +214,8 @@ GameObject:
   m_Component:
   - component: {fileID: 628588697}
   - component: {fileID: 628588696}
+  - component: {fileID: 628588698}
+  - component: {fileID: 628588699}
   m_Layer: 0
   m_Name: Lanterns
   m_TagString: Untagged
@@ -233,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2213902b4e23b87409a07445f80c8b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearCount: 0
+  _clearCount: 0
 --- !u!4 &628588697
 Transform:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 628588695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.888, z: 0}
+  m_LocalPosition: {x: 0, y: -4.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -253,6 +255,43 @@ Transform:
   - {fileID: 1709023393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &628588698
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628588695}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1dbd5ede847f3c54b90d093ca9e96e8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &628588699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628588695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f341e9b46aaafdc4fbd84604e93bb978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Apear: 0
+  Bright: 0
+  Disapear: 0
+  MoveSpeed: 0.02
 --- !u!1001 &668792535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -800,7 +839,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bClamp: 1
+  _useClamp: 0
 --- !u!1 &1864660833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1266,7 @@ Transform:
   m_GameObject: {fileID: 2092423695}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18551233, y: -0, z: -0, w: 0.982642}
-  m_LocalPosition: {x: 0, y: 1.731, z: -2.67}
+  m_LocalPosition: {x: 0, y: 4.88, z: -6.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
