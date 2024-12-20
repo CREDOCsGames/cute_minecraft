@@ -1,6 +1,10 @@
 # 팀 목표
+<!-- 
+
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
+-->
+
 ```
 → 12월 : 알파 타입 완성
 ν 11월 : Boss 스테이지 
@@ -11,17 +15,18 @@
 ν 6월 : 방해요인이 없는 프로토타입 
 ```
 
+
 # 목표 달성
 <!-- 
 >12월 : 알파 타입 완성 #<a href="">플레이 영상</a> 
 >11월 : Boss 스테이지 #<a href="">플레이 영상</a>   
 >10월 : 플라워 퍼즐의 테스트 환경 구축 #<a href="">플레이 영상</a>   
--->
+
 >9월 : 스테이지 형식과 새로운 메인 플레이 메커니즘이 적용된 프로토타입 #<a href="https://youtu.be/FDuE9BE1mF4">발표회 영상</a>   
 >8월 : 3분이 좀 더 재미있는 알파타입 #<a href="https://youtu.be/z8W7RxiKq7U">플레이 영상</a>   
 >7월 : 방해요인이 있는 3분이 재밌는 프로토타입 #<a href="https://youtu.be/xMm53i5QQvU">플레이 영상</a>   
 >6월 : 방해요인이 없는 프로토타입 #<a href="https://youtu.be/L-DdV-VDRyM">플레이 영상</a>
-
+-->
 
 ### ※ 참여 인원
 |이름|파트|참여기간|
