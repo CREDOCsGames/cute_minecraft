@@ -27,5 +27,6 @@ namespace Util
 
             _renderer.material.SetColor("_Color", color);
         }
+
     }
 }

@@ -32,7 +32,16 @@ namespace Controller
 
         public void EnterGound() => _character?.EnterGound();
         public void FinishiedAction() => _character?.FinisihedAction();
-        public void Hit() => _character?.Hit();
+        public void Hit()
+        {
+            if (_character.State is CharacterState.Die)
+            {
+                return;
+            }
+
+            _character?.Hit();
+            _character?.ChangeController(new HitState());
+        }
 
         private void Awake()
         {
@@ -56,7 +65,10 @@ namespace Controller
                 return;
             }
             _character.Update();
-            _lookAt.Update();
+            if (_character.State is CharacterState.Run)
+            {
+                _lookAt.Update();
+            }
             _character.MoveSpeed = _moveSpeed;
             _character.JumpForce = _jumpForce;
             ui.text = _character.State.ToString();

@@ -1,10 +1,9 @@
 using Battle;
 using Controller;
-using Puzzle;
 using System.Linq;
 using UnityEngine;
 using Util;
-namespace NW
+namespace Puzzle
 {
     public class SlimeSpawnerPresentation : IPresentation
     {
@@ -63,9 +62,13 @@ namespace NW
             {
                 var controller = new Controller.MonsterState();
                 var list = GameObject.FindObjectsOfType<Flower>().ToList();
+                list = list.Where(f => f.transform.position.y == list.Max(x => x.transform.position.y)).ToList();
+                if (list.Count == 0) return;
                 var target = list[Random.Range(0, list.Count)].transform;
                 controller.StartTrace(target);
                 slime._character.ChangeController(controller);
+                slime._character.Idle();
+                slime._character.Rigidbody.excludeLayers = LayerMask.GetMask("Default");
             }
         }
     }

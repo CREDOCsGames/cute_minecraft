@@ -41,7 +41,7 @@ namespace PlatformGame.Debugger
         public static string GetStrings(byte[] bytes)
         {
             string s = "";
-            foreach(var data in bytes)
+            foreach (var data in bytes)
             {
                 s += data.ToString() + " ";
             }

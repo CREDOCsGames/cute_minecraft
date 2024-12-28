@@ -1,20 +1,31 @@
 using UnityEngine;
-using Util;
 
 namespace Puzzle
 {
     [CreateAssetMenu(menuName = "Custom/Puzzle/FlowerPuzzle")]
-    public class FlowerPuzzleInstance : PuzzleInstance, NW.IDestroyable
+    public class FlowerPuzzleInstance : ScriptableObject, IInstance, IPuzzleInstance, IDestroyable
     {
-        [SerializeField] private Flower _flowerPrefab;
+        public DataReader DataReader { get; private set; } = new FlowerReader();
         private CubeMap<Flower> _cubeMap;
-        private HitBoxLink _dataLink;
+        private IPresentation _flwerPresentation;
+        private readonly HitBoxLink _dataLink = new();
+        [SerializeField] private Flower _flowerPrefab;
 
-        protected override void Instantiate(NW.CubeMapReader puzzleData)
+        public void SetMediator(IMediatorInstance mediator)
+        {
+            _dataLink.Mediator = mediator;
+        }
+
+        public void InstreamData(byte[] data)
+        {
+            _flwerPresentation.InstreamData(data);
+        }
+
+        public void Init(CubeMapReader puzzleData)
         {
             var instantiator = new Instantiator<Flower>(_flowerPrefab);
             _cubeMap = new CubeMap<Flower>(puzzleData.Width, instantiator);
-
+            _flwerPresentation = new FlowerPresentation(_cubeMap);
             float offset = ((puzzleData.Width) / 2f) - 0.5f;
             float offsetY = (puzzleData.BaseTransformSize.x / 2f) - 0.5f;
 
@@ -54,25 +65,9 @@ namespace Puzzle
                     default:
                         break;
                 };
-
+                _flwerPresentation.InstreamData(new byte[] { x, y, face, puzzleData.GetElement(x, y, face) });
             }
 
-        }
-
-        protected override void SetDataLink(out IDataLink dataLink)
-        {
-            _dataLink = new HitBoxLink();
-            dataLink = _dataLink;
-        }
-
-        protected override void SetPresentation(out IPresentation presentation)
-        {
-            presentation = new FlowerPresentation(_cubeMap);
-        }
-
-        protected override void SetDataReader(out NW.DataReader reader)
-        {
-            reader = new FlowerReader();
         }
 
         public void Destroy()
@@ -83,6 +78,7 @@ namespace Puzzle
             }
             _cubeMap = null;
         }
+
     }
 }
 

@@ -1,170 +1,132 @@
-using Battle;
-using Movement;
-using System;
-using System.IO;
-using System.Linq;
+using PlatformGame.Debugger;
+using System.Collections.Generic;
 using UnityEngine;
-using Util;
-using NW;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Puzzle
 {
-    [ExecuteAlways]
-    public class CubePuzzleComponent : MonoBehaviour, IInstance
+    public class CubePuzzleComponent : MonoBehaviour
     {
-        [HideInInspector][SerializeField] private string _uniqueID;
-        [SerializeField][Range(1, 255)] private byte _width;
-        public MediatorCenter.TunnelFlag Flag;
-        public ScriptableObject[] Puzzles;
-        public Scriptable_MatrixByte[] MapData
-        {
-            get
-            {
-                Scriptable_MatrixByte[] mapData = new Scriptable_MatrixByte[6];
-                var path = Path.Combine("Assets/10. Editor/Cookie", GetUniqueID());
-                for (int i = 0; i < 6; i++)
-                {
-                    if (!File.Exists(path + $"{i}.asset"))
-                    {
-                        Scriptable_MatrixByte obj = ScriptableObject.CreateInstance<Scriptable_MatrixByte>();
-                        AssetDatabase.CreateAsset(obj, path + $"{i}.asset");
-                        AssetDatabase.SaveAssets();
-                    }
-                    mapData[i] = AssetDatabase.LoadAssetAtPath<Scriptable_MatrixByte>(path + $"{i}.asset");
-                }
-                return mapData;
-            }
-        }
-        private MediatorCenter _mediator;
+        private MessageObserver _systemMessageObserver;
+        private MessageObserver _puzzleMessageObserver;
+        private MessageObserver _monsterMessageObserver;
+        private MediatorCenter _mediatorCenter;
+        private CubePuzzleDataReader _puzzleDataReader;
+        private CubeMap<byte> _cubeMap;
+        private CubeMapReader _cubeMapReader;
+        [SerializeField] private CubePuzzleData _cubePuzzleData;
 
-        public event Action<byte[]> InstreamEvent;
+        private SlimeSpawner _spawnerCore;
 
-        private string GetUniqueID()
+        private void Awake()
         {
-            if (string.IsNullOrEmpty(_uniqueID))
-            {
-                _uniqueID = GUID.Generate().ToString();
-#if UNITY_EDITOR
-                EditorUtility.SetDirty(this);
-#endif
-            }
-            return _uniqueID;
-        }
-
-        void Start()
-        {
-            if (!Puzzles.Where(x => x as IInstance != null).Any())
+            if (_cubePuzzleData.Faces.Length != 6)
             {
                 return;
             }
 
-            _mediator = new MediatorCenter();
-            _mediator.AddCore(CreateMap(), Flag);
+            _puzzleDataReader = new CubePuzzleDataReader(_cubePuzzleData);
+            _mediatorCenter = new MediatorCenter();
+            _systemMessageObserver = new MessageObserver(new SystemReader());
+            _systemMessageObserver.RecieveSystemMessage += MoveNextFace;
+            _systemMessageObserver.RecieveSystemMessage += PrintSystemMessage;
+            _puzzleMessageObserver = new MessageObserver(new FlowerReader());
+            _puzzleMessageObserver.RecieveSystemMessage += PrintFlowerMessage;
+            _monsterMessageObserver = new MessageObserver(new MonsterReader());
+            _monsterMessageObserver.RecieveSystemMessage += PrintMonsterMessage;
+            _cubeMap = new(_cubePuzzleData.Width, _cubePuzzleData.Elements);
+            _cubeMapReader = new CubeMapReader(_cubePuzzleData);
+            _spawnerCore = new SlimeSpawner();
 
-            foreach (var puzzle in Puzzles)
-            {
-                if (puzzle is IInstance && puzzle is ScriptableObject obj)
-                {
-                    var instance = GameObject.Instantiate(obj) as IInstance;
-                    _mediator.AddInstance(instance, Flag);
-                }
-                else
-                {
-                    Debug.Assert(false, $"{puzzle.name} is not IPuzzleInstance. type {puzzle.GetType()}");
-                }
-            }
-
-            Invoke(nameof(A), 3);
-            _mediator.AddListenerSystemMessage(this);
+            SettingAllResources();
+            StartPuzzle(Face.top);
         }
-
-        private void A()
+        private void StartPuzzle(Face playFace)
         {
-            _mediator.Cores.ForEach(x => (x as ICore).Init());
-        }
+            CleanUnusedResources(playFace);
+            SettingNewlyUsedResources(playFace);
+            _puzzleDataReader.MoveReadWindow(playFace);
 
-        private void OnDisable()
+            _puzzleDataReader.ReadAllCores(out var inUseCores);
+            inUseCores.Add(_spawnerCore); //
+            _mediatorCenter.SetCores(inUseCores);
+
+            _puzzleDataReader.ReadAllInstances(out var inUseInstances);
+            inUseInstances.Add(_systemMessageObserver);  //
+            inUseInstances.Add(_puzzleMessageObserver);  //
+            inUseInstances.Add(_monsterMessageObserver); //
+            _mediatorCenter.SetInstances(inUseInstances);
+        }
+        private void CleanAllResources()
         {
-            _mediator = null;
+            _puzzleDataReader.ReadAllCores(out var usedCores);
+            usedCores.Add(_spawnerCore);//
+            _puzzleDataReader.ReadAllInstances(out var usedInstances);
+            EventBinder.UnbindEvent(usedCores, _mediatorCenter);
+            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
+            usedCores.ForEach(x => (x as IDestroyable)?.Destroy());
+            usedInstances.ForEach(x => (x as IDestroyable)?.Destroy());
         }
-
-        public CubeMap<byte> CreateMap()
+        private void CleanUnusedResources(Face nextFace)
         {
-            var cubeMap = new CubeMap<byte>((byte)MapData[0].Matrix.ColumnsCount, (byte)0);
-
-            for (byte face = 0; face < 6; face++)
-            {
-                for (byte x = 0; x < MapData[0].Matrix.ColumnsCount; x++)
-                {
-                    for (byte y = 0; y < MapData[0].Matrix.ColumnsCount; y++)
-                    {
-                        MapData[face].Matrix.TryGetElement(x, y, out var value);
-                        cubeMap.SetElements(x, y, face, value);
-                    }
-                }
-            }
-
-            return cubeMap;
+            _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> usedCores);
+            _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> usedInstances);
+            EventBinder.UnbindEvent(usedCores, _mediatorCenter);
+            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
+            usedCores.ForEach(x => (x as IDestroyable)?.Destroy());
+            usedInstances.ForEach(x => (x as IDestroyable)?.Destroy());
         }
-
-        string p;
-        private void Rotate(string path)
+        private void SettingAllResources()
         {
-            p = path;   
-            Invoke(nameof(Go), 1f);
+            _puzzleDataReader.ReadAllCores(out List<ICore> inUseCores);
+            _puzzleDataReader.ReadAllInstances(out List<IInstance> inUseInstances);
+            inUseCores.Add(_spawnerCore);//
+            inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_cubeMap));
+            inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_cubeMapReader));
+            EventBinder.BindEvent(inUseCores, _mediatorCenter);
+            EventBinder.BindEvent(inUseInstances, _mediatorCenter);
         }
-
-        private void Go()
+        private void SettingNewlyUsedResources(Face nextFace)
         {
-            var action = Resources.Load<MovementAction>(p);
-            if (action != null)
-            {
-                GetComponent<MovementComponent>().PlayMovement(action);
-            }
-            GameObject.FindAnyObjectByType<PCController>()?.DoJump(500);
+            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> inUseCores);
+            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> inUseInstances);
+            EventBinder.BindEvent(inUseCores, _mediatorCenter);
+            EventBinder.BindEvent(inUseInstances, _mediatorCenter);
+            inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_cubeMap));
+            inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_cubeMapReader));
         }
-
-        public void InstreamData(byte[] data)
+        private void MoveNextFace(byte[] data)
         {
-            if (!SystemMessage.CheckSystemMessage(data))
+            if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
             {
-                return;
+                CleanAllResources();
             }
-
-
-            if (SystemMessage.CLEAR_RIGHT.Equals(data))
+            else
+            if (SystemReader.IsClearFace(data))
             {
-                Rotate("MovementAction/RotateLeft");
-            }
-            else if (SystemMessage.CLEAR_LEFT.Equals(data))
-            {
-                Rotate("MovementAction/RotateLeft");
-            }
-            else if (SystemMessage.CLEAR_FRONT.Equals(data))
-            {
-                Rotate("MovementAction/RotateLeft");
-            }
-            else if (SystemMessage.CLEAR_BACK.Equals(data))
-            {
-                Rotate("MovementAction/RotateBackward");
-            }
-            else if (SystemMessage.CLEAR_TOP.Equals(data))
-            {
-                Rotate("MovementAction/RotateBackward");
-            }
-            else if (SystemMessage.CLEAR_BOTTOM.Equals(data))
-            {
-                Rotate("MovementAction/RotateLeft");
+                StartPuzzle(_puzzleDataReader.ReadWindow + 1);
             }
         }
-
+        private void PrintSystemMessage(byte[] data)
+        {
+            Debug.Log($"[System] {DebugLog.GetStrings(data)}");
+        }
+        private void PrintFlowerMessage(byte[] data)
+        {
+            Debug.Log($"[Puzzle] {DebugLog.GetStrings(data)}");
+        }
+        private void PrintMonsterMessage(byte[] data)
+        {
+            Debug.Log($"[Monster] {DebugLog.GetStrings(data)}");
+        }
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawWireCube(transform.position, Vector3.one * _width);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position, _cubePuzzleData.BaseTransformSize.extents);
         }
-    }
+        private void Update()
+        {
+            _spawnerCore.Update();
+        }
 
+    }
 }

@@ -1,42 +1,39 @@
-using Flow;
-using System.Linq;
 using UnityEngine;
 
 namespace Puzzle
 {
-    [RequireComponent(typeof(AreaComponent))]
-    public class AreaWallComponent : MonoBehaviour
+    public class AreaWallComponent : MonoBehaviour, IPuzzleInstance, IInstance
     {
-        private enum Type
+        public enum Type
         {
             Wall,
             JumpWall
         }
 
-        [SerializeField] private Side _side;
         private AreaWall _wall;
-        private AreaComponent _area;
+        [SerializeField] private Side _side;
         [SerializeField] private Type _wallType;
+        private Bounds _bounds;
 
-        private void Start()
+        public DataReader DataReader => new SystemReader();
+
+        public event System.Action<byte[]> InstreamEvent;
+
+        public void Init(CubeMapReader puzzleData)
         {
-            _area = GetComponent<AreaComponent>();
-
-            var bounds = _area.HalfRange;
-            bounds.center += Vector3.up * bounds.size.y;
-            _wall = new AreaWall(_side, bounds, $"Objects/{_wallType}");
-
-            _area.OnEnterEvent.AddListener(b => MakeWall($"Objects/{_wallType}"));
-            _area.OnExitEvent.AddListener(b => _wall.Destroy());
-            _area.OnClearEvent.AddListener(b =>
-            {
-                MakeWall($"Objects/{Type.Wall}");
-                Invoke(nameof(MakeWay), 0.1f);
-            });
-
+            _bounds = new Bounds();
+            _bounds.extents = puzzleData.BaseTransformSize / 2f;
+            _bounds.center = puzzleData.BaseTransform.position + Vector3.up * puzzleData.BaseTransformSize.y;
+            _wall = new AreaWall(_side, _bounds, $"Objects/{_wallType}");
             MakeWall($"Objects/{_wallType}");
         }
-
+        public void InstreamData(byte[] data)
+        {
+            if (data.Equals(SystemReader.CLEAR_BACK_FACE))
+            {
+                MakeWall($"Objects/{Type.JumpWall}");
+            }
+        }
         private void MakeWall(string wall)
         {
             _wall.Destroy();
@@ -44,26 +41,8 @@ namespace Puzzle
             _wall.Create();
         }
 
-        private void MakeWay()
+        public void SetMediator(IMediatorInstance mediator)
         {
-            if (!_wall.Objects.Any())
-            {
-                return;
-            }
-
-            foreach (var obj in _wall.Objects)
-            {
-                if (!Physics.CheckBox(obj.transform.position, obj.transform.lossyScale / 2f, Quaternion.identity,
-                        LayerMask.GetMask("Bridge")))
-                {
-                    continue;
-                }
-
-                var colliders = obj.GetComponents<Collider>();
-                colliders[0].enabled = false;
-                colliders[1].enabled = true;
-                colliders[2].enabled = true;
-            }
         }
     }
 }

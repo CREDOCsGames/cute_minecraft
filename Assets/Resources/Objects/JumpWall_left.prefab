@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1608739471037447468}
   - component: {fileID: 6057104379870754066}
   - component: {fileID: 1633907854034694481}
-  - component: {fileID: 618215818298846345}
   - component: {fileID: 8229010665161542805}
   m_Layer: 0
   m_Name: JumpWall_left
@@ -50,11 +49,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 16384
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.1, y: 1.1, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1633907854034694481
 BoxCollider:
@@ -73,31 +72,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.45, y: 1, z: 1}
-  m_Center: {x: -0.275, y: 0, z: 0}
---- !u!65 &618215818298846345
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4995155654788029905}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 16384
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.45, y: 1, z: 1}
-  m_Center: {x: 0.275, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8229010665161542805
 MonoBehaviour:
   m_ObjectHideFlags: 0

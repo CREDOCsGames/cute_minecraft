@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lantern : MonoBehaviour
@@ -18,7 +15,7 @@ public class Lantern : MonoBehaviour
             {
                 this.transform.position += new Vector3(0, MoveSpeed, 0);
             }
-            else if(this.transform.position.y < 2.8f)
+            else if (this.transform.position.y < 2.8f)
             {
                 this.transform.position += new Vector3(0, MoveSpeed * 0.5f, 0);
             }
@@ -27,14 +24,14 @@ public class Lantern : MonoBehaviour
                 Apear = false;
             }
         }
-        if(Bright)
+        if (Bright)
         {
             GetComponent<Animator>().SetTrigger("Bright");
             Bright = false;
         }
-        if(Disapear)
+        if (Disapear)
         {
-            if(this.transform.position.y > -3.5f )
+            if (this.transform.position.y > -3.5f)
             {
                 this.transform.position += new Vector3(0, -MoveSpeed, 0);
             }
@@ -45,5 +42,5 @@ public class Lantern : MonoBehaviour
             }
         }
     }
-    
+
 }
