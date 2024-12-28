@@ -1,7 +1,7 @@
-using UnityEngine;
-using Util;
 using System;
 using System.Collections;
+using UnityEngine;
+using Util;
 
 namespace Battle
 {

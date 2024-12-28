@@ -13,7 +13,7 @@ namespace Controller
     {
         public static bool IsNear(Transform A, Transform B)
         {
-            return Vector3Int.Distance(Vector3IntUtil.Convert(A.transform.position), Vector3IntUtil.Convert(B.transform.position)) <= 2f;
+            return Vector3.Distance(A.transform.position, B.transform.position) <= 0.1f;
         }
     }
     public class MonsterState : IController
@@ -35,9 +35,16 @@ namespace Controller
                 return;
             }
 
-            if (player.State is CharacterState.Attack && player.IsFinishedAction)
+            if (player.State is CharacterState.Hit && player.IsFinishedAction)
             {
                 player.Idle();
+                return;
+            }
+
+            if (player.State is CharacterState.Attack && player.IsFinishedAction)
+            {
+                player.Die();
+                player.ChangeController(new CanNotControl());
                 return;
             }
 
@@ -57,7 +64,7 @@ namespace Controller
             }
             else
             {
-                if (player.State is CharacterState.Idle)
+                if (player.State is CharacterState.Idle && player.IsGrounded)
                 {
                     player.Move((_traceTarget.position - player.Transform.position).normalized);
                 }

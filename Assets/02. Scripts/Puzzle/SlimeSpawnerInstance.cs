@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace NW
+namespace Puzzle
 {
     public class SlimeSpawnerInstance : MonoBehaviour, IInstance
     {
@@ -11,6 +11,10 @@ namespace NW
         private SlimeSpawnerPresentation _slimePresentation;
 
         public DataReader DataReader { get; private set; } = new MonsterReader();
+        public void InstreamData(byte[] data)
+        {
+            _slimePresentation.InstreamData(data);
+        }
 
         private void Awake()
         {
@@ -23,10 +27,6 @@ namespace NW
         {
         }
 
-        public void InstreamData(byte[] data)
-        {
-            _slimePresentation.InstreamData(data);
-        }
 
         public void OnDrawGizmosSelected()
         {

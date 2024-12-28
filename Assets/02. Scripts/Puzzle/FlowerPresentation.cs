@@ -17,10 +17,10 @@ namespace Puzzle
             switch (data[3])
             {
                 case (byte)Flower.FlowerType.Red:
-                    flower.Color = Color.red;
+                    flower.Color = new Color(191f / 255f, 12f / 255f, 255f / 255f);
                     break;
                 case (byte)Flower.FlowerType.Green:
-                    flower.Color = Color.green;
+                    flower.Color = Color.cyan;
                     break;
                 default:
                     flower.gameObject.SetActive(false);
