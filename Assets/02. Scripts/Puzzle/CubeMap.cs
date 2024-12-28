@@ -4,47 +4,6 @@ using UnityEngine;
 
 namespace Puzzle
 {
-    public static class CubeMap
-    {
-        public static bool TryGetData<T>(int x, int y, int face, int width, in List<T> list, out T value)
-        {
-            var index = width * width * face + width * y + x;
-            value = default;
-
-            if (-1 < index && index < list.Count)
-            {
-                value = list[index];
-                return true;
-            }
-            return false;
-        }
-
-        public static bool TrySetData<T>(int x, int y, int face, int width, in List<T> list, in T value)
-        {
-            var index = width * width * face + width * y + x;
-
-            if (-1 < index && index < list.Count)
-            {
-                list[index] = value;
-                return true;
-            }
-            return false;
-        }
-
-        public static bool TryGetFace<T>(int face, int width, in List<T> list)
-        {
-            var count = width * width;
-            var index = count * face;
-
-            if (-1 < index && index + count < list.Count)
-            {
-                list.GetRange(index, count);
-                return true;
-            }
-            return false;
-        }
-    }
-
     public class CubeMap<T>
     {
         public readonly T[] Elements;

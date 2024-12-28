@@ -65,14 +65,18 @@ namespace Controller
                 IsGrounded = false;
             }
         }
+        public void Die()
+        {
+            ChangeState(CharacterState.Die);
+        }
         public void Idle()
         {
             ChangeState(CharacterState.Idle);
+            Rigidbody.velocity = Vector3.zero;
         }
         public void Hit()
         {
             ChangeState(CharacterState.Hit, true);
-            ChangeController(new HitState());
         }
         public void Attack()
         {
@@ -85,6 +89,10 @@ namespace Controller
         public void EnterGound()
         {
             IsGrounded = true;
+        }
+        public void ExitGound()
+        {
+            IsGrounded = false;
         }
         public void Land()
         {

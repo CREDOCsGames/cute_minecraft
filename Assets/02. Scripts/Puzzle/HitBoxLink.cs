@@ -1,7 +1,5 @@
 using Battle;
-using NW;
 using System;
-using Util;
 
 namespace Puzzle
 {
@@ -22,7 +20,7 @@ namespace Puzzle
             {
                 data[3] = box.Type;
             }
-            Mediator.InstreamDataInstance<FlowerReader>(data);
+            Mediator?.InstreamDataInstance<FlowerReader>(data);
         }
     }
 
