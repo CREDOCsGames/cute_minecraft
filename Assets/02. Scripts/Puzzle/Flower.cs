@@ -7,7 +7,7 @@ namespace Puzzle
     public class Flower : MonoBehaviour
     {
         [SerializeField] private List<MeshRenderer> _renderers;
-        public enum FlowerType : byte
+        public enum Type : byte
         {
             None, Red, Green
         }

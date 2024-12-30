@@ -16,10 +16,10 @@ namespace Puzzle
             flower.gameObject.SetActive(true);
             switch (data[3])
             {
-                case (byte)Flower.FlowerType.Red:
+                case (byte)Flower.Type.Red:
                     flower.Color = new Color(191f / 255f, 12f / 255f, 255f / 255f);
                     break;
-                case (byte)Flower.FlowerType.Green:
+                case (byte)Flower.Type.Green:
                     flower.Color = Color.cyan;
                     break;
                 default:

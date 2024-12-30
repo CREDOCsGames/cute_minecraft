@@ -8,7 +8,7 @@ namespace Puzzle
 
     public static class FlowerCoreFuntions
     {
-        private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
+        private static readonly List<int[]> _crossIndices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
 
         public static void CheckFlowerNormalStageClear(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
@@ -45,7 +45,7 @@ namespace Puzzle
                 return;
             }
 
-            foreach (var dxdy in indices)
+            foreach (var dxdy in _crossIndices)
             {
                 if (data[0] + dxdy[0] < 0 || cubeMap.Width <= data[0] + dxdy[0] ||
                     data[1] + dxdy[1] < 0 || cubeMap.Width <= data[1] + dxdy[1])
@@ -68,23 +68,36 @@ namespace Puzzle
         public static void AttackCrossLink(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
             message = new List<byte[]>();
-            var flower = cubeMap.GetElements(data[0], data[1], data[2]);
-            if (flower != 1 && flower != 2)
+
+            var face = data[2];
+            if (face.Equals(Face.bottom))
             {
                 return;
             }
 
-            foreach (var dxdy in indices)
+            var flower = cubeMap.GetElements(data[0], data[1], data[2]);
+            if (flower is not (byte)Flower.Type.Red &&
+                flower is not (byte)Flower.Type.Green)
             {
-                if (data[0] + dxdy[0] < 0 || cubeMap.Width <= data[0] + dxdy[0] ||
-                    data[1] + dxdy[1] < 0 || cubeMap.Width <= data[1] + dxdy[1])
+                return;
+            }
+
+            var x = data[0];
+            var y = data[1];
+            var attackType = data[3];
+
+            foreach (var dxdy in _crossIndices)
+            {
+                if (x + dxdy[0] < 0 || cubeMap.Width <= x + dxdy[0] ||
+                    y + dxdy[1] < 0 || cubeMap.Width <= y + dxdy[1])
                 {
                     continue;
                 }
 
-                var index = new byte[] { (byte)(data[0] + dxdy[0]), (byte)(data[1] + dxdy[1]), data[2], data[3] };
+                var index = new byte[] { (byte)(x + dxdy[0]), (byte)(y + dxdy[1]), face, attackType };
                 flower = cubeMap.GetElements(index[0], index[1], index[2]);
-                if (flower != 1 && flower != 2)
+                if (flower is not (byte)Flower.Type.Red &&
+                flower is not (byte)Flower.Type.Green)
                 {
                     continue;
                 }
