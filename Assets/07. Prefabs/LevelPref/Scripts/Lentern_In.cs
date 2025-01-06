@@ -1,62 +1,61 @@
-using Flow;
 using Puzzle;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 
-public class Lentern_In : MonoBehaviour, IInstance
+public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
 
     public float MoveSpeed;
-    public float delayTime;
+    public float DelayTime;
+    public float LenternInterval;
 
-    public Transform frontSide;
-    public Transform leftSide;
-    public Transform rightSide;
-    public Transform backSide;
+    public Transform FrontSide;
+    public Transform LeftSide;
+    public Transform RightSide;
+    public Transform BackSide;
 
-    private bool Bright = false;
-    private bool Apear = false;
-    private bool Disapear = false;
-    private float time;
+    private Vector3 _cubeCenter;
+    private byte _cubeWidth;
+    private bool _bright = false;
+    private bool _apear = false;
+    private bool _disapear = false;
+    private float _time;
 
     public void InstreamData(byte[] data)
     {
         if(data == SystemReader.CLEAR_TOP_FACE) // Å¬¸®¾î.
         {
-            Lentern_Active(rightSide);
+            Lentern_Active(RightSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_RIGHT_FACE)
         {
-            Lentern_Active(rightSide);
+            Lentern_Active(RightSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_BOTTOM_FACE)
         {
-            Lentern_Active(frontSide);
+            Lentern_Active(FrontSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_FRONT_FACE)
         {
-            Lentern_Active(leftSide);
+            Lentern_Active(LeftSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_LEFT_FACE)
         {
-            Lentern_Active(backSide);
+            Lentern_Active(BackSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_BACK_FACE)
         {
             // Todo
         }
-
+        else
         if (data == null) // need => Rotation Data
         {
-            Disapear = true;
+            _disapear = true;
         }
 
     }
@@ -66,9 +65,21 @@ public class Lentern_In : MonoBehaviour, IInstance
         
     }
 
+    public void Init(CubeMapReader puzzleData)
+    {
+        _cubeCenter = puzzleData.BaseTransform.position;
+        _cubeWidth = puzzleData.Width;
+        float _cubeInterval = _cubeWidth + LenternInterval;
+
+        FrontSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y , _cubeCenter.z + _cubeInterval);
+        BackSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y , _cubeCenter.z - _cubeInterval);
+        LeftSide.position = _cubeCenter + new Vector3(_cubeCenter.x - _cubeInterval, _cubeCenter.y, _cubeCenter.z);
+        RightSide.position = _cubeCenter + new Vector3(_cubeCenter.x + _cubeInterval, _cubeCenter.y, _cubeCenter.z);
+    }
+
     private void Update()
     {
-        if (Apear)
+        if (_apear)
         {
             if (this.transform.position.y < 2.5f)
             {
@@ -80,21 +91,21 @@ public class Lentern_In : MonoBehaviour, IInstance
             }
             else
             {
-                time += Time.deltaTime;
-                if(time > delayTime)
+                _time += Time.deltaTime;
+                if(_time > DelayTime)
                 {
-                    Apear = false;
+                    _apear = false;
                 }
             }
         }
 
-        if(!Apear && Bright)
+        if(!_apear && _bright)
         {
             GetComponent<Animator>().SetTrigger("Bright");
-            Bright = false;
+            _bright = false;
         }
 
-        if (Disapear)
+        if (_disapear)
         {
             if (this.transform.position.y > -3.5f)
             {
@@ -102,7 +113,7 @@ public class Lentern_In : MonoBehaviour, IInstance
             }
             else
             {
-                Disapear = false;
+                _disapear = false;
                 this.gameObject.SetActive(false);
             }
         }
@@ -114,9 +125,10 @@ public class Lentern_In : MonoBehaviour, IInstance
         this.gameObject.transform.position = spwanPos.position;
         this.gameObject.SetActive(true);
 
-        Apear = true;
-        Bright = true;
-        time = 0;
+        _apear = true;
+        _bright = true;
+        _time = 0;
     }
 
+    
 }
