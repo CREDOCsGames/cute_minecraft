@@ -69,7 +69,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 16392
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -342,9 +342,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6637545595513598919}
     m_Modifications:
+    - target: {fileID: 835278678304963566, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 835278678304963566, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_Name
       value: HitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387269476924952863, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 4653495698917083196, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -417,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 7327050847650024997, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
       propertyPath: _onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187246704381836346, guid: 684c39c2d63d75e4e8423873a70df1ff, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16385
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -735,6 +755,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6637545595513598919}
     m_Modifications:
+    - target: {fileID: 15022120420765144, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 77212208035221718, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3548597194172635614, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -796,8 +824,20 @@ PrefabInstance:
       value: AttackBox
       objectReference: {fileID: 0}
     - target: {fileID: 6821352901189550333, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6821352901189550333, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6821352901189550333, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807966091348961804, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16384
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2472615789004964900, guid: b8a86d539e87e7841ac159a95e6b23b3, type: 3}

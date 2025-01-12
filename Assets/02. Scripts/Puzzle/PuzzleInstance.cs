@@ -2,7 +2,7 @@ namespace Puzzle
 {
     public interface IPuzzleInstance
     {
-        public void Init(CubeMapReader puzzleData);
+        public void Init(CubePuzzleDataReader puzzleData);
     }
 
 }

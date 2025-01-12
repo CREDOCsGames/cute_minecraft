@@ -1,74 +1,77 @@
-using Flow;
 using Puzzle;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 
-public class Lentern_In : MonoBehaviour, IInstance
+public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
 
     public float MoveSpeed;
-    public float delayTime;
+    public float DelayTime;
 
-    public Transform frontSide;
-    public Transform leftSide;
-    public Transform rightSide;
-    public Transform backSide;
+    public Transform FrontSide;
+    public Transform LeftSide;
+    public Transform RightSide;
+    public Transform BackSide;
+    public bool IsDisapear { get; private set; } = false;
 
-    private bool Bright = false;
-    private bool Apear = false;
-    private bool Disapear = false;
-    private float time;
+    private bool _apear = false;
+    private bool _bright = false;
+    private float _time;
+    private byte _width;
+    private Vector3 _center;
 
     public void InstreamData(byte[] data)
     {
-        if(data == SystemReader.CLEAR_TOP_FACE) // 클리어.
+        if (data == SystemReader.CLEAR_TOP_FACE) // 클리어.
         {
-            Lentern_Active(rightSide);
+            Lentern_Active(RightSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_RIGHT_FACE)
         {
-            Lentern_Active(rightSide);
+            Lentern_Active(RightSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_BOTTOM_FACE)
         {
-            Lentern_Active(frontSide);
+            Lentern_Active(FrontSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_FRONT_FACE)
         {
-            Lentern_Active(leftSide);
+            Lentern_Active(LeftSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_LEFT_FACE)
         {
-            Lentern_Active(backSide);
+            Lentern_Active(BackSide);
         }
-
+        else
         if (data == SystemReader.CLEAR_BACK_FACE)
         {
             // Todo
         }
-
+        else
         if (data == null) // need => Rotation Data
         {
-            Disapear = true;
+            IsDisapear = true;
         }
 
     }
 
+    public void Init(CubePuzzleDataReader puzzleData)
+    {
+        _center = puzzleData.BaseTransform.position;
+        _width = puzzleData.Width;
+    }
     public void SetMediator(IMediatorInstance mediator)
     {
-        
+
     }
 
     private void Update()
     {
-        if (Apear)
+        if (_apear)
         {
             if (this.transform.position.y < 2.5f)
             {
@@ -80,21 +83,21 @@ public class Lentern_In : MonoBehaviour, IInstance
             }
             else
             {
-                time += Time.deltaTime;
-                if(time > delayTime)
+                _time += Time.deltaTime;
+                if (_time > DelayTime)
                 {
-                    Apear = false;
+                    _apear = false;
                 }
             }
         }
 
-        if(!Apear && Bright)
+        if (!_apear && _bright)
         {
             GetComponent<Animator>().SetTrigger("Bright");
-            Bright = false;
+            _bright = false;
         }
 
-        if (Disapear)
+        if (IsDisapear)
         {
             if (this.transform.position.y > -3.5f)
             {
@@ -102,7 +105,7 @@ public class Lentern_In : MonoBehaviour, IInstance
             }
             else
             {
-                Disapear = false;
+                IsDisapear = false;
                 this.gameObject.SetActive(false);
             }
         }
@@ -114,9 +117,9 @@ public class Lentern_In : MonoBehaviour, IInstance
         this.gameObject.transform.position = spwanPos.position;
         this.gameObject.SetActive(true);
 
-        Apear = true;
-        Bright = true;
-        time = 0;
+        _apear = true;
+        _bright = true;
+        _time = 0;
     }
 
 }

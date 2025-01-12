@@ -2,7 +2,7 @@ namespace Puzzle
 {
     public interface IPuzzleCore
     {
-        public void Init(CubeMap<byte> map);
+        public void Init(CubePuzzleReaderForCore reader);
     }
 
 }

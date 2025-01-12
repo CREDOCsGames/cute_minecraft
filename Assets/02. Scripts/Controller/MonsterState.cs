@@ -44,7 +44,7 @@ namespace Controller
             if (player.State is CharacterState.Attack && player.IsFinishedAction)
             {
                 player.Die();
-                player.ChangeController(new CanNotControl());
+                player.ChangeController(new DieState());
                 return;
             }
 
