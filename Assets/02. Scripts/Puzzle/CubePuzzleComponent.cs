@@ -1,6 +1,7 @@
 using PlatformGame.Debugger;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Puzzle
 {
@@ -10,12 +11,13 @@ namespace Puzzle
         private MessageObserver _puzzleMessageObserver;
         private MessageObserver _monsterMessageObserver;
         private MediatorCenter _mediatorCenter;
-        private CubePuzzleDataReader _puzzleDataReader;
         private CubeMap<byte> _cubeMap;
-        private CubeMapReader _cubeMapReader;
+        private CubePuzzleDataReader _puzzleReaderForInstance;
+        private CubePuzzleDataReader _puzzleDataReader;
+        private CubePuzzleReaderForCore _puzzleReaderForCore;
+        private readonly UnityEvent<Face> _rotatedStageEvent = new();
+        private readonly UnityEvent<Face> _changedStageEvent = new();
         [SerializeField] private CubePuzzleData _cubePuzzleData;
-
-        private SlimeSpawner _spawnerCore;
 
         private void Awake()
         {
@@ -24,49 +26,47 @@ namespace Puzzle
                 return;
             }
 
-            _puzzleDataReader = new CubePuzzleDataReader(_cubePuzzleData);
             _mediatorCenter = new MediatorCenter();
+
             _systemMessageObserver = new MessageObserver(new SystemReader());
             _systemMessageObserver.RecieveSystemMessage += MoveNextFace;
             _systemMessageObserver.RecieveSystemMessage += PrintSystemMessage;
+
             _puzzleMessageObserver = new MessageObserver(new FlowerReader());
             _puzzleMessageObserver.RecieveSystemMessage += PrintFlowerMessage;
+
             _monsterMessageObserver = new MessageObserver(new MonsterReader());
             _monsterMessageObserver.RecieveSystemMessage += PrintMonsterMessage;
+
+            _puzzleDataReader = new CubePuzzleDataReader(_cubePuzzleData);
+            _puzzleDataReader.GlobalInstanceObservers.Add(_systemMessageObserver);
+            _puzzleDataReader.GlobalInstanceObservers.Add(_puzzleMessageObserver);
+            _puzzleDataReader.GlobalInstanceObservers.Add(_monsterMessageObserver);
+
             _cubeMap = new(_cubePuzzleData.Width, _cubePuzzleData.Elements);
-            _cubeMapReader = new CubeMapReader(_cubePuzzleData);
-            _spawnerCore = new SlimeSpawner();
+            _puzzleReaderForInstance = new CubePuzzleDataReader(_cubePuzzleData);
+            _puzzleReaderForCore = new(_cubeMap, _changedStageEvent, _rotatedStageEvent);
 
             SettingAllResources();
             StartPuzzle(Face.top);
         }
         private void StartPuzzle(Face playFace)
         {
-            CleanUnusedResources(playFace);
+            ClearUnusedResources(playFace);
             SettingNewlyUsedResources(playFace);
             _puzzleDataReader.MoveReadWindow(playFace);
-
-            _puzzleDataReader.ReadAllCores(out var inUseCores);
-            inUseCores.Add(_spawnerCore); //
-            _mediatorCenter.SetCores(inUseCores);
-
-            _puzzleDataReader.ReadAllInstances(out var inUseInstances);
-            inUseInstances.Add(_systemMessageObserver);  //
-            inUseInstances.Add(_puzzleMessageObserver);  //
-            inUseInstances.Add(_monsterMessageObserver); //
-            _mediatorCenter.SetInstances(inUseInstances);
+            _changedStageEvent.Invoke(playFace);
         }
-        private void CleanAllResources()
+        private void ClearAllResources()
         {
             _puzzleDataReader.ReadAllCores(out var usedCores);
-            usedCores.Add(_spawnerCore);//
             _puzzleDataReader.ReadAllInstances(out var usedInstances);
             EventBinder.UnbindEvent(usedCores, _mediatorCenter);
             EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
             usedCores.ForEach(x => (x as IDestroyable)?.Destroy());
             usedInstances.ForEach(x => (x as IDestroyable)?.Destroy());
         }
-        private void CleanUnusedResources(Face nextFace)
+        private void ClearUnusedResources(Face nextFace)
         {
             _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> usedCores);
             _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> usedInstances);
@@ -79,26 +79,33 @@ namespace Puzzle
         {
             _puzzleDataReader.ReadAllCores(out List<ICore> inUseCores);
             _puzzleDataReader.ReadAllInstances(out List<IInstance> inUseInstances);
-            inUseCores.Add(_spawnerCore);//
-            inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_cubeMap));
-            inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_cubeMapReader));
+            _mediatorCenter.SetCores(inUseCores);
             EventBinder.BindEvent(inUseCores, _mediatorCenter);
+            _mediatorCenter.SetInstances(inUseInstances);
             EventBinder.BindEvent(inUseInstances, _mediatorCenter);
+            inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_puzzleReaderForCore));
+            inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_puzzleReaderForInstance));
         }
         private void SettingNewlyUsedResources(Face nextFace)
         {
-            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> inUseCores);
-            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> inUseInstances);
-            EventBinder.BindEvent(inUseCores, _mediatorCenter);
-            EventBinder.BindEvent(inUseInstances, _mediatorCenter);
-            inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_cubeMap));
-            inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_cubeMapReader));
+            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> newlyCores);
+            _puzzleDataReader.ReadAllCores(nextFace, out var inUseCores);
+            _mediatorCenter.SetCores(inUseCores);
+            EventBinder.BindEvent(newlyCores, _mediatorCenter);
+
+            _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> newlyInstances);
+            _puzzleDataReader.ReadAllInstances(nextFace, out var inUseInstances);
+            _mediatorCenter.SetInstances(inUseInstances);
+            EventBinder.BindEvent(newlyInstances, _mediatorCenter);
+
+            newlyCores.ForEach(x => (x as IPuzzleCore)?.Init(_puzzleReaderForCore));
+            newlyInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_puzzleReaderForInstance));
         }
         private void MoveNextFace(byte[] data)
         {
             if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
             {
-                CleanAllResources();
+                ClearAllResources();
             }
             else
             if (SystemReader.IsClearFace(data))
@@ -122,10 +129,6 @@ namespace Puzzle
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(transform.position, _cubePuzzleData.BaseTransformSize.extents);
-        }
-        private void Update()
-        {
-            _spawnerCore.Update();
         }
 
     }

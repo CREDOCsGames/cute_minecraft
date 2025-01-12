@@ -1,5 +1,4 @@
 using Controller;
-using Movement;
 using Puzzle;
 using UnityEngine;
 
@@ -7,9 +6,13 @@ namespace Battle
 {
     public class JumpWall : MonoBehaviour
     {
+        private enum DIR
+        {
+            RIGHT, LEFT, FRONT, BACK
+        }
+        [SerializeField] DIR _dir;
         private static float _updateTime;
-        private MovementComponent movement;
-        public MovementAction Action;
+        private CubeInstance _cube;
         private void OnTriggerEnter(Collider other)
         {
             if (Time.time < _updateTime + 1.5f)
@@ -19,14 +22,29 @@ namespace Battle
 
             if (other.transform.TryGetComponent<CharacterComponent>(out var con))
             {
-                movement = GameObject.FindAnyObjectByType<CubePuzzleComponent>()?.GetComponent<MovementComponent>();
-                con._character.Idle();
-                con._character.Jump();
-                con._character.ChangeController(new JumpState());
-                if (Action != null && movement != null)
+                _cube = GameObject.FindAnyObjectByType<CubeInstance>();
+                if (_cube != null)
                 {
-                    movement.PlayMovement(Action);
                     _updateTime = Time.time;
+
+                    switch (_dir)
+                    {
+                        case DIR.LEFT:
+                            _cube.TurnLeft();
+                            break;
+                        case DIR.BACK:
+                            _cube.TurnBack();
+                            break;
+                        case DIR.RIGHT:
+                            _cube.TurnRight();
+                            break;
+                        case DIR.FRONT:
+                            _cube.TurnFront();
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
 
             }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Puzzle
@@ -70,7 +71,7 @@ namespace Puzzle
             message = new List<byte[]>();
 
             var face = data[2];
-            if (face.Equals(Face.bottom))
+            if (face is (byte)Face.bottom)
             {
                 return;
             }
@@ -85,24 +86,15 @@ namespace Puzzle
             var x = data[0];
             var y = data[1];
             var attackType = data[3];
+            CubeMapReader reader = new CubeMapReader(cubeMap);
+            reader.TryGetCrossIndices(x, y, face, out var cross);
 
-            foreach (var dxdy in _crossIndices)
+            foreach (var index in cross)
             {
-                if (x + dxdy[0] < 0 || cubeMap.Width <= x + dxdy[0] ||
-                    y + dxdy[1] < 0 || cubeMap.Width <= y + dxdy[1])
-                {
-                    continue;
-                }
-
-                var index = new byte[] { (byte)(x + dxdy[0]), (byte)(y + dxdy[1]), face, attackType };
-                flower = cubeMap.GetElements(index[0], index[1], index[2]);
-                if (flower is not (byte)Flower.Type.Red &&
-                flower is not (byte)Flower.Type.Green)
-                {
-                    continue;
-                }
-                AttackDot(index, cubeMap, out var dotMessage);
-                message.AddRange(dotMessage);
+                AttackDot(new byte[] { (byte)index.x, (byte)index.y, (byte)Face.bottom, attackType }, cubeMap, out var bossFaceMessage);
+                AttackDot(new byte[] { (byte)index.x, (byte)index.y, face, attackType }, cubeMap, out var currentFaceMessage);
+                message.AddRange(bossFaceMessage);
+                message.AddRange(currentFaceMessage);
             }
         }
 

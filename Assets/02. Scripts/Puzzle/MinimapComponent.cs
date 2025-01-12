@@ -12,7 +12,7 @@ namespace Puzzle
         [SerializeField, Range(0, 5)] private byte _viewFace;
         private byte _width;
 
-        public void Init(CubeMapReader puzzleData)
+        public void Init(CubePuzzleDataReader puzzleData)
         {
             _width = puzzleData.Width;
             _root.constraintCount = _width;
@@ -44,6 +44,12 @@ namespace Puzzle
             if (data[2] == _viewFace)
             {
                 Colorize(data);
+            }
+            if (FlowerReader.FLOWER_CREATE.Equals(data))
+            {
+                // 수정의 개수를 갱신한다
+                // 수정의 개수가 n개라면 단계를 넘어간다
+                // 추락
             }
         }
         public void SetMediator(IMediatorInstance mediator)

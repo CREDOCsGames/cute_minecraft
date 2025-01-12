@@ -13,6 +13,13 @@ namespace Puzzle
         public void InstreamData(byte[] data)
         {
             var flower = _cubeMap.GetElements(data[0], data[1], data[2]);
+            var face = (Face)data[2];
+            if (face is Face.bottom)
+            {
+                flower.gameObject.SetActive(false);
+                return;
+            }
+
             flower.gameObject.SetActive(true);
             switch (data[3])
             {

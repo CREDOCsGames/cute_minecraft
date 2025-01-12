@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Puzzle
@@ -42,9 +43,9 @@ namespace Puzzle
                 _mediator.InstreamDataCore<SystemReader>(message);
             }
         }
-        public void Init(CubeMap<byte> map)
+        public void Init(CubePuzzleReaderForCore reader)
         {
-            _puzzle = map;
+            _puzzle = reader.Map;
         }
         public void SetMediator(IMediatorCore mediator)
         {
