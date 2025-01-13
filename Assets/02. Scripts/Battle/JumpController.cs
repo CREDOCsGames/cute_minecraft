@@ -12,35 +12,56 @@ namespace Battle
         public Vector3 EndPoint;
         public AnimationCurve JumpCurve;
         public event Action<Transform> OnEndEvent;
+        public event Action<Transform> OnFailEvent;
         public event Action<Transform> OnStartEvent;
+        public event Action<Transform> OnReachedEvent;
+        private bool _bInterrupt;
 
+        public void Stop()
+        {
+            _bInterrupt = true;
+        }
         public IEnumerator Move(Transform Target)
         {
-            Transform target = Target;
-            if (target == null)
+            if (Target == null)
             {
                 yield break;
             }
-
+            var target = Target;
+            var startPoint = StartPoint;
+            var endPoint = EndPoint;
+            var lookDir = endPoint;
             var time = 0f;
             var progress = 0f;
             var moveTime = JumpCurve.keys[^1].time - JumpCurve.keys[0].time;
-            var startPoint = StartPoint;
-            var endPoint = EndPoint;
+            _bInterrupt = false;
 
             target.position = startPoint;
-            var lookDir = endPoint;
             lookDir.y = startPoint.y;
             Target.LookAt(lookDir);
+
             OnStartEvent?.Invoke(target);
             while (progress < 1f)
             {
+                if (_bInterrupt)
+                {
+                    break;
+                }
                 time += Time.deltaTime;
                 progress = Mathf.Clamp01(time / moveTime);
                 target.position = DrawGizmos.Lerp(startPoint, endPoint, progress, JumpCurve);
                 yield return null;
             }
-            target.position = endPoint;
+
+            if (!_bInterrupt)
+            {
+                target.position = endPoint;
+                OnReachedEvent?.Invoke(target);
+            }
+            else
+            {
+                OnFailEvent?.Invoke(target);
+            }
             OnEndEvent?.Invoke(target);
         }
 

@@ -1,7 +1,20 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Util
 {
+    public static class Index
+    {
+        public static readonly Vector2Int[] CROSS =
+        {
+            Vector2Int.up,
+            Vector2Int.left,
+            Vector2Int.zero,
+            Vector2Int.right,
+            Vector2Int.down
+        };
+    }
+
     public interface IIndexInt
     {
         public void Next();

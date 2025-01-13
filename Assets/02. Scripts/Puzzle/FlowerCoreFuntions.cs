@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Puzzle
@@ -8,7 +9,7 @@ namespace Puzzle
 
     public static class FlowerCoreFuntions
     {
-        private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
+        private static readonly List<int[]> _crossIndices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
 
         public static void CheckFlowerNormalStageClear(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
@@ -45,7 +46,7 @@ namespace Puzzle
                 return;
             }
 
-            foreach (var dxdy in indices)
+            foreach (var dxdy in _crossIndices)
             {
                 if (data[0] + dxdy[0] < 0 || cubeMap.Width <= data[0] + dxdy[0] ||
                     data[1] + dxdy[1] < 0 || cubeMap.Width <= data[1] + dxdy[1])
@@ -68,28 +69,32 @@ namespace Puzzle
         public static void AttackCrossLink(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
             message = new List<byte[]>();
-            var flower = cubeMap.GetElements(data[0], data[1], data[2]);
-            if (flower != 1 && flower != 2)
+
+            var face = data[2];
+            if (face is (byte)Face.bottom)
             {
                 return;
             }
 
-            foreach (var dxdy in indices)
+            var flower = cubeMap.GetElements(data[0], data[1], data[2]);
+            if (flower is not (byte)Flower.Type.Red &&
+                flower is not (byte)Flower.Type.Green)
             {
-                if (data[0] + dxdy[0] < 0 || cubeMap.Width <= data[0] + dxdy[0] ||
-                    data[1] + dxdy[1] < 0 || cubeMap.Width <= data[1] + dxdy[1])
-                {
-                    continue;
-                }
+                return;
+            }
 
-                var index = new byte[] { (byte)(data[0] + dxdy[0]), (byte)(data[1] + dxdy[1]), data[2], data[3] };
-                flower = cubeMap.GetElements(index[0], index[1], index[2]);
-                if (flower != 1 && flower != 2)
-                {
-                    continue;
-                }
-                AttackDot(index, cubeMap, out var dotMessage);
-                message.AddRange(dotMessage);
+            var x = data[0];
+            var y = data[1];
+            var attackType = data[3];
+            CubeMapReader reader = new CubeMapReader(cubeMap);
+            reader.TryGetCrossIndices(x, y, face, out var cross);
+
+            foreach (var index in cross)
+            {
+                AttackDot(new byte[] { (byte)index.x, (byte)index.y, (byte)Face.bottom, attackType }, cubeMap, out var bossFaceMessage);
+                AttackDot(new byte[] { (byte)index.x, (byte)index.y, face, attackType }, cubeMap, out var currentFaceMessage);
+                message.AddRange(bossFaceMessage);
+                message.AddRange(currentFaceMessage);
             }
         }
 

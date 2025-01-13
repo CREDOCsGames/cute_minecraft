@@ -1,7 +1,7 @@
 using Puzzle;
 using UnityEngine;
 
-public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
+public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
 
@@ -13,17 +13,17 @@ public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
     public Transform LeftSide;
     public Transform RightSide;
     public Transform BackSide;
+    public bool IsDisapear { get; private set; } = false;
 
-    private Vector3 _cubeCenter;
-    private byte _cubeWidth;
-    private bool _bright = false;
     private bool _apear = false;
-    private bool _disapear = false;
+    private bool _bright = false;
     private float _time;
+    private byte _width;
+    private Vector3 _center;
 
     public void InstreamData(byte[] data)
     {
-        if(data == SystemReader.CLEAR_TOP_FACE) // Å¬¸®¾î.
+        if (data == SystemReader.CLEAR_TOP_FACE) // Å¬ï¿½ï¿½ï¿½ï¿½.
         {
             Lentern_Active(RightSide);
         }
@@ -55,14 +55,19 @@ public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
         else
         if (data == null) // need => Rotation Data
         {
-            _disapear = true;
+            IsDisapear = true;
         }
 
     }
 
+    public void Init(CubePuzzleDataReader puzzleData)
+    {
+        _center = puzzleData.BaseTransform.position;
+        _width = puzzleData.Width;
+    }
     public void SetMediator(IMediatorInstance mediator)
     {
-        
+
     }
 
     public void Init(CubeMapReader puzzleData)
@@ -92,20 +97,20 @@ public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
             else
             {
                 _time += Time.deltaTime;
-                if(_time > DelayTime)
+                if (_time > DelayTime)
                 {
                     _apear = false;
                 }
             }
         }
 
-        if(!_apear && _bright)
+        if (!_apear && _bright)
         {
             GetComponent<Animator>().SetTrigger("Bright");
             _bright = false;
         }
 
-        if (_disapear)
+        if (IsDisapear)
         {
             if (this.transform.position.y > -3.5f)
             {
@@ -113,7 +118,7 @@ public class Lentern_In : MonoBehaviour, IInstance, IPuzzleInstance
             }
             else
             {
-                _disapear = false;
+                IsDisapear = false;
                 this.gameObject.SetActive(false);
             }
         }

@@ -20,6 +20,7 @@ namespace Puzzle
         public const byte EMPTY = 0;
         public const byte FLOWER_RED = 1;
         public const byte FLOWER_GREEN = 2;
+        public static readonly byte[] FLOWER_CREATE = { 3 };
 
         public override bool IsReadable(byte[] data)
         {
@@ -62,13 +63,21 @@ namespace Puzzle
     {
         public static readonly byte[] BOSS_SPAWN = { 0 };
         public static readonly byte[] BOSS_EXIT = { 1 };
-        public static readonly byte[] BOSS_SPIT_OUT = { 2 };
         public static readonly byte[] SLIME_SPAWN = { 3 };
         public static readonly byte[] SLIME_BOUNCE = { 4 };
         public static readonly byte[] SLIME_LAND = { 5 };
+        public static readonly byte[] BOSS_SPIT_OUT_FAIL = { 7 };
+        public static readonly byte[] BOSS_SPIT_OUT_SUCCESS = { 6 };
+        public static readonly IDataChecker SLIME_ENTER = new CountChecker((byte)3);
+        public static readonly IDataChecker BOSS_SPIT_OUT = new CountChecker((byte)2);
         public override bool IsReadable(byte[] data)
         {
             return data.Length == 1;
+        }
+        public static bool CreateSlimeSpawnData(byte x, byte z, out byte[] data)
+        {
+            data = new byte[] { x, z };
+            return true;
         }
     }
 }
