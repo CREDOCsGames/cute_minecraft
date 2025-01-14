@@ -3,7 +3,6 @@ namespace Puzzle
 {
     public interface IDataLink
     {
-        public event Action<byte[]> OnInteraction;
         public IMediatorInstance Mediator { get; set; }
     }
 
@@ -11,7 +10,6 @@ namespace Puzzle
     {
         public IMediatorInstance Mediator { get; set; }
 
-        public event Action<byte[]> OnInteraction;
     }
 
 }

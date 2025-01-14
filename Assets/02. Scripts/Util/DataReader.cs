@@ -42,6 +42,7 @@ namespace Puzzle
         public static readonly byte[] CLEAR_RIGHT_FACE = { 4 };
         public static readonly byte[] CLEAR_BACK_FACE = { 5 };
         public static readonly byte[] CLEAR_BOTTOM_FACE = { 6 };
+        public static readonly byte[] ROTATE_CUBE = { 7 };
         public static readonly List<byte[]> CLEAR_MESSAGES = new() { CLEAR_TOP_FACE, CLEAR_LEFT_FACE, CLEAR_FRONT_FACE, CLEAR_RIGHT_FACE, CLEAR_BACK_FACE, CLEAR_BOTTOM_FACE };
         public static bool IsClearFace(byte[] data)
         {
@@ -52,7 +53,6 @@ namespace Puzzle
                 || data.Equals(CLEAR_BACK_FACE)
                 || data.Equals(CLEAR_BOTTOM_FACE);
         }
-
         public override bool IsReadable(byte[] data)
         {
             return data.Length == 1;

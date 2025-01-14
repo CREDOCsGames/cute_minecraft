@@ -1,5 +1,7 @@
 using PlatformGame.Debugger;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,14 +9,15 @@ namespace Puzzle
 {
     public class CubePuzzleComponent : MonoBehaviour
     {
+        private MessageObserverCore _systemMessageObserverCore;
         private MessageObserver _systemMessageObserver;
         private MessageObserver _puzzleMessageObserver;
         private MessageObserver _monsterMessageObserver;
-        private MediatorCenter _mediatorCenter;
         private CubeMap<byte> _cubeMap;
-        private CubePuzzleDataReader _puzzleReaderForInstance;
         private CubePuzzleDataReader _puzzleDataReader;
+        private CubePuzzleDataReader _puzzleReaderForInstance;
         private CubePuzzleReaderForCore _puzzleReaderForCore;
+        private readonly MediatorCenter _mediatorCenter = new();
         private readonly UnityEvent<Face> _rotatedStageEvent = new();
         private readonly UnityEvent<Face> _changedStageEvent = new();
         [SerializeField] private CubePuzzleData _cubePuzzleData;
@@ -26,11 +29,12 @@ namespace Puzzle
                 return;
             }
 
-            _mediatorCenter = new MediatorCenter();
-
             _systemMessageObserver = new MessageObserver(new SystemReader());
             _systemMessageObserver.RecieveSystemMessage += MoveNextFace;
             _systemMessageObserver.RecieveSystemMessage += PrintSystemMessage;
+
+            _systemMessageObserverCore = new MessageObserverCore(new SystemReader());
+            _systemMessageObserverCore.RecieveSystemMessage += OnRotateFace;
 
             _puzzleMessageObserver = new MessageObserver(new FlowerReader());
             _puzzleMessageObserver.RecieveSystemMessage += PrintFlowerMessage;
@@ -38,13 +42,14 @@ namespace Puzzle
             _monsterMessageObserver = new MessageObserver(new MonsterReader());
             _monsterMessageObserver.RecieveSystemMessage += PrintMonsterMessage;
 
-            _puzzleDataReader = new CubePuzzleDataReader(_cubePuzzleData);
+            _puzzleDataReader = new(_cubePuzzleData, _rotatedStageEvent);
+            _puzzleDataReader.GlobalCoreObservers.Add(_systemMessageObserverCore);
             _puzzleDataReader.GlobalInstanceObservers.Add(_systemMessageObserver);
             _puzzleDataReader.GlobalInstanceObservers.Add(_puzzleMessageObserver);
             _puzzleDataReader.GlobalInstanceObservers.Add(_monsterMessageObserver);
 
             _cubeMap = new(_cubePuzzleData.Width, _cubePuzzleData.Elements);
-            _puzzleReaderForInstance = new CubePuzzleDataReader(_cubePuzzleData);
+            _puzzleReaderForInstance = new(_cubePuzzleData, _rotatedStageEvent);
             _puzzleReaderForCore = new(_cubeMap, _changedStageEvent, _rotatedStageEvent);
 
             SettingAllResources();
@@ -60,43 +65,49 @@ namespace Puzzle
         private void ClearAllResources()
         {
             _puzzleDataReader.ReadAllCores(out var usedCores);
-            _puzzleDataReader.ReadAllInstances(out var usedInstances);
             EventBinder.UnbindEvent(usedCores, _mediatorCenter);
-            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
             usedCores.ForEach(x => (x as IDestroyable)?.Destroy());
+
+            _puzzleDataReader.ReadAllInstances(out var usedInstances);
+            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
             usedInstances.ForEach(x => (x as IDestroyable)?.Destroy());
         }
         private void ClearUnusedResources(Face nextFace)
         {
             _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> usedCores);
-            _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> usedInstances);
             EventBinder.UnbindEvent(usedCores, _mediatorCenter);
-            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
             usedCores.ForEach(x => (x as IDestroyable)?.Destroy());
+
+            _puzzleDataReader.ReadDifferenceOfSets(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> usedInstances);
+            EventBinder.UnbindEvent(usedInstances, _mediatorCenter);
             usedInstances.ForEach(x => (x as IDestroyable)?.Destroy());
         }
         private void SettingAllResources()
         {
             _puzzleDataReader.ReadAllCores(out List<ICore> inUseCores);
-            _puzzleDataReader.ReadAllInstances(out List<IInstance> inUseInstances);
-            _mediatorCenter.SetCores(inUseCores);
             EventBinder.BindEvent(inUseCores, _mediatorCenter);
-            _mediatorCenter.SetInstances(inUseInstances);
+            _mediatorCenter.SetCores(inUseCores);
+
+            _puzzleDataReader.ReadAllInstances(out List<IInstance> inUseInstances);
             EventBinder.BindEvent(inUseInstances, _mediatorCenter);
+            _mediatorCenter.SetInstances(inUseInstances);
+
             inUseCores.ForEach(x => (x as IPuzzleCore)?.Init(_puzzleReaderForCore));
             inUseInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_puzzleReaderForInstance));
         }
         private void SettingNewlyUsedResources(Face nextFace)
         {
             _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<ICore> newlyCores);
-            _puzzleDataReader.ReadAllCores(nextFace, out var inUseCores);
-            _mediatorCenter.SetCores(inUseCores);
             EventBinder.BindEvent(newlyCores, _mediatorCenter);
 
+            _puzzleDataReader.ReadAllCores(nextFace, out var inUseCores);
+            _mediatorCenter.SetCores(inUseCores);
+
             _puzzleDataReader.ReadIntersection(_puzzleDataReader.ReadWindow, nextFace, out List<IInstance> newlyInstances);
+            EventBinder.BindEvent(newlyInstances, _mediatorCenter);
+
             _puzzleDataReader.ReadAllInstances(nextFace, out var inUseInstances);
             _mediatorCenter.SetInstances(inUseInstances);
-            EventBinder.BindEvent(newlyInstances, _mediatorCenter);
 
             newlyCores.ForEach(x => (x as IPuzzleCore)?.Init(_puzzleReaderForCore));
             newlyInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_puzzleReaderForInstance));
@@ -112,6 +123,53 @@ namespace Puzzle
             {
                 StartPuzzle(_puzzleDataReader.ReadWindow + 1);
             }
+        }
+        private void OnRotateFace(byte[] data)
+        {
+            if (!data.Equals(SystemReader.ROTATE_CUBE))
+            {
+                return;
+            }
+            Face target = Face.top;
+
+            var normal = _puzzleDataReader.BaseTransform.up;
+            if (normal == Vector3.up)
+            {
+                target = Face.top;
+            }
+
+            normal = -_puzzleDataReader.BaseTransform.up;
+            if (normal == Vector3.up)
+            {
+                target = Face.bottom;
+            }
+
+            normal = _puzzleDataReader.BaseTransform.right;
+            if (normal == Vector3.up)
+            {
+                target = Face.right;
+            }
+
+            normal = -_puzzleDataReader.BaseTransform.right;
+            if (normal == Vector3.up)
+            {
+                target = Face.left;
+            }
+
+            normal = _puzzleDataReader.BaseTransform.forward;
+            if (normal == Vector3.up)
+            {
+                target = Face.back;
+            }
+
+            normal = -_puzzleDataReader.BaseTransform.forward;
+            if (normal == Vector3.up)
+            {
+                target = Face.front;
+            }
+
+            Debug.Log(target);
+            _rotatedStageEvent.Invoke(target);
         }
         private void PrintSystemMessage(byte[] data)
         {
