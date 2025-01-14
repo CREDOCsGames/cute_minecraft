@@ -66,7 +66,7 @@ namespace Puzzle
             {
                 TrasitionState(MonsterState.Action1);
                 var index = new byte[] { command[0], command[1], (byte)_puzzleData.ReadWindow };
-                _puzzleData.GetLocation(index, out var position, out var rotation);
+                _puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
                 _bossController.SlimeSpawnPoint = _puzzleData.BaseTransform.position + position;
                 return;
             }

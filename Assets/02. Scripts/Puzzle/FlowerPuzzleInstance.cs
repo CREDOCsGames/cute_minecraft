@@ -36,7 +36,7 @@ namespace Puzzle
                 var face = index[2];
                 var flower = _cubeMap.GetElements(index);
                 _dataLink.Link(flower, index.Concat(new byte[] { 0 }).ToArray<byte>());
-                puzzleData.GetLocation(index, out var position, out var rotation);
+                puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
                 flower.transform.SetParent(puzzleData.BaseTransform);
                 flower.transform.localPosition = position;
                 flower.transform.localRotation = rotation;

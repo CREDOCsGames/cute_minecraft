@@ -17,8 +17,6 @@ namespace Puzzle
 
         public DataReader DataReader => new SystemReader();
 
-        public event System.Action<byte[]> InstreamEvent;
-
         public void Init(CubePuzzleDataReader puzzleData)
         {
             _bounds = new Bounds();
