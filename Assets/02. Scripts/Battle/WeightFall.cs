@@ -2,85 +2,23 @@ using System.Collections;
 using UnityEngine;
 using Cinemachine;
 using Puzzle;
-public class WeightFall : MonoBehaviour , IInstance, IPuzzleInstance
+public class WeightFall : MonoBehaviour, IInstance, IPuzzleInstance
 {
-    [SerializeField] CinemachineVirtualCamera cinemachine;
-
+    public DataReader DataReader { get; private set; } = new FlowerReader();
+    private int _flowerCount;
+    private ParticleSystem particle;
+    [SerializeField] private float speed;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 rotation;
     [SerializeField] private Transform _cube;
     [SerializeField] private GameObject _dust;
-    private ParticleSystem particle;
-    [SerializeField] float speed;
-    [SerializeField] Vector3 offset;
-    [SerializeField] Vector3 rotation;
-    [SerializeField] NoiseSettings noiseSettings;
-    private int _flowerCount;
-    public DataReader DataReader { get; private set; } = new FlowerReader();
-    private void Start()
-    {
-        Init2();
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            FallLevelFunc();
-        }
-    }
-    void FallLevelFunc()
-    {
-        Vector3 pre_cube = _cube.position + Vector3.down;
-        Vector3 pre_dust = _dust.transform.position + Vector3.down;
-        cinemachine.gameObject.SetActive(true);
-        particle.gameObject.SetActive(true);
-        particle.Play();
-        StartCoroutine(FallLevel(pre_cube,pre_dust));
-    }
-    float timer = 0f;
-    IEnumerator FallLevel(Vector3 pre_cube,Vector3 pre_dust)
-    {
-        while (true)
-        {
-            if (Mathf.Abs(_cube.position.y - pre_cube.y) < 0.1f)
-            {
-                _cube.position = pre_cube;
-                _dust.transform.position = pre_dust;
-                cinemachine.gameObject.SetActive(false);
-                particle.gameObject.SetActive(false);
-                Debug.Log(timer);
-                timer = 0;
-                break;
-            }
-            timer += Time.deltaTime;
-            _cube.position = Vector3.MoveTowards(_cube.position, pre_cube, speed);
-            _dust.transform.position = Vector3.MoveTowards(_dust.transform.position, pre_dust, speed);
-            yield return null;
-        }
-        yield break;
-    }
-    public void InstreamData(byte[] data)
-    {
-        if (data.Equals(FlowerReader.FLOWER_CREATE))
-        {
-            _flowerCount++;
-            switch(_flowerCount)
-            {
-                case 3: FallLevelFunc(); break;
-                case 6: FallLevelFunc(); break;
-                case 9: FallLevelFunc(); break;
-                case 12: FallLevelFunc(); break;
-                case 15: FallLevelFunc(); break;
-                case 18: FallLevelFunc(); break;
-            }
-        }
-    }
-
+    [SerializeField] private NoiseSettings noiseSettings;
+    [SerializeField] private CinemachineVirtualCamera cinemachine;
+    [SerializeField] private Transform _bg;
     public void SetMediator(IMediatorInstance mediator)
     {
-        throw new System.NotImplementedException();
     }
-
-    public void Init(CubeMapReader puzzleData)
+    public void Init(CubePuzzleDataReader puzzleData)
     {
         _cube = puzzleData.BaseTransform;
         //camera Setting
@@ -104,4 +42,49 @@ public class WeightFall : MonoBehaviour , IInstance, IPuzzleInstance
         particle = _dust.GetComponent<ParticleSystem>();
 
     }
+    public void InstreamData(byte[] data)
+    {
+        if (FlowerReader.FLOWER_CREATE.Equals(data))
+        {
+            _flowerCount++;
+            switch (_flowerCount)
+            {
+                case 3: FallLevelFunc(); break;
+                case 6: FallLevelFunc(); break;
+                case 9: FallLevelFunc(); break;
+                case 12: FallLevelFunc(); break;
+                case 15: FallLevelFunc(); break;
+                case 18: FallLevelFunc(); break;
+            }
+        }
+    }
+
+    private void FallLevelFunc()
+    {
+        Vector3 pre_cube = _cube.position + Vector3.down;
+        Vector3 pre_dust = _dust.transform.position + Vector3.down;
+        cinemachine.gameObject.SetActive(true);
+        particle.gameObject.SetActive(true);
+        particle.Play();
+        StartCoroutine(FallLevel(pre_cube, pre_dust));
+    }
+    private IEnumerator FallLevel(Vector3 pre_cube, Vector3 pre_dust)
+    {
+        while (true)
+        {
+            if (Mathf.Abs(_cube.position.y - pre_cube.y) < 0.1f)
+            {
+                _cube.position = pre_cube;
+                _dust.transform.position = pre_dust;
+                cinemachine.gameObject.SetActive(false);
+                particle.gameObject.SetActive(false);
+                break;
+            }
+            _cube.position = Vector3.MoveTowards(_cube.position, pre_cube, speed);
+            _dust.transform.position = Vector3.MoveTowards(_dust.transform.position, pre_dust, speed);
+            yield return null;
+        }
+        yield break;
+    }
+
 }

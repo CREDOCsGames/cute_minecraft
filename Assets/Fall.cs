@@ -10,7 +10,7 @@ public class Fall : MonoBehaviour, IInstance, IPuzzleInstance
     private int _flowerCount;
     public void InstreamData(byte[] data)
     {
-        if (data.Equals(FlowerReader.FLOWER_CREATE))
+        if (data.Equals(FlowerReader.FLOWER_CREATE.Equals(data)))
         {
             _flowerCount++;
             _cube.position += Vector3.down;
