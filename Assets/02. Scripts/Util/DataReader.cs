@@ -20,6 +20,7 @@ namespace Puzzle
         public const byte EMPTY = 0;
         public const byte FLOWER_RED = 1;
         public const byte FLOWER_GREEN = 2;
+        public const byte FLOWER_CREATE = 3;
 
         public override bool IsReadable(byte[] data)
         {
