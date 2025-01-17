@@ -990,6 +990,7 @@ MonoBehaviour:
     - {fileID: 1528571569}
     - {fileID: 1153576640}
     - {fileID: 409676009}
+    - {fileID: 461457147}
     Faces:
     - Width: 5
       MapData: 00000000000000020000000002000000020102000000000000
@@ -1135,6 +1136,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a2ed40df3ab29d4f86bc4f571fb4659, type: 3}
+--- !u!1 &461457146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461457148}
+  - component: {fileID: 461457147}
+  m_Layer: 0
+  m_Name: Fall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &461457147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461457146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52550f8648cd44849bb0fc0493db59d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.001
+  offset: {x: -11, y: 8, z: -10}
+  rotation: {x: 0, y: 0, z: 0}
+  _cube: {fileID: 0}
+  _dust: {fileID: 1513832951954776, guid: c23281b1e17c88046bda7844edc5694f, type: 3}
+  noiseSettings: {fileID: 11400000, guid: 5f0705dada54b8c4a86f7673a880f24d, type: 2}
+  cinemachine: {fileID: 8774037372963863811, guid: 938a8ca16b770ad44b3982114ab71b59, type: 3}
+  _bg: {fileID: 656851843}
+--- !u!4 &461457148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461457146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &513353249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,7 +2874,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -3722,3 +3775,4 @@ SceneRoots:
   - {fileID: 1283343889}
   - {fileID: 409676008}
   - {fileID: 53278360}
+  - {fileID: 461457148}
