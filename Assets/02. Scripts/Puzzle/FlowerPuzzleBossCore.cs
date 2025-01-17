@@ -40,14 +40,15 @@ namespace Puzzle
                 _mediator.InstreamDataCore<SystemReader>(message);
             }
         }
-        public void Init(CubeMap<byte> map)
-        {
-            _puzzle = map;
+        public void Init(CubePuzzleReaderForCore reader)
+         {
+            _puzzle = reader.Map;
+            _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPAWN);
         }
         public void SetMediator(IMediatorCore mediator)
         {
             _mediator = mediator;
         }
-    }
 
+    }
 }

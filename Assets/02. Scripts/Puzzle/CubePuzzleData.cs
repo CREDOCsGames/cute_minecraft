@@ -1,3 +1,4 @@
+using Battle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,12 @@ namespace Puzzle
     [Serializable]
     public class CubePuzzleData
     {
+        public byte Width;
+        public Throw Trow;
         public Transform BaseTransform;
         public Bounds BaseTransformSize;
-        public byte Width;
         public byte[] Elements => Faces.SelectMany(x => x.MapData).ToArray();
-        public List<UnityEngine.Object> _globalCores = new();
+        [SerializeField] private List<UnityEngine.Object> _globalCores = new();
         private readonly List<ICore> _globalCoresChace = new();
         public List<ICore> GlobalCores
         {
@@ -38,7 +40,7 @@ namespace Puzzle
                 return _globalCoresChace;
             }
         }
-        public List<UnityEngine.Object> _globalInstances = new();
+        [SerializeField] private List<UnityEngine.Object> _globalInstances = new();
         private readonly List<IInstance> _globalInstancesChace = new();
         public List<IInstance> GlobalInstances
         {

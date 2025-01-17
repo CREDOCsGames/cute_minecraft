@@ -22,7 +22,8 @@ namespace Controller
         {
             _character.Rigidbody.excludeLayers = -1;
             _character.ChangeController(new CanNotControl());
-            _character.Rigidbody.AddForce(dir * 17f, ForceMode.Impulse);
+            _character.Rigidbody.AddForce(dir, ForceMode.Impulse);
+            _character.Die();
         }
         public void Hit()
         {
@@ -32,7 +33,7 @@ namespace Controller
         public void Hit(HitBoxCollision coll)
         {
             _character?.Hit();
-            _character.ChangeController(new MonsterHit());
+            _character.ChangeController(new MonsterHit(_character.Controller));
             Vector3 dir = coll.Attacker.forward.normalized; dir.y = 1;
             _rigidbody.AddForce(dir * 5f, ForceMode.Impulse);
         }
@@ -48,6 +49,11 @@ namespace Controller
 
     public class MonsterHit : IController
     {
+        private IController _savedState;
+        public MonsterHit(IController controller)
+        {
+            _savedState = controller;
+        }
         public void HandleInput(Character player)
         {
             if (player.State is CharacterState.Hit && !player.IsFinishedAction)
@@ -58,7 +64,7 @@ namespace Controller
 
             if (player.IsGrounded)
             {
-                player.ChangeController(new MonsterState());
+                player.ChangeController(_savedState);
                 return;
             }
         }

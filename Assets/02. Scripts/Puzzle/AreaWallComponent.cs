@@ -17,9 +17,7 @@ namespace Puzzle
 
         public DataReader DataReader => new SystemReader();
 
-        public event System.Action<byte[]> InstreamEvent;
-
-        public void Init(CubeMapReader puzzleData)
+        public void Init(CubePuzzleDataReader puzzleData)
         {
             _bounds = new Bounds();
             _bounds.extents = puzzleData.BaseTransformSize / 2f;

@@ -1,20 +1,23 @@
+using System;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public Transform slimeSpawnPoint;
-    private BossSlimeSpawner slimeSpawner;
+    [NonSerialized] public Vector3 SlimeSpawnPoint;
+    private BossSlimeSpawner _slimeSpawner;
+    public event Action OnFailed;
 
     void Start()
     {
-        slimeSpawner = GetComponent<BossSlimeSpawner>();
+        _slimeSpawner = GetComponent<BossSlimeSpawner>();
+        _slimeSpawner.OnFailed += ()=>OnFailed?.Invoke();
     }
-
     public void OnSlimeSpawnAnimationEvent()
     {
-        Vector3 spawnPosition = slimeSpawnPoint.position;
-
-        // 슬라임 스포너의 슬라임을 생성 좌표로 대체한다.
-        slimeSpawner.SpawnAt(spawnPosition);
+        _slimeSpawner.SpawnAt(SlimeSpawnPoint);
+    }
+    public void Success()
+    {
+        _slimeSpawner.OnSuccess();
     }
 }
