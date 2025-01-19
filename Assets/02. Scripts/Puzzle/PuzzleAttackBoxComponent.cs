@@ -44,5 +44,11 @@ namespace Puzzle
             }
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            Destroy(_cursorInstance);
+        }
+
     }
 }
