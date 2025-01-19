@@ -35,13 +35,13 @@ namespace Controller
                 return;
             }
 
-            if (player.State is CharacterState.Hit && player.IsFinishedAction)
+            if (player.State is CharacterState.Hit && player.IsActionFinished)
             {
                 player.Idle();
                 return;
             }
 
-            if (player.State is CharacterState.Attack && player.IsFinishedAction)
+            if (player.State is CharacterState.Attack && player.IsActionFinished)
             {
                 player.Die();
                 player.ChangeController(new DieState());

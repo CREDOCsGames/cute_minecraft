@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea2b24cdd519b74d82c83655493c397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Actor: {fileID: 0}
-  OnAttack:
+  _actor: {fileID: 0}
+  _onAttack:
     m_PersistentCalls:
       m_Calls: []
-  AttackWindow: 1
+  _attackWindow: 0
+  _boxType: 0
 --- !u!65 &15022120420765144
 BoxCollider:
   m_ObjectHideFlags: 0

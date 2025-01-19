@@ -4,8 +4,6 @@ namespace Controller
 {
     public class IdleState : IController
     {
-        public string Name => "Idle";
-
         public void HandleInput(Character player)
         {
             Vector3 input = new(Input.GetAxisRaw("Horizontal"),

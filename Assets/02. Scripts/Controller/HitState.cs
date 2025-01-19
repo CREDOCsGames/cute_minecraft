@@ -6,7 +6,7 @@
 
         public void HandleInput(Character player)
         {
-            if (player.IsFinishedAction)
+            if (player.IsActionFinished)
             {
                 player.Idle();
                 player.ChangeController(new IdleState());

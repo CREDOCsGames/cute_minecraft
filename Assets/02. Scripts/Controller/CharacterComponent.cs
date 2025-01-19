@@ -24,6 +24,7 @@ namespace Controller
     {
         private LookAt _lookAt;
         public Character _character { get; private set; }
+        public CharacterState State => _character.State;
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField, Range(0, 100)] private float _moveSpeed;
@@ -31,7 +32,6 @@ namespace Controller
         public TextMeshProUGUI ui;
 
         public void EnterGound() => _character?.EnterGound();
-        public void FinishiedAction() => _character?.FinisihedAction();
         public void Hit()
         {
             if (_character.State is CharacterState.Die)

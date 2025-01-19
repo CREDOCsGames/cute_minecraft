@@ -26,12 +26,11 @@ namespace Puzzle
         public static void CheckFlowerBossStageClear(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
             message = new List<byte[]>();
-            var face = data[2];
             var @base = cubeMap.GetFace(Face.bottom).Where(x => x == 1 || x == 2);
             if (@base.All(x => x == 1) || @base.All(x => x == 2))
             {
                 message = new List<byte[]> {
-                    SystemReader.CLEAR_MESSAGES[face] };
+                    SystemReader.CLEAR_MESSAGES[(byte)Face.bottom] };
             }
 
         }

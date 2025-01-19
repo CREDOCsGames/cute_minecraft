@@ -1,7 +1,5 @@
 using PlatformGame.Debugger;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -159,16 +157,16 @@ namespace Puzzle
             normal = _puzzleDataReader.BaseTransform.forward;
             if (normal == Vector3.up)
             {
-                target = Face.back;
+                target = Face.front;
             }
 
             normal = -_puzzleDataReader.BaseTransform.forward;
             if (normal == Vector3.up)
             {
-                target = Face.front;
+                target = Face.back;
             }
 
-            Debug.Log(target);
+            Debug.Log($"[Rotate] {target}");
             _rotatedStageEvent.Invoke(target);
         }
         private void PrintSystemMessage(byte[] data)
