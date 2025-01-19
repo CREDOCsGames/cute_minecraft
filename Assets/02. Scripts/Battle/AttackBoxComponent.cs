@@ -47,4 +47,5 @@ public class AttackBoxComponent : MonoBehaviour
     }
     protected virtual void FixedUpdate() { }
     protected virtual void Awake() { }
+    protected virtual void OnDestroy() { }
 }
