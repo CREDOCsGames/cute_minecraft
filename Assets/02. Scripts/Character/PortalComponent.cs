@@ -8,10 +8,11 @@ namespace Character
 {
     public sealed class PortalComponent : MonoBehaviour
     {
+        public WorkState State { get; private set; }
+        private readonly List<Transform> _entrylist = new();
         [Range(0, byte.MaxValue)]
         [SerializeField] private byte _needCharacters = 1;
-        public WorkState State { get; private set; }
-        private readonly Dictionary<CharacterComponent, bool> _entrylist = new();
+        [SerializeField] private LayerMask CharacterTag;
         [SerializeField] private UnityEvent _runEvent;
         [SerializeField] private UnityEvent _endEvent;
 
@@ -21,32 +22,20 @@ namespace Character
             _runEvent.Invoke();
         }
 
-        private bool CanRunningPortal(Character.CharacterComponent other)
+        private bool CanRunningPortal(Transform other)
         {
-            Debug.Assert(_needCharacters <= _entrylist.Count);
-            return State == WorkState.Ready &&
-                   _needCharacters <= _entrylist.Count(x => x.Value);
-        }
-
-        private void ResetEntrylist()
-        {
-            _entrylist.Clear();
-            var characters = PlayerCharacterManager.JoinCharacters;
-            foreach (var character in characters)
-            {
-                _entrylist.Add(character, false);
-            }
+            return State is WorkState.Ready &&
+                   _needCharacters <= _entrylist.Count();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            var character = other.GetComponent<Character.CharacterComponent>();
-            if (!(character && character.CompareTag(Character.CharacterComponent.TAG_PLAYER)))
+            var character = other.transform;
+            if (!other.CompareTag("Character") ||
+                _entrylist.Contains(character))
             {
                 return;
             }
-
-            _entrylist[character] = true;
 
             if (!CanRunningPortal(character))
             {
@@ -58,35 +47,19 @@ namespace Character
 
         private void OnTriggerExit(Collider other)
         {
-            var character = other.GetComponent<Character.CharacterComponent>();
-            if (!(character && character.CompareTag(Character.CharacterComponent.TAG_PLAYER)))
+            var character = other.transform;
+
+            if (_entrylist.Contains(character))
             {
-                return;
+                _entrylist.Remove(character);
             }
 
-            if (_entrylist.ContainsKey(character))
+            if (State is WorkState.Action &&
+                _entrylist.Count() < _needCharacters)
             {
-                _entrylist[character] = false;
+                State = WorkState.Ready;
+                _endEvent.Invoke();
             }
-
-            if (!(State is WorkState.Action))
-            {
-                return;
-            }
-
-            if (_entrylist.Any(x => x.Value))
-            {
-                return;
-            }
-
-
-            State = WorkState.Ready;
-            _endEvent.Invoke();
-        }
-
-        private void Start()
-        {
-            ResetEntrylist();
         }
     }
 }

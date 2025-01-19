@@ -7,7 +7,7 @@ namespace Puzzle
         public T Copy();
     }
 
-    public class Instantiator<T> : ICopyable<T> where T : MonoBehaviour
+    public class Instantiator<T> : ICopyable<T> where T : Object
     {
         private readonly T _origin;
         public Instantiator(T origin)

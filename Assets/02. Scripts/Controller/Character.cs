@@ -13,25 +13,29 @@ namespace Controller
         public float JumpForce = 7f;
         public bool IsGrounded { get; private set; }
         public bool IsJumping { get; private set; } = false;
-        public bool IsFinishedAction => FinisihedAction();
+        public bool IsActionFinished => _characterAnimation.IsAnimationFinished;
         public CharacterState State { get; private set; }
         public Vector3 Position => Rigidbody.position;
         public IController Controller { get; private set; }
-        private readonly Animator _animator;
         public readonly Rigidbody Rigidbody;
+        private readonly CharacterAnimation _characterAnimation;
         public Transform Transform => Rigidbody.transform;
         public event Action<CharacterState> OnChagedState;
 
         public Character(Rigidbody rigidbody, Animator animator)
         {
-            _animator = animator;
+            _characterAnimation = new CharacterAnimation(animator);
+            OnChagedState += _characterAnimation.OnChangedCharacterState;
             Rigidbody = rigidbody;
-            OnChagedState += UpdateAnimation;
         }
         public void Update()
         {
-            Controller?.HandleInput(this);
-            Controller?.UpdateState(this);
+            if (Controller == null)
+            {
+                return;
+            }
+            Controller.HandleInput(this);
+            Controller.UpdateState(this);
         }
         public void ChangeController(IController newController)
         {
@@ -44,11 +48,6 @@ namespace Controller
                 OnChagedState?.Invoke(newState);
             }
             State = newState;
-        }
-        public void UpdateAnimation(CharacterState newState)
-        {
-            _animator.ResetTrigger(State.ToString());
-            _animator.SetTrigger(newState.ToString());
         }
         public void Move(Vector3 moveDirection)
         {
@@ -98,10 +97,6 @@ namespace Controller
         public void Land()
         {
             ChangeState(CharacterState.Land);
-        }
-        public bool FinisihedAction()
-        {
-            return 1f <= _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         }
     }
 }

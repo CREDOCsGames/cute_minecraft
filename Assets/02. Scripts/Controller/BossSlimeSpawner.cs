@@ -23,13 +23,13 @@ public class BossSlimeSpawner : MonoBehaviour
         _slimeInstance._character.OnChagedState += CheckFailed;
     }
 
-    public void CheckFailed(Controller.CharacterState state)
+    public void CheckFailed(CharacterState state)
     {
         if(_slimeInstance == null)
         {
             return;
         }
-        if(state is Controller.CharacterState.Die)
+        if(state is CharacterState.Die)
         {
             _controller.Stop();
         }

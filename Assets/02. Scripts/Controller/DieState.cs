@@ -12,7 +12,7 @@ namespace Controller
         }
         public void HandleInput(Character player)
         {
-            if (_time < Time.time && !_bDead && player.IsFinishedAction)
+            if (_time < Time.time && !_bDead && player.IsActionFinished)
             {
                 _bDead = true;
                 GameObject.Destroy(player.Rigidbody.gameObject);
