@@ -14,7 +14,6 @@ namespace Puzzle
         public Transform BaseTransform;
         public Bounds BaseTransformSize;
         public byte[] Elements => Faces.SelectMany(x => x.MapData).ToArray();
-        [field: SerializeField] public FaceFlags BossStages { get; private set; }
         [SerializeField] private List<UnityEngine.Object> _globalCores = new();
         private readonly List<ICore> _globalCoresChace = new();
         public List<ICore> GlobalCores

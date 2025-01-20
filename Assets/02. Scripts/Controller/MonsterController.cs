@@ -8,10 +8,12 @@ namespace Puzzle
     {
         public DataReader DataReader { get; private set; } = new MonsterReader();
         private Animator _animator;
+        private Face _playingFace;
         private IMediatorInstance _mediator;
         private MonsterState _characterState;
         private BossController _bossController;
         private CubePuzzleDataReader _puzzleData;
+        private CubeMap<GameObject> _cubeMap;
         private readonly Queue<byte[]> _commandQueue = new();
 
         private void Start()
@@ -33,7 +35,7 @@ namespace Puzzle
                 Debug.LogWarning($"Boss's status is already {_characterState.ToString()}.");
             }
 
-             if (data.Equals(MonsterReader.BOSS_SPIT_OUT_SUCCESS))
+            if (data.Equals(MonsterReader.BOSS_SPIT_OUT_SUCCESS))
             {
                 _bossController.Success();
             }
@@ -65,9 +67,8 @@ namespace Puzzle
             if (MonsterReader.BOSS_SPIT_OUT.Equals(command))
             {
                 TrasitionState(MonsterState.Action1);
-                var index = new byte[] { command[0], command[1], (byte)_puzzleData.ReadWindow };
-                _puzzleData.GetLocation(index, out var position, out var rotation);
-                _bossController.SlimeSpawnPoint = _puzzleData.BaseTransform.position + position;
+                var flower = _cubeMap.GetElements(command[0], command[1], (byte)_playingFace);
+                _bossController.SlimeSpawnPoint = flower.transform.position;
                 return;
             }
         }
@@ -96,6 +97,20 @@ namespace Puzzle
         public void Init(CubePuzzleDataReader puzzleData)
         {
             _puzzleData = puzzleData;
+            _puzzleData.OnRotatedStage += OnRotatedCube;
+            _cubeMap = new CubeMap<GameObject>(puzzleData.Width, new Instantiator<GameObject>(new GameObject()));
+
+            foreach (var index in _cubeMap.GetIndex())
+            {
+                var flower = _cubeMap.GetElements(index);
+                flower.transform.SetParent(puzzleData.BaseTransform);
+                puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
+                flower.transform.SetLocalPositionAndRotation(position, rotation);
+            }
+        }
+        private void OnRotatedCube(Face newFace)
+        {
+            _playingFace = newFace;
         }
     }
 

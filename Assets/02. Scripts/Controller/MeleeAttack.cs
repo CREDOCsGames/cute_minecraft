@@ -1,15 +1,27 @@
-﻿namespace Controller
+﻿using UnityEngine;
+
+namespace Controller
 {
     public class MeleeAttack : IController
     {
-        public string Name => "Attack";
+        private readonly float _enterTime = Time.time + 0.2f;
+        private float _minStayTime;
 
         public void HandleInput(Character player)
         {
-            if (player.IsFinishedAction)
+            if (Time.time < _enterTime)
+            {
+                return;
+            }
+            if (_minStayTime != 0 && _minStayTime < Time.time)
+            {
+                player.ChangeController(new IdleState());
+                return;
+            }
+            if (player.IsActionFinished)
             {
                 player.Idle();
-                player.ChangeController(new IdleState());
+                _minStayTime = Time.time + 0.1f;
             }
         }
 

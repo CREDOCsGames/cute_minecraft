@@ -14,32 +14,26 @@ namespace Util
 
     public class LookAtComponent : MonoBehaviour
     {
-        CharacterComponent _character;
-        Vector3 _3DVelocity;
-        [SerializeField] LookAtType _type;
-        [SerializeField] Transform _target;
+        private Rigidbody _movement;
+        private Vector3 _3DVelocity;
+        [SerializeField] private LookAtType _type;
+        [SerializeField] private Transform _target;
 
         public void SetTarget(Transform target)
         {
             _target = target;
-            _character = target?.GetComponent<CharacterComponent>();
+            _movement = target?.GetComponent<Rigidbody>();
         }
 
         private void LookAtMoveDir()
         {
-            if (_character == null)
+            if (_movement == null)
             {
                 _type = LookAtType.None;
                 return;
             }
 
-            if (_character.State is not (//CharacterState.Walk or
-                                         CharacterState.Run))
-            {
-                return;
-            }
-
-            var velocity = _character.Rigid.velocity;
+            var velocity = _movement.velocity;
 
             if (Mathf.Abs(velocity.magnitude) < 1f)
             {

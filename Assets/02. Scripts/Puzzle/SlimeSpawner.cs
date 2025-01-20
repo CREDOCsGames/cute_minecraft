@@ -11,7 +11,8 @@ namespace Puzzle
         private byte[] _spawnMessage;
         private readonly Timer _spawnTimer = new Timer();
         private CubeMap<byte> _map;
-        private Face _current;
+        private Face _currentLevel;
+        private Face _playingFace;
         private float _exitTime;
         private bool _bWasSpawn;
         [SerializeField] private float _killTime = 1f;
@@ -52,8 +53,8 @@ namespace Puzzle
             {
                 var x = _spawnMessage[0];
                 var y = _spawnMessage[1];
-                var z = (byte)_current;
-                if (_map.GetElements(x, y, z) != 0)
+                var z = (byte)_playingFace;
+                if (z == (byte)Face.bottom || _map.GetElements(x, y, z) != 0)
                 {
                     return;
                 }
@@ -69,7 +70,7 @@ namespace Puzzle
 
         private void SendSpawnMessage()
         {
-            if (_current is Face.bottom)
+            if (_currentLevel is Face.bottom)
             {
                 if (TryCalculateSpanwPosition(out var position))
                 {
@@ -92,11 +93,12 @@ namespace Puzzle
             _map = reader.Map;
             _reader = reader;
             reader.OnChangedStage += OnChangedStage;
+            reader.OnRotatedStage += OnRotatedCube;
         }
 
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
-            var indices = _map.GetIndex(_current);
+            var indices = _map.GetIndex(_playingFace);
             indices.Sort((x, y) => UnityEngine.Random.Range(-1, 2));
             foreach (var index in indices)
             {
@@ -113,7 +115,11 @@ namespace Puzzle
 
         private void OnChangedStage(Face face)
         {
-            _current = face;
+            _currentLevel = face;
+        }
+        private void OnRotatedCube(Face face)
+        {
+            _playingFace = face;
         }
 
         public void Destroy()

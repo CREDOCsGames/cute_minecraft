@@ -28,18 +28,14 @@ namespace Puzzle
             var instantiator = new Instantiator<Flower>(_flowerPrefab);
             _cubeMap = new CubeMap<Flower>(puzzleData.Width, instantiator);
             _flwerPresentation = new FlowerPresentation(_cubeMap);
-            float offset = ((puzzleData.Width) / 2f) - 0.5f;
-            float offsetY = (puzzleData.BaseTransformSize.x / 2f) - 0.5f;
 
             foreach (var index in _cubeMap.GetIndex())
             {
-                var face = index[2];
                 var flower = _cubeMap.GetElements(index);
                 _dataLink.Link(flower, index.Concat(new byte[] { 0 }).ToArray<byte>());
-                puzzleData.GetLocation(index, out var position, out var rotation);
+                puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
                 flower.transform.SetParent(puzzleData.BaseTransform);
-                flower.transform.localPosition = position;
-                flower.transform.localRotation = rotation;
+                flower.transform.SetLocalPositionAndRotation(position, rotation);
                 _flwerPresentation.InstreamData(index.Concat(new byte[] { puzzleData.GetElement(index) }).ToArray<byte>());
             }
 

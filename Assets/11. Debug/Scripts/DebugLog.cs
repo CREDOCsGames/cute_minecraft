@@ -21,21 +21,9 @@ namespace PlatformGame.Debugger
         }
 
         [Conditional("DEVELOPMENT")]
-        public static void PrintLog(Transform who, CharacterState state)
-        {
-            Debug.Log($"{who.name}: {state}");
-        }
-
-        [Conditional("DEVELOPMENT")]
         public static void PrintLog(string text)
         {
             Debug.Log(text);
-        }
-
-        [Conditional("DEVELOPMENT")]
-        public static void PrintLog(Character.CharacterComponent character)
-        {
-            Debug.Log(character.State);
         }
 
         public static string GetStrings(byte[] bytes)

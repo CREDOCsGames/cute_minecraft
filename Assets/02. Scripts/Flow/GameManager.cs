@@ -1,4 +1,3 @@
-using Character;
 using Sound;
 using UnityEngine;
 
@@ -32,12 +31,6 @@ namespace Flow
 
             ContentsLoader.OnStartLoad += _gameTimer.Stop;
             ContentsLoader.OnLoaded += _gameTimer.Start;
-
-            MovieCutscene.OnPlayEvent += PlayerCharacterManager.Instance.ReleaseController;
-            MovieCutscene.OnEndEvent += PlayerCharacterManager.Instance.ControlDefaultCharacter;
-            ContentsLoader.OnStartLoad += PlayerCharacterManager.Instance.ReleaseController;
-            ContentsLoader.OnLoaded += PlayerCharacterManager.Instance.ControlDefaultCharacter;
-
             ContentsLoader.SetLoaderType(LoaderType.LevelLoader);
             ContentsLoader.LoadContents();
 
