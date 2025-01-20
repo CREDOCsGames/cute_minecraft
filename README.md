@@ -1,6 +1,6 @@
 # 팀 목표
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
->회의 #<a href="https://miro.com/welcomeonboard/UVVodHdqdmRxSnFjbklCc3pwMFB6SnVyT09xSjhKdW9oakQzVXRFSkJmaTNkZGI0Y2hWSmJRd2JyNmpyZDFtTS9lY3BSNDVBUVR1SDlkVHhHYnZsQnZLOE9vUVZSd25CMW9kZkJVRFJQY1MwNXRkRTZPaUNYT05IY2E0M293OWIhZQ==?share_link_id=292005462475">Miro</a>
+>회의 #<a href="https://miro.com/welcomeonboard/UVVodHdqdmRxSnFjbklCc3pwMFB6SnVyT09xSjhKdW9oakQzVXRFSkJmaTNkZGI0Y2hWSmJRd2JyNmpyZDFtTS9lY3BSNDVBUVR1SDlkVHhHYnZsQnZLOE9vUVZSd25CMW9kZkJVRFJQY1MwNXRkRTZPaUNYT05IY2E0M293OWIhZQ==?share_link_id=292005462475">Miro</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 
 
