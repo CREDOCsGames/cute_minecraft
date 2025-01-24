@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Controller
 {
     public class JumpState : IController

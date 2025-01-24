@@ -1,16 +1,20 @@
 using UnityEngine;
-namespace NW
+namespace Puzzle
 {
     public class SlimeSpawnerInstance : MonoBehaviour, IInstance
     {
+        private SlimeSpawnerPresentation _slimePresentation;
         [SerializeField] private AnimationCurve _jumpCurve;
         [SerializeField] private Transform _slime;
         [SerializeField] private Transform _baseTransform;
         [SerializeField, Range(0, 100)] private float _startRadius;
         [SerializeField, Range(0, 100)] private float _endRadius;
-        private SlimeSpawnerPresentation _slimePresentation;
 
         public DataReader DataReader { get; private set; } = new MonsterReader();
+        public void InstreamData(byte[] data)
+        {
+            _slimePresentation?.InstreamData(data);
+        }
 
         private void Awake()
         {
@@ -23,10 +27,6 @@ namespace NW
         {
         }
 
-        public void InstreamData(byte[] data)
-        {
-            _slimePresentation.InstreamData(data);
-        }
 
         public void OnDrawGizmosSelected()
         {

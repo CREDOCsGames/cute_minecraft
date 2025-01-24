@@ -1,19 +1,18 @@
 using Battle;
 using Controller;
-using Puzzle;
 using System.Linq;
 using UnityEngine;
 using Util;
-namespace NW
+namespace Puzzle
 {
     public class SlimeSpawnerPresentation : IPresentation
     {
         public float StartRadius = 5.0f;
         public float EndRadius = 3.0f;
         private float _positionAngle = 0f;
+        private readonly Transform _slime;
         private readonly Transform _baseTransform;
         private readonly AnimationCurve _jumpCurve;
-        private readonly Transform _slime;
         private readonly JumpController _jumpController = new();
         private float _positionAngleInRadians => _positionAngle * Mathf.Deg2Rad;
 
@@ -24,7 +23,7 @@ namespace NW
             _baseTransform = baseTransform;
             _slime = slime;
             _jumpController.OnStartEvent += PlaySpawnMotion;
-            _jumpController.OnEndEvent += StartBehavior;
+            _jumpController.OnReachedEvent += StartBehavior;
         }
         public void InstreamData(byte[] data)
         {
@@ -63,9 +62,13 @@ namespace NW
             {
                 var controller = new Controller.MonsterState();
                 var list = GameObject.FindObjectsOfType<Flower>().ToList();
+                list = list.Where(f => f.transform.position.y > list.Max(x => x.transform.position.y)-1f).ToList();
+                if (list.Count == 0) return;
                 var target = list[Random.Range(0, list.Count)].transform;
                 controller.StartTrace(target);
                 slime._character.ChangeController(controller);
+                slime._character.Idle();
+                slime._character.Rigidbody.excludeLayers = LayerMask.GetMask("Default");
             }
         }
     }

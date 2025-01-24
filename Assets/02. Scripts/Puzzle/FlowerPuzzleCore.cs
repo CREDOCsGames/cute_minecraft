@@ -1,112 +1,55 @@
 using System.Collections.Generic;
-using System.Linq;
-using NW;
+using UnityEditor;
 using UnityEngine;
-using Util;
 
 namespace Puzzle
 {
     [CreateAssetMenu(menuName = "Custom/FlowerPuzzleCore")]
-    public class FlowerPuzzleCore : PuzzleCore
+    public class FlowerPuzzleCore : ScriptableObject, ICore, IPuzzleCore
     {
-        private readonly NW.DataReader _reader = new FlowerReader();
-        public override NW.DataReader DataReader => _reader;
+        public DataReader DataReader { get; private set; } = new FlowerReader();
+        private CubeMap<byte> _puzzle;
+        private IMediatorCore _mediator;
+        private readonly CoreFunction _crossAttack = FlowerCoreFuntions.AttackCross;
+        private readonly CoreFunction _dotAttack = FlowerCoreFuntions.AttackDot;
+        private readonly CoreFunction _createFlower = FlowerCoreFuntions.CreateFlower;
+        private readonly CoreFunction _clearCheck = FlowerCoreFuntions.CheckFlowerNormalStageClear;
 
-        protected override IMediatorCore _mediator { get; set; }
-        protected override CubeMap<byte> CubeMap { get; set; }
-
-        public override void InstreamData(byte[] data)
+        public void InstreamData(byte[] data)
         {
+            List<byte[]> puzzleMessages = new();
             switch (data[3])
             {
                 case 1:
-                    Cross(data);
+                    _crossAttack(data, _puzzle, out puzzleMessages);
                     break;
                 case 2:
-                    Dot(data);
+                    _dotAttack(data, _puzzle, out puzzleMessages);
                     break;
                 case 3:
-                    Create(data);
+                    _createFlower(data, _puzzle, out puzzleMessages);
                     break;
                 default:
                     return;
             }
-            ClearMessage(data);
-        }
-
-        private void ClearMessage(byte[] data)
-        {
-            var face = data[2];
-            var @base = CubeMap.GetFace((Face)face).Where(x => x == 1 || x == 2);
-            if (@base.All(x => x == 1) || @base.All(x => x == 2))
+            foreach (var message in puzzleMessages)
             {
-                _mediator.InstreamDataCore<SystemReader>(SystemReader.CLEAR_MESSAGES[face]);
+                _mediator.InstreamDataCore<FlowerReader>(message);
+            }
+
+            _clearCheck(data, _puzzle, out var systemMessages);
+            foreach (var message in systemMessages)
+            {
+                _mediator.InstreamDataCore<SystemReader>(message);
             }
         }
-
-        private static readonly List<int[]> indices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
-
-
-        private void Cross(byte[] input)
+        public void Init(CubePuzzleReaderForCore reader)
         {
-            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
-            if (flower != 1 && flower != 2)
-            {
-                return;
-            }
-
-            foreach (var dxdy in indices)
-            {
-                if (input[0] + dxdy[0] < 0 || CubeMap.Width <= input[0] + dxdy[0] ||
-                    input[1] + dxdy[1] < 0 || CubeMap.Width <= input[1] + dxdy[1])
-                {
-                    continue;
-                }
-
-                var index = new byte[] { (byte)(input[0] + dxdy[0]), (byte)(input[1] + dxdy[1]), input[2], input[3] };
-                flower = CubeMap.GetElements(index[0], index[1], index[2]);
-                if (flower != 1 && flower != 2)
-                {
-                    continue;
-                }
-                Dot(index);
-            }
-
+            _puzzle = reader.Map;
         }
-
-        private void Dot(byte[] input)
+        public void SetMediator(IMediatorCore mediator)
         {
-            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
-            byte[] result;
-            switch (flower)
-            {
-                case 1:
-                    result = new[] { input[0], input[1], input[2], (byte)2 };
-                    break;
-                case 2:
-                    result = new[] { input[0], input[1], input[2], (byte)1 };
-                    break;
-                default:
-                    return;
-            }
-            CubeMap.SetElements(result[0], result[1], result[2], result[3]);
-            _mediator.InstreamDataCore<FlowerReader>(result);
-        }
-
-        private void Create(byte[] input)
-        {
-            var flower = CubeMap.GetElements(input[0], input[1], input[2]);
-            byte[] result;
-            switch (flower)
-            {
-                case 0:
-                    result = new[] { input[0], input[1], input[2], (byte)Random.Range(1, 2) };
-                    break;
-                default:
-                    return;
-            }
-            CubeMap.SetElements(result[0], result[1], result[2], result[3]);
-            _mediator.InstreamDataCore<FlowerReader>(result);
+            _mediator = mediator;
         }
 
     }

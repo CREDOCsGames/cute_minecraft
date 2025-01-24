@@ -16,7 +16,7 @@ namespace Controller
         public bool IsFinishedAction => FinisihedAction();
         public CharacterState State { get; private set; }
         public Vector3 Position => Rigidbody.position;
-        private IController _controller;
+        public IController Controller { get; private set; }
         private readonly Animator _animator;
         public readonly Rigidbody Rigidbody;
         public Transform Transform => Rigidbody.transform;
@@ -30,12 +30,12 @@ namespace Controller
         }
         public void Update()
         {
-            _controller?.HandleInput(this);
-            _controller?.UpdateState(this);
+            Controller?.HandleInput(this);
+            Controller?.UpdateState(this);
         }
         public void ChangeController(IController newController)
         {
-            _controller = newController;
+            Controller = newController;
         }
         private void ChangeState(CharacterState newState, bool duplicateCall = false)
         {
@@ -53,7 +53,8 @@ namespace Controller
         public void Move(Vector3 moveDirection)
         {
             ChangeState(CharacterState.Run);
-            Rigidbody.velocity = moveDirection * MoveSpeed;
+            var velocity = moveDirection * MoveSpeed;
+            Rigidbody.velocity = velocity;
         }
         public void Jump()
         {
@@ -65,14 +66,18 @@ namespace Controller
                 IsGrounded = false;
             }
         }
+        public void Die()
+        {
+            ChangeState(CharacterState.Die);
+        }
         public void Idle()
         {
             ChangeState(CharacterState.Idle);
+            Rigidbody.velocity = Vector3.zero;
         }
         public void Hit()
         {
             ChangeState(CharacterState.Hit, true);
-            ChangeController(new HitState());
         }
         public void Attack()
         {
@@ -85,6 +90,10 @@ namespace Controller
         public void EnterGound()
         {
             IsGrounded = true;
+        }
+        public void ExitGound()
+        {
+            IsGrounded = false;
         }
         public void Land()
         {

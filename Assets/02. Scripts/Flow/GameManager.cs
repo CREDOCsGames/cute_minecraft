@@ -1,5 +1,4 @@
 using Character;
-using Puzzle;
 using Sound;
 using UnityEngine;
 
@@ -12,15 +11,11 @@ namespace Flow
         public static Area StageArea { get; private set; } = new();
         public static Selection Title { get; private set; } = new();
         public static Selection StageSelect { get; private set; } = new();
-        public static LanternComponent Lantern;
         private static Timer _gameTimer { get; set; } = new();
         private static bool _visitTitle;
 
         static GameManager()
         {
-            PuzzleArea.OnEnterEvent += PuzzlePieceComponent.EnablePieceInArea;
-            PuzzleArea.OnClearEvent += PuzzlePieceComponent.DisablePieceInArea;
-            PuzzleArea.OnExitEvent += PuzzlePieceComponent.DisablePieceInArea;
 
             Title.OnEnterEvent += () =>
             {
@@ -42,9 +37,6 @@ namespace Flow
             MovieCutscene.OnEndEvent += PlayerCharacterManager.Instance.ControlDefaultCharacter;
             ContentsLoader.OnStartLoad += PlayerCharacterManager.Instance.ReleaseController;
             ContentsLoader.OnLoaded += PlayerCharacterManager.Instance.ControlDefaultCharacter;
-
-            PuzzleArea.OnEnterEvent += (x) => AreaManager.DisConnect();
-            PuzzleArea.OnClearEvent += (b) => AreaManager.Connect();
 
             ContentsLoader.SetLoaderType(LoaderType.LevelLoader);
             ContentsLoader.LoadContents();

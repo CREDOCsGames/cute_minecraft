@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR
-using System;
 using Puzzle;
+using System;
 using UnityEngine;
 
 namespace CuzzleEditor

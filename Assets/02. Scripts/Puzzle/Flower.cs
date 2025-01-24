@@ -1,11 +1,13 @@
 using Battle;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Puzzle
 {
     public class Flower : MonoBehaviour
     {
-        public enum FlowerType : byte
+        [SerializeField] private List<MeshRenderer> _renderers;
+        public enum Type : byte
         {
             None, Red, Green
         }
@@ -18,15 +20,8 @@ namespace Puzzle
             set
             {
                 _color = value;
-                _renderer.material.color = value;
+                _renderers.ForEach(r => r.material.color = value);
             }
-        }
-
-        private MeshRenderer _renderer;
-
-        private void Awake()
-        {
-            _renderer = GetComponent<MeshRenderer>();
         }
     }
 

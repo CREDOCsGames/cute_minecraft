@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Controller
+﻿namespace Controller
 {
     public class LandState : IController
     {
