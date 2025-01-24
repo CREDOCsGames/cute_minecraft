@@ -2,8 +2,6 @@ namespace Controller
 {
     public class JumpState : IController
     {
-        public string Name => "Jump";
-
         public void HandleInput(Character player)
         {
         }

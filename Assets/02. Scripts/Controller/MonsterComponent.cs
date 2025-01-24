@@ -23,7 +23,7 @@ namespace Controller
             _character.Rigidbody.excludeLayers = -1;
             _character.ChangeController(new CanNotControl());
             _character.Rigidbody.AddForce(dir, ForceMode.Impulse);
-            _character.Die();
+            // _character.Die();
         }
         public void Hit()
         {
@@ -56,7 +56,7 @@ namespace Controller
         }
         public void HandleInput(Character player)
         {
-            if (player.State is CharacterState.Hit && !player.IsFinishedAction)
+            if (player.State is CharacterState.Hit && !player.IsActionFinished)
             {
                 player.ExitGound();
                 return;

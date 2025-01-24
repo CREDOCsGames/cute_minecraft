@@ -1,30 +1,46 @@
 using Battle;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Puzzle
 {
     public class CubePuzzleDataReader
     {
-        public Face ReadWindow;
-        private readonly CubePuzzleData _cubePuzzleData;
-        private readonly CubeMapReader _cubeMapReader;
+        public event Action<Face> OnRotatedStage;
+        public Face ReadWindow { get; private set; }
         public byte Width => _cubeMapReader.Width;
+        public Throw Throw => _cubePuzzleData.Trow;
         public readonly Transform BaseTransform;
         public readonly Vector3 BaseTransformSize;
-        public Vector3 BaseTransformPlacePivot => BaseTransform.position + Vector3.up * BaseTransformSize.y / 2f - (Vector3.right + Vector3.forward) * (Width / 2);
+        public Vector3 BaseTransformPlacePivot =>
+            BaseTransform.position
+            + Vector3.up * BaseTransformSize.y / 2f
+            - (Vector3.right + Vector3.forward) * (Width / 2);
         public readonly List<ICore> GlobalCoreObservers = new();
         public readonly List<IInstance> GlobalInstanceObservers = new();
+        private readonly CubeMapReader _cubeMapReader;
+        private readonly CubePuzzleData _cubePuzzleData;
 
-        public Throw Throw => _cubePuzzleData.Trow;
-
-        public CubePuzzleDataReader(CubePuzzleData puzzleData)
+        public CubePuzzleDataReader(CubePuzzleData puzzleData, UnityEvent<Face> onRotatedStage)
         {
+            onRotatedStage.AddListener((face)=>OnRotatedStage?.Invoke(face));
             _cubePuzzleData = puzzleData;
             _cubeMapReader = new(new CubeMap<byte>(puzzleData.Width, puzzleData.Elements));
             BaseTransform = puzzleData.BaseTransform;
             BaseTransformSize = puzzleData.BaseTransformSize.extents;
         }
+        public bool TryGetElements(out byte[] elements)
+            => _cubeMapReader.TryGetElements(out elements);
+        public List<byte[]> GetIndex()
+            => _cubeMapReader.GetIndex();
+        public byte GetElement(byte x, byte y, byte z)
+        => _cubeMapReader.GetElement(x, y, z);
+        public byte GetElement(byte[] index)
+        => _cubeMapReader.GetElement(index);
+        public List<byte> GetFace(byte face)
+            => _cubeMapReader.GetFace(face);
         public void MoveReadWindow(Face nextReadWindow)
         {
             ReadWindow = nextReadWindow;
@@ -113,19 +129,9 @@ namespace Puzzle
                 intersection.Add(item);
             }
         }
-        public bool TryGetElements(out byte[] elements)
-            => _cubeMapReader.TryGetElements(out elements);
-        public List<byte[]> GetIndex()
-            => _cubeMapReader.GetIndex();
-        public byte GetElement(byte x, byte y, byte z)
-        => _cubeMapReader.GetElement(x, y, z);
-        public byte GetElement(byte[] index)
-        => _cubeMapReader.GetElement(index);
-        public List<byte> GetFace(byte face)
-            => _cubeMapReader.GetFace(face);
-
-        public void GetLocation(byte[] index, out Vector3 position, out Quaternion rotation)
+        public void GetPositionAndRotation(byte[] index, out Vector3 position, out Quaternion rotation)
         {
+            Debug.Assert(index.Length == 3);
             float offset = Width / 2;
             float offsetY = (BaseTransformSize.x / 2) - 0.5f;
             var x = index[0];

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class AttackBoxComponent : MonoBehaviour
 {
-    [Header("[Refer]")]
+    [Header("[References]")]
     [SerializeField] protected Transform _actor;
     [Header("[Options]")]
     [SerializeField] private UnityEvent<HitBoxCollision> _onAttack;
@@ -41,9 +41,11 @@ public class AttackBoxComponent : MonoBehaviour
         return hitBox;
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         AttackBox.CheckCollision(other);
     }
-
+    protected virtual void FixedUpdate() { }
+    protected virtual void Awake() { }
+    protected virtual void OnDestroy() { }
 }
