@@ -20,7 +20,6 @@ namespace Puzzle
         [SerializeField, Range(0, 1000)] private float _interval = 15f;
         private CubePuzzleReaderForCore _reader;
 
-
         public void Awake()
         {
             _spawnTimer.OnTimeoutEvent += (t) => SendSpawnMessage();
@@ -36,7 +35,6 @@ namespace Puzzle
         public void SetMediator(IMediatorCore mediator)
         {
             _mediator = mediator;
-            _spawnTimer.Start();
         }
         private void Update()
         {
@@ -49,6 +47,11 @@ namespace Puzzle
 
         private void FixedUpdate()
         {
+            if(_mediator == null)
+            {
+                return;
+            }
+
             if (_bWasSpawn && _exitTime < Time.time)
             {
                 var x = _spawnMessage[0];
@@ -66,8 +69,6 @@ namespace Puzzle
                 _spawnTimer.Start();
             }
         }
-
-
         private void SendSpawnMessage()
         {
             if (_currentLevel is Face.bottom)
@@ -87,15 +88,14 @@ namespace Puzzle
                 _mediator.InstreamDataCore<MonsterReader>(_spawnMessage);
             }
         }
-
         public void Init(CubePuzzleReaderForCore reader)
         {
             _map = reader.Map;
             _reader = reader;
             reader.OnChangedStage += OnChangedStage;
             reader.OnRotatedStage += OnRotatedCube;
+            _spawnTimer.Start();
         }
-
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
             var indices = _map.GetIndex(_playingFace);
@@ -112,7 +112,6 @@ namespace Puzzle
             position = new byte[] { };
             return false;
         }
-
         private void OnChangedStage(Face face)
         {
             _currentLevel = face;
@@ -121,10 +120,10 @@ namespace Puzzle
         {
             _playingFace = face;
         }
-
         public void Destroy()
         {
             _reader.OnChangedStage -= OnChangedStage;
+            _spawnTimer.Stop();
         }
     }
 }
