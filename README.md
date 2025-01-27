@@ -1,5 +1,6 @@
 # 팀 목표
 >일정표 #<a href="https://docs.google.com/spreadsheets/d/19ddOy-hGZPW09LCSMfKd36jwMjSrMh14/copy">Excel</a>   
+>회의 #<a href="https://miro.com/welcomeonboard/UVVodHdqdmRxSnFjbklCc3pwMFB6SnVyT09xSjhKdW9oakQzVXRFSkJmaTNkZGI0Y2hWSmJRd2JyNmpyZDFtTS9lY3BSNDVBUVR1SDlkVHhHYnZsQnZLOE9vUVZSd25CMW9kZkJVRFJQY1MwNXRkRTZPaUNYT05IY2E0M293OWIhZQ==?share_link_id=292005462475">Miro</a>   
 >리소스 테이블 #<a href="https://docs.google.com/spreadsheets/d/1aPC0sq3G-th4tddcuolTIw9G-XterXSN/edit?usp=sharing&ouid=103363998133289087028&rtpof=true&sd=true">Excel</a>   
 
 
@@ -37,34 +38,8 @@
 ### ※ 회의 일정
 |일|월|화|수|목|금|토|
 |---|---|---|---|---|---|---|
-||20시|||||15시|
-||회의|||||디자인 회의|
-
-### ※ 회의록
-<details>
-  <summary>히스토리</summary>
-
-  |제목|내용|설명|
-|------|---|---|
-|241030|<a href="https://clovanote.naver.com/s/whm3twSYbtaU8MHz27JyR5S">링크</a>|인트로 후반부의 퀄리티 낮은 부분을 원화로 대체, 부유섬 추락 구도에 대한 논의|
-|241029|<a href="https://clovanote.naver.com/s/cDHhiBsSVYdNAdGoxpJBtTS">링크</a>|인트로 퀄리티업 방향과 원화 제안, 팀 세분화로 회의 관리|
-|241022|<a href="https://clovanote.naver.com/s/cNXpB8ejhr4ZQJ2766xqbnS">링크</a>|몬스터 등장, 스테이지 형식 압축, 프로그래밍적 레벨 구성, 결산 연출 제시|
-|241015|<a href="">링크</a>|안개 활용, 육면체 메커니즘 적용|
-|241008|<a href="https://clovanote.naver.com/s/uFAEdFxqNV5ryN9dZnAq4FS">링크</a>|초기 디자인 복원, 기획 방향 점검, 히트 박스 개선|
-|241001|<a href="https://clovanote.naver.com/s/9FvySnw2orrJBEvuK6S4GcS?t=3953">링크</a>|콘텐츠 확장에 대한 공유, 동선 단방향 제한|
-|240827|<a href="https://clovanote.naver.com/s/H7tbgzDxfUix5ZEEbtmQ2ZS">링크</a>|퀄리티 업 일정 및 2차 사이클 일정 수립|
-|240820|<a href="https://clovanote.naver.com/s/TxxQFuATijZQfsNcbZaFHdS">링크</a>|퀄리티 업 아이디어 회의|
-|240819|<a href="https://clovanote.naver.com/s/s85VoeBeckL5kr5jdZ2F2ES">링크</a>|메인 플레이 메커니즘과 크래프팅 논의|
-|240805|<a href="https://clovanote.naver.com/s/gLNNbYRLgy8EoPwf75LQCcS?t=105">링크</a>|게임의 핵심에 대한 토론, 모드 중간점검, 인트로 결산 이이디어 회의|
-|240729|<a href="https://clovanote.naver.com/s/m8GgH88MNSCyGAyFH2msEGS?t=430">링크</a>|모드 제작에 대한 찬반토론, 육면체 회전 연출의 문제점, 일정표 마감시간 조율|
-|240721|<a href="https://clovanote.naver.com/s/pdJWsdsGBKgqzzpaGRTJKkS">링크</a>|TPO에 따른 육면체 변화 아이디어 제시, 모드 아이디어 제시|
-|240715|<a href="https://clovanote.naver.com/s/USh8aDtjFEVaJi9EBgobjYS?t=1177">링크</a>|새로운 인원 투입, 게임의 재미 발표, 일정표 작성|
-|240708|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/f5f2bee2-b126-4d8c-ba9f-889f84dac052n">링크</a>|퍼즐의 유형과 고민의 유형, 조작의 재미 유지|
-|240704|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/dbae2cd0-0eea-4306-9e2b-544635a112e7n">링크</a>|레벨 제작 건의|
-|240630|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/dbae2cd0-0eea-4306-9e2b-544635a112e7n">링크</a>|월간 방향성 회의|
-|240624|<a href="https://clovanote.naver.com/w/GLp5zFWRaZD6q5FCzj5w/note-detail/2440c436-a6a9-40f3-9c9c-6b3e1386699bn">링크</a>|협업 환경 구성|
-|240617|<a href="https://clovanote.naver.com/s/XygYU6JxKTYFpDEuma5JYeS">링크</a>|첫 회의. 큐브맵 메커니즘 제안.|
-</details>
+||20시||||||
+||회의||||||
 
 ### ※ 프로젝트 이슈
 ```
