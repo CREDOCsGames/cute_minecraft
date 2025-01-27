@@ -175,14 +175,13 @@ public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
     {
         if (_enterBossStage)
         {
-            
             if(face == Face.top || face == Face.right || face == Face.bottom)
             {
-                SwitchPositionFromDirection(-this.transform.forward);
+                Lentern_Active(SwitchPositionFromDirection(-this.transform.forward));
             }
             else
             {
-                SwitchPositionFromDirection(this.transform.up);
+                Lentern_Active(SwitchPositionFromDirection(this.transform.up));
             }
             
         }
