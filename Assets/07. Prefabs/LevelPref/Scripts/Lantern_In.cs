@@ -1,5 +1,6 @@
 using Puzzle;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
 {
@@ -15,11 +16,13 @@ public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
     public Transform BackSide;
     public bool IsDisapear { get; private set; } = false;
 
+    private CubePuzzleDataReader _castingPuzzleData;
     private bool _apear = false;
     private bool _bright = false;
     private float _time;
-    private byte _width;
-    private Vector3 _center;
+    private Vector3 _cubeCenter;
+    private byte _cubeWidth;
+    private bool _enterBossStage = false;
 
     public void InstreamData(byte[] data)
     {
@@ -50,36 +53,35 @@ public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
         else
         if (data == SystemReader.CLEAR_BACK_FACE)
         {
-            // Todo
+            // Boss Todo
+            _enterBossStage = true;
+            SetSpawnPoint(_castingPuzzleData);
         }
         else
-        if (data == null) // need => Rotation Data
+        if (data == SystemReader.ROTATE_CUBE) // need => Rotation Data
         {
             IsDisapear = true;
+        }
+        else
+        if (data == null) // need => Fall Data
+        {
+            // Boss Todo
+            SetSpawnPoint(_castingPuzzleData);
         }
 
     }
 
     public void Init(CubePuzzleDataReader puzzleData)
     {
-        _center = puzzleData.BaseTransform.position;
-        _width = puzzleData.Width;
+        _castingPuzzleData = puzzleData;
+        _castingPuzzleData.OnRotatedStage += SetLenternPosition;
+        _cubeWidth = puzzleData.Width;
+        SetSpawnPoint(_castingPuzzleData);
     }
+
     public void SetMediator(IMediatorInstance mediator)
     {
 
-    }
-
-    public void Init(CubeMapReader puzzleData)
-    {
-        _cubeCenter = puzzleData.BaseTransform.position;
-        _cubeWidth = puzzleData.Width;
-        float _cubeInterval = _cubeWidth + LenternInterval;
-
-        FrontSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y , _cubeCenter.z + _cubeInterval);
-        BackSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y , _cubeCenter.z - _cubeInterval);
-        LeftSide.position = _cubeCenter + new Vector3(_cubeCenter.x - _cubeInterval, _cubeCenter.y, _cubeCenter.z);
-        RightSide.position = _cubeCenter + new Vector3(_cubeCenter.x + _cubeInterval, _cubeCenter.y, _cubeCenter.z);
     }
 
     private void Update()
@@ -129,11 +131,60 @@ public class Lantern_In : MonoBehaviour, IInstance, IPuzzleInstance
     {
         this.gameObject.transform.position = spwanPos.position;
         this.gameObject.SetActive(true);
-
         _apear = true;
         _bright = true;
         _time = 0;
     }
 
-    
+    private void SetSpawnPoint(CubePuzzleDataReader puzzleData)
+    {
+        _cubeCenter = puzzleData.BaseTransform.position;
+        float _cubeInterval = _cubeWidth + LenternInterval;
+
+        FrontSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z + _cubeInterval);
+        BackSide.position = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z - _cubeInterval);
+        LeftSide.position = _cubeCenter + new Vector3(_cubeCenter.x - _cubeInterval, _cubeCenter.y, _cubeCenter.z);
+        RightSide.position = _cubeCenter + new Vector3(_cubeCenter.x + _cubeInterval, _cubeCenter.y, _cubeCenter.z);
+    }
+
+    private Transform SwitchPositionFromDirection(Vector3 direction)
+    {
+        if(direction == new Vector3(-1,0,0))
+        {
+            return LeftSide;
+        }
+        else if(direction == new Vector3(1, 0, 0))
+        {
+            return RightSide;
+        }
+        else if (direction == new Vector3(0, 0, -1))
+        {
+            return FrontSide;
+        }
+        else if (direction == new Vector3(0, 0, 1))
+        {
+            return BackSide;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void SetLenternPosition(Face face)
+    {
+        if (_enterBossStage)
+        {
+            
+            if(face == Face.top || face == Face.right || face == Face.bottom)
+            {
+                SwitchPositionFromDirection(-this.transform.forward);
+            }
+            else
+            {
+                SwitchPositionFromDirection(this.transform.up);
+            }
+            
+        }
+    }
 }
