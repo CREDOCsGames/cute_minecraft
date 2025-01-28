@@ -23,17 +23,10 @@ public class WeightFall : MonoBehaviour, IInstance, IPuzzleInstance
         if (MonsterReader.BOSS_SPIT_OUT_SUCCESS.Equals(data)) 
         {
             _flowerCount++;
-            if(_flowerCount > 19 && _flowerCount % 3 ==0)
+            if(_flowerCount < 19 && _flowerCount % 3 ==0)
             {
                 FallCube();
             }
-        }
-    }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            FallCube();
         }
     }
     private void FallCube()
