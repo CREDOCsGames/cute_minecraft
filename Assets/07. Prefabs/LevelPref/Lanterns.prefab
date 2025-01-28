@@ -10,13 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4495362637218611878}
   - component: {fileID: 5353859532495748971}
+  - component: {fileID: 5056344158397627345}
+  - component: {fileID: 2788168739791746008}
   m_Layer: 0
   m_Name: Lanterns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4495362637218611878
 Transform:
   m_ObjectHideFlags: 0
@@ -49,13 +51,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveTime: 1
-  DelayTime: 0
-  LenternInterval: 1
-  LanternMoveHight: {x: 0, y: 3, z: 0}
-  FrontSide: {fileID: 0}
-  LeftSide: {fileID: 0}
-  RightSide: {fileID: 0}
-  BackSide: {fileID: 0}
+  LanternInterval: 3
+  LanternDelayTime: 0
+  LanternMoveHight: {x: 0, y: 10, z: 0}
+  FrontSide: {x: 0, y: 0, z: 0}
+  LeftSide: {x: 0, y: 0, z: 0}
+  RightSide: {x: 0, y: 0, z: 0}
+  BackSide: {x: 0, y: 0, z: 0}
+--- !u!95 &5056344158397627345
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172193296131882716}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1dbd5ede847f3c54b90d093ca9e96e8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &2788168739791746008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172193296131882716}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5769773167231769910
 GameObject:
   m_ObjectHideFlags: 0

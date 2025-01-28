@@ -1,13 +1,15 @@
 using Puzzle;
 using System.Collections;
 using UnityEngine;
+using static SuperCharacterController;
 
 public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
 
     public float MoveTime;
-    public float LenternInterval;
+    public float LanternInterval;
+    public float LanternDelayTime;
     public Vector3 LanternMoveHight;
 
     public Vector3 FrontSide;
@@ -17,9 +19,11 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
     public bool IsDisapear { get; private set; } = false;
 
     private CubePuzzleDataReader _castingPuzzleData;
-    private Transform _cube;
+    private Animator _animator;
     private Vector3 _cubeCenter;
     private byte _cubeWidth;
+    private bool _onRotated;
+    private BoxCollider _collider;
 
     public void Init(CubePuzzleDataReader puzzleData)
     {
@@ -28,16 +32,29 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
         _castingPuzzleData.OnRotatedStage += SetLenternPosition;
         _cubeWidth = puzzleData.Width;
         SetSpawnPoint(_castingPuzzleData);
+
+        float x = LanternInterval*2 + 0.8f;
+        _collider.size = new Vector3(x, 10, x);
     }
 
     public void Destroy()
     {
         _castingPuzzleData.OnRotatedStage -= SetLenternPosition;
+        // TODO
+        // 랜턴이 배경으로써 위치에 배치되도록.
+    }
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _collider = GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
-        
+#if UNITY_EDITOR
+        SetSpawnPoint(_castingPuzzleData);
+#endif
     }
 
     private void Lentern_Active(Vector3 spwanPos)
@@ -45,47 +62,15 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
         StartCoroutine(MoveLantern(spwanPos));
     }
 
-    private Vector3 SwitchPositionFromDirection(Vector3 direction)
-    {
-        if (direction == new Vector3(-1, 0, 0))
-        {
-            return LeftSide;
-        }
-        else if (direction == new Vector3(1, 0, 0))
-        {
-            return RightSide;
-        }
-        else if (direction == new Vector3(0, 0, -1))
-        {
-            return FrontSide;
-        }
-        else if (direction == new Vector3(0, 0, 1))
-        {
-            return BackSide;
-        }
-        else
-        {
-            return new Vector3();
-        }
-    }
 
     private void SetLenternPosition(Face face)
     {
-        if (face == Face.top || face == Face.right || face == Face.bottom)
-        {
-            Lentern_Active(SwitchPositionFromDirection(-_cube.transform.forward));
-        }
-        else
-        {
-            Lentern_Active(SwitchPositionFromDirection(_cube.transform.up));
-        }
+        _onRotated = true;
     }
 
     private void SetSpawnPoint(CubePuzzleDataReader puzzleData)
     {
-        _cubeCenter = puzzleData.BaseTransform.position;
-        _cube = puzzleData.BaseTransform;
-        float _cubeInterval = _cubeWidth + LenternInterval;
+        float _cubeInterval = _cubeWidth + LanternInterval;
 
         FrontSide = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z + _cubeInterval);
         BackSide = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z - _cubeInterval);
@@ -95,9 +80,12 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
 
     private IEnumerator MoveLantern(Vector3 spawnPoint)
     {
+        this.transform.position = spawnPoint;
+        _onRotated = false;
+
         float t = 0;
         Vector3 current = transform.position;
-        Vector3 target = current - LanternMoveHight;
+        Vector3 target = current + new Vector3(0, _cubeWidth, 0) + LanternMoveHight;
         while (t < MoveTime)
         {
             t += Time.deltaTime;
@@ -105,11 +93,18 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
             yield return null;
         }
 
-        this.transform.position = spawnPoint;
+        _animator.SetTrigger("Bright");
+
+        while (!_onRotated)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(LanternDelayTime);
 
         t = 0;
         current = transform.position;
-        target = current + LanternMoveHight;
+        target = current - new Vector3(0, _cubeWidth, 0) - LanternMoveHight;
         while (t < MoveTime)
         {
             t += Time.deltaTime;
@@ -124,6 +119,16 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
     }
     public void InstreamData(byte[] data)
     {
+        // SystemReader.IsClearFace(data);
+        // SystemReader.CLEAR_LEFT_FACE == data;
 
+        if (SystemReader.CLEAR_TOP_FACE == data || SystemReader.CLEAR_BACK_FACE == data)
+        {
+            Lentern_Active(LeftSide);
+        }
+        else
+        {
+            Lentern_Active(FrontSide);
+        }
     }
 }
