@@ -1,40 +1,60 @@
-using Sound;
+using Cinema;
+using Controller;
 using UnityEngine;
 
 namespace Flow
 {
     public static class GameManager
     {
-        public static Movie MovieCutscene { get; private set; } = new();
-        public static Area PuzzleArea { get; private set; } = new();
-        public static Area StageArea { get; private set; } = new();
-        public static Selection Title { get; private set; } = new();
-        public static Selection StageSelect { get; private set; } = new();
-        private static Timer _gameTimer { get; set; } = new();
-        private static bool _visitTitle;
+        public static Timer Timer { get; private set; } = new();
 
         static GameManager()
         {
-
-            Title.OnEnterEvent += () =>
-            {
-                if (_visitTitle) Title.Skip();
-                _visitTitle = true;
-            };
-
-            StageArea.OnClearEvent += (area) => StageManager.Instance.ClearCurrentStage();
-            StageArea.OnEnterEvent += (area) =>
-            {
-                SoundManagerComponent.Instance.PlayMusic($"Stage_{StageManager.Instance.StageIndex.x}");
-            };
-
-
-            ContentsLoader.OnStartLoad += _gameTimer.Stop;
-            ContentsLoader.OnLoaded += _gameTimer.Start;
-            ContentsLoader.SetLoaderType(LoaderType.LevelLoader);
-            ContentsLoader.LoadContents();
-
+            AddEventToLoadScene();
+            AddEventToIntroMovie();
+            AddEventToEnterGameMovie();
+            AddEventToEnterBossMovie();
+            AddEventToClearGameMovie();
+            AddEventToMovieSkipUI();
             Debug.Log("Run Game");
         }
+        private static void AddEventToLoadScene()
+        {
+            GameSceneManager.OnLoadedFirstTime += (s) => Movie.DoPlay(Movie.INTRO);
+            GameSceneManager.OnLoadedGameScene += (s) => Movie.DoPlay(Movie.ENTER_GAME);
+        }
+        private static void AddEventToIntroMovie()
+        {
+            Movie.INTRO.OnPlay += Character.StopUpdate;
+            Movie.INTRO.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
+            Movie.INTRO.OnEnd += Character.StartUpdate;
+            Movie.INTRO.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+        }
+        private static void AddEventToEnterGameMovie()
+        {
+            Movie.ENTER_GAME.OnPlay += Character.StopUpdate;
+            Movie.ENTER_GAME.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
+            Movie.ENTER_GAME.OnEnd += Character.StartUpdate;
+            Movie.ENTER_GAME.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+        }
+        private static void AddEventToEnterBossMovie()
+        {
+            Movie.INTRO.OnPlay += Character.StopUpdate;
+            Movie.INTRO.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
+            Movie.INTRO.OnEnd += Character.StartUpdate;
+            Movie.INTRO.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+        }
+        private static void AddEventToClearGameMovie()
+        {
+            Movie.INTRO.OnPlay += Character.StopUpdate;
+            Movie.INTRO.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
+            Movie.INTRO.OnEnd += Character.StartUpdate;
+            Movie.INTRO.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+        }
+        private static void AddEventToMovieSkipUI()
+        {
+            UIResources.CutSceneUI.Instance.OnSkip += Movie.DoSkip;
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace Controller
         public readonly Rigidbody Rigidbody;
         public Transform Transform => Rigidbody.transform;
         public event Action<CharacterState> OnChagedState;
-        public static bool Active { get; set; } = true;
+        private static bool _active { get; set; } = true;
         private readonly CharacterAnimation _characterAnimation;
 
         public Character(Rigidbody rigidbody, Animator animator)
@@ -29,10 +29,17 @@ namespace Controller
             OnChagedState += _characterAnimation.OnChangedCharacterState;
             Rigidbody = rigidbody;
         }
-        
+        public static void StopUpdate()
+        {
+            _active = false;
+        }
+        public static void StartUpdate()
+        {
+            _active = true;
+        }
         public void Update()
         {
-            if (Controller == null|| !Active)
+            if (Controller == null|| !_active)
             {
                 return;
             }

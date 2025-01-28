@@ -26,42 +26,42 @@ namespace Flow
         public void Initialize(float maxTimerTim)
         {
             _timer.SetTimeout(maxTimerTim);
-            _timer.Stop();
+            _timer.DoStop();
         }
 
         public void DoStart()
         {
-            _timer.Start();
+            _timer.DoStart();
         }
 
         public void DoPause()
         {
-            _timer.Pause();
+            _timer.DoPause();
         }
 
         public void DoResume()
         {
-            _timer.Resume();
+            _timer.DoResume();
         }
 
         public void DoStop()
         {
-            _timer.Stop();
+            _timer.DoStop();
         }
 
         void Update()
         {
-            _timer.Tick();
+            _timer.DoTick();
         }
 
         void Awake()
         {
-            _timer.OnPauseEvent += (t) => OnPause.Invoke(this);
-            _timer.OnResumeEvent += (t) => OnResume.Invoke(this);
-            _timer.OnStartEvent += (t) => OnStart.Invoke(this);
-            _timer.OnStopEvent += (t) => OnStop.Invoke(this);
-            _timer.OnTickEvent += (t) => OnTick.Invoke(this);
-            _timer.OnTimeoutEvent += (t) => OnTimeout.Invoke(this);
+            _timer.OnPause += (t) => OnPause.Invoke(this);
+            _timer.OnResume += (t) => OnResume.Invoke(this);
+            _timer.OnStart += (t) => OnStart.Invoke(this);
+            _timer.OnStop += (t) => OnStop.Invoke(this);
+            _timer.OnTick += (t) => OnTick.Invoke(this);
+            _timer.OnTimeout += (t) => OnTimeout.Invoke(this);
 
             _timer.SetTimeout(_timeout);
         }

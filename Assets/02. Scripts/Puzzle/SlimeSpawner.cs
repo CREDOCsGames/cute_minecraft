@@ -22,8 +22,8 @@ namespace Puzzle
 
         public void Awake()
         {
-            _spawnTimer.OnTimeoutEvent += (t) => SendSpawnMessage();
-            _spawnTimer.OnTimeoutEvent += (t) => _spawnTimer.Start();
+            _spawnTimer.OnTimeout += (t) => SendSpawnMessage();
+            _spawnTimer.OnTimeout += (t) => _spawnTimer.DoStart();
         }
         public void InstreamData(byte[] data)
         {
@@ -42,7 +42,7 @@ namespace Puzzle
             {
                 _spawnTimer.SetTimeout(_interval);
             }
-            _spawnTimer.Tick();
+            _spawnTimer.DoTick();
         }
 
         private void FixedUpdate()
@@ -66,7 +66,7 @@ namespace Puzzle
                 _mediator.InstreamDataCore<FlowerReader>(new byte[] { x, y, z, flower });
                 _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPIT_OUT_SUCCESS);
                 _bWasSpawn = false;
-                _spawnTimer.Start();
+                _spawnTimer.DoStart();
             }
         }
         private void SendSpawnMessage()
@@ -79,7 +79,7 @@ namespace Puzzle
                     _mediator.InstreamDataCore<MonsterReader>(_spawnMessage);
                     _exitTime = Time.time + _killTime;
                     _bWasSpawn = true;
-                    _spawnTimer.Stop();
+                    _spawnTimer.DoStop();
                 }
             }
             else
@@ -94,7 +94,7 @@ namespace Puzzle
             _reader = reader;
             reader.OnChangedStage += OnChangedStage;
             reader.OnRotatedStage += OnRotatedCube;
-            _spawnTimer.Start();
+            _spawnTimer.DoStart();
         }
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
@@ -123,7 +123,7 @@ namespace Puzzle
         public void Destroy()
         {
             _reader.OnChangedStage -= OnChangedStage;
-            _spawnTimer.Stop();
+            _spawnTimer.DoStop();
         }
     }
 }
