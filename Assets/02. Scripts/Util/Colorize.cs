@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Util
@@ -38,19 +39,19 @@ namespace Util
 
         private void Lerp(List<MeshRenderer> materials, Color color)
         {
-            CoroutineRunner.Instance.StartCoroutine(Coroutine(materials, color));
+            CoroutineRunner.instance.StartCoroutine(Coroutine(materials, color));
         }
 
         private void LateColor(List<MeshRenderer> materials, Color color)
         {
-            var coroutineRunner = CoroutineRunner.Instance;
+            var coroutineRunner = CoroutineRunner.instance;
             if (coroutineRunner == null)
             {
                 Fixed(materials, color);
                 return;
             }
 
-            CoroutineRunner.Instance.StartCoroutine(Late(materials, color));
+            CoroutineRunner.instance.StartCoroutine(Late(materials, color));
         }
 
         private static IEnumerator Late(List<MeshRenderer> materials, Color color)

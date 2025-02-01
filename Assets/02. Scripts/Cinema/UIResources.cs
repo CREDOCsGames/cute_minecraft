@@ -12,6 +12,7 @@ public class GameResource<T> where T : MonoBehaviour
             {
                 _instance = GameObject.Instantiate(Resources.Load<T>(_path));
                 _instance.gameObject.SetActive(false);
+                GameObject.DontDestroyOnLoad(_instance);
             }
             return _instance;
         }

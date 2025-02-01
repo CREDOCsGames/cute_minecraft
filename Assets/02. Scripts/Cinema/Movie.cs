@@ -2,30 +2,31 @@ namespace Cinema
 {
     public static class Movie
     {
-        public readonly static MovieCamera INTRO = new(new Film("Intro", 10));
-        public readonly static MovieCamera ENTER_GAME = new(new Film("GameStart", 10));
-        public readonly static MovieCamera ENTER_BOSS = new(new Film("GameStart", 10));
-        private static MovieCamera _movie = MovieCamera.DEFAULT;
-        public static void ChangeCamera(MovieCamera movie)
+        private static Projector _projector = Projector.DEFAULT;
+        public readonly static Projector INTRO = new(FilmContainer.Search("Intro"));
+        public readonly static Projector ENTER_GAME = new(FilmContainer.Search("StartGame"));
+        public readonly static Projector ENTER_BOSS = new(FilmContainer.Search("EnterBoss"));
+
+        public static void ChangeCamera(Projector movie)
         {
-            if (_movie.IsPlaying)
+            if (_projector.IsPlaying)
             {
-                _movie.DoSkip();
+                _projector.DoSkip();
             }
-            _movie = movie;
+            _projector = movie;
         }
         public static void DoPlay()
         {
-            _movie.DoPlay();
+            _projector.DoPlay();
         }
-        public static void DoPlay(MovieCamera movie)
+        public static void DoPlay(Projector movie)
         {
             ChangeCamera(movie);
             DoPlay();
         }
         public static void DoSkip()
         {
-            _movie.DoSkip();
+            _projector.DoSkip();
         }
 
     }

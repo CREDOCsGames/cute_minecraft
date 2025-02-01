@@ -12,7 +12,7 @@ namespace Puzzle
             None, Red, Green
         }
 
-        public HitBoxComponent HitBoxComponent;
+        [field: SerializeField] public HitBoxComponent HitBoxComponent { get; private set; }
         private Color _color;
         public Color Color
         {

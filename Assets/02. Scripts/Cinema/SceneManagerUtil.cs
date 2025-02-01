@@ -1,5 +1,4 @@
 using System.IO;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Util
@@ -8,6 +7,8 @@ namespace Util
     {
         public static bool IsSceneUnvalid(string sceneName)
         {
+            return false;
+            // TODO
             int sceneCount = SceneManager.sceneCountInBuildSettings;
             for (int i = 0; i < sceneCount; i++)
             {

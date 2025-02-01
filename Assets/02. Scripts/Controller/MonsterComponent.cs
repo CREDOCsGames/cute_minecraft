@@ -20,7 +20,7 @@ namespace Controller
         }
         public void Exit(Vector3 dir)
         {
-            _character.Rigidbody.excludeLayers = -1;
+            _character.Rigidbody.excludeLayers = -1 - LayerMask.GetMask("Wall");
             _character.ChangeController(new CanNotControl());
             _character.Rigidbody.AddForce(dir, ForceMode.Impulse);
             // _character.Die();

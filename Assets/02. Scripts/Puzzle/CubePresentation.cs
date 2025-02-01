@@ -2,6 +2,7 @@
 using Movement;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Movement.MovementAction;
 
@@ -56,7 +57,7 @@ namespace Puzzle
             {
                 return; 
             }
-            Util.CoroutineRunner.Instance.StartCoroutine(Action(path));
+            CoroutineRunner.instance.StartCoroutine(Action(path));
         }
         private IEnumerator Action(string path)
         {

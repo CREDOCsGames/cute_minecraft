@@ -3,19 +3,27 @@ using UnityEngine.Timeline;
 
 namespace Cinema
 {
+    public static class FilmFactory
+    {
+        public static Film MakeFilmAs(TimelineAsset timeline)
+        {
+            return new Film(timeline.name, (float)timeline.duration);
+        }
+    }
+
     public class TimelineMovieComponent : MonoBehaviour
     {
-        [SerializeField] private string _sceneName;
         [SerializeField] private TimelineAsset _timeLine;
+        [SerializeField] private Object _scene;
         private Film _film = Film.EMPTY;
-        private MovieCamera _movie;
+        private Projector _movie;
 
         private void Awake()
         {
-            _movie = new MovieCamera();
-            if (string.IsNullOrEmpty(_sceneName) || _timeLine)
+            _movie = new Projector();
+            if (_scene && _timeLine)
             {
-                _film = new Film(_sceneName, (float)_timeLine.duration);
+                _film = FilmFactory.MakeFilmAs(_timeLine);
             }
             else
             {

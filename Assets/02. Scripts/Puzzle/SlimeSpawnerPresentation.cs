@@ -1,6 +1,8 @@
 using Battle;
 using Controller;
+using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 namespace Puzzle
@@ -29,10 +31,10 @@ namespace Puzzle
         {
             if (data == MonsterReader.SLIME_SPAWN)
             {
-                SpawnSlime();
+                CoroutineRunner.instance.StartCoroutine(SpawnSlime());
             }
         }
-        private void SpawnSlime()
+        private IEnumerator SpawnSlime()
         {
             var go = GameObject.Instantiate(_slime);
             _positionAngle = Random.Range(0, 360);
@@ -40,7 +42,8 @@ namespace Puzzle
             _jumpController.EndPoint = CalculatePointOnCircle(EndRadius, _jumpCurve.keys[^1].value);
             go.transform.position = _jumpController.StartPoint;
             go.transform.LookAt(_jumpController.EndPoint);
-            CoroutineRunner.InvokeDelayAction(() => CoroutineRunner.Instance.StartCoroutine(_jumpController.Move(go.transform)), 4f);
+            yield return new WaitForSeconds(4f);
+            CoroutineRunner.instance.StartCoroutine(_jumpController.Move(go.transform));
         }
         private Vector3 CalculatePointOnCircle(float radius, float heightOffset = 0f)
         {
@@ -62,7 +65,7 @@ namespace Puzzle
             {
                 var controller = new Controller.MonsterState();
                 var list = GameObject.FindObjectsOfType<Flower>().ToList();
-                list = list.Where(f => f.transform.position.y > list.Max(x => x.transform.position.y)-1f).ToList();
+                list = list.Where(f => f.transform.position.y > list.Max(x => x.transform.position.y) - 1f).ToList();
                 if (list.Count == 0) return;
                 var target = list[Random.Range(0, list.Count)].transform;
                 controller.StartTrace(target);
