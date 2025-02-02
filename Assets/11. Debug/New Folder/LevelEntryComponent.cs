@@ -23,6 +23,7 @@ namespace Puzzle
             if (_icon.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space))
             {
                 _icon.gameObject.SetActive(false);
+                GetComponent<Collider>().enabled = false;
                 Movie.DoPlay(Movie.ENTER_BOSS);
             }
         }
