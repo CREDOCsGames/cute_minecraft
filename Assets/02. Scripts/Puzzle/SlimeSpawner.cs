@@ -27,7 +27,7 @@ namespace Puzzle
         }
         public void InstreamData(byte[] data)
         {
-            if(data.Equals(MonsterReader.BOSS_SPIT_OUT_FAIL))
+            if (data.Equals(MonsterReader.BOSS_SPIT_OUT_FAIL))
             {
                 _bWasSpawn = false;
             }
@@ -47,7 +47,7 @@ namespace Puzzle
 
         private void FixedUpdate()
         {
-            if(_mediator == null)
+            if (_mediator == null)
             {
                 return;
             }
@@ -92,9 +92,12 @@ namespace Puzzle
         {
             _map = reader.Map;
             _reader = reader;
-            reader.OnChangedStage += OnChangedStage;
-            reader.OnRotatedStage += OnRotatedCube;
+            reader.OnStartLevel += OnChangedStage;
+            reader.OnRotatedCube += OnRotatedCube;
             _spawnTimer.DoStart();
+            _spawnTimer.DoPause();
+            _reader.OnStartLevel += (face) => _spawnTimer.DoResume();
+            _reader.OnClearLevel += (face) => _spawnTimer.DoPause();
         }
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
@@ -122,7 +125,7 @@ namespace Puzzle
         }
         public void Destroy()
         {
-            _reader.OnChangedStage -= OnChangedStage;
+            _reader.OnStartLevel -= OnChangedStage;
             _spawnTimer.DoStop();
         }
     }

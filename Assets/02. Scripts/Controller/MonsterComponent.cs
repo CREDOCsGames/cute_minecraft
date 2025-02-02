@@ -34,8 +34,8 @@ namespace Controller
         {
             _character?.Hit();
             _character.ChangeController(new MonsterHit(_character.Controller));
-            Vector3 dir = coll.Attacker.forward.normalized; dir.y = 1;
-            _rigidbody.AddForce(dir * 5f, ForceMode.Impulse);
+            Vector3 dir = coll.Attacker.forward; dir.y = 1;
+            _rigidbody.AddForce(dir * 5f, ForceMode.Impulse); 
         }
         public void EnterGround()
         => _character?.EnterGound();
@@ -50,15 +50,22 @@ namespace Controller
     public class MonsterHit : IController
     {
         private IController _savedState;
+        private readonly float _minTime;
         public MonsterHit(IController controller)
         {
             _savedState = controller;
+            _minTime = Time.time + 0.5f;
         }
         public void HandleInput(Character player)
         {
             if (player.State is CharacterState.Hit && !player.IsActionFinished)
             {
                 player.ExitGound();
+                return;
+            }
+
+            if(Time.time < _minTime)
+            {
                 return;
             }
 

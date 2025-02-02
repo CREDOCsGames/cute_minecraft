@@ -66,10 +66,10 @@ namespace Puzzle
                 var flower = _cubeMap.GetElements(index);
                 if ((byte)face == index[2])
                 {
-
                     index[2] = (byte)Face.top;
                     _puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
                     flower.transform.position = _puzzleData.BaseTransform.position + position;
+                    flower.transform.rotation = Quaternion.identity;
                     flower.gameObject.SetActive(flower.Color != Color.clear);
                 }
                 else

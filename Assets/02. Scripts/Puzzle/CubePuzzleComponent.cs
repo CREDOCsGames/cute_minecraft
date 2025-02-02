@@ -16,8 +16,10 @@ namespace Puzzle
         private CubePuzzleDataReader _puzzleReaderForInstance;
         private CubePuzzleReaderForCore _puzzleReaderForCore;
         private readonly MediatorCenter _mediatorCenter = new();
-        private readonly UnityEvent<Face> _rotatedStageEvent = new();
-        private readonly UnityEvent<Face> _changedStageEvent = new();
+        private readonly UnityEvent _onReady = new();
+        private readonly UnityEvent<Face> _clearLevelEvent = new();
+        private readonly UnityEvent<Face> _rotatedCubeEvent = new();
+        private readonly UnityEvent<Face> _startLevelEvent = new();
         [SerializeField] private CubePuzzleData _cubePuzzleData;
 
         private void Awake()
@@ -28,11 +30,12 @@ namespace Puzzle
             }
 
             _systemMessageObserver = new MessageObserver(new SystemReader());
-            _systemMessageObserver.RecieveSystemMessage += MoveNextFace;
+            _systemMessageObserver.RecieveSystemMessage += MoveNextLevel;
             _systemMessageObserver.RecieveSystemMessage += PrintSystemMessage;
 
             _systemMessageObserverCore = new MessageObserverCore(new SystemReader());
-            _systemMessageObserverCore.RecieveSystemMessage += OnRotateFace;
+            _systemMessageObserverCore.RecieveSystemMessage += OnReady;
+            _systemMessageObserverCore.RecieveSystemMessage += OnRotateCube;
 
             _puzzleMessageObserver = new MessageObserver(new FlowerReader());
             _puzzleMessageObserver.RecieveSystemMessage += PrintFlowerMessage;
@@ -40,15 +43,19 @@ namespace Puzzle
             _monsterMessageObserver = new MessageObserver(new MonsterReader());
             _monsterMessageObserver.RecieveSystemMessage += PrintMonsterMessage;
 
-            _puzzleDataReader = new(_cubePuzzleData, _rotatedStageEvent);
+            _puzzleDataReader = new(_cubePuzzleData, _rotatedCubeEvent);
             _puzzleDataReader.GlobalCoreObservers.Add(_systemMessageObserverCore);
             _puzzleDataReader.GlobalInstanceObservers.Add(_systemMessageObserver);
             _puzzleDataReader.GlobalInstanceObservers.Add(_puzzleMessageObserver);
             _puzzleDataReader.GlobalInstanceObservers.Add(_monsterMessageObserver);
 
             _cubeMap = new(_cubePuzzleData.Width, _cubePuzzleData.Elements);
-            _puzzleReaderForInstance = new(_cubePuzzleData, _rotatedStageEvent);
-            _puzzleReaderForCore = new(_cubeMap, _changedStageEvent, _rotatedStageEvent);
+            _puzzleReaderForInstance = new(_cubePuzzleData, _rotatedCubeEvent);
+            _puzzleReaderForCore = new(_cubeMap,
+                                       _startLevelEvent,
+                                       _clearLevelEvent,
+                                       _rotatedCubeEvent,
+                                       _onReady);
 
             SettingAllResources();
             StartPuzzle(Face.top);
@@ -58,7 +65,7 @@ namespace Puzzle
             ClearUnusedResources(playFace);
             SettingNewlyUsedResources(playFace);
             _puzzleDataReader.MoveReadWindow(playFace);
-            _changedStageEvent.Invoke(playFace);
+            _startLevelEvent.Invoke(playFace);
         }
         private void ClearAllResources()
         {
@@ -110,19 +117,20 @@ namespace Puzzle
             newlyCores.ForEach(x => (x as IPuzzleCore)?.Init(_puzzleReaderForCore));
             newlyInstances.ForEach(x => (x as IPuzzleInstance)?.Init(_puzzleReaderForInstance));
         }
-        private void MoveNextFace(byte[] data)
+        private void MoveNextLevel(byte[] data)
         {
             if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
             {
+                _clearLevelEvent?.Invoke((Face)(data[0] - 1));
                 ClearAllResources();
             }
             else
             if (SystemReader.IsClearFace(data))
             {
-                StartPuzzle(_puzzleDataReader.ReadWindow + 1);
+                _clearLevelEvent?.Invoke((Face)(data[0] - 1));
             }
         }
-        private void OnRotateFace(byte[] data)
+        private void OnRotateCube(byte[] data)
         {
             if (!data.Equals(SystemReader.ROTATE_CUBE))
             {
@@ -167,7 +175,16 @@ namespace Puzzle
             }
 
             Debug.Log($"[Rotate] {target}");
-            _rotatedStageEvent.Invoke(target);
+            _rotatedCubeEvent.Invoke(target);
+        }
+        private void OnReady(byte[] data)
+        {
+            if (!data.Equals(SystemReader.READY_PLAYER))
+            {
+                return;
+            }
+            _onReady?.Invoke();
+            StartPuzzle(_puzzleDataReader.ReadWindow + 1);
         }
         private void PrintSystemMessage(byte[] data)
         {

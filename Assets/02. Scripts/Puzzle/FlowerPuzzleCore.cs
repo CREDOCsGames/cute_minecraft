@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Puzzle
@@ -8,8 +7,10 @@ namespace Puzzle
     public class FlowerPuzzleCore : ScriptableObject, ICore, IPuzzleCore
     {
         public DataReader DataReader { get; private set; } = new FlowerReader();
+        private bool _isStart;
         private CubeMap<byte> _puzzle;
         private IMediatorCore _mediator;
+        private CubePuzzleReaderForCore _reader;
         private readonly CoreFunction _crossAttack = FlowerCoreFuntions.AttackCross;
         private readonly CoreFunction _dotAttack = FlowerCoreFuntions.AttackDot;
         private readonly CoreFunction _createFlower = FlowerCoreFuntions.CreateFlower;
@@ -17,6 +18,10 @@ namespace Puzzle
 
         public void InstreamData(byte[] data)
         {
+            if (!_isStart)
+            {
+                return;
+            }
             List<byte[]> puzzleMessages = new();
             switch (data[3])
             {
@@ -45,6 +50,9 @@ namespace Puzzle
         }
         public void Init(CubePuzzleReaderForCore reader)
         {
+            _reader = reader;
+            _reader.OnStartLevel += (face) => _isStart = true;
+            _reader.OnClearLevel += (face) => _isStart = false;
             _puzzle = reader.Map;
         }
         public void SetMediator(IMediatorCore mediator)

@@ -72,6 +72,11 @@ namespace Puzzle
                 slime._character.ChangeController(controller);
                 slime._character.Idle();
                 slime._character.Rigidbody.excludeLayers = LayerMask.GetMask("Default");
+                var footstep = transform.GetComponentInChildren<FootstepComponent>();
+                if (footstep)
+                {
+                    footstep.OnLand();
+                }
             }
         }
     }
