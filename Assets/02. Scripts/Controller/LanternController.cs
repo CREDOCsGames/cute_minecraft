@@ -9,7 +9,6 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
     public float MoveTime;
     public float LenternInterval;
     public Vector3 LanternMoveHight;
-    public Transform Cube;
 
     public Vector3 FrontSide;
     public Vector3 LeftSide;
@@ -18,6 +17,7 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
     public bool IsDisapear { get; private set; } = false;
 
     private CubePuzzleDataReader _castingPuzzleData;
+    private Transform _cube;
     private Vector3 _cubeCenter;
     private byte _cubeWidth;
 
@@ -73,17 +73,18 @@ public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDes
     {
         if (face == Face.top || face == Face.right || face == Face.bottom)
         {
-            Lentern_Active(SwitchPositionFromDirection(-Cube.transform.forward));
+            Lentern_Active(SwitchPositionFromDirection(-_cube.transform.forward));
         }
         else
         {
-            Lentern_Active(SwitchPositionFromDirection(Cube.transform.up));
+            Lentern_Active(SwitchPositionFromDirection(_cube.transform.up));
         }
     }
 
     private void SetSpawnPoint(CubePuzzleDataReader puzzleData)
     {
         _cubeCenter = puzzleData.BaseTransform.position;
+        _cube = puzzleData.BaseTransform;
         float _cubeInterval = _cubeWidth + LenternInterval;
 
         FrontSide = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z + _cubeInterval);
