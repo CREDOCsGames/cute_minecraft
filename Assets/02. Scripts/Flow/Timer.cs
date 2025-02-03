@@ -1,41 +1,28 @@
 using System;
+using System.Collections;
 
 namespace Flow
 {
     public class Timer
     {
-        public event Action<Timer> OnStartEvent;
-        public event Action<Timer> OnStopEvent;
-        public event Action<Timer> OnPauseEvent;
-        public event Action<Timer> OnResumeEvent;
-        public event Action<Timer> OnTimeoutEvent;
-        public event Action<Timer> OnTickEvent;
-
+        public event Action<Timer> OnStart;
+        public event Action<Timer> OnStop;
+        public event Action<Timer> OnPause;
+        public event Action<Timer> OnResume;
+        public event Action<Timer> OnTimeout;
+        public event Action<Timer> OnTick;
         public bool IsPause { get; private set; }
-
         public bool IsStart { get; private set; }
-
         public float Timeout { get; private set; }
-
         public float ElapsedTime { get; private set; }
-
         public float LastPauseTime { get; private set; }
-
         private float _lastTickTime { get; set; }
-
         private static float _serverTime => ServerTime.Time;
 
         public Timer()
         {
         }
-
-        public Timer(float timeout, Action<Timer> timeOutAction)
-        {
-            SetTimeout(timeout);
-            OnTimeoutEvent += timeOutAction;
-        }
-
-        public void Start()
+        public void DoStart()
         {
             if (IsStart)
             {
@@ -46,10 +33,9 @@ namespace Flow
             IsPause = false;
             ElapsedTime = 0f;
             _lastTickTime = _serverTime;
-            OnStartEvent?.Invoke(this);
+            OnStart?.Invoke(this);
         }
-
-        public void Stop()
+        public void DoStop()
         {
             if (IsStart == false)
             {
@@ -57,10 +43,9 @@ namespace Flow
             }
 
             IsStart = false;
-            OnStopEvent?.Invoke(this);
+            OnStop?.Invoke(this);
         }
-
-        public void Pause()
+        public void DoPause()
         {
             if (IsPause)
             {
@@ -69,10 +54,9 @@ namespace Flow
 
             IsPause = true;
             LastPauseTime = _serverTime;
-            OnPauseEvent?.Invoke(this);
+            OnPause?.Invoke(this);
         }
-
-        public void Resume()
+        public void DoResume()
         {
             if (!IsPause)
             {
@@ -80,21 +64,18 @@ namespace Flow
             }
 
             IsPause = false;
-            OnResumeEvent?.Invoke(this);
+            OnResume?.Invoke(this);
             _lastTickTime = _serverTime;
         }
-
         public void SetTimeout(float timeout)
         {
             Timeout = timeout;
         }
-
         public void RemoveTimeout()
         {
             Timeout = 0f;
         }
-
-        public void Tick()
+        public void DoTick()
         {
             if (!IsStart || IsPause)
             {
@@ -103,7 +84,7 @@ namespace Flow
 
             ElapsedTime += _serverTime - _lastTickTime;
             _lastTickTime = _serverTime;
-            OnTickEvent?.Invoke(this);
+            OnTick?.Invoke(this);
 
             if (Timeout == 0)
             {
@@ -115,11 +96,18 @@ namespace Flow
                 DoTimeout();
             }
         }
-
+        public IEnumerator Update()
+        {
+            while (true)
+            {
+                yield return null;
+                DoTick();
+            }
+        }
         private void DoTimeout()
         {
             IsStart = false;
-            OnTimeoutEvent?.Invoke(this);
+            OnTimeout?.Invoke(this);
         }
     }
 }

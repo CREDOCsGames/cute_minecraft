@@ -18,9 +18,10 @@ namespace Controller
         public Vector3 Position => Rigidbody.position;
         public IController Controller { get; private set; }
         public readonly Rigidbody Rigidbody;
-        private readonly CharacterAnimation _characterAnimation;
         public Transform Transform => Rigidbody.transform;
         public event Action<CharacterState> OnChagedState;
+        private static bool _active { get; set; } = true;
+        private readonly CharacterAnimation _characterAnimation;
 
         public Character(Rigidbody rigidbody, Animator animator)
         {
@@ -28,9 +29,17 @@ namespace Controller
             OnChagedState += _characterAnimation.OnChangedCharacterState;
             Rigidbody = rigidbody;
         }
+        public static void StopUpdate()
+        {
+            _active = false;
+        }
+        public static void StartUpdate()
+        {
+            _active = true;
+        }
         public void Update()
         {
-            if (Controller == null)
+            if (Controller == null|| !_active)
             {
                 return;
             }

@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,7 +220,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,7 +304,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -388,7 +388,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -477,73 +477,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1771b8f7699d7be4fbe6aaabb13c04d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnShowEvent:
+  _onShowEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 361431570748714050}
-        m_TargetAssemblyTypeName: PlatformGame.TypingEffects, Assembly-CSharp
-        m_MethodName: StartEffects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8699888662959027606}
-        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: StartTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHideEvent:
+      m_Calls: []
+  _onHideEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 361431570748714050}
-        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
-        m_MethodName: StopAllCoroutines
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8699888662959027606}
-        m_TargetAssemblyTypeName: PlatformGame.TimerComponent, Assembly-CSharp
-        m_MethodName: StopTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  UI: {fileID: 8112115725841161066}
-  E: {fileID: 2763461157059248837}
-  W: {fileID: 3824301731309415777}
-  S: {fileID: 3085794600468812616}
-  N: {fileID: 4521585161571060723}
-  C: {fileID: 2987438340021617875}
-  NE: {fileID: 7128019361730904711}
-  NW: {fileID: 7016016445275805717}
-  SE: {fileID: 4633639426595015878}
-  SW: {fileID: 3336262453628173677}
-  Arrow: {fileID: 8996218830999734762}
-  mHeightUnit: 1
-  interval: 23
+      m_Calls: []
+  _ui: {fileID: 0}
+  _e: {fileID: 0}
+  _w: {fileID: 0}
+  _s: {fileID: 0}
+  _n: {fileID: 0}
+  _c: {fileID: 0}
+  _ne: {fileID: 0}
+  _nw: {fileID: 0}
+  _se: {fileID: 0}
+  _sw: {fileID: 0}
+  _arrow: {fileID: 0}
+  _heightUnit: 1
+  _interval: 23
 --- !u!114 &15799401385719715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf506610ecebd748bf733e12e08d41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mType: 2
-  mTarget: {fileID: 0}
+  _type: 0
+  _target: {fileID: 0}
 --- !u!114 &8699888662959027606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,16 +522,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0f86d70753e4740b496676fca4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStartTimer:
+  OnStart:
     m_PersistentCalls:
       m_Calls: []
-  OnStopTimer:
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
-  OnPauseTimer:
+  OnPause:
     m_PersistentCalls:
       m_Calls: []
-  OnResumeTimer:
+  OnResume:
     m_PersistentCalls:
       m_Calls: []
   OnTick:
@@ -600,10 +552,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mTimeout: 10
-  mbPlayOnAwake: 1
-  mbUseDebug: 0
-  mTimeoutKey: 
+  _timeout: 0
+  _playOnAwake: 1
 --- !u!1 &3682203879829179158
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +606,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -740,7 +690,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -824,7 +774,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1064,10 +1014,10 @@ MonoBehaviour:
   OnTypingEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  UI: {fileID: 8112115725841161066}
-  Type: 1
-  Duration: 3
-  FixedInterval: 0.1
+  _ui: {fileID: 0}
+  _type: 0
+  _duration: 0
+  _fixedInterval: 0
 --- !u!114 &8112115725841161066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1159,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1293,7 +1243,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

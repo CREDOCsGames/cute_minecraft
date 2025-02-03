@@ -20,15 +20,14 @@ namespace Puzzle
         [SerializeField, Range(0, 1000)] private float _interval = 15f;
         private CubePuzzleReaderForCore _reader;
 
-
         public void Awake()
         {
-            _spawnTimer.OnTimeoutEvent += (t) => SendSpawnMessage();
-            _spawnTimer.OnTimeoutEvent += (t) => _spawnTimer.Start();
+            _spawnTimer.OnTimeout += (t) => SendSpawnMessage();
+            _spawnTimer.OnTimeout += (t) => _spawnTimer.DoStart();
         }
         public void InstreamData(byte[] data)
         {
-            if(data.Equals(MonsterReader.BOSS_SPIT_OUT_FAIL))
+            if (data.Equals(MonsterReader.BOSS_SPIT_OUT_FAIL))
             {
                 _bWasSpawn = false;
             }
@@ -36,7 +35,6 @@ namespace Puzzle
         public void SetMediator(IMediatorCore mediator)
         {
             _mediator = mediator;
-            _spawnTimer.Start();
         }
         private void Update()
         {
@@ -44,11 +42,16 @@ namespace Puzzle
             {
                 _spawnTimer.SetTimeout(_interval);
             }
-            _spawnTimer.Tick();
+            _spawnTimer.DoTick();
         }
 
         private void FixedUpdate()
         {
+            if (_mediator == null)
+            {
+                return;
+            }
+
             if (_bWasSpawn && _exitTime < Time.time)
             {
                 var x = _spawnMessage[0];
@@ -63,11 +66,9 @@ namespace Puzzle
                 _mediator.InstreamDataCore<FlowerReader>(new byte[] { x, y, z, flower });
                 _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPIT_OUT_SUCCESS);
                 _bWasSpawn = false;
-                _spawnTimer.Start();
+                _spawnTimer.DoStart();
             }
         }
-
-
         private void SendSpawnMessage()
         {
             if (_currentLevel is Face.bottom)
@@ -78,7 +79,7 @@ namespace Puzzle
                     _mediator.InstreamDataCore<MonsterReader>(_spawnMessage);
                     _exitTime = Time.time + _killTime;
                     _bWasSpawn = true;
-                    _spawnTimer.Stop();
+                    _spawnTimer.DoStop();
                 }
             }
             else
@@ -87,15 +88,17 @@ namespace Puzzle
                 _mediator.InstreamDataCore<MonsterReader>(_spawnMessage);
             }
         }
-
         public void Init(CubePuzzleReaderForCore reader)
         {
             _map = reader.Map;
             _reader = reader;
-            reader.OnChangedStage += OnChangedStage;
-            reader.OnRotatedStage += OnRotatedCube;
+            reader.OnStartLevel += OnChangedStage;
+            reader.OnRotatedCube += OnRotatedCube;
+            _spawnTimer.DoStart();
+            _spawnTimer.DoPause();
+            _reader.OnStartLevel += (face) => _spawnTimer.DoResume();
+            _reader.OnClearLevel += (face) => _spawnTimer.DoPause();
         }
-
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
             var indices = _map.GetIndex(_playingFace);
@@ -112,7 +115,6 @@ namespace Puzzle
             position = new byte[] { };
             return false;
         }
-
         private void OnChangedStage(Face face)
         {
             _currentLevel = face;
@@ -121,10 +123,10 @@ namespace Puzzle
         {
             _playingFace = face;
         }
-
         public void Destroy()
         {
-            _reader.OnChangedStage -= OnChangedStage;
+            _reader.OnStartLevel -= OnChangedStage;
+            _spawnTimer.DoStop();
         }
     }
 }

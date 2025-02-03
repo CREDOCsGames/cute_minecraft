@@ -6,17 +6,22 @@ namespace Puzzle
     public class CubePuzzleReaderForCore
     {
         public readonly CubeMap<byte> Map;
-        public event Action<Face> OnChangedStage;
-        public event Action<Face> OnRotatedStage;
-
+        public event Action OnReady;
+        public event Action<Face> OnStartLevel;
+        public event Action<Face> OnClearLevel;
+        public event Action<Face> OnRotatedCube;
         public CubePuzzleReaderForCore(
             CubeMap<byte> map,
-            UnityEvent<Face> onChangedStage,
-            UnityEvent<Face> onRotatedStage)
+            UnityEvent<Face> onStartLevel,
+            UnityEvent<Face> onClearLevel,
+            UnityEvent<Face> onRotatedCube,
+            UnityEvent onReady)
         {
             Map = map;
-            onChangedStage.AddListener((face) => OnChangedStage?.Invoke(face));
-            onRotatedStage.AddListener((face) => OnRotatedStage?.Invoke(face));
+            onStartLevel.AddListener((face) => OnStartLevel?.Invoke(face));
+            onClearLevel.AddListener((face) => OnClearLevel?.Invoke(face));
+            onRotatedCube.AddListener((face) => OnRotatedCube?.Invoke(face));
+            onReady.AddListener(() => OnReady?.Invoke());
         }
     }
 

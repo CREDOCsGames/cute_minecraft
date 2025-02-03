@@ -5,7 +5,7 @@ using static Movement.MovementAction;
 
 namespace Puzzle
 {
-    public class CubeInstance : MonoBehaviour, IInstance, IPuzzleInstance
+    public class CubeInstance : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
     {
         public DataReader DataReader => new SystemReader();
         private AreaWall _areaWall;
@@ -41,14 +41,13 @@ namespace Puzzle
             _presentation.SetReader(reader);
             _presentation.RotatedEvent += OnRotated;
         }
-
         public void InstreamData(byte[] data)
         {
             _presentation.InstreamData(data);
             if (data.Equals(SystemReader.CLEAR_BACK_FACE))
             {
-                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
                 _areaWall.Destroy();
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
                 _areaWall.Create();
             }
         }
@@ -75,6 +74,11 @@ namespace Puzzle
         private void OnRotated()
         {
             _mediator.InstreamDataInstance<SystemReader>(SystemReader.ROTATE_CUBE);
+        }
+
+        public void Destroy()
+        {
+            _presentation.RotatedEvent -= OnRotated;
         }
     }
 

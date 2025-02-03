@@ -43,6 +43,7 @@ namespace Puzzle
         public void Init(CubePuzzleReaderForCore reader)
          {
             _puzzle = reader.Map;
+            gameObject.SetActive(true);
             _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPAWN);
         }
         public void SetMediator(IMediatorCore mediator)
