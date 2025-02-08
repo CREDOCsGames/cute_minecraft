@@ -39,7 +39,7 @@ namespace Controller
         }
         public void Update()
         {
-            if (Controller == null|| !_active)
+            if (Controller == null || !_active)
             {
                 return;
             }
@@ -61,6 +61,7 @@ namespace Controller
         public void Move(Vector3 moveDirection)
         {
             ChangeState(CharacterState.Run);
+            moveDirection = moveDirection.normalized;
             var velocity = moveDirection * MoveSpeed;
             Rigidbody.velocity = velocity;
         }

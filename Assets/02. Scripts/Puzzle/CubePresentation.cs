@@ -25,37 +25,12 @@ namespace Puzzle
         }
         public void InstreamData(byte[] data)
         {
-            if (SystemReader.CLEAR_TOP_FACE.Equals(data))
-            {
-                CommandAction(ROTATE_ROLL_P90);
-            }
-            else if (SystemReader.CLEAR_LEFT_FACE.Equals(data))
-            {
-                CommandAction(ROTATE_PITCH_P90);
-            }
-            else if (SystemReader.CLEAR_FRONT_FACE.Equals(data))
-            {
-                CommandAction(ROTATE_PITCH_P90);
-            }
-            else if (SystemReader.CLEAR_RIGHT_FACE.Equals(data))
-            {
-                CommandAction(ROTATE_PITCH_P90);
-            }
-            else if (SystemReader.CLEAR_BACK_FACE.Equals(data))
-            {
-                CommandAction(ROTATE_ROLL_P90);
-            }
-            else if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
-            {
-                // Level Clear Event
-            }
-
         }
         public void CommandAction(string path)
         {
             if (IsActing)
             {
-                return; 
+                return;
             }
             CoroutineRunner.instance.StartCoroutine(Action(path));
         }

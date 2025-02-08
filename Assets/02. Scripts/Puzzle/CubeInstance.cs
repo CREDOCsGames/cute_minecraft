@@ -8,6 +8,7 @@ namespace Puzzle
     public class CubeInstance : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
     {
         public DataReader DataReader => new SystemReader();
+        private bool _boss;
         private AreaWall _areaWall;
         private MovementComponent _movement;
         private CubePresentation _presentation;
@@ -44,11 +45,15 @@ namespace Puzzle
         public void InstreamData(byte[] data)
         {
             _presentation.InstreamData(data);
-            if (data.Equals(SystemReader.CLEAR_BACK_FACE))
+            if (SystemReader.IsClearFace(data))
             {
                 _areaWall.Destroy();
                 _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
                 _areaWall.Create();
+            }
+            if (SystemReader.CLEAR_BACK_FACE.Equals(data))
+            {
+                _boss = true;
             }
         }
         public void TurnRight()
@@ -74,12 +79,16 @@ namespace Puzzle
         private void OnRotated()
         {
             _mediator.InstreamDataInstance<SystemReader>(SystemReader.ROTATE_CUBE);
+            if (!_boss)
+            {
+                _areaWall.Destroy();
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.Wall}");
+                _areaWall.Create();
+            }
         }
-
         public void Destroy()
         {
             _presentation.RotatedEvent -= OnRotated;
         }
     }
-
 }

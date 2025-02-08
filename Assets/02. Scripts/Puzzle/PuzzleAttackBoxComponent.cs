@@ -23,25 +23,24 @@ namespace Puzzle
 
         protected override void FixedUpdate()
         {
-            base.FixedUpdate();
             _focus = null;
             if (0 < _hitTargets.Count)
             {
                 _focus = _hitTargets[0];
                 _cursorInstance.transform.position = _focus.transform.position + (Vector3.up * 2f);
-                AttackBox.CheckCollision(_focus);
                 _hitTargets.Clear();
+                base.OnTriggerStay(_focus);
             }
             _cursorInstance.SetActive(_focus != null);
-
         }
 
         protected override void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent<IHitBox>(out var hitBox))
+            if (!other.TryGetComponent<IHitBox>(out var hitBox))
             {
-                _hitTargets.Add(other);
+                return;
             }
+            _hitTargets.Add(other);
         }
 
         protected override void OnDestroy()

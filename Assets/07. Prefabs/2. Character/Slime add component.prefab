@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2741798824799845786}
   _animator: {fileID: 6719387171652835999}
+  _attackBox: {fileID: 8842745012265108206}
 --- !u!54 &2741798824799845786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -892,7 +893,19 @@ MonoBehaviour:
   _actor: {fileID: 4644733102201766465}
   _onAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1147538ab5dc23649a06578797f8925b, type: 2}
+        m_TargetAssemblyTypeName: PlatformGame.Debugger.DebugLog, Assembly-CSharp
+        m_MethodName: PrintLog
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _attackWindow: 1
   _boxType: 1
   _type: 2
