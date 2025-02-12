@@ -20,7 +20,7 @@ namespace Battle
                 enable = value;
             }
         }
-        [NonSerialized] public Vector3 Dir;
+        [NonSerialized] public Vector3 Dir = Vector3.one;
 
         private void OnTriggerEnter(Collider collision)
         {

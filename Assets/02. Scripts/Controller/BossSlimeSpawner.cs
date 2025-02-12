@@ -29,7 +29,7 @@ public class BossSlimeSpawner : MonoBehaviour
         {
             return;
         }
-        if(state is CharacterState.Die)
+        if(state is CharacterState.Hit)
         {
             _controller.Stop();
         }

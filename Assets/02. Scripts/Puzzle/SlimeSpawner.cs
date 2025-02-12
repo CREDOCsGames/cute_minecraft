@@ -16,14 +16,12 @@ namespace Puzzle
         private float _exitTime;
         private bool _bWasSpawn;
         [SerializeField] private float _killTime = 1f;
-        [SerializeField] private FaceFlags _bossStages;
         [SerializeField, Range(0, 1000)] private float _interval = 15f;
         private CubePuzzleReaderForCore _reader;
 
         public void Awake()
         {
             _spawnTimer.OnTimeout += (t) => SendSpawnMessage();
-            _spawnTimer.OnTimeout += (t) => _spawnTimer.DoStart();
         }
         public void InstreamData(byte[] data)
         {
@@ -51,9 +49,9 @@ namespace Puzzle
             {
                 return;
             }
-
             if (_bWasSpawn && _exitTime < Time.time)
             {
+                _bWasSpawn = false;
                 var x = _spawnMessage[0];
                 var y = _spawnMessage[1];
                 var z = (byte)_playingFace;
@@ -65,7 +63,13 @@ namespace Puzzle
                 var flower = _map.GetElements(x, y, z);
                 _mediator.InstreamDataCore<FlowerReader>(new byte[] { x, y, z, flower });
                 _mediator.InstreamDataCore<MonsterReader>(MonsterReader.BOSS_SPIT_OUT_SUCCESS);
-                _bWasSpawn = false;
+            }
+            if (_bWasSpawn)
+            {
+                return;
+            }
+            if (!_spawnTimer.IsStart)
+            {
                 _spawnTimer.DoStart();
             }
         }
@@ -79,7 +83,6 @@ namespace Puzzle
                     _mediator.InstreamDataCore<MonsterReader>(_spawnMessage);
                     _exitTime = Time.time + _killTime;
                     _bWasSpawn = true;
-                    _spawnTimer.DoStop();
                 }
             }
             else
@@ -92,12 +95,18 @@ namespace Puzzle
         {
             _map = reader.Map;
             _reader = reader;
-            reader.OnStartLevel += OnChangedStage;
-            reader.OnRotatedCube += OnRotatedCube;
             _spawnTimer.DoStart();
             _spawnTimer.DoPause();
-            _reader.OnStartLevel += (face) => _spawnTimer.DoResume();
-            _reader.OnClearLevel += (face) => _spawnTimer.DoPause();
+            _reader.OnClearLevel += OnClearLevel;
+            _reader.OnStartLevel += OnStartLevel;
+            _reader.OnRotatedCube += OnRotatedCube;
+        }
+        public void Destroy()
+        {
+            _reader.OnRotatedCube -= OnRotatedCube;
+            _reader.OnStartLevel -= OnStartLevel;
+            _reader.OnClearLevel -= OnClearLevel;
+            _spawnTimer.DoStop();
         }
         private bool TryCalculateSpanwPosition(out byte[] position)
         {
@@ -115,18 +124,19 @@ namespace Puzzle
             position = new byte[] { };
             return false;
         }
-        private void OnChangedStage(Face face)
+        private void OnStartLevel(Face face)
         {
             _currentLevel = face;
+            _spawnTimer.DoStop();
+            _spawnTimer.DoStart();
+        }
+        private void OnClearLevel(Face face)
+        {
+            _spawnTimer.DoPause();
         }
         private void OnRotatedCube(Face face)
         {
             _playingFace = face;
-        }
-        public void Destroy()
-        {
-            _reader.OnStartLevel -= OnChangedStage;
-            _spawnTimer.DoStop();
         }
     }
 }

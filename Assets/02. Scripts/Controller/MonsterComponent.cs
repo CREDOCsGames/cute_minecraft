@@ -26,7 +26,7 @@ namespace Controller
             _character.Rigidbody.excludeLayers = -1 - LayerMask.GetMask("Wall");
             _character.ChangeController(new CanNotControl());
             _character.Rigidbody.AddForce(dir, ForceMode.Impulse);
-            // _character.Die();
+            _character.Hit();
         }
         public void Hit()
         {

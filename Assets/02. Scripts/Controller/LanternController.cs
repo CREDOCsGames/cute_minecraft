@@ -1,18 +1,20 @@
 using Puzzle;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class LanternController : MonoBehaviour, IInstance, IDestroyable
+public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzleInstance
 {
+    public DataReader DataReader { get; private set; } = new SystemReader();
+    private CubePuzzleDataReader _reader;
+    private int index;
     [SerializeField] private float duration;
     [SerializeField] private Vector2 h;
     [SerializeField] private List<Transform> _lanternPositions;
-    public DataReader DataReader { get; private set; } = new SystemReader();
-
     public void InstreamData(byte[] data)
     {
-        int index = -1;
+        index = -1;
         if (SystemReader.CLEAR_TOP_FACE.Equals(data))
         {
             index = 0;
@@ -42,19 +44,38 @@ public class LanternController : MonoBehaviour, IInstance, IDestroyable
         {
             return;
         }
-        if (index < 0 || _lanternPositions.Count <= index)
+        if (0 <= index && index < _lanternPositions.Count)
         {
-            return;
+            CoroutineRunner.instance.StartCoroutine(PlayClearEvent(_lanternPositions[index]));
         }
-        StartCoroutine(PlayClearEvent(_lanternPositions[index]));
     }
-
     private IEnumerator PlayClearEvent(Transform lantern)
+    {
+        CoroutineRunner.instance.StartCoroutine(DownLantern());
+        yield return new WaitForSeconds(duration + 0.5f);
+        CoroutineRunner.instance.StartCoroutine(UpLantern(lantern));
+    }
+    private IEnumerator UpLantern(Transform lantern)
     {
         float t;
         Vector3 prePos, nextPos;
-
-        // down
+        prePos = lantern.position;
+        prePos.y = h.x;
+        nextPos = lantern.position;
+        nextPos.y = h.y;
+        t = 0;
+        gameObject.SetActive(true);
+        while (t < 1)
+        {
+            t = Mathf.Clamp01(t + Time.deltaTime / duration);
+            transform.position = Vector3.Lerp(prePos, nextPos, t);
+            yield return null;
+        }
+    }
+    private IEnumerator DownLantern()
+    {
+        float t;
+        Vector3 prePos, nextPos;
         prePos = transform.position;
         nextPos = transform.position;
         nextPos.y = h.x;
@@ -65,26 +86,18 @@ public class LanternController : MonoBehaviour, IInstance, IDestroyable
             transform.position = Vector3.Lerp(prePos, nextPos, t);
             yield return null;
         }
-
-        yield return new WaitForSeconds(0.5f);
-
-        // up
-        prePos = lantern.position;
-        prePos.y = h.x;
-        nextPos = lantern.position;
-        nextPos.y = h.y;
-        t = 0;
-        while (t < 1)
-        {
-            t = Mathf.Clamp01(t + Time.deltaTime / duration);
-            transform.position = Vector3.Lerp(prePos, nextPos, t);
-            yield return null;
-        }
+        gameObject.SetActive(false);
     }
     public void SetMediator(IMediatorInstance mediator)
     {
     }
     public void Destroy()
     {
+    }
+
+    public void Init(CubePuzzleDataReader puzzleData)
+    {
+        _reader = puzzleData;
+        _reader.OnRotatedStage += (f) => CoroutineRunner.instance.StartCoroutine(DownLantern());
     }
 }
