@@ -15,6 +15,7 @@ public class BossSlimeSpawner : MonoBehaviour
 
     public void SpawnAt(Vector3 slimePosition)
     {
+        // OnSuccess();
         _slimeInstance = Instantiate(slimePrefab, slimePosition, Quaternion.identity);
         _controller.StartPoint = _bitePoint.position;
         _controller.EndPoint = slimePosition;
@@ -37,6 +38,10 @@ public class BossSlimeSpawner : MonoBehaviour
         OnFailed?.Invoke();
     }
     public void OnSuccess()
+    {
+        ClearMonster();
+    }
+    public void ClearMonster()
     {
         if (_slimeInstance == null)
         {

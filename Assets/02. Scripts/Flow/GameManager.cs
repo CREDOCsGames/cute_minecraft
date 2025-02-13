@@ -1,7 +1,12 @@
 using Cinema;
 using Controller;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Flow
 {
@@ -9,6 +14,7 @@ namespace Flow
     {
         public static string CurrentMap { get; private set; } = "EMPTY";
         public static Timer Timer { get; private set; } = new();
+        public static event Action OnStart;
 
         static GameManager()
         {
@@ -18,7 +24,11 @@ namespace Flow
             AddEventToEnterBossMovie();
             AddEventToClearGameMovie();
             AddEventToMovieSkipUI();
-            Debug.Log("Run Game");
+        }
+        public static void StartGame()
+        {
+            GameSceneManager.UpdateState();
+            OnStart?.Invoke();
         }
         private static void AddEventToLoadScene()
         {
@@ -49,10 +59,15 @@ namespace Flow
         }
         private static void AddEventToClearGameMovie()
         {
-            Movie.INTRO.OnPlay += Character.StopUpdate;
-            Movie.INTRO.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
-            Movie.INTRO.OnEnd += Character.StartUpdate;
-            Movie.INTRO.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+            Movie.EXIT_BOSS.OnPlay += Character.StopUpdate;
+            Movie.EXIT_BOSS.OnPlay += UIResources.CutSceneUI.Instance.OnUI;
+            Movie.EXIT_BOSS.OnEnd += UIResources.CutSceneUI.Instance.CloseUI;
+#if UNITY_EDITOR
+            Movie.EXIT_BOSS.OnEnd += () => EditorApplication.Exit(0);
+#else
+            Movie.EXIT_BOSS.OnEnd += Application.Quit;
+#endif
+
         }
         private static void AddEventToMovieSkipUI()
         {

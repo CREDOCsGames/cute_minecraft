@@ -45,15 +45,40 @@ namespace Puzzle
         public void InstreamData(byte[] data)
         {
             _presentation.InstreamData(data);
-            if (SystemReader.IsClearFace(data))
-            {
-                _areaWall.Destroy();
-                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
-                _areaWall.Create();
-            }
             if (SystemReader.CLEAR_BACK_FACE.Equals(data))
             {
                 _boss = true;
+                _areaWall.Destroy();
+                _areaWall.SetSide(Side.left | Side.forward | Side.backward | Side.right);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
+                _areaWall.Create();
+            }
+            else if (SystemReader.CLEAR_TOP_FACE.Equals(data))
+            {
+                _areaWall.Destroy();
+                _areaWall.SetSide(Side.left | Side.forward | Side.backward);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.Wall}");
+                _areaWall.Create();
+                _areaWall.SetSide(Side.right);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
+                _areaWall.Create();
+            }
+            else if (SystemReader.CLEAR_RIGHT_FACE.Equals(data) || SystemReader.CLEAR_FRONT_FACE.Equals(data) || SystemReader.CLEAR_LEFT_FACE.Equals(data))
+            {
+                _areaWall.Destroy();
+                _areaWall.SetSide(Side.left | Side.right | Side.backward);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.Wall}");
+                _areaWall.Create();
+                _areaWall.SetSide(Side.forward);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.JumpWall}");
+                _areaWall.Create();
+            }
+            else if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
+            {
+                _areaWall.Destroy();
+                _areaWall.SetSide(Side.left | Side.right | Side.forward | Side.backward);
+                _areaWall.SetWall($"Objects/{AreaWallComponent.Type.Wall}");
+                _areaWall.Create();
             }
         }
         public void TurnRight()
@@ -83,6 +108,7 @@ namespace Puzzle
             {
                 _areaWall.Destroy();
                 _areaWall.SetWall($"Objects/{AreaWallComponent.Type.Wall}");
+                _areaWall.SetSide(Side.left | Side.right | Side.forward | Side.backward);
                 _areaWall.Create();
             }
         }

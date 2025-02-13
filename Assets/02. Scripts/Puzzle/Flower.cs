@@ -1,6 +1,7 @@
 using Battle;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Puzzle
 {
@@ -20,7 +21,20 @@ namespace Puzzle
             set
             {
                 _color = value;
-                _renderers.ForEach(r => r.material.color = value);
+                _renderers.ForEach(r => SetColor(r, value));
+            }
+        }
+
+        private void SetColor(Renderer renderer, Color color)
+        {
+            if (renderer.material.shader.name == "Toon")
+            {
+                renderer.material.SetColor("_BaseColor", color);
+                // renderer.material.SetColor("Color", color);
+            }
+            else
+            {
+                renderer.material.color = color;
             }
         }
     }

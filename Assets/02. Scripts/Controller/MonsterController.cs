@@ -66,6 +66,7 @@ namespace Puzzle
 
             if (MonsterReader.BOSS_SPIT_OUT.Equals(command))
             {
+                _bossController.ClearMonster();
                 TrasitionState(MonsterState.Action1);
                 _puzzleData.GetPositionAndRotation(new[] { command[0], command[1], (byte)Face.top }, out var position, out var rotation);
                 var flower = _cubeMap.GetElements(command[0], command[1], (byte)_playingFace);

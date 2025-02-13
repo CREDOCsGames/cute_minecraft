@@ -1,5 +1,7 @@
 using Cinema;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,7 +87,7 @@ namespace Puzzle
             else
             if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
             {
-
+                CoroutineRunner.instance.StartCoroutine(PlayEnding());
             }
         }
         public void Init(CubePuzzleDataReader puzzleData)
@@ -103,6 +105,11 @@ namespace Puzzle
         private void SendEntryMessage()
         {
             _mediator?.InstreamDataInstance<SystemReader>(SystemReader.READY_PLAYER);
+        }
+        private IEnumerator PlayEnding()
+        {
+            yield return new WaitForSeconds(2f);
+            Movie.DoPlay(Movie.EXIT_BOSS);
         }
     }
 

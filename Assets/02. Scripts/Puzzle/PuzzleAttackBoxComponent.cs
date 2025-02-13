@@ -1,5 +1,6 @@
 using Battle;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Puzzle
@@ -23,6 +24,11 @@ namespace Puzzle
 
         protected override void FixedUpdate()
         {
+            if (_focus)
+            {
+                SetOutline(_focus.GetComponent<HitBoxComponent>().HitBox.Actor, 0);
+            }
+
             _focus = null;
             if (0 < _hitTargets.Count)
             {
@@ -30,6 +36,7 @@ namespace Puzzle
                 _cursorInstance.transform.position = _focus.transform.position + (Vector3.up * 2f);
                 _hitTargets.Clear();
                 base.OnTriggerStay(_focus);
+                SetOutline(_focus.GetComponent<HitBoxComponent>().HitBox.Actor, 70);
             }
             _cursorInstance.SetActive(_focus != null);
         }
@@ -48,6 +55,11 @@ namespace Puzzle
             base.OnDestroy();
             Destroy(_cursorInstance);
         }
-
+        private void SetOutline(Transform target, float width)
+        {
+            target.GetComponentsInChildren<Renderer>()
+                  .ToList()
+                  .ForEach(renderer => renderer.material.SetFloat("_Outline_Width", width));
+        }
     }
 }
