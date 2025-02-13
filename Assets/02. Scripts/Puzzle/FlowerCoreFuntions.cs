@@ -89,6 +89,10 @@ namespace Puzzle
 
             foreach (var index in cross)
             {
+                if (reader.GetElement(new byte[] { (byte)index.x, (byte)index.y, (byte)face }) == 0)
+                {
+                    continue;
+                }
                 AttackDot(new byte[] { (byte)index.x, (byte)index.y, (byte)Face.bottom, attackType }, cubeMap, out var bossFaceMessage);
                 AttackDot(new byte[] { (byte)index.x, (byte)index.y, face, attackType }, cubeMap, out var currentFaceMessage);
                 message.AddRange(bossFaceMessage);

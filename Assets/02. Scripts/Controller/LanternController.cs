@@ -1,129 +1,103 @@
 using Puzzle;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class LanternController : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
+public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
-
-    public float MoveTime;
-    public float LenternInterval;
-    public Vector3 LanternMoveHight;
-
-    public Vector3 FrontSide;
-    public Vector3 LeftSide;
-    public Vector3 RightSide;
-    public Vector3 BackSide;
-    public bool IsDisapear { get; private set; } = false;
-
-    private CubePuzzleDataReader _castingPuzzleData;
-    private Transform _cube;
-    private Vector3 _cubeCenter;
-    private byte _cubeWidth;
+    private CubePuzzleDataReader _reader;
+    private int index;
+    [SerializeField] private float duration;
+    [SerializeField] private Vector2 h;
+    [SerializeField] private List<Transform> _lanternPositions;
+    public void InstreamData(byte[] data)
+    {
+        index = -1;
+        if (SystemReader.CLEAR_TOP_FACE.Equals(data))
+        {
+            index = 0;
+        }
+        else
+        if (SystemReader.CLEAR_LEFT_FACE.Equals(data))
+        {
+            index = 1;
+        }
+        else
+        if (SystemReader.CLEAR_FRONT_FACE.Equals(data))
+        {
+            index = 2;
+        }
+        else
+        if (SystemReader.CLEAR_RIGHT_FACE.Equals(data))
+        {
+            index = 3;
+        }
+        else
+        if (SystemReader.CLEAR_BACK_FACE.Equals(data))
+        {
+            index = 4;
+        }
+        else
+        if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))
+        {
+            return;
+        }
+        if (0 <= index && index < _lanternPositions.Count)
+        {
+            CoroutineRunner.instance.StartCoroutine(PlayClearEvent(_lanternPositions[index]));
+        }
+    }
+    private IEnumerator PlayClearEvent(Transform lantern)
+    {
+        CoroutineRunner.instance.StartCoroutine(DownLantern());
+        yield return new WaitForSeconds(duration + 0.5f);
+        CoroutineRunner.instance.StartCoroutine(UpLantern(lantern));
+    }
+    private IEnumerator UpLantern(Transform lantern)
+    {
+        float t;
+        Vector3 prePos, nextPos;
+        prePos = lantern.position;
+        prePos.y = h.x;
+        nextPos = lantern.position;
+        nextPos.y = h.y;
+        t = 0;
+        gameObject.SetActive(true);
+        while (t < 1)
+        {
+            t = Mathf.Clamp01(t + Time.deltaTime / duration);
+            transform.position = Vector3.Lerp(prePos, nextPos, t);
+            yield return null;
+        }
+    }
+    private IEnumerator DownLantern()
+    {
+        float t;
+        Vector3 prePos, nextPos;
+        prePos = transform.position;
+        nextPos = transform.position;
+        nextPos.y = h.x;
+        t = 0;
+        while (t < 1)
+        {
+            t = Mathf.Clamp01(t + Time.deltaTime / duration);
+            transform.position = Vector3.Lerp(prePos, nextPos, t);
+            yield return null;
+        }
+        gameObject.SetActive(false);
+    }
+    public void SetMediator(IMediatorInstance mediator)
+    {
+    }
+    public void Destroy()
+    {
+    }
 
     public void Init(CubePuzzleDataReader puzzleData)
     {
-        this.gameObject.SetActive(true);
-        _castingPuzzleData = puzzleData;
-        _castingPuzzleData.OnRotatedStage += SetLenternPosition;
-        _cubeWidth = puzzleData.Width;
-        SetSpawnPoint(_castingPuzzleData);
-    }
-
-    public void Destroy()
-    {
-        _castingPuzzleData.OnRotatedStage -= SetLenternPosition;
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    private void Lentern_Active(Vector3 spwanPos)
-    {
-        StartCoroutine(MoveLantern(spwanPos));
-    }
-
-    private Vector3 SwitchPositionFromDirection(Vector3 direction)
-    {
-        if (direction == new Vector3(-1, 0, 0))
-        {
-            return LeftSide;
-        }
-        else if (direction == new Vector3(1, 0, 0))
-        {
-            return RightSide;
-        }
-        else if (direction == new Vector3(0, 0, -1))
-        {
-            return FrontSide;
-        }
-        else if (direction == new Vector3(0, 0, 1))
-        {
-            return BackSide;
-        }
-        else
-        {
-            return new Vector3();
-        }
-    }
-
-    private void SetLenternPosition(Face face)
-    {
-        if (face == Face.top || face == Face.right || face == Face.bottom)
-        {
-            Lentern_Active(SwitchPositionFromDirection(-_cube.transform.forward));
-        }
-        else
-        {
-            Lentern_Active(SwitchPositionFromDirection(_cube.transform.up));
-        }
-    }
-
-    private void SetSpawnPoint(CubePuzzleDataReader puzzleData)
-    {
-        _cubeCenter = puzzleData.BaseTransform.position;
-        _cube = puzzleData.BaseTransform;
-        float _cubeInterval = _cubeWidth + LenternInterval;
-
-        FrontSide = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z + _cubeInterval);
-        BackSide = _cubeCenter + new Vector3(_cubeCenter.x, _cubeCenter.y, _cubeCenter.z - _cubeInterval);
-        LeftSide = _cubeCenter + new Vector3(_cubeCenter.x - _cubeInterval, _cubeCenter.y, _cubeCenter.z);
-        RightSide = _cubeCenter + new Vector3(_cubeCenter.x + _cubeInterval, _cubeCenter.y, _cubeCenter.z);
-    }
-
-    private IEnumerator MoveLantern(Vector3 spawnPoint)
-    {
-        float t = 0;
-        Vector3 current = transform.position;
-        Vector3 target = current - LanternMoveHight;
-        while (t < MoveTime)
-        {
-            t += Time.deltaTime;
-            transform.position = Vector3.Lerp(current, target, t);
-            yield return null;
-        }
-
-        this.transform.position = spawnPoint;
-
-        t = 0;
-        current = transform.position;
-        target = current + LanternMoveHight;
-        while (t < MoveTime)
-        {
-            t += Time.deltaTime;
-            transform.position = Vector3.Lerp(current, target, t);
-            yield return null;
-        }
-    }
-
-    public void SetMediator(IMediatorInstance mediator)
-    {
-
-    }
-    public void InstreamData(byte[] data)
-    {
-
+        _reader = puzzleData;
+        _reader.OnRotatedStage += (f) => CoroutineRunner.instance.StartCoroutine(DownLantern());
     }
 }

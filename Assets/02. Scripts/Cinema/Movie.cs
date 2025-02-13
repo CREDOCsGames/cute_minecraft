@@ -6,6 +6,7 @@ namespace Cinema
         public readonly static Projector INTRO = new(FilmContainer.Search("Intro"));
         public readonly static Projector ENTER_GAME = new(FilmContainer.Search("StartGame"));
         public readonly static Projector ENTER_BOSS = new(FilmContainer.Search("EnterBoss"));
+        public readonly static Projector EXIT_BOSS = new(FilmContainer.Search("ExitBoss"));
 
         public static void ChangeCamera(Projector movie)
         {

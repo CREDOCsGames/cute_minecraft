@@ -15,12 +15,6 @@ namespace Controller
                 player.ChangeController(new MoveState());
                 return;
             }
-            //if (Input.GetButtonDown("Jump"))
-            //{
-            //    player.Jump();
-            //    player.ChangeController(new JumpState());
-            //    return;
-            //}
             if (Input.GetButtonDown("Attack"))
             {
                 player.Attack();

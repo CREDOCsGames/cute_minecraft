@@ -21,6 +21,11 @@ namespace Battle
 
         public void CheckCollision(Collider other)
         {
+            if (_NotWithinAttackWindow)
+            {
+                return;
+            }
+
             if (_NotWithinAttackWindow ||
                 !other.TryGetComponent<IHitBox>(out var victim) ||
                 victim.HitBox.Actor.Equals(Actor) ||

@@ -20,4 +20,8 @@ public class BossController : MonoBehaviour
     {
         _slimeSpawner.OnSuccess();
     }
+    public void ClearMonster()
+    {
+        _slimeSpawner.ClearMonster();
+    }
 }

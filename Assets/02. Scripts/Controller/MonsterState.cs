@@ -13,7 +13,7 @@ namespace Controller
     {
         public static bool IsNear(Transform A, Transform B)
         {
-            return Vector3.Distance(A.transform.position, B.transform.position) <= 0.1f;
+            return Vector3.Distance(A.transform.position, B.transform.position) <= 0.3f;
         }
     }
     public class MonsterState : IController

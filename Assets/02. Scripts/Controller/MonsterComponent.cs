@@ -1,4 +1,5 @@
 using Battle;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controller
@@ -8,11 +9,13 @@ namespace Controller
         public Character _character { get; private set; }
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Animator _animator;
+        [SerializeField] private AttackBoxComponent _attackBox;
 
         private void Awake()
         {
             _character = new Character(_rigidbody, _animator);
             _character.MoveSpeed = 1f;
+            _character.OnChagedState += (s) => { if (s is CharacterState.Attack) _attackBox.OpenAttackWindow(); };
         }
         public void Attack()
         {
@@ -23,7 +26,7 @@ namespace Controller
             _character.Rigidbody.excludeLayers = -1 - LayerMask.GetMask("Wall");
             _character.ChangeController(new CanNotControl());
             _character.Rigidbody.AddForce(dir, ForceMode.Impulse);
-            // _character.Die();
+            _character.Hit();
         }
         public void Hit()
         {
@@ -35,7 +38,7 @@ namespace Controller
             _character?.Hit();
             _character.ChangeController(new MonsterHit(_character.Controller));
             Vector3 dir = coll.Attacker.forward; dir.y = 1;
-            _rigidbody.AddForce(dir * 5f, ForceMode.Impulse); 
+            _rigidbody.AddForce(dir * 5f, ForceMode.Impulse);
         }
         public void EnterGround()
         => _character?.EnterGound();
@@ -64,7 +67,7 @@ namespace Controller
                 return;
             }
 
-            if(Time.time < _minTime)
+            if (Time.time < _minTime)
             {
                 return;
             }

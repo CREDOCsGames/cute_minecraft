@@ -19,9 +19,9 @@ namespace Puzzle
 
     public class AreaWall
     {
-        readonly Side _side;
-        Bounds _bounds;
-        string _path;
+        private Side _side;
+        private Bounds _bounds;
+        private string _path;
 
         static readonly Vector3[] dirs =
         {
@@ -78,7 +78,10 @@ namespace Puzzle
         {
             _path = wall;
         }
-
+        public void SetSide(Side side)
+        {
+            _side = side;
+        }
         public void Destroy()
         {
             foreach (var wall in Objects.ToList())
