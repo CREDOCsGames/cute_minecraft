@@ -15,7 +15,7 @@ namespace Util
         {
             Duration = duration;
         }
-        public void SetStartTime()
+        public void DoStart()
         {
             StartTime = Time.time;
         }

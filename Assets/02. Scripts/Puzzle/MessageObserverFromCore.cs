@@ -2,33 +2,33 @@
 
 namespace Puzzle
 {
-    public class MessageObserver : IInstance
+    public class MessageObserverFromCore : IInstance
     {
         public DataReader DataReader { get; private set; }
-        public MessageObserver(DataReader dataReader)
+        public MessageObserverFromCore(DataReader dataReader)
         {
             DataReader = dataReader;
         }
-        public event Action<byte[]> RecieveSystemMessage;
+        public event Action<byte[]> OnRecieveMessage;
         public void InstreamData(byte[] data)
         {
-            RecieveSystemMessage.Invoke(data);
+            OnRecieveMessage.Invoke(data);
         }
         public void SetMediator(IMediatorInstance mediator)
         {
         }
     }
-    public class MessageObserverCore : ICore
+    public class MessageObserverFromInstance : ICore
     {
         public DataReader DataReader { get; private set; }
-        public MessageObserverCore(DataReader dataReader)
+        public MessageObserverFromInstance(DataReader dataReader)
         {
             DataReader = dataReader;
         }
-        public event Action<byte[]> RecieveSystemMessage;
+        public event Action<byte[]> OnRecieveMessage;
         public void InstreamData(byte[] data)
         {
-            RecieveSystemMessage.Invoke(data);
+            OnRecieveMessage.Invoke(data);
         }
         public void SetMediator(IMediatorCore mediator)
         {

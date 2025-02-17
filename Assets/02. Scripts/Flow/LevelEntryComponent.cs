@@ -10,7 +10,7 @@ namespace Puzzle
     public class LevelEntryComponent : MonoBehaviour, IInstance, IPuzzleInstance
     {
         private IMediatorInstance _mediator;
-        private CubePuzzleDataReader _puzzleData;
+        private CubePuzzleReader _puzzleData;
         private readonly List<Collider> _players = new();
         [SerializeField] private Image _icon;
 
@@ -90,7 +90,7 @@ namespace Puzzle
                 CoroutineRunner.instance.StartCoroutine(PlayEnding());
             }
         }
-        public void Init(CubePuzzleDataReader puzzleData)
+        public void Init(CubePuzzleReader puzzleData)
         {
             _puzzleData = puzzleData;
         }

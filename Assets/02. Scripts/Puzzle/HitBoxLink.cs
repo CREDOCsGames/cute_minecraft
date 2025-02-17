@@ -1,4 +1,5 @@
 using Battle;
+using System.Linq;
 
 namespace Puzzle
 {
@@ -6,7 +7,15 @@ namespace Puzzle
     {
         public IMediatorInstance Mediator { get; set; }
 
-        public void Link(Flower flower, byte[] data)
+        public void Link(CubeMap<Flower> map)
+        {
+            foreach (var index in map.GetIndex())
+            {
+                var flower = map.GetElements(index);
+                Link(flower, index.Concat(new byte[] { 0 }).ToArray<byte>());
+            }
+        }
+        private void Link(Flower flower, byte[] data)
         {
             flower.HitBoxComponent.HitBox.OnCollision += (c) => Convert2Vector4Byte(c, data);
         }

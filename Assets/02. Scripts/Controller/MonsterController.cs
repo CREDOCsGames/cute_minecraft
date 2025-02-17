@@ -12,7 +12,7 @@ namespace Puzzle
         private IMediatorInstance _mediator;
         private MonsterState _characterState;
         private BossController _bossController;
-        private CubePuzzleDataReader _puzzleData;
+        private CubePuzzleReader _puzzleData;
         private CubeMap<GameObject> _cubeMap;
         private readonly Queue<byte[]> _commandQueue = new();
 
@@ -96,7 +96,7 @@ namespace Puzzle
         {
             _mediator = mediator;
         }
-        public void Init(CubePuzzleDataReader puzzleData)
+        public void Init(CubePuzzleReader puzzleData)
         {
             _puzzleData = puzzleData;
             _puzzleData.OnRotatedStage += OnRotatedCube;

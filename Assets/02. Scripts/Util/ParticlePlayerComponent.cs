@@ -23,24 +23,16 @@ namespace Util
         }
         private void PlayEffect(Transform spawnPoint, Transform root)
         {
-            var newPosition = spawnPoint.position;
+            var position = spawnPoint.position;
             if (_spawns.Contains(root))
             {
                 return;
             }
             _spawns.Add(spawnPoint);
-            var effect = ParticlePlayer.GetPool(_originEffect).Get();
-            effect.transform.position = newPosition;
-            effect.Play();
+
             var coll = spawnPoint.GetComponent<BoxCollider>();
-            effect.transform.localScale = coll ? Vector3.Scale(coll.size, spawnPoint.transform.localScale) : Vector3.one;
-            StartCoroutine(ReleaseEffect(effect, root));
-        }
-        private IEnumerator ReleaseEffect(ParticleSystem particle, Transform root)
-        {
-            yield return new WaitForSeconds(particle.main.duration);
-            ParticlePlayer.GetPool(_originEffect).Release(particle);
-            _spawns.Remove(root);
+            var size = coll ? Vector3.Scale(coll.size, spawnPoint.transform.localScale) : Vector3.one;
+            ParticlePlayer.PlayParticleAt(_originEffect, position, size);
         }
 
     }

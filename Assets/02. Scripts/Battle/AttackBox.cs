@@ -6,12 +6,12 @@ namespace Battle
 {
     public class AttackBox : CollisionBox
     {
-        public enum Type { None, One };
+        public enum AttackType { None, OneHit };
         private readonly Delay _delay;
         private readonly List<Collider> _attacked = new();
-        private bool _NotWithinAttackWindow => !_delay.IsDelay() || (_type == Type.One && _bHit);
+        private bool _bNotWithinAttackWindow => !_delay.IsDelay() || (_attackType == AttackType.OneHit && _bHit);
         private bool _bHit;
-        private Type _type;
+        private AttackType _attackType;
 
         public AttackBox(Transform actor, float attackWindow = 0f) : base(actor)
         {
@@ -21,12 +21,12 @@ namespace Battle
 
         public void CheckCollision(Collider other)
         {
-            if (_NotWithinAttackWindow)
+            if (_bNotWithinAttackWindow)
             {
                 return;
             }
 
-            if (_NotWithinAttackWindow ||
+            if (_bNotWithinAttackWindow ||
                 !other.TryGetComponent<IHitBox>(out var victim) ||
                 victim.HitBox.Actor.Equals(Actor) ||
                 _attacked.Contains(other))
@@ -42,13 +42,13 @@ namespace Battle
         public void OpenAttackWindow()
         {
             _bHit = false;
-            _delay.SetStartTime();
+            _delay.DoStart();
             _attacked.Clear();
         }
 
-        public void SetType(Type type)
+        public void SetType(AttackType type)
         {
-            _type = type;
+            _attackType = type;
         }
 
     }

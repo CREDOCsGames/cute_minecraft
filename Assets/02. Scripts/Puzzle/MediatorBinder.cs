@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Puzzle
 {
-    public static class EventBinder
+    public static class MediatorBinder
     {
         public static void BindEvent(ICore core, IMediatorCore mediator)
         {

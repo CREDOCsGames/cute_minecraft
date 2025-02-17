@@ -4,38 +4,38 @@ namespace Util
 {
     public class BoolComponent : Condition
     {
-        [SerializeField] private ConditionData mCondition;
-        private bool _condition;
+        [SerializeField] private ConditionData _condition;
+        private bool _bCondition;
 
         public override bool IsTrue()
         {
-            return _condition;
+            return _bCondition;
         }
 
         public void SetCondition(ConditionData condition)
         {
-            mCondition = condition;
-            _condition = false;
+            _condition = condition;
+            _bCondition = false;
         }
 
         public void MeetCondition()
         {
-            if (!ContainCondition(mCondition))
+            if (!ContainCondition(_condition))
             {
                 return;
             }
 
-            _condition = true;
+            _bCondition = true;
         }
 
         public void CancleCondition()
         {
-            if (!ContainCondition(mCondition))
+            if (!ContainCondition(_condition))
             {
                 return;
             }
 
-            _condition = false;
+            _bCondition = false;
         }
 
         public override void SetFalse()
@@ -45,12 +45,12 @@ namespace Util
 
         public void ToggleCondition()
         {
-            if (!ContainCondition(mCondition))
+            if (!ContainCondition(_condition))
             {
                 return;
             }
 
-            _condition = !_condition;
+            _bCondition = !_bCondition;
         }
 
         private static bool ContainCondition(ConditionData condition)

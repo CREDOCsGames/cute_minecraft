@@ -7,7 +7,7 @@ using UnityEngine;
 public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
-    private CubePuzzleDataReader _reader;
+    private CubePuzzleReader _reader;
     private int index;
     [SerializeField] private float duration;
     [SerializeField] private Vector2 h;
@@ -95,7 +95,7 @@ public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzle
     {
     }
 
-    public void Init(CubePuzzleDataReader puzzleData)
+    public void Init(CubePuzzleReader puzzleData)
     {
         _reader = puzzleData;
         _reader.OnRotatedStage += (f) => CoroutineRunner.instance.StartCoroutine(DownLantern());

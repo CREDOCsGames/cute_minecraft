@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 namespace Puzzle
 {
-    public class CubePuzzleDataReader
+    public class CubePuzzleReader
     {
         public event Action<Face> OnRotatedStage;
-        public Face ReadWindow { get; private set; }
+        public Face CurrentFace { get; private set; }
         public byte Width => _cubeMapReader.Width;
         public Throw Throw => _cubePuzzleData.Trow;
         public readonly Transform BaseTransform;
@@ -18,12 +18,12 @@ namespace Puzzle
             BaseTransform.position
             + Vector3.up * BaseTransformSize.y / 2f
             - (Vector3.right + Vector3.forward) * (Width / 2);
-        public readonly List<ICore> GlobalCoreObservers = new();
-        public readonly List<IInstance> GlobalInstanceObservers = new();
+        public readonly List<ICore> CoreObservers = new();
+        public readonly List<IInstance> InstanceObservers = new();
         private readonly CubeMapReader _cubeMapReader;
         private readonly CubePuzzleData _cubePuzzleData;
 
-        public CubePuzzleDataReader(CubePuzzleData puzzleData, UnityEvent<Face> onRotatedStage)
+        public CubePuzzleReader(CubePuzzleData puzzleData, UnityEvent<Face> onRotatedStage)
         {
             onRotatedStage.AddListener((face)=>OnRotatedStage?.Invoke(face));
             _cubePuzzleData = puzzleData;
@@ -43,35 +43,35 @@ namespace Puzzle
             => _cubeMapReader.GetFace(face);
         public void MoveReadWindow(Face nextReadWindow)
         {
-            ReadWindow = nextReadWindow;
+            CurrentFace = nextReadWindow;
         }
         public void ReadAllCores(out List<ICore> cores)
         {
             cores = new List<ICore>();
             cores.AddRange(_cubePuzzleData.GlobalCores);
-            cores.AddRange(_cubePuzzleData.Faces[(int)ReadWindow].Cores);
-            cores.AddRange(GlobalCoreObservers);
+            cores.AddRange(_cubePuzzleData.Faces[(int)CurrentFace].Cores);
+            cores.AddRange(CoreObservers);
         }
         public void ReadAllCores(Face face, out List<ICore> cores)
         {
             cores = new List<ICore>();
             cores.AddRange(_cubePuzzleData.GlobalCores);
             cores.AddRange(_cubePuzzleData.Faces[(int)face].Cores);
-            cores.AddRange(GlobalCoreObservers);
+            cores.AddRange(CoreObservers);
         }
         public void ReadAllInstances(out List<IInstance> instances)
         {
             instances = new List<IInstance>();
             instances.AddRange(_cubePuzzleData.GlobalInstances);
-            instances.AddRange(_cubePuzzleData.Faces[(int)ReadWindow].Instances);
-            instances.AddRange(GlobalInstanceObservers);
+            instances.AddRange(_cubePuzzleData.Faces[(int)CurrentFace].Instances);
+            instances.AddRange(InstanceObservers);
         }
         public void ReadAllInstances(Face face, out List<IInstance> instances)
         {
             instances = new List<IInstance>();
             instances.AddRange(_cubePuzzleData.GlobalInstances);
             instances.AddRange(_cubePuzzleData.Faces[(int)face].Instances);
-            instances.AddRange(GlobalInstanceObservers);
+            instances.AddRange(InstanceObservers);
         }
         public void ReadDifferenceOfSets(Face A, Face B, out List<IInstance> differenceOfSets)
         {
