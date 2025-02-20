@@ -44,63 +44,12 @@
 
 # 빌드 파일 링크
 
-### 2차 완성
+### 25년 02월
 >#<a href="https://drive.google.com/file/d/11i_wZwjLz3DMyRxy06FqK8sr4sqCJETO/view?usp=drive_link">build</a>   
 이동 조작 : wasd   
 공격, 상호작용 : space   
 
-### 1차 완성
+### 24년 09월
 >#<a href="https://drive.google.com/file/d/1WQT6EhQ7uuhaub76Uq5kPBLIB4VM_KQ6/view?usp=sharing">build</a>   
 이동 조작 : wasd, 방향키   
 버튼 이벤트 액션 : space   
-
-### 스테이지 (플라워 1-3)
->#<a href="https://drive.google.com/file/d/1S74nj52vCjxIBL506jNIgXIqvSDnQxzG/view?usp=sharing">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : space   
-
-### 테마 모드 2차 빌드
->#<a href="https://drive.google.com/file/d/1p0JuWJqEip6US5D_3gu-v5o5FXDbcxKI/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : space
-
-
-### 테마 모드 1차 빌드
->#<a href="https://drive.google.com/file/d/1NwBtn3lbGALS9ikNb8WnBT_qVrZKiz8-/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : 마우스 좌클릭   
-플레이 영역 결정 : Left shift 
-
-
-### 레벨 확인 (카메라 이동)
->#<a href="https://drive.google.com/file/d/1tsTAlGS60nx4s4pEiH86oCffGzJ0wPrL/view?usp=drive_link">build</a>   
-이동 조작 : wasd   
-업다운 조작 : e,q   
-회전 조작 : 마우스   
-
-
-### 레벨 배치 & 큐브맵 회전 연출
->#<a href="https://drive.google.com/file/d/1lNL1erf1I2s2jIMyIjV_Fs8eyf4j4S0C/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : 마우스 좌클릭   
-플레이 영역 결정 : Left shift
-
-
-#### 더블 점프 펫
->#<a href="https://drive.google.com/file/d/1PlcLq0hKbdb1EzfmntonaNO3yQESJEeH/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : 마우스 좌클릭   
-
-
-#### 전투
->#<a href="https://drive.google.com/file/d/1IizCPwd5lgrprw05d08igH5widwSBZ_B/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-버튼 이벤트 액션 : 마우스 좌클릭   
-
-
-#### 큐브 특성
->#<a href="https://drive.google.com/file/d/1PFVbyEVSnUtqjqbctOvyuKhADu1GULuD/view?usp=drive_link">build</a>   
-이동 조작 : wasd, 방향키   
-공격 : 마우스 좌클릭   
-패링 : Left shift   
-점프 : Spacebar
