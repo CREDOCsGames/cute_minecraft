@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Cinemachine;
 using Puzzle;
+using Sound;
 
 public class WeightFall : MonoBehaviour, IInstance, IPuzzleInstance
 {
@@ -48,6 +49,7 @@ public class WeightFall : MonoBehaviour, IInstance, IPuzzleInstance
         _shakeCamera.gameObject.SetActive(true);
         _dust.gameObject.SetActive(true);
         _dust.Play();
+        SoundManagerComponent.Instance.PlaySound("Move_Stone");
         while (t < 1)
         {
             t = Mathf.Clamp01(t + Time.deltaTime / _duration);

@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Movement;
+using Sound;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -45,7 +46,7 @@ namespace Puzzle
             yield return new WaitForSeconds(0.1f);
             character.Jump();
             character?.ChangeController(new JumpState());
-
+            SoundManagerComponent.Instance.PlaySound("Move_Stone");
             if (MovementAction.TryGetAction(path, out var action))
             {
                 _movement.PlayMovement(action);

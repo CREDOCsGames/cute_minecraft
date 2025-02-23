@@ -19,6 +19,8 @@ namespace Controller
     public class MonsterState : IController
     {
         private Transform _traceTarget;
+        private LookAt _lookAt;
+
         public void StartTrace(Transform target)
         {
             _traceTarget = target;
@@ -67,6 +69,8 @@ namespace Controller
                 if (player.State is CharacterState.Idle && player.IsGrounded)
                 {
                     player.Move((_traceTarget.position - player.Transform.position).normalized);
+                    player.Transform.LookAt(_traceTarget.position);
+                    LookAt.UpdateLook(player.Transform, _traceTarget);
                 }
                 return;
             }

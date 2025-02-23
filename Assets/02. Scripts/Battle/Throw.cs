@@ -1,6 +1,8 @@
 using Controller;
+using Sound;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Battle
 {
@@ -9,6 +11,7 @@ namespace Battle
         [SerializeField] private Collider Trigger;
         public Vector3 PowerMulti = Vector3.one;
         private bool enable;
+        [SerializeField] private UnityEvent<Collider> _onThrow;
 
         public bool Enable
         {
@@ -33,6 +36,7 @@ namespace Battle
                 var rigid = monster.GetComponent<Rigidbody>();
                 rigid.velocity = Vector3.zero;
                 monster.Exit(Vector3.Scale(Dir, PowerMulti));
+                SoundManagerComponent.Instance.PlaySound("Cannon");
             }
         }
     }

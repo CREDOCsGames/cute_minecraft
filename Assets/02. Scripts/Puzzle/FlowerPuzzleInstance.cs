@@ -64,6 +64,7 @@ namespace Puzzle
             {
                 var flower = _cubeMap.GetElements(index);
                 var face = index[2];
+                flower.gameObject.SetActive(false);
                 if ((byte)nextFace == face)
                 {
                     index[2] = (byte)Face.top;
@@ -71,10 +72,6 @@ namespace Puzzle
                     flower.transform.position = _puzzleData.BaseTransform.position + position;
                     flower.transform.rotation = Quaternion.identity;
                     flower.gameObject.SetActive(flower.Color != Color.clear);
-                }
-                else
-                {
-                    flower.gameObject.SetActive(false);
                 }
             }
         }

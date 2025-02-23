@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Puzzle
@@ -13,7 +14,8 @@ namespace Puzzle
         private CubePuzzleReader _puzzleData;
         private readonly List<Collider> _players = new();
         [SerializeField] private Image _icon;
-
+        [SerializeField] private UnityEvent OnEnterBossStage;
+        [SerializeField] private UnityEvent OnEnterBossMovie;
         public DataReader DataReader => new SystemReader();
 
         private void OnEnable()
@@ -27,6 +29,7 @@ namespace Puzzle
                 _icon.gameObject.SetActive(false);
                 GetComponent<Collider>().enabled = false;
                 Movie.DoPlay(Movie.ENTER_BOSS);
+                OnEnterBossMovie.Invoke();
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -82,7 +85,9 @@ namespace Puzzle
             if (SystemReader.CLEAR_BACK_FACE.Equals(data))
             {
                 Movie.ENTER_BOSS.OnEnd += SendEntryMessage;
+                Movie.ENTER_BOSS.OnEnd += OnEnterBossStage.Invoke;
                 Movie.ENTER_BOSS.OnEnd += () => Movie.ENTER_BOSS.OnEnd -= SendEntryMessage;
+                Movie.ENTER_BOSS.OnEnd += () => Movie.ENTER_BOSS.OnEnd -= OnEnterBossStage.Invoke;
             }
             else
             if (SystemReader.CLEAR_BOTTOM_FACE.Equals(data))

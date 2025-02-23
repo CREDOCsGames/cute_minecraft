@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Util;
 
 public class FootstepComponent : MonoBehaviour
@@ -10,15 +11,20 @@ public class FootstepComponent : MonoBehaviour
     [SerializeField] private Transform _rightFoot;
     [SerializeField] private ParticleSystem _footstepEffect;
     [SerializeField] private ParticleSystem _stempEffect;
+    [SerializeField] private UnityEvent _onRightStep;
+    [SerializeField] private UnityEvent _onLeftStep;
+    [SerializeField] private UnityEvent _onLand;
 
     public void StepLeft()
     {
         _bLeftStep = true;
+        _onLeftStep.Invoke();
         PlayEffect();
     }
     public void StepRight()
     {
         _bRightStep = true;
+        _onRightStep.Invoke();
         PlayEffect();
     }
     public void JumpUp()
@@ -32,6 +38,7 @@ public class FootstepComponent : MonoBehaviour
         _bLanding = true;
         _bLeftStep = true;
         _bRightStep = true;
+        _onLand.Invoke();
         PlayEffect();
     }
     private void PlayEffect()
