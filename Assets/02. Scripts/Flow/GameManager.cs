@@ -65,7 +65,7 @@ namespace Flow
 #if UNITY_EDITOR
             Movie.EXIT_BOSS.OnEnd += () => EditorApplication.Exit(0);
 #else
-            Movie.EXIT_BOSS.OnEnd += Application.Quit;
+            //Movie.EXIT_BOSS.OnEnd += Application.Quit;
 #endif
 
         }

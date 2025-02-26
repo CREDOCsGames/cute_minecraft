@@ -9,8 +9,8 @@ namespace Input1
         private static readonly List<PlayerControllerComponent> mInstances = new();
         public static IEnumerable<PlayerControllerComponent> Instances => mInstances.ToList();
         private PlayerController _controller = new();
-        [Header("[Options]")][SerializeField] private bool _activeOnAwake;
         [SerializeField] private List<ButtonEvent> _buttonEvents;
+        [Header("Options")][SerializeField] private bool _activeOnAwake;
 
         public bool IsActive
         {

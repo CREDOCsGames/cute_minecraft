@@ -17,6 +17,15 @@ namespace Puzzle
     }
     public class FlowerReader : DataReader
     {
+        public static FlowerReader _instance;
+        public static FlowerReader Instance
+        {
+            get
+            {
+                _instance ??= new FlowerReader();
+                return _instance;
+            }
+        }
         public const byte EMPTY = 0;
         public const byte FLOWER_RED = 1;
         public const byte FLOWER_GREEN = 2;
@@ -34,6 +43,15 @@ namespace Puzzle
     }
     public class SystemReader : DataReader
     {
+        private static SystemReader _instance;
+        public static SystemReader Instance
+        {
+            get
+            {
+                _instance ??= new SystemReader();
+                return _instance;
+            }
+        }
         public static readonly byte[] FAIL = { 0 };
         public static readonly byte[] CLEAR_TOP_FACE = { 1 };
         public static readonly byte[] CLEAR_LEFT_FACE = { 2 };
@@ -61,6 +79,15 @@ namespace Puzzle
 
     public class MonsterReader : DataReader
     {
+        public static MonsterReader _instance;
+        public static MonsterReader Instance
+        {
+            get
+            {
+                _instance ??= new MonsterReader();
+                return _instance;
+            }
+        }
         public static readonly byte[] BOSS_SPAWN = { 0 };
         public static readonly byte[] BOSS_EXIT = { 1 };
         public static readonly byte[] SLIME_SPAWN = { 3 };

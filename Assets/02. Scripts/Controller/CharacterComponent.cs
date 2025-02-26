@@ -18,6 +18,12 @@ namespace Controller
             lookDirection.y = 0f;
             _body.LookAt(_body.position + lookDirection);
         }
+        public static void UpdateLook(Transform body, Transform target)
+        {
+            var lookDirection = target.position - body.position;
+            lookDirection.y = 0f;
+            body.LookAt(body.position + lookDirection);
+        }
     }
 
     public class CharacterComponent : MonoBehaviour

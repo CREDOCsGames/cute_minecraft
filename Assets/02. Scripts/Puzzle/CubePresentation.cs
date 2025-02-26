@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Movement;
+using Sound;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -13,13 +14,13 @@ namespace Puzzle
         public event Action RotatedEvent;
         public bool IsActing => Time.time < _coolTime;
         private float _coolTime;
-        private CubePuzzleDataReader _reader;
+        private CubePuzzleReader _reader;
         private readonly MovementComponent _movement;
         public CubePresentation(MovementComponent movementComponent)
         {
             _movement = movementComponent;
         }
-        public void SetReader(CubePuzzleDataReader reader)
+        public void SetReader(CubePuzzleReader reader)
         {
             _reader = reader;
         }
@@ -45,7 +46,7 @@ namespace Puzzle
             yield return new WaitForSeconds(0.1f);
             character.Jump();
             character?.ChangeController(new JumpState());
-
+            SoundManagerComponent.Instance.PlaySound("Move_Stone");
             if (MovementAction.TryGetAction(path, out var action))
             {
                 _movement.PlayMovement(action);

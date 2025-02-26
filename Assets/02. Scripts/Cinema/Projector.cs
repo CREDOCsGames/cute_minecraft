@@ -1,4 +1,5 @@
 using Flow;
+using Sound;
 using System;
 using UnityEngine.SceneManagement;
 using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
@@ -7,6 +8,7 @@ namespace Cinema
 {
     public class Projector
     {
+        private const float DURATION = 2f;
         public static readonly Projector DEFAULT = new Projector();
         public event Action OnPlay;
         public event Action OnSkip;

@@ -1,31 +1,31 @@
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace Util
 {
     public static class ParticlePlayer
     {
-        private static readonly Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> _particles = new();
-
-        public static ObjectPool<ParticleSystem> GetPool(ParticleSystem origin)
+        public static void PlayParticleAt(ParticleSystem particle, Vector3 position)
         {
-            _particles.TryAdd(origin, new(() => GameObject.Instantiate(origin)));
-            return _particles[origin];
+            var instance = GameObjectPool<ParticleSystem>.GetPool(particle).Get();
+            instance.transform.position = position;
+            instance.Play();
+            CoroutineRunner.instance.StartCoroutine(ReleaseEffect(particle, instance));
         }
-        public static void ClearAll()
+        public static void PlayParticleAt(ParticleSystem particle, Vector3 position, Vector3 scale)
         {
-            _particles.Keys
-                      .ToList()
-                      .ForEach(ClearPool);
+            var instance = GameObjectPool<ParticleSystem>.GetPool(particle).Get();
+            instance.transform.position = position;
+            instance.transform.localScale = scale;
+            instance.Play();
+            CoroutineRunner.instance.StartCoroutine(ReleaseEffect(particle, instance));
         }
-        public static void ClearPool(ParticleSystem origin)
+        private static IEnumerator ReleaseEffect(ParticleSystem origin, ParticleSystem particle)
         {
-            GetPool(origin).Dispose();
-            GetPool(origin).Clear();
-            _particles.Remove(origin);
+            yield return new WaitUntil(() => !particle.IsAlive());
+            GameObjectPool<ParticleSystem>.GetPool(origin).Release(particle);
         }
-
     }
+
 }

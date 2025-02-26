@@ -12,7 +12,7 @@ namespace Puzzle
         [SerializeField, Range(0, 5)] private byte _viewFace;
         private byte _width;
 
-        public void Init(CubePuzzleDataReader puzzleData)
+        public void Init(CubePuzzleReader puzzleData)
         {
             _width = puzzleData.Width;
             _root.constraintCount = _width;
