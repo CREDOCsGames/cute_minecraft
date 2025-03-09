@@ -96,13 +96,13 @@ namespace Puzzle
         {
             _mediator = mediator;
         }
-        public void Init(CubePuzzleReader puzzleData)
+        public void InitInstance(CubePuzzleReader puzzleData)
         {
             _puzzleData = puzzleData;
-            _puzzleData.OnRotatedStage += OnRotatedCube;
+            _puzzleData.OnRotated += OnRotatedCube;
             _cubeMap = new CubeMap<GameObject>(puzzleData.Width, new Instantiator<GameObject>(new GameObject()));
 
-            foreach (var index in _cubeMap.GetIndex())
+            foreach (var index in _cubeMap.GetAllIndex())
             {
                 var flower = _cubeMap.GetElements(index);
                 flower.transform.SetParent(puzzleData.BaseTransform);
@@ -110,9 +110,9 @@ namespace Puzzle
                 flower.transform.SetLocalPositionAndRotation(position, rotation);
             }
         }
-        private void OnRotatedCube(Face newFace)
+        private void OnRotatedCube(Face preFace, Face playFace)
         {
-            _playingFace = newFace;
+            _playingFace = playFace;
         }
     }
 

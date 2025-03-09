@@ -9,7 +9,7 @@ namespace Puzzle
 
         public void Link(CubeMap<Flower> map)
         {
-            foreach (var index in map.GetIndex())
+            foreach (var index in map.GetAllIndex())
             {
                 var flower = map.GetElements(index);
                 Link(flower, index.Concat(new byte[] { 0 }).ToArray<byte>());

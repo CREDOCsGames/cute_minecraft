@@ -20,7 +20,7 @@ public class WeightFall : MonoBehaviour, IInstance, IPuzzleInstance
     public void SetMediator(IMediatorInstance mediator)
     {
     }
-    public void Init(CubePuzzleReader puzzleData)
+    public void InitInstance(CubePuzzleReader puzzleData)
     {
         _preBgPos = _bg.transform.position;
         StartCoroutine(UpLevel());

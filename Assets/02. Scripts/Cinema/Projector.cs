@@ -1,19 +1,17 @@
 using Flow;
-using Sound;
 using System;
 using UnityEngine.SceneManagement;
 using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
+using Debug = UnityEngine.Debug;
 
 namespace Cinema
 {
     public class Projector
     {
-        private const float DURATION = 2f;
-        public static readonly Projector DEFAULT = new Projector();
+        public static readonly Projector DEFAULT = new();
         public event Action OnPlay;
         public event Action OnSkip;
         public event Action OnEnd;
-        public bool IsStart => IsStart && !_player.IsPause;
         public bool IsPlaying => _player.IsStart && !_player.IsPause;
         public readonly byte ClosingDuration;
         private Film _film = Film.EMPTY;
@@ -27,7 +25,6 @@ namespace Cinema
             AddEventMovieEnd();
             AddEventMovieSkip();
             ClosingDuration = closingDuration;
-
         }
         public Projector(Film film, byte closingDuration = 2) : this(closingDuration)
         {
@@ -39,10 +36,10 @@ namespace Cinema
             {
                 _player.DoStop();
             }
-
             if (film.IsBad)
             {
                 _film = Film.EMPTY;
+                Debug.LogWarning($"{_film.Name} is bad film.");
                 return;
             }
 

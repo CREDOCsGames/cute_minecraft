@@ -60,26 +60,26 @@ namespace Puzzle
         {
             if (SystemReader.IsClearFace(data))
             {
-                _puzzleData.OnRotatedStage -= SendEntryMessage;
+                _puzzleData.OnRotated -= SendEntryMessage;
             }
             if (SystemReader.CLEAR_TOP_FACE.Equals(data))
             {
-                _puzzleData.OnRotatedStage += SendEntryMessage;
+                _puzzleData.OnRotated += SendEntryMessage;
             }
             else
             if (SystemReader.CLEAR_LEFT_FACE.Equals(data))
             {
-                _puzzleData.OnRotatedStage += SendEntryMessage;
+                _puzzleData.OnRotated += SendEntryMessage;
             }
             else
             if (SystemReader.CLEAR_FRONT_FACE.Equals(data))
             {
-                _puzzleData.OnRotatedStage += SendEntryMessage;
+                _puzzleData.OnRotated += SendEntryMessage;
             }
             else
             if (SystemReader.CLEAR_RIGHT_FACE.Equals(data))
             {
-                _puzzleData.OnRotatedStage += SendEntryMessage;
+                _puzzleData.OnRotated += SendEntryMessage;
             }
             else
             if (SystemReader.CLEAR_BACK_FACE.Equals(data))
@@ -95,7 +95,7 @@ namespace Puzzle
                 CoroutineRunner.instance.StartCoroutine(PlayEnding());
             }
         }
-        public void Init(CubePuzzleReader puzzleData)
+        public void InitInstance(CubePuzzleReader puzzleData)
         {
             _puzzleData = puzzleData;
         }
@@ -103,7 +103,7 @@ namespace Puzzle
         {
             _mediator = mediator;
         }
-        private void SendEntryMessage(Face face)
+        private void SendEntryMessage(Face preFace,Face playFace)
         {
             _mediator?.InstreamDataInstance<SystemReader>(SystemReader.READY_PLAYER);
         }

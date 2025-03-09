@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzleInstance
+public class LanternController : MonoBehaviour, IInstance, IReleasable, IPuzzleInstance
 {
     public DataReader DataReader { get; private set; } = new SystemReader();
     private CubePuzzleReader _reader;
@@ -91,13 +91,13 @@ public class LanternController : MonoBehaviour, IInstance, IDestroyable, IPuzzle
     public void SetMediator(IMediatorInstance mediator)
     {
     }
-    public void Destroy()
+    public void DoRelease()
     {
     }
 
-    public void Init(CubePuzzleReader puzzleData)
+    public void InitInstance(CubePuzzleReader puzzleData)
     {
         _reader = puzzleData;
-        _reader.OnRotatedStage += (f) => CoroutineRunner.instance.StartCoroutine(DownLantern());
+        _reader.OnRotated += (p, n) => CoroutineRunner.instance.StartCoroutine(DownLantern());
     }
 }

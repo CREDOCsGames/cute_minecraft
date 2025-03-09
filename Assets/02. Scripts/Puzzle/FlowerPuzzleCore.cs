@@ -1,49 +1,44 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Puzzle
 {
     [CreateAssetMenu(menuName = "Custom/FlowerPuzzleCore")]
-    public class FlowerPuzzleCore : ScriptableObject, ICore, IPuzzleCore
+    public class FlowerPuzzleCore : ScriptableObject, ICore, IPuzzleCore, IReleasable
     {
-        public DataReader DataReader { get; private set; } = new FlowerReader();
-        private bool _isStart;
+        public DataReader DataReader { get; private set; } = FlowerReader.Instance;
         private CubeMap<byte> _puzzle;
         private IMediatorCore _mediator;
         private CubePuzzleReaderForCore _reader;
+        private readonly CoreSetting _coreSetting = new();
         private readonly CoreFunction _crossAttack = FlowerCoreFuntions.AttackCross;
         private readonly CoreFunction _dotAttack = FlowerCoreFuntions.AttackDot;
         private readonly CoreFunction _createFlower = FlowerCoreFuntions.CreateFlower;
-        private readonly CoreFunction _clearCheck = FlowerCoreFuntions.CheckFlowerNormalStageClear;
+        private readonly CoreFunction _checkClear = FlowerCoreFuntions.CheckClearFlowerNormalStage;
 
         public void InstreamData(byte[] data)
         {
-            if (!_isStart)
+            if (!_coreSetting.IsStart)
             {
                 return;
             }
-            List<byte[]> puzzleMessages = new();
-            switch (data[3])
+
+            var eventData = FlowerReader.GetEventData(data);
+            var puzzleEvent = eventData switch
             {
-                case 1:
-                    _crossAttack(data, _puzzle, out puzzleMessages);
-                    break;
-                case 2:
-                    _dotAttack(data, _puzzle, out puzzleMessages);
-                    break;
-                case 3:
-                    _createFlower(data, _puzzle, out puzzleMessages);
-                    break;
-                default:
-                    return;
-            }
+                FlowerReader.EVENT_DOT => _dotAttack,
+                FlowerReader.EVENT_CROSS => _crossAttack,
+                FlowerReader.EVENT_CREATE => _createFlower,
+                _ => FlowerCoreFuntions.PrintDebugMessage
+            };
+
+            puzzleEvent(data, _puzzle, out var puzzleMessages);
             foreach (var message in puzzleMessages)
             {
                 _mediator.InstreamDataCore<FlowerReader>(message);
             }
 
-            _clearCheck(data, _puzzle, out var systemMessages);
-            foreach (var message in systemMessages)
+            _checkClear(data, _puzzle, out var clearMessage);
+            foreach (var message in clearMessage)
             {
                 _mediator.InstreamDataCore<SystemReader>(message);
             }
@@ -51,14 +46,20 @@ namespace Puzzle
         public void Init(CubePuzzleReaderForCore reader)
         {
             _reader = reader;
-            _reader.OnStartLevel += (face) => _isStart = true;
-            _reader.OnClearLevel += (face) => _isStart = false;
             _puzzle = reader.Map;
+            _reader.PuzzleEvent.OnStartLevel += _coreSetting.StartCore;
+            _reader.PuzzleEvent.OnClearLevel += _coreSetting.StopCore;
+        }
+        public void DoRelease()
+        {
+            _reader.PuzzleEvent.OnStartLevel -= _coreSetting.StartCore;
+            _reader.PuzzleEvent.OnClearLevel -= _coreSetting.StopCore;
+            _reader = null;
+            _puzzle = null;
         }
         public void SetMediator(IMediatorCore mediator)
         {
             _mediator = mediator;
         }
-
     }
 }

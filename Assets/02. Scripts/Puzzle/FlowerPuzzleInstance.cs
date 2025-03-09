@@ -1,93 +1,116 @@
+using Battle;
 using System.Linq;
 using UnityEngine;
+using Util;
 
 namespace Puzzle
 {
-    [CreateAssetMenu(menuName = "Custom/Puzzle/FlowerPuzzle")]
-    public class FlowerPuzzleInstance : ScriptableObject, IInstance, IPuzzleInstance, IDestroyable
+    [CreateAssetMenu(menuName = "Puzzle/FlowerPuzzle")]
+    public class FlowerPuzzleInstance : ScriptableObject, IInstance, IPuzzleInstance, IReleasable
     {
         public DataReader DataReader { get; private set; } = FlowerReader.Instance;
         private CubeMap<Flower> _cubeMap;
-        private readonly HitBoxLink _dataLink = new();
-        private CubePuzzleReader _puzzleData;
-        [SerializeField] private Flower _flowerPrefab;
+        private CubePuzzleReader _puzzle;
+        private IMediatorInstance _mediator;
+        private Color _EMPTY => _flowerColors[0];
+        [SerializeField] private ColorList _flowerColors = ColorList.DEFAULT;
+        [SerializeField] private Flower _flowerPrefab = Flower.DEFAULT;
 
-        public void Init(CubePuzzleReader puzzleData)
+        public void InitInstance(CubePuzzleReader puzzle)
         {
-            _puzzleData = puzzleData;
+            SetPuzzleData(puzzle);
+            InstantiateCubeMap();
+            Enermerator.InvokeFor(_cubeMap.GetIndexArray(), InitFlower);
+            Enermerator.InvokeFor(_cubeMap.GetIndexArray(), DisableFlower);
+            Enermerator.InvokeFor(_cubeMap.GetIndexArray(puzzle.PlayingFace), EnableFlower);
+        }
+        public void DoRelease()
+        {
+            Enermerator.InvokeFor(_cubeMap.Elements, Destroy);
+            _cubeMap = null;
+            _puzzle.OnRotated -= OnRotated;
+        }
+        private void SetPuzzleData(CubePuzzleReader puzzle)
+        {
+            _puzzle = puzzle;
+            _puzzle.OnRotated += OnRotated;
+        }
+        private void InstantiateCubeMap()
+        {
             var instantiator = new Instantiator<Flower>(_flowerPrefab);
-            _cubeMap = new CubeMap<Flower>(_puzzleData.Width, instantiator);
-            _dataLink.Link(_cubeMap);
-            _puzzleData.OnRotatedStage += OnRotated;
-            InitFlower();
+            _cubeMap = new CubeMap<Flower>(_puzzle.Width, instantiator);
         }
-        public void InitFlower()
+        public void InitFlower(byte[] index)
         {
-            foreach (var index in _cubeMap.GetIndex())
+            if (_cubeMap == null)
             {
-                var flower = _cubeMap.GetElements(index);
-                flower.transform.SetParent(_puzzleData.BaseTransform);
-                _puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
-                flower.transform.SetLocalPositionAndRotation(position, rotation);
-                InstreamData(index.Concat(new byte[] { _puzzleData.GetElement(index) }).ToArray<byte>());
+                Debug.Log(DM_ERROR.REFERENCES_NULL);
             }
-        }
-        public void InstreamData(byte[] data)
-        {
-            var face = (Face)data[2];
-            if (face is Face.bottom)
+            if (_cubeMap.IsOutOfRange(index))
             {
+                Debug.Log($"{DM_ERROR.OUT_OF_RANGE} : {index}");
                 return;
             }
-            var flower = _cubeMap.GetElements(data[0], data[1], data[2]);
-            flower.gameObject.SetActive(true);
-            switch (data[3])
-            {
-                case (byte)Flower.Type.Red:
-                    flower.Color = new Color(191f / 255f, 12f / 255f, 255f / 255f);
-                    break;
-                case (byte)Flower.Type.Green:
-                    flower.Color = Color.cyan;
-                    break;
-                default:
-                    flower.gameObject.SetActive(false);
-                    break;
-            }
+
+            var flower = _cubeMap.GetElements(index);
+            flower.transform.SetParent(_puzzle.BaseTransform);
+            flower.Index = index;
+            flower.OnHit -= OnHit;
+            flower.OnHit += OnHit;
+
+            var color = _puzzle.GetElement(index);
+            flower.Color = _flowerColors[color];
         }
-        private void OnRotated(Face nextFace)
+        private void EnableFlower(byte[] index)
         {
-            if (nextFace is Face.bottom)
-            {
-                return;
-            }
-            foreach (var index in _cubeMap.GetIndex())
-            {
-                var flower = _cubeMap.GetElements(index);
-                var face = index[2];
-                flower.gameObject.SetActive(false);
-                if ((byte)nextFace == face)
-                {
-                    index[2] = (byte)Face.top;
-                    _puzzleData.GetPositionAndRotation(index, out var position, out var rotation);
-                    flower.transform.position = _puzzleData.BaseTransform.position + position;
-                    flower.transform.rotation = Quaternion.identity;
-                    flower.gameObject.SetActive(flower.Color != Color.clear);
-                }
-            }
+            var flower = _cubeMap.GetElements(index);
+            flower.gameObject.SetActive(flower.Color != _EMPTY);
+            _puzzle.GetPositionAndRotation(index, out var position, out var rotation);
+            flower.transform.SetPositionAndRotation(position, rotation);
+        }
+        private void DisableFlower(byte[] index)
+        {
+            var flower = _cubeMap.GetElements(index);
+            flower.gameObject.SetActive(false);
         }
         public void SetMediator(IMediatorInstance mediator)
         {
-            _dataLink.Mediator = mediator;
+            _mediator = mediator;
         }
-        public void Destroy()
+        public void InstreamData(byte[] data)
         {
-            foreach (var obj in _cubeMap.Elements)
-            {
-                Destroy(obj);
-            }
-            _cubeMap = null;
-            _puzzleData.OnRotatedStage -= OnRotated;
+            var index = FlowerReader.GetFlowerIndex(data);
+            var flower = _cubeMap.GetElements(index);
+            var flowerColor = FlowerReader.GetFlowerColor(data);
+            flower.Color = _flowerColors[flowerColor];
         }
+        private void OnHit(HitBoxCollision coll)
+        {
+            if (_mediator == null ||
+                !coll.Victim.TryGetComponent<Flower>(out var flower))
+            {
+                return;
+            }
+            var message = FlowerReader.CreateHitMessage(flower.Index);
+            if (coll.Attacker.TryGetComponent<PuzzleAttackBoxComponent>(out var box))
+            {
+                message = FlowerReader.AdditiveMessage(message, box.Type);
+            }
+            _mediator.InstreamDataInstance<FlowerReader>(message);
+        }
+        private void OnRotated(Face preFace, Face playFace)
+        {
+            if (preFace is not FlowerReader.SHELTER)
+            {
+                Enermerator.InvokeFor(_cubeMap.GetIndexArray(preFace), DisableFlower);
+            }
+
+            if (playFace is not FlowerReader.SHELTER)
+            {
+                Enermerator.InvokeFor(_cubeMap.GetIndexArray(playFace), EnableFlower);
+            }
+        }
+
     }
 }
 

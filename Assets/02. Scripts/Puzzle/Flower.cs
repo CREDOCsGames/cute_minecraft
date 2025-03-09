@@ -1,28 +1,41 @@
 using Battle;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Puzzle
 {
     public class Flower : MonoBehaviour
     {
-        [SerializeField] private List<MeshRenderer> _renderers;
+        public static readonly Flower DEFAULT;
         public enum Type : byte
         {
             None, Red, Green
         }
-
-        [field: SerializeField] public HitBoxComponent HitBoxComponent { get; private set; }
+        public event Action<HitBoxCollision> OnHit;
+        public byte[] Index { get; set; }
         private Color _color;
         public Color Color
         {
             get => _color;
             set
             {
+                gameObject.SetActive(value != Color.clear);
                 _color = value;
                 _renderers.ForEach(r => SetColor(r, value));
             }
+        }
+        [field: SerializeField] public HitBoxComponent HitBoxComponent { get; private set; }
+        [SerializeField] private List<MeshRenderer> _renderers;
+
+        private void Awake()
+        {
+            if (HitBoxComponent == null)
+            {
+                Debug.Log(DM_ERROR.REFERENCES_NULL);
+                return;
+            }
+            HitBoxComponent.HitBox.OnCollision += (c) => OnHit?.Invoke(c);
         }
 
         private void SetColor(Renderer renderer, Color color)
@@ -30,7 +43,6 @@ namespace Puzzle
             if (renderer.material.shader.name == "Toon")
             {
                 renderer.material.SetColor("_BaseColor", color);
-                // renderer.material.SetColor("Color", color);
             }
             else
             {

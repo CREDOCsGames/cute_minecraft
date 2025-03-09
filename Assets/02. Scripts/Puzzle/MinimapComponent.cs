@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Puzzle
 {
-    public class MinimapComponent : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
+    public class MinimapComponent : MonoBehaviour, IInstance, IPuzzleInstance, IReleasable
     {
         public DataReader DataReader { get; } = new FlowerReader();
         [SerializeField] private GridLayoutGroup _root;
@@ -12,7 +12,7 @@ namespace Puzzle
         [SerializeField, Range(0, 5)] private byte _viewFace;
         private byte _width;
 
-        public void Init(CubePuzzleReader puzzleData)
+        public void InitInstance(CubePuzzleReader puzzleData)
         {
             _width = puzzleData.Width;
             _root.constraintCount = _width;
@@ -60,7 +60,7 @@ namespace Puzzle
             var index = _width * data[1] + data[0];
             switch (data[3])
             {
-                case FlowerReader.EMPTY:
+                case FlowerReader.NONE:
                     _root.transform.GetChild(index).GetComponent<Button>().interactable = false;
                     break;
                 case FlowerReader.FLOWER_RED:
@@ -74,7 +74,7 @@ namespace Puzzle
             }
         }
 
-        public void Destroy()
+        public void DoRelease()
         {
             for (int i = 0; i < _root.transform.childCount; i++)
             {
