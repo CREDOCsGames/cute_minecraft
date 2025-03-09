@@ -6,7 +6,7 @@ using static Movement.MovementAction;
 
 namespace Puzzle
 {
-    public class CubeInstance : MonoBehaviour, IInstance, IPuzzleInstance, IDestroyable
+    public class CubeInstance : MonoBehaviour, IInstance, IPuzzleInstance, IReleasable
     {
         public DataReader DataReader => new SystemReader();
         private bool _boss;
@@ -15,7 +15,7 @@ namespace Puzzle
         private CubePresentation _presentation;
         private IMediatorInstance _mediator;
 
-        public void Init(CubePuzzleReader reader)
+        public void InitInstance(CubePuzzleReader reader)
         {
             if (!reader.BaseTransform.TryGetComponent(out _movement))
             {
@@ -114,7 +114,7 @@ namespace Puzzle
                 _areaWall.Create();
             }
         }
-        public void Destroy()
+        public void DoRelease()
         {
             _presentation.RotatedEvent -= OnRotated;
         }

@@ -32,11 +32,11 @@ namespace Puzzle
         }
         public List<byte[]> GetIndex()
         {
-            return _cubeMap.GetIndex();
+            return _cubeMap.GetAllIndex();
         }
         public List<byte> GetFace(byte face)
         {
-            return _cubeMap.GetFace((Puzzle.Face)face);
+            return _cubeMap.GetElements((Puzzle.Face)face);
         }
         public bool TryGetCrossIndices(byte x, byte y, byte face, out List<Vector2Int> crossIndices)
         {

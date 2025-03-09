@@ -17,7 +17,7 @@ namespace Puzzle
 
         public DataReader DataReader => new SystemReader();
 
-        public void Init(CubePuzzleReader puzzleData)
+        public void InitInstance(CubePuzzleReader puzzleData)
         {
             _bounds = new Bounds();
             _bounds.extents = puzzleData.BaseTransformSize / 2f;

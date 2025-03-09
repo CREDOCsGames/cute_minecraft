@@ -10,31 +10,29 @@ namespace Puzzle
     {
         private static readonly List<int[]> _crossIndices = new() { new[] { 0, 0 }, new[] { 1, 0 }, new[] { -1, 0 }, new[] { 0, 1 }, new[] { 0, -1 } };
 
-        public static void CheckFlowerNormalStageClear(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
+        public static void CheckClearFlowerNormalStage(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
-            message = new List<byte[]>();
-            var face = data[2];
-            var @base = cubeMap.GetFace((Puzzle.Face)face).Where(x => x == 1 || x == 2);
-            if (@base.All(x => x == 1) || @base.All(x => x == 2))
+            message = new();
+            var currentStage = (Face)FlowerReader.GetFace(data);
+            if (CheckClearFlowerPuzzle(currentStage, cubeMap))
             {
-                message = new List<byte[]> {
-                    SystemReader.CLEAR_MESSAGES[face] };
+                message.Add(SystemReader.GetClearMessage(currentStage));
             }
-
         }
-
         public static void CheckFlowerBossStageClear(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
-            message = new List<byte[]>();
-            var @base = cubeMap.GetFace(Face.bottom).Where(x => x == 1 || x == 2);
-            if (@base.All(x => x == 1) || @base.All(x => x == 2))
+            message = new();
+            var bossStage = Face.bottom;
+            if (CheckClearFlowerPuzzle(bossStage, cubeMap))
             {
-                message = new List<byte[]> {
-                    SystemReader.CLEAR_MESSAGES[(byte)Face.bottom] };
+                message.Add(SystemReader.GetClearMessage(bossStage));
             }
-
         }
-
+        private static bool CheckClearFlowerPuzzle(Face stage, CubeMap<byte> cubeMap)
+        {
+            var @base = cubeMap.GetElements(stage).Where(FlowerReader.IsFlower);
+            return @base.All(x => x == FlowerReader.FLOWER_GREEN) || @base.All(x => x == FlowerReader.FLOWER_RED);
+        }
         public static void AttackCross(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
         {
             message = new List<byte[]>();
@@ -135,6 +133,11 @@ namespace Puzzle
             }
             cubeMap.SetElements(result[0], result[1], result[2], result[3]);
             message.Add(result);
+        }
+        public static void PrintDebugMessage(byte[] data, CubeMap<byte> cubeMap, out List<byte[]> message)
+        {
+            Debug.LogWarning($"{DM_ERROR.INVALID_FORMAT} {data}");
+            message = new List<byte[]>();
         }
     }
 

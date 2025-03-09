@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Puzzle
 {
-    public class SlimeSpawner : MonoBehaviour, ICore, IPuzzleCore, IDestroyable
+    public class SlimeSpawner : MonoBehaviour, ICore, IPuzzleCore, IReleasable
     {
         public DataReader DataReader { get; private set; } = new MonsterReader();
         private IMediatorCore _mediator;
@@ -97,15 +97,15 @@ namespace Puzzle
             _reader = reader;
             _spawnTimer.DoStart();
             _spawnTimer.DoPause();
-            _reader.OnClearLevel += OnClearLevel;
-            _reader.OnStartLevel += OnStartLevel;
-            _reader.OnRotatedCube += OnRotatedCube;
+            _reader.PuzzleEvent.OnClearLevel += OnClearLevel;
+            _reader.PuzzleEvent.OnStartLevel += OnStartLevel;
+            _reader.PuzzleEvent.OnRotated += OnRotatedCube;
         }
-        public void Destroy()
+        public void DoRelease()
         {
-            _reader.OnRotatedCube -= OnRotatedCube;
-            _reader.OnStartLevel -= OnStartLevel;
-            _reader.OnClearLevel -= OnClearLevel;
+            _reader.PuzzleEvent.OnRotated -= OnRotatedCube;
+            _reader.PuzzleEvent.OnStartLevel -= OnStartLevel;
+            _reader.PuzzleEvent.OnClearLevel -= OnClearLevel;
             _spawnTimer.DoStop();
         }
         private bool TryCalculateSpanwPosition(out byte[] position)
@@ -134,9 +134,9 @@ namespace Puzzle
         {
             _spawnTimer.DoPause();
         }
-        private void OnRotatedCube(Face face)
+        private void OnRotatedCube(Face preFace, Face playFace)
         {
-            _playingFace = face;
+            _playingFace = playFace;
         }
     }
 }

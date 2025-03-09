@@ -47,7 +47,7 @@ namespace Puzzle
 
         public T GetElements(byte[] index)
         {
-            Debug.Assert(index.Length == 3);
+            Debug.Assert(2 <  index.Length );
             var x = index[0];
             var y = index[1];
             var z = index[2];
@@ -61,7 +61,7 @@ namespace Puzzle
             Elements[Width * Width * z + Width * y + x] = value;
         }
 
-        public List<T> GetFace(Face face)
+        public List<T> GetElements(Face face)
         {
             List<T> list = new();
 
@@ -90,7 +90,7 @@ namespace Puzzle
             return list;
         }
 
-        public List<byte[]> GetIndex()
+        public List<byte[]> GetAllIndex()
         {
             List<byte[]> list = new();
             for (byte face = 0; face < 6; face++)
@@ -105,6 +105,44 @@ namespace Puzzle
             }
             return list;
         }
+        public byte[][] GetIndexArray()
+        {
+            List<byte[]> list = new();
+            for (byte face = 0; face < 6; face++)
+            {
+                list.AddRange(GetIndexArray((Face)face));
+            }
+            return list.ToArray();
+        }
+        public byte[][] GetIndexArray(Face face)
+        {
+            List<byte[]> list = new();
 
+            for (byte y = 0; y < Width; y++)
+            {
+                for (byte x = 0; x < Width; x++)
+                {
+                    list.Add(new[] { x, y, (byte)face });
+                }
+            }
+
+            return list.ToArray();
+        }
+        public byte GetFace(byte[] index)
+        {
+            if (index.Length < 3)
+            {
+                Debug.LogError(DM_ERROR.INVALID_FORMAT);
+                return 255;
+            }
+            return index[2];
+        }
+        public bool IsOutOfRange(byte[] index)
+        {
+            var x = index[0];
+            var y = index[1];
+            var z = index[2];
+            return Width * Width * z + Width * y + x >= Elements.Length;
+        }
     }
 }

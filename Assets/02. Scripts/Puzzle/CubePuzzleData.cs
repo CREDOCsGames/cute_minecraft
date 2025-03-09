@@ -20,7 +20,7 @@ namespace Puzzle
         {
             get
             {
-                if (_globalCores.Count != _globalCoresChace.Count)
+                if (_globalCoresChace.Count < _globalCores.Count)
                 {
                     _globalCores = _globalCores.Where(x => x is ICore).ToList();
                     _globalCoresChace.Clear();
@@ -46,7 +46,7 @@ namespace Puzzle
         {
             get
             {
-                if (_globalInstances.Count != _globalInstancesChace.Count)
+                if (_globalInstancesChace.Count < _globalInstances.Count )
                 {
                     _globalInstances = _globalInstances.Where(x => x is IInstance).ToList();
                     _globalInstancesChace.Clear();

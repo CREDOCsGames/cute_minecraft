@@ -182,7 +182,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bClamp: 1
+  _useClamp: 0
 --- !u!1 &2669085641503480234
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +262,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8078943411719288319}
-  - component: {fileID: 6073185575251611979}
+  - component: {fileID: 499187219710538549}
+  - component: {fileID: 4301337258960712882}
   m_Layer: 0
   m_Name: Lanterns
   m_TagString: Untagged
@@ -289,19 +290,47 @@ Transform:
   - {fileID: 2472762482729411419}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6073185575251611979
+--- !u!114 &499187219710538549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7455418627374873460}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2213902b4e23b87409a07445f80c8b3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 52e06cec29686084d9597167b5c638dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearCount: 0
+  duration: 1
+  h: {x: 5.2, y: 8}
+  _lanternPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!95 &4301337258960712882
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455418627374873460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1dbd5ede847f3c54b90d093ca9e96e8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2183417774753140486
 PrefabInstance:
   m_ObjectHideFlags: 0

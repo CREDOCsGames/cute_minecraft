@@ -15,12 +15,6 @@ namespace Battle
         {
             Actor = actor;
         }
-
-        protected void InvokeEvent(HitBoxCollision collision)
-        {
-            OnCollision.Invoke(collision);
-        }
-
         protected static void InvokeCollision(CollisionBox attack, CollisionBox hit)
         {
             var collsion = new HitBoxCollision()
@@ -30,6 +24,10 @@ namespace Battle
             };
             attack.InvokeEvent(collsion);
             hit.InvokeEvent(collsion);
+        }
+        private void InvokeEvent(HitBoxCollision collision)
+        {
+            OnCollision.Invoke(collision);
         }
     }
 
